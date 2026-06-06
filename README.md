@@ -1,5 +1,4 @@
-[README.md](https://github.com/user-attachments/files/28673804/README.md)
-# le-meilleur-casino-en-ligne# Handoff — le-meilleur-casino-en-ligne.fr
+Handoff — le-meilleur-casino-en-ligne.fr
 
 Package de référence design pour reconstruire le site dans ton environnement cible (**Next.js + Tailwind CSS + GA4 via GTM**, déploiement Vercel).
 
