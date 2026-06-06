@@ -1,0 +1,102 @@
+/* ============================================================
+   Comparatif top-X template — le-meilleur-casino-en-ligne.fr
+   Loaded AFTER site.css
+   ============================================================ */
+
+/* breadcrumbs (shared visual with review) */
+.breadcrumbs { border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.breadcrumbs .in { max-width: var(--maxw); margin: 0 auto; padding: 11px 32px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
+.breadcrumbs a { text-decoration: none; color: var(--ink-3); }
+.breadcrumbs a:hover { color: var(--green); }
+.breadcrumbs .sep { opacity: .5; }
+.breadcrumbs .cur { color: var(--ink); font-weight: 600; }
+
+/* intro head */
+.cmp-head { padding: 40px 0 8px; }
+.cmp-head .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.cmp-head .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.cmp-head h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 4.6vw, 52px); letter-spacing: -.02em; line-height: 1.04; margin: 0 0 18px; max-width: 18ch; }
+.cmp-head h1 em { font-style: italic; color: var(--green); }
+.cmp-head .intro { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 64ch; margin: 0 0 22px; }
+.cmp-meta { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--sh-1); }
+.cmp-meta .mi { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; color: var(--ink-2); font-weight: 500; }
+.cmp-meta .mi svg { width: 15px; height: 15px; color: var(--green); }
+.cmp-meta .author { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.cmp-meta .author .av { width: 34px; height: 34px; border-radius: 50%; background: repeating-linear-gradient(135deg, var(--bg-sunken), var(--bg-sunken) 5px, var(--surface-2) 5px, var(--surface-2) 10px); border: 1px solid var(--line); flex: none; display:grid; place-items:center; font-family:var(--mono); font-size:7px; color:var(--ink-3); }
+.cmp-meta .author .nm { font-size: 12.5px; font-weight: 700; }
+.cmp-meta .author .rl { font-size: 11px; color: var(--ink-3); }
+
+/* table caption row */
+.section-label { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 3vw, 32px); letter-spacing: -.015em; margin: 0 0 18px; }
+.section-label .n { font-family: var(--mono); font-size: 14px; color: var(--green); margin-right: 10px; }
+
+/* ranked mini-fiche cards */
+.rank-list { display: flex; flex-direction: column; gap: 18px; }
+.rank-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--sh-1); overflow: hidden; display: grid; grid-template-columns: 70px 1fr 304px; transition: box-shadow .18s, transform .18s; }
+.rank-card:hover { box-shadow: var(--sh-3); }
+.rank-card.is-top { box-shadow: var(--sh-2); }
+.rc-rank { display: grid; place-items: center; background: var(--surface-2); border-right: 1px solid var(--line); position: relative; }
+.rc-rank .n { font-family: var(--serif); font-weight: 600; font-size: 30px; color: var(--ink-3); line-height: 1; }
+.rc-rank-medal { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-weight: 600; font-size: 13px; color: #fff; }
+.rank-card[data-medal="1"] .rc-rank { background: color-mix(in srgb, var(--gold) 14%, var(--surface-2)); }
+.rank-card[data-medal="1"] .rc-rank .n { color: var(--gold-ink); }
+.rank-card[data-medal="1"] { border-color: color-mix(in srgb, var(--gold) 40%, var(--line)); }
+.rank-card[data-medal="2"] .rc-rank .n { color: #7C8088; }
+.rank-card[data-medal="3"] .rc-rank .n { color: #A9743F; }
+.rc-badge-top { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 8px; letter-spacing: .06em; color: var(--gold-ink); text-transform: uppercase; white-space: nowrap; }
+
+.rc-main { padding: 20px 24px; display: flex; flex-direction: column; gap: 13px; min-width: 0; }
+.rc-head { display: flex; align-items: center; gap: 14px; }
+.rc-head .logo-ph { width: 110px; height: 40px; flex: none; }
+.rc-head .nm { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+.rc-head .lic { font-size: 11px; color: var(--ink-3); font-family: var(--mono); }
+.rc-head .score-pill { margin-left: auto; }
+.rc-verdict { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+.rc-points { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; }
+.rc-points .pt { display: flex; gap: 9px; font-size: 13.5px; color: var(--ink-2); align-items: flex-start; line-height: 1.4; }
+.rc-points .pt svg { width: 14px; height: 14px; flex: none; margin-top: 2px; }
+.rc-points .pt.pro svg { color: var(--green); }
+.rc-points .pt.con svg { color: var(--red); }
+
+.rc-side { padding: 20px 22px; border-left: 1px solid var(--line); background: var(--surface-2); display: flex; flex-direction: column; gap: 11px; justify-content: center; }
+.rc-side .bonus-badge { padding: 11px 14px; }
+.rc-side .bonus-badge .bamt { font-size: 20px; }
+
+/* criteria / methodology */
+.crit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.crit-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--sh-1); }
+.crit-card .ci { width: 40px; height: 40px; border-radius: 10px; background: var(--green-50); color: var(--green); display: grid; place-items: center; margin-bottom: 14px; }
+.crit-card .ci svg { width: 20px; height: 20px; }
+.crit-card h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+.crit-card .wt { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 10px; }
+.crit-card p { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; margin: 0 0 12px; }
+.crit-bar { height: 6px; border-radius: 3px; background: var(--bg-sunken); overflow: hidden; }
+.crit-bar i { display: block; height: 100%; background: var(--green); border-radius: 3px; }
+
+/* faq (shared) */
+.faq-list { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 4px 22px; box-shadow: var(--sh-1); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item:last-child { border-bottom: 0; }
+.faq-q { width: 100%; text-align: left; background: none; border: 0; font: inherit; font-weight: 600; font-size: 16px; color: var(--ink); padding: 18px 0; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.faq-q .pm { flex: none; width: 20px; height: 20px; position: relative; }
+.faq-q .pm::before, .faq-q .pm::after { content: ""; position: absolute; background: var(--green); border-radius: 2px; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+.faq-q .pm::before { width: 13px; height: 2px; }
+.faq-q .pm::after { width: 2px; height: 13px; transition: transform .2s; }
+.faq-item.open .faq-q .pm::after { transform: translate(-50%,-50%) scaleY(0); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .28s ease; }
+.faq-item.open .faq-a { max-height: 360px; }
+.faq-a p { margin: 0 0 18px; color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+
+@media (max-width: 920px) {
+  .crit-grid { grid-template-columns: 1fr; }
+  .rank-card { grid-template-columns: 56px 1fr; }
+  .rc-side { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .rc-side .bonus-badge { flex: 1; min-width: 160px; }
+  .rc-side .btn { flex: 1; min-width: 150px; }
+}
+@media (max-width: 620px) {
+  .rc-points { grid-template-columns: 1fr; }
+  .rc-head { flex-wrap: wrap; }
+  .rc-head .score-pill { margin-left: 0; }
+  .cmp-meta .author { margin-left: 0; }
+}

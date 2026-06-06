@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeu responsable : reconnaître les risques et trouver de l'aide</title>
+<meta name="description" content="Le jeu doit rester un plaisir. Reconnaître les signes d'une pratique à risque, fixer des limites, s'auto-exclure et trouver de l'aide gratuite. Joueurs Info Service 09 74 75 13 13.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.breadcrumbs { border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.breadcrumbs .in { max-width: var(--maxw); margin: 0 auto; padding: 11px 32px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
+.breadcrumbs a { text-decoration: none; color: var(--ink-3); }
+.breadcrumbs a:hover { color: var(--green); }
+.breadcrumbs .sep { opacity: .5; }
+.breadcrumbs .cur { color: var(--ink); font-weight: 600; }
+
+.rg-hero { padding: 44px 0 8px; }
+.rg-hero .wrap { max-width: 820px; }
+.rg-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.rg-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.rg-hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(34px, 5vw, 54px); letter-spacing: -.022em; line-height: 1.05; margin: 0 0 18px; }
+.rg-hero .lead { font-size: 20px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+
+/* helpline card */
+.helpline { display: flex; align-items: center; gap: 24px; background: var(--surface); border: 1px solid color-mix(in srgb, var(--red) 28%, var(--line)); border-left: 5px solid var(--red); border-radius: var(--radius-lg); padding: 24px 28px; box-shadow: var(--sh-2); margin: 30px 0 0; flex-wrap: wrap; }
+.helpline .ic { width: 56px; height: 56px; border-radius: 14px; background: var(--red-50); color: var(--red); display: grid; place-items: center; flex: none; }
+.helpline .ic svg { width: 28px; height: 28px; }
+.helpline .ht { flex: 1; min-width: 220px; }
+.helpline .ht .t { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 4px; }
+.helpline .ht .num { font-family: var(--serif); font-size: 32px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; line-height: 1; }
+.helpline .ht .sub { font-size: 13px; color: var(--ink-3); margin-top: 6px; }
+
+.rg-section { padding: 26px 0; }
+.rg-section .wrap { max-width: 900px; }
+.rg-section h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -.016em; margin: 0 0 8px; }
+.rg-section .intro { font-size: 16.5px; color: var(--ink-2); line-height: 1.6; margin: 0 0 22px; max-width: 70ch; }
+
+/* warning signs checklist */
+.signs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sign { display: flex; gap: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 15px 17px; box-shadow: var(--sh-1); align-items: flex-start; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
+.sign .d { width: 22px; height: 22px; border-radius: 50%; background: var(--red-50); color: var(--red); display: grid; place-items: center; flex: none; font-weight: 800; font-size: 13px; margin-top: 1px; }
+
+/* tools */
+.tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.tool { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--sh-1); }
+.tool .ti { width: 44px; height: 44px; border-radius: 11px; background: var(--green-50); color: var(--green); display: grid; place-items: center; margin-bottom: 14px; }
+.tool .ti svg { width: 22px; height: 22px; }
+.tool h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; margin: 0 0 6px; }
+.tool p { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+
+/* self-test */
+.selftest { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--sh-2); overflow: hidden; }
+.selftest .st-head { padding: 26px 30px 18px; border-bottom: 1px solid var(--line); }
+.selftest .st-head h3 { font-family: var(--serif); font-size: 23px; font-weight: 600; margin: 0 0 6px; }
+.selftest .st-head p { font-size: 14px; color: var(--ink-2); margin: 0; }
+.st-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 30px; border-bottom: 1px solid var(--line); }
+.st-q .qt { font-size: 15px; color: var(--ink); font-weight: 500; max-width: 62ch; }
+.st-toggle { display: flex; gap: 8px; flex: none; }
+.st-toggle button { font: inherit; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 8px; border: 1.5px solid var(--line-2); background: var(--surface); color: var(--ink-2); cursor: pointer; transition: all .15s; }
+.st-toggle button:hover { border-color: var(--ink-3); }
+.st-toggle button.sel-yes { background: var(--red); border-color: var(--red); color: #fff; }
+.st-toggle button.sel-no { background: var(--green); border-color: var(--green); color: #fff; }
+.st-result { padding: 22px 30px; background: var(--surface-2); display: none; }
+.st-result.show { display: block; }
+.st-result .rt { font-family: var(--serif); font-size: 19px; font-weight: 600; margin: 0 0 8px; }
+.st-result p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+.st-result.warn .rt { color: var(--red-ink); }
+.st-result.ok .rt { color: var(--green-ink); }
+
+/* resources */
+.res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.res-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--sh-1); display: flex; flex-direction: column; gap: 8px; }
+.res-card .rorg { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.res-card .rflag { font-size: 11px; font-family: var(--mono); color: var(--ink-3); }
+.res-card p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; margin: 4px 0 8px; }
+.res-card .rcontact { font-weight: 700; color: var(--green); font-size: 15px; margin-top: auto; }
+
+.callout-soft { background: var(--green-50); border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line)); border-radius: var(--radius-lg); padding: 24px 26px; }
+.callout-soft h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0 0 10px; }
+.callout-soft p { font-size: 15px; color: var(--ink-2); line-height: 1.6; margin: 0; }
+
+@media (max-width: 680px) {
+  .signs, .tools, .res-grid { grid-template-columns: 1fr; }
+  .st-q { flex-direction: column; align-items: flex-start; }
+  .helpline { gap: 16px; }
+}
+</style>
+</head>
+<body data-page-type="responsible_gaming" data-locale="fr">
+
+<div class="topstrip">
+  <div class="in">
+    <span class="badge18">18+</span>
+    <span class="desc">Les jeux d'argent comportent des risques&nbsp;: endettement, dépendance.</span>
+    <span class="sep">·</span>
+    <a href="#" data-event="responsible_gaming_click">Joueurs Info Service — 09 74 75 13 13</a>
+    <span class="right">MàJ 07 JUIN 2026</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="in">
+    <a href="Homepage FR.html" class="brandmark"><span class="glyph">M</span><span class="name">le<b>·meilleur</b>·casino</span></a>
+    <nav class="mainnav" aria-label="Navigation principale">
+      <a href="Liste Casinos.html">Casinos</a><a href="Comparatif Top 10.html">Comparatifs</a><a href="Categorie Machines a sous.html">Jeux</a><a href="#">Bonus</a><a href="#" class="active">Guides</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-btn desktop-only" aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <button class="icon-btn" data-action="theme-toggle" aria-label="Basculer le thème" data-event="dark_mode_toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
+      <div class="locale desktop-only">
+        <button class="locale-btn" data-action="locale-toggle" aria-controls="locale-menu"><span class="flag fr"></span> FR <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="locale-menu" id="locale-menu">
+          <a href="#" data-event="locale_switch" data-to="fr"><span class="flag fr"></span> Français <span class="sub">FR</span></a>
+          <a href="#" data-event="locale_switch" data-to="en"><span class="flag gb"></span> English <span class="sub">EN</span></a>
+        </div>
+      </div>
+      <button class="icon-btn menu-btn" data-action="mobile-menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="breadcrumbs" aria-label="Fil d'Ariane">
+  <div class="in"><a href="Homepage FR.html">Accueil</a><span class="sep">›</span><a href="#">Guides</a><span class="sep">›</span><span class="cur">Jeu responsable</span></div>
+</nav>
+
+<section class="rg-hero">
+  <div class="wrap">
+    <div class="rg-eyebrow">Notre engagement</div>
+    <h1>Le jeu doit rester un plaisir.</h1>
+    <p class="lead">Les jeux d'argent peuvent procurer du divertissement, mais ils comportent de vrais risques : perte de contrôle, endettement, isolement. Cette page existe pour vous aider à jouer en sécurité — ou à trouver de l'aide si le jeu prend trop de place.</p>
+    <div class="helpline">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
+      <div class="ht">
+        <div class="t">Joueurs Info Service — appel gratuit &amp; anonyme</div>
+        <div class="num">09 74 75 13 13</div>
+        <div class="sub">7j/7 de 8h à 2h · ou tchat sur joueurs-info-service.fr</div>
+      </div>
+      <a href="#" class="btn btn-secondary" data-event="responsible_gaming_click" data-placement="rg_hero">Faire le test en ligne</a>
+    </div>
+  </div>
+</section>
+
+<section class="rg-section">
+  <div class="wrap">
+    <h2>Reconnaître les signes d'une pratique à risque</h2>
+    <p class="intro">Le jeu devient problématique quand il n'est plus un loisir choisi, mais un besoin. Voici des signaux d'alerte fréquents. Si plusieurs vous parlent, n'hésitez pas à demander de l'aide.</p>
+    <div class="signs">
+      <div class="sign"><span class="d">!</span> Vous jouez plus longtemps ou plus d'argent que prévu</div>
+      <div class="sign"><span class="d">!</span> Vous tentez de « vous refaire » après une perte</div>
+      <div class="sign"><span class="d">!</span> Vous mentez à vos proches sur votre pratique</div>
+      <div class="sign"><span class="d">!</span> Vous jouez avec de l'argent dont vous avez besoin</div>
+      <div class="sign"><span class="d">!</span> Le jeu affecte votre sommeil, votre humeur, votre travail</div>
+      <div class="sign"><span class="d">!</span> Vous ressentez de l'anxiété quand vous ne jouez pas</div>
+    </div>
+  </div>
+</section>
+
+<section class="rg-section">
+  <div class="wrap">
+    <h2>Les outils à votre disposition</h2>
+    <p class="intro">Les opérateurs sérieux mettent à disposition des outils pour garder le contrôle. Activez-les dès l'inscription, avant que le besoin ne se fasse sentir.</p>
+    <div class="tools">
+      <div class="tool"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span><h3>Limites de dépôt</h3><p>Plafonnez le montant que vous pouvez déposer par jour, semaine ou mois. La limite à la baisse est immédiate, à la hausse différée.</p></div>
+      <div class="tool"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Limites de temps</h3><p>Définissez une durée de session maximale, avec des rappels réguliers vous indiquant depuis combien de temps vous jouez.</p></div>
+      <div class="tool"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.4 5.6a9 9 0 1 0 0 12.8M21 3l-3 3-3-3"/></svg></span><h3>Pause &amp; auto-exclusion</h3><p>Suspendez votre compte de 24 h à plusieurs mois, ou excluez-vous définitivement. L'interdiction nationale de jeu est aussi possible via l'ANJ.</p></div>
+      <div class="tool"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Vérification du budget</h3><p>Consultez votre historique de mises et de gains/pertes à tout moment, pour garder une vision lucide de votre pratique réelle.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rg-section">
+  <div class="wrap">
+    <h2>Auto-évaluation rapide</h2>
+    <p class="intro">Trois questions pour faire le point. Ce mini-test ne remplace pas un diagnostic, mais peut vous aider à y voir plus clair. Vos réponses restent sur votre appareil.</p>
+    <div class="selftest" id="selftest">
+      <div class="st-head"><h3>En pensant aux 12 derniers mois…</h3><p>Répondez honnêtement à chaque question.</p></div>
+      <div class="st-q"><span class="qt">Avez-vous misé plus que ce que vous pouviez vous permettre de perdre ?</span><span class="st-toggle"><button data-v="yes">Oui</button><button data-v="no">Non</button></span></div>
+      <div class="st-q"><span class="qt">Avez-vous eu besoin de jouer des sommes croissantes pour ressentir la même excitation ?</span><span class="st-toggle"><button data-v="yes">Oui</button><button data-v="no">Non</button></span></div>
+      <div class="st-q"><span class="qt">Le jeu a-t-il causé des problèmes financiers ou des tensions avec vos proches ?</span><span class="st-toggle"><button data-v="yes">Oui</button><button data-v="no">Non</button></span></div>
+      <div class="st-result" id="stResult"><div class="rt" id="stTitle"></div><p id="stText"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rg-section">
+  <div class="wrap">
+    <h2>Où trouver de l'aide</h2>
+    <p class="intro">Des organismes indépendants et gratuits vous accompagnent, en toute confidentialité, que vous soyez en France ou ailleurs.</p>
+    <div class="res-grid">
+      <div class="res-card"><div class="rorg">Joueurs Info Service</div><div class="rflag">🇫🇷 France</div><p>Écoute, information et orientation pour les joueurs et leurs proches. Anonyme et gratuit.</p><div class="rcontact">09 74 75 13 13</div></div>
+      <div class="res-card"><div class="rorg">SOS Joueurs</div><div class="rflag">🇫🇷 France</div><p>Accompagnement des personnes en difficulté avec le jeu et de leur entourage.</p><div class="rcontact">09 69 39 55 12</div></div>
+      <div class="res-card"><div class="rorg">ANJ — Interdiction de jeu</div><div class="rflag">🇫🇷 France</div><p>Demandez votre inscription au fichier national des interdits de jeu, valable dans tous les établissements.</p><div class="rcontact">anj.fr</div></div>
+      <div class="res-card"><div class="rorg">GamCare / BeGambleAware</div><div class="rflag">🇬🇧 International</div><p>Support, conseils et outils d'auto-exclusion pour le public anglophone.</p><div class="rcontact">begambleaware.org</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="rg-section">
+  <div class="wrap">
+    <div class="callout-soft">
+      <h3>Vous vous inquiétez pour un proche ?</h3>
+      <p>Il n'est pas toujours simple d'aborder le sujet. Évitez le jugement, parlez de ce que vous observez plutôt que d'accuser, et orientez vers une aide professionnelle. Les lignes d'écoute ci-dessus accompagnent aussi l'entourage des joueurs — vous n'avez pas à gérer cela seul.</p>
+    </div>
+  </div>
+</section>
+
+<div class="rg-banner">
+  <div class="in">
+    <span class="badge18">18+</span>
+    <span><strong>Le jeu doit rester un plaisir.</strong> En cas de dépendance, appelez le <strong>09 74 75 13 13</strong> (Joueurs Info Service) ou faites le test sur <a href="#">joueurs-info-service.fr</a>.</span>
+    <span class="orgs"><span class="org-ph">Joueurs Info Service</span><span class="org-ph">ANJ</span><span class="org-ph">GamCare</span></span>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="Homepage FR.html" class="brandmark"><span class="glyph">M</span><span class="name">le<b>·meilleur</b>·casino</span></a>
+        <p>Le comparatif indépendant des casinos en ligne. Testés à l'argent réel, notés sans complaisance, depuis 2021.</p>
+      </div>
+      <div class="foot-col"><h4>Casinos</h4><ul><li><a href="Liste Casinos.html">Tous les casinos</a></li><li><a href="#">Casinos crypto</a></li><li><a href="#">Retraits rapides</a></li></ul></div>
+      <div class="foot-col"><h4>Comparatifs</h4><ul><li><a href="Comparatif Top 10.html">Top 10 casinos</a></li><li><a href="Versus Cresus vs Lucky8.html">Cresus vs Lucky8</a></li></ul></div>
+      <div class="foot-col"><h4>Jeux</h4><ul><li><a href="Categorie Machines a sous.html">Machines à sous</a></li><li><a href="#">Casino live</a></li></ul></div>
+      <div class="foot-col"><h4>Ressources</h4><ul><li><a href="Jeu Responsable.html">Jeu responsable</a></li><li><a href="Article ANJ 2026.html">Légalité en France</a></li><li><a href="#">Notre méthodologie</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <div class="aff-disc"><strong>Transparence sur l'affiliation.</strong> Nous percevons une commission lorsque vous vous inscrivez auprès d'un opérateur via nos liens, ce qui finance nos tests. Cette rémunération n'influence ni nos notes, ni nos classements. <a href="#" style="color:var(--green)">En savoir plus.</a></div>
+      <span>© 2026 le-meilleur-casino-en-ligne.fr</span>
+      <span class="badge18" style="font-family:var(--mono);font-weight:600;background:var(--red);color:#fff;padding:2px 7px;border-radius:5px;font-size:11px">18+</span>
+      <span class="right"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-overlay">
+  <div class="cookie" role="dialog" aria-label="Consentement aux cookies">
+    <h3>Vos préférences de cookies</h3>
+    <p>Nous utilisons des cookies pour faire fonctionner le site, mesurer l'audience et personnaliser les offres. Vous choisissez — refuser est aussi simple qu'accepter. <a href="#">Politique de cookies</a></p>
+    <div class="ck-row"><div><div class="ck-label">Essentiels</div><div class="ck-desc">Nécessaires au fonctionnement du site.</div></div><button class="toggle-sw" aria-checked="true" disabled></button></div>
+    <div class="ck-row"><div><div class="ck-label">Mesure d'audience</div><div class="ck-desc">Google Analytics 4, anonymisé.</div></div><button class="toggle-sw" aria-checked="false"></button></div>
+    <div class="ck-row"><div><div class="ck-label">Marketing</div><div class="ck-desc">Suivi des conversions d'affiliation.</div></div><button class="toggle-sw" aria-checked="false"></button></div>
+    <div class="cookie-actions">
+      <button class="btn btn-secondary" data-cookie="reject">Tout refuser</button>
+      <button class="btn btn-secondary" data-cookie="save">Enregistrer</button>
+      <button class="btn btn-primary" data-cookie="accept">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  var test=document.getElementById('selftest');
+  var answers={};
+  test.querySelectorAll('.st-q').forEach(function(q,i){
+    q.querySelectorAll('.st-toggle button').forEach(function(b){
+      b.addEventListener('click',function(){
+        q.querySelectorAll('button').forEach(function(x){x.classList.remove('sel-yes','sel-no');});
+        b.classList.add(b.dataset.v==='yes'?'sel-yes':'sel-no');
+        answers[i]=b.dataset.v;
+        if(Object.keys(answers).length===3){
+          var yes=Object.values(answers).filter(function(v){return v==='yes';}).length;
+          var res=document.getElementById('stResult');
+          var t=document.getElementById('stTitle');
+          var p=document.getElementById('stText');
+          res.classList.remove('warn','ok');
+          if(yes===0){res.classList.add('ok');t.textContent='Votre pratique semble maîtrisée';p.textContent='Continuez à fixer des limites et à jouer pour le plaisir. Revenez faire le point régulièrement.';}
+          else if(yes===1){res.classList.add('warn');t.textContent='Quelques signaux à surveiller';p.textContent='Un signal d\u2019alerte ressort. Fixez des limites strictes et restez attentif. En cas de doute, parlez-en au 09 74 75 13 13.';}
+          else{res.classList.add('warn');t.textContent='Il serait utile d\u2019en parler';p.textContent='Plusieurs signaux suggèrent une pratique à risque. Vous n\u2019êtes pas seul : contactez gratuitement Joueurs Info Service au 09 74 75 13 13, 7j/7.';}
+          res.classList.add('show');
+          if(window.dataLayer) window.dataLayer.push({event:'rg_selftest_complete',yes_count:yes});
+        }
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
