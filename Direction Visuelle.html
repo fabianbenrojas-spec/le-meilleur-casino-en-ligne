@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction Visuelle — le-meilleur-casino-en-ligne.fr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ---- LIGHT (default) — clean cool near-white ---- */
+  --bg:        #FAFBFC;
+  --bg-sunken: #F0F2F5;
+  --surface:   #FFFFFF;
+  --surface-2: #F8FAFB;
+  --ink:       #0B0D0F;
+  --ink-2:     #3E424A;
+  --ink-3:     #71757E;
+  --line:      #E7E9ED;
+  --line-2:    #D7DAE0;
+
+  --green:     #0F6B3E;
+  --green-700: #0C5733;
+  --green-50:  #ECF4EF;
+  --green-ink: #0B4F2E;
+
+  --gold:      #B8893F;
+  --gold-50:   #F6EFE2;
+  --gold-ink:  #8A6526;
+
+  --red:       #C8322B;
+  --red-50:    #FBEDEC;
+
+  --star:      #C9962E;
+
+  --radius-sm: 6px;
+  --radius:    10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --sh-1: 0 1px 2px rgba(15,18,28,.05), 0 1px 1px rgba(15,18,28,.04);
+  --sh-2: 0 2px 4px rgba(15,18,28,.05), 0 4px 12px rgba(15,18,28,.07);
+  --sh-3: 0 8px 24px rgba(15,18,28,.10), 0 2px 6px rgba(15,18,28,.05);
+
+  --maxw: 1080px;
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+[data-theme="dark"] {
+  --bg:        #0E0E10;
+  --bg-sunken: #09090B;
+  --surface:   #18181B;
+  --surface-2: #1E1E22;
+  --ink:       #F5F5F0;
+  --ink-2:     #C4C4BC;
+  --ink-3:     #8E8E86;
+  --line:      #2A2A2E;
+  --line-2:    #34343A;
+
+  --green:     #34B26B;
+  --green-700: #2A9159;
+  --green-50:  #12241A;
+  --green-ink: #6FD79C;
+
+  --gold:      #D6AC63;
+  --gold-50:   #271F12;
+  --gold-ink:  #E2BE7C;
+
+  --red:       #E2655E;
+  --red-50:    #2A1513;
+
+  --star:      #E5B94E;
+
+  --sh-1: 0 1px 2px rgba(0,0,0,.4);
+  --sh-2: 0 2px 8px rgba(0,0,0,.45);
+  --sh-3: 0 10px 30px rgba(0,0,0,.55);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .35s ease, color .35s ease;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in { max-width: var(--maxw); margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
+.brandmark { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: -.01em; }
+.brandmark .glyph {
+  width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+  background: var(--green); color: #fff; font-family: var(--serif); font-weight: 600; font-size: 18px;
+  box-shadow: var(--sh-1);
+}
+.brandmark .name { font-size: 15.5px; }
+.brandmark .name b { color: var(--green); }
+.topbar .tag { font-size: 12px; color: var(--ink-3); border-left: 1px solid var(--line-2); padding-left: 16px; }
+.spacer { flex: 1; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 999px;
+  padding: 7px 14px 7px 11px; font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink);
+  box-shadow: var(--sh-1); transition: border-color .2s, transform .1s;
+}
+.theme-toggle:hover { border-color: var(--ink-3); }
+.theme-toggle:active { transform: scale(.97); }
+.theme-toggle .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; position: relative; color: var(--gold); }
+[data-theme="dark"] .theme-toggle .dot { color: var(--gold); border-color: var(--gold); box-shadow: inset 4px -4px 0 0 currentColor; }
+
+/* ---------- hero ---------- */
+.hero { padding: 76px 0 36px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono);
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--gold); }
+.hero h1 {
+  font-family: var(--serif); font-weight: 500; letter-spacing: -.02em; line-height: 1.04;
+  font-size: clamp(38px, 6vw, 66px); margin: 0 0 22px; max-width: 16ch;
+}
+.hero h1 em { font-style: italic; color: var(--green); }
+.hero .lede { font-size: 20px; line-height: 1.55; color: var(--ink-2); max-width: 58ch; margin: 0; }
+.hero .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; font-size: 13.5px;
+  font-weight: 500; color: var(--ink-2); box-shadow: var(--sh-1);
+}
+.chip .k { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.chip.gold .k { background: var(--gold); }
+.chip.red .k { background: var(--red); }
+
+/* ---------- section scaffolding ---------- */
+section.block { padding: 52px 0; border-top: 1px solid var(--line); }
+.sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+.sec-num { font-family: var(--mono); font-size: 13px; color: var(--green); font-weight: 500; }
+.sec-head h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -.015em; margin: 0; }
+.sec-sub { color: var(--ink-2); font-size: 16.5px; max-width: 70ch; margin: 14px 0 34px; }
+.sec-sub strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- references ---------- */
+.ref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ref {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 22px; box-shadow: var(--sh-1);
+}
+.ref .rname { font-family: var(--serif); font-size: 21px; font-weight: 600; margin: 0 0 2px; }
+.ref .rurl { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-bottom: 14px; letter-spacing: .02em; }
+.ref p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+.ref .swatch-line { display: flex; gap: 6px; margin-bottom: 16px; }
+.ref .swatch-line i { width: 26px; height: 26px; border-radius: 6px; display: block; border: 1px solid rgba(0,0,0,.06); }
+
+/* ---------- palette ---------- */
+.pal-group { margin-bottom: 30px; }
+.pal-group h3 { font-size: 13px; font-family: var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px; font-weight: 500; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
+.sw { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); box-shadow: var(--sh-1); }
+.sw .cap { height: 76px; display: flex; align-items: flex-end; padding: 10px; }
+.sw .body { padding: 11px 13px 13px; }
+.sw .nm { font-size: 13.5px; font-weight: 600; }
+.sw .hx { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 2px; }
+.sw .use { font-size: 11.5px; color: var(--ink-3); margin-top: 7px; line-height: 1.4; }
+
+/* ---------- type ---------- */
+.type-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--sh-1); overflow: hidden; }
+.type-card + .type-card { margin-top: 18px; }
+.type-card .th { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 24px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.type-card .th .fam { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); letter-spacing: .04em; }
+.type-card .th .role { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.type-card .tb { padding: 26px 24px 30px; }
+.specimen-serif { font-family: var(--serif); }
+.specimen-sans { font-family: var(--sans); }
+.t-row { display: flex; align-items: baseline; gap: 18px; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.t-row:last-child { border-bottom: 0; }
+.t-row .lab { font-family: var(--mono); font-size: 11px; color: var(--ink-3); width: 120px; flex: none; }
+.scale-h1 { font-size: 52px; font-weight: 500; letter-spacing: -.02em; line-height: 1; }
+.scale-h2 { font-size: 34px; font-weight: 500; letter-spacing: -.015em; }
+.scale-h3 { font-size: 23px; font-weight: 600; }
+.scale-body { font-size: 17px; }
+.scale-sm { font-size: 14px; }
+.scale-xs { font-size: 12px; font-family: var(--mono); letter-spacing: .04em; }
+
+/* ---------- scales (spacing/radius/shadow) ---------- */
+.scales { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 18px; }
+.scalebox { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--sh-1); }
+.scalebox h4 { margin: 0 0 18px; font-size: 13px; font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.sp-row { display: flex; align-items: center; gap: 14px; margin-bottom: 11px; }
+.sp-row .bar { height: 14px; background: var(--green); border-radius: 3px; opacity: .85; }
+.sp-row .v { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.rad-row { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+.rad-row .box { width: 46px; height: 46px; background: var(--green-50); border: 1.5px solid var(--green); flex: none; }
+.rad-row .v { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.sh-row { margin-bottom: 16px; }
+.sh-row .box { height: 44px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 6px; }
+.sh-row .v { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+/* ---------- component lab ---------- */
+.lab-note { font-size: 13px; color: var(--ink-3); font-family: var(--mono); letter-spacing: .03em; margin: 0 0 16px; }
+.demo { background: var(--bg-sunken); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px; margin-bottom: 22px; }
+.demo-label { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; }
+
+/* CTA buttons */
+.btnrow { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: var(--radius);
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 14px 22px; min-height: 48px; border: 1.5px solid transparent; font-size: 15.5px;
+  letter-spacing: -.005em; transition: background .18s, border-color .18s, transform .08s, box-shadow .18s;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn .arr { font-size: 17px; transition: transform .18s; }
+.btn:hover .arr { transform: translateX(3px); }
+.btn-primary { background: var(--green); color: #fff; box-shadow: var(--sh-2); }
+.btn-primary:hover { background: var(--green-700); }
+.btn-primary:focus-visible { outline: 3px solid color-mix(in srgb, var(--green) 45%, transparent); outline-offset: 2px; }
+.btn-secondary { background: transparent; color: var(--green-ink); border-color: var(--green); }
+.btn-secondary:hover { background: var(--green-50); }
+[data-theme="dark"] .btn-secondary { color: var(--green-ink); }
+.btn-tertiary { background: transparent; color: var(--ink-2); padding: 12px 8px; min-height: 0; font-weight: 600; }
+.btn-tertiary:hover { color: var(--green); }
+.btn-tertiary u { text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 1px; }
+.btn-disabled { background: var(--bg-sunken); color: var(--ink-3); border-color: var(--line-2); cursor: not-allowed; box-shadow: none; }
+.btn .sub { font-weight: 500; font-size: 12px; opacity: .85; }
+.btn-stack { flex-direction: column; gap: 2px; padding: 11px 22px; }
+.btn-stack .sub { color: rgba(255,255,255,.82); }
+
+/* rating */
+.rating { display: inline-flex; align-items: center; gap: 12px; }
+.rating .num { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1; }
+.rating .num small { font-size: 15px; color: var(--ink-3); font-family: var(--sans); font-weight: 500; }
+.stars { display: inline-flex; gap: 2px; }
+.stars svg { width: 17px; height: 17px; display: block; }
+.rating .cnt { font-size: 13px; color: var(--ink-3); }
+.rating-block .grade { font-size: 12px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .05em; }
+
+/* bonus badge */
+.bonus-badge {
+  display: inline-flex; flex-direction: column; background: var(--green-50);
+  border: 1.5px solid color-mix(in srgb, var(--green) 30%, var(--line));
+  border-radius: var(--radius); padding: 13px 18px; min-width: 200px;
+}
+.bonus-badge .blab { font-size: 11px; font-family: var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--green-ink); margin-bottom: 3px; }
+.bonus-badge .bamt { font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1.05; color: var(--ink); letter-spacing: -.01em; }
+.bonus-badge .bamt span { color: var(--green); }
+.bonus-badge .bcond { font-size: 11.5px; color: var(--ink-3); margin-top: 5px; }
+.bonus-badge.gold { background: var(--gold-50); border-color: color-mix(in srgb, var(--gold) 34%, var(--line)); }
+.bonus-badge.gold .blab { color: var(--gold-ink); }
+.bonus-badge.gold .bamt span { color: var(--gold-ink); }
+
+/* operator cards */
+.opcard {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  box-shadow: var(--sh-2); overflow: hidden; position: relative;
+}
+.opcard.featured { display: grid; grid-template-columns: 200px 1fr auto; gap: 0; }
+.op-rank { position: absolute; top: 0; left: 0; background: var(--green); color: #fff; font-family: var(--mono); font-size: 12px; font-weight: 600; padding: 5px 11px; border-bottom-right-radius: 12px; letter-spacing: .04em; z-index: 2; }
+.op-logo { background: var(--surface-2); border-right: 1px solid var(--line); display: grid; place-items: center; padding: 28px; }
+.logo-ph {
+  width: 100%; height: 64px; border-radius: 8px; display: grid; place-items: center;
+  background: repeating-linear-gradient(135deg, var(--bg-sunken), var(--bg-sunken) 7px, transparent 7px, transparent 14px);
+  border: 1px dashed var(--line-2); font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-align: center; padding: 6px;
+}
+.op-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.op-name { font-family: var(--serif); font-size: 23px; font-weight: 600; margin: 0; letter-spacing: -.01em; }
+.op-name .lic { font-family: var(--sans); font-size: 11px; font-weight: 500; color: var(--ink-3); margin-left: 9px; vertical-align: middle; background: var(--bg-sunken); padding: 2px 8px; border-radius: 5px; border: 1px solid var(--line); }
+.op-arg { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+.op-features { display: flex; flex-wrap: wrap; gap: 7px; }
+.feat { font-size: 12px; color: var(--ink-2); background: var(--bg-sunken); border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; display: inline-flex; gap: 5px; align-items: center; }
+.feat svg { width: 12px; height: 12px; color: var(--green); }
+.op-cta { padding: 22px 24px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; justify-content: center; min-width: 234px; background: var(--surface-2); }
+
+/* comparison row variant */
+.opcard.rowv { display: grid; grid-template-columns: 56px 150px 1fr 150px 200px; align-items: center; gap: 18px; padding: 16px 20px; box-shadow: var(--sh-1); }
+.opcard.rowv .rk { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--ink-3); text-align: center; }
+.opcard.rowv .logo-ph { height: 44px; }
+.opcard.rowv .mid { min-width: 0; }
+.opcard.rowv .mid .op-name { font-size: 18px; margin-bottom: 3px; }
+.opcard.rowv .mid .op-arg { font-size: 13px; }
+
+/* compact listing */
+.opcard.compact { width: 280px; padding: 18px; display: flex; flex-direction: column; gap: 13px; }
+.opcard.compact .logo-ph { height: 50px; }
+.opcard.compact .crow { display: flex; justify-content: space-between; align-items: center; }
+
+/* disclaimers / compliance */
+.disc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.disclaimer {
+  border-radius: var(--radius); padding: 15px 18px; font-size: 13.5px; line-height: 1.5;
+  display: flex; gap: 13px; align-items: flex-start;
+}
+.disclaimer .ic { flex: none; width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.d-18 { background: var(--red-50); border: 1px solid color-mix(in srgb, var(--red) 30%, var(--line)); color: var(--ink-2); }
+.d-18 .ic { background: var(--red); color: #fff; font-family: var(--mono); }
+.d-18 strong { color: var(--red); }
+.d-aff { background: var(--bg-sunken); border: 1px solid var(--line); color: var(--ink-2); }
+.d-aff .ic { background: var(--gold); color: #fff; }
+.d-aff strong { color: var(--ink); }
+
+/* data-attr callout */
+.code-callout {
+  background: var(--bg-sunken); border: 1px solid var(--line); border-left: 3px solid var(--green);
+  border-radius: var(--radius); padding: 18px 20px; font-family: var(--mono); font-size: 12.5px;
+  line-height: 1.7; color: var(--ink-2); overflow-x: auto; white-space: pre;
+}
+.code-callout .at { color: var(--green); }
+.code-callout .st { color: var(--gold-ink); }
+.code-callout .tg { color: var(--ink); font-weight: 600; }
+
+/* pro/con mini */
+.proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.proscons > div { padding: 16px 18px; }
+.proscons .pros { background: var(--green-50); border-right: 1px solid var(--line); }
+.proscons .cons { background: var(--red-50); }
+.proscons h5 { margin: 0 0 11px; font-size: 12px; font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.proscons .pros h5 { color: var(--green-ink); }
+.proscons .cons h5 { color: var(--red); }
+.proscons ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.proscons li { font-size: 13.5px; color: var(--ink-2); display: flex; gap: 9px; align-items: flex-start; }
+.proscons li .m { flex: none; font-weight: 800; }
+.proscons .pros li .m { color: var(--green); }
+.proscons .cons li .m { color: var(--red); }
+
+/* footer note */
+.endnote { padding: 50px 0 90px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 14px; }
+.endnote .nx { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px 26px; box-shadow: var(--sh-1); color: var(--ink-2); }
+.endnote .nx h3 { font-family: var(--serif); color: var(--ink); font-size: 21px; margin: 0 0 14px; font-weight: 600; }
+.endnote .nx ol { margin: 0; padding-left: 20px; line-height: 1.9; }
+.endnote .nx b { color: var(--green); }
+
+.argue { margin-top: 16px; display: grid; gap: 10px; }
+.argue .a { display: flex; gap: 12px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.argue .a .why { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--green); flex: none; width: 96px; padding-top: 2px; }
+
+@media (max-width: 920px) {
+  .ref-grid { grid-template-columns: 1fr; }
+  .scales { grid-template-columns: 1fr; }
+  .opcard.featured { grid-template-columns: 1fr; }
+  .op-logo { border-right: 0; border-bottom: 1px solid var(--line); }
+  .op-cta { border-left: 0; border-top: 1px solid var(--line); }
+  .opcard.rowv { grid-template-columns: 40px 1fr; grid-auto-rows: auto; }
+  .disc-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brandmark">
+      <span class="glyph">M</span>
+      <span class="name">le<b>·meilleur</b>·casino</span>
+    </div>
+    <span class="tag">Direction visuelle — v1</span>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="toggle" data-event="dark_mode_toggle" aria-label="Basculer le thème">
+      <span class="dot"></span>
+      <span id="toggle-label">Mode sombre</span>
+    </button>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div class="eyebrow">Direction visuelle &amp; système</div>
+  <h1>Le <em>Wirecutter</em> du casino en ligne.</h1>
+  <p class="lede">Un comparateur qui inspire la confiance d'un média éditorial sérieux — pas la 50ᵉ copie néon-flashy du secteur. Sobriété, autorité, et des zones de conversion nettes. Voici le système avant de lancer les maquettes.</p>
+  <div class="meta-row">
+    <span class="chip"><span class="k"></span> Éditorial, pas « gamer »</span>
+    <span class="chip gold"><span class="k"></span> EEAT-first (YMYL gambling)</span>
+    <span class="chip"><span class="k"></span> Mobile-first 375px</span>
+    <span class="chip red"><span class="k"></span> Conformité 18+ intégrée</span>
+  </div>
+</header>
+
+<!-- 01 POSITIONING / REFERENCES -->
+<section class="block wrap">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Le moodboard, en un paragraphe</h2></div>
+  <p class="sec-sub">Imagine un <strong>guide d'achat de presse</strong> — generous white space, une serif éditoriale pour la voix, des tableaux comparatifs lisibles, et un vert « confiance + argent » utilisé avec parcimonie pour marquer l'action. Zéro gradient, zéro néon, zéro glow. La couleur travaille pour la <strong>hiérarchie et la conversion</strong>, jamais pour la décoration. Le résultat doit ressembler à un outil dans lequel on prend une décision à 200 €, pas à une salle d'arcade.</p>
+
+  <div class="ref-grid">
+    <div class="ref">
+      <div class="swatch-line"><i style="background:#000"></i><i style="background:#fff"></i><i style="background:#127a3e"></i><i style="background:#f2f2f0"></i></div>
+      <p class="rname">Wirecutter</p>
+      <p class="rurl">nytimes.com/wirecutter</p>
+      <p>La référence absolue du « guide d'achat de confiance ». Verdict express en haut, méthodologie transparente, un seul accent de couleur pour l'action. On vole sa rigueur éditoriale.</p>
+    </div>
+    <div class="ref">
+      <div class="swatch-line"><i style="background:#0a0a0a"></i><i style="background:#fff"></i><i style="background:#1b7a4b"></i><i style="background:#e8f3ec"></i></div>
+      <p class="rname">NerdWallet</p>
+      <p class="rurl">nerdwallet.com</p>
+      <p>YMYL finance — exactement nos contraintes EEAT. Cartes produits avec note, CTA vert dédié, comparateurs triables. La preuve qu'un design « sérieux argent » convertit fort.</p>
+    </div>
+    <div class="ref">
+      <div class="swatch-line"><i style="background:#1a1a1a"></i><i style="background:#faf8f4"></i><i style="background:#9b7b3f"></i><i style="background:#efe8da"></i></div>
+      <p class="rname">Monos &amp; Que Choisir</p>
+      <p class="rurl">quechoisir.org · monos.com</p>
+      <p>La caution « consommateur indépendant » à la française + le raffinement typographique serif/sans. On emprunte la posture d'autorité neutre et le soin éditorial.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 COLOR -->
+<section class="block wrap">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Système de couleur</h2></div>
+  <p class="sec-sub">Validée depuis ta proposition, avec ajustements de contraste. Le <strong>vert profond</strong> est réservé à l'action et au « bien » ; l'<strong>or sobre</strong> signale le premium / featured ; le <strong>rouge</strong> est strictement légal (18+, warnings). Bascule le thème en haut à droite pour voir le mode sombre — calibré pour la lecture longue du soir.</p>
+
+  <div class="pal-group">
+    <h3>Surfaces &amp; encre</h3>
+    <div class="swatches">
+      <div class="sw"><div class="cap" style="background:var(--bg)"></div><div class="body"><div class="nm">Background</div><div class="hx">#FAFBFC / #0E0E10</div><div class="use">Fond de page, blanc cassé chaud</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--surface);border-bottom:1px solid var(--line)"></div><div class="body"><div class="nm">Surface</div><div class="hx">#FFFFFF / #18181B</div><div class="use">Cartes, tableaux, conteneurs</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--ink)"></div><div class="body"><div class="nm">Ink</div><div class="hx">#0B0D0F / #F5F5F0</div><div class="use">Titres, texte principal — AAA</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--ink-3)"></div><div class="body"><div class="nm">Ink muted</div><div class="hx">#71757E / #8E8E86</div><div class="use">Métas, légendes, captions</div></div></div>
+    </div>
+  </div>
+
+  <div class="pal-group">
+    <h3>Accents fonctionnels</h3>
+    <div class="swatches">
+      <div class="sw"><div class="cap" style="background:var(--green)"><span style="color:#fff;font-size:12px;font-family:var(--mono)">CTA</span></div><div class="body"><div class="nm">Green / Primary</div><div class="hx">#0F6B3E</div><div class="use">Boutons bonus, liens, « positif »</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--gold)"><span style="color:#fff;font-size:12px;font-family:var(--mono)">★</span></div><div class="body"><div class="nm">Gold / Premium</div><div class="hx">#B8893F</div><div class="use">Featured, éditeur's pick, étoiles</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--red)"><span style="color:#fff;font-size:12px;font-family:var(--mono)">18+</span></div><div class="body"><div class="nm">Red / Legal</div><div class="hx">#C8322B</div><div class="use">18+, warnings, jeu responsable</div></div></div>
+      <div class="sw"><div class="cap" style="background:var(--green-50);border-bottom:1px solid var(--line)"></div><div class="body"><div class="nm">Green tint</div><div class="hx">#ECF4EF</div><div class="use">Fonds de badges bonus, pros</div></div></div>
+    </div>
+  </div>
+  <div class="argue">
+    <div class="a"><span class="why">Pourquoi vert</span><span>Double signal « argent + sûr », et il nous démarque du jaune/rouge agressif que 95 % du secteur utilise. Le CTA ressort par contraste, pas par criardise.</span></div>
+    <div class="a"><span class="why">Pourquoi or, pas jaune néon</span><span>L'or désaturé dit « premium / sélection éditoriale » sans virer casino las-vegas. Réservé au top pick — sa rareté lui donne du poids.</span></div>
+    <div class="a"><span class="why">Rouge cloisonné</span><span>Si le rouge ne sert qu'au légal, il garde sa force d'alerte. On ne le « brûle » jamais en décoration.</span></div>
+  </div>
+</section>
+
+<!-- 03 TYPOGRAPHY -->
+<section class="block wrap">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Typographie</h2></div>
+  <p class="sec-sub"><strong>Challenge à ton brief :</strong> je propose <strong>Newsreader</strong> plutôt que Fraunces pour les titres. Fraunces est aujourd'hui sur-utilisé par les startups et lit « tendance » ; Newsreader lit « presse / rédaction » — exactement la caution éditoriale qu'on veut. En UI/body, j'évite Inter (le cliché du secteur) au profit de <strong>Hanken Grotesk</strong> : chaleureux, très lisible aux petites tailles des tableaux, neutre sans être froid.</p>
+
+  <div class="type-card">
+    <div class="th"><span class="role">Titres &amp; voix éditoriale</span><span class="fam">Newsreader — serif</span></div>
+    <div class="tb specimen-serif">
+      <div class="t-row"><span class="lab">H1 · 52/500</span><span class="scale-h1">Meilleurs casinos 2026</span></div>
+      <div class="t-row"><span class="lab">H2 · 34/500</span><span class="scale-h2">Notre méthodologie de test</span></div>
+      <div class="t-row"><span class="lab">H3 · 23/600</span><span class="scale-h3">Bonus de bienvenue &amp; conditions</span></div>
+      <div class="t-row"><span class="lab">Italic · lede</span><span class="scale-h3" style="font-style:italic;font-weight:400;color:var(--ink-2)">« Indépendant, testé, vérifié. »</span></div>
+    </div>
+  </div>
+
+  <div class="type-card">
+    <div class="th"><span class="role">Interface, body &amp; data</span><span class="fam">Hanken Grotesk — sans</span></div>
+    <div class="tb specimen-sans">
+      <div class="t-row"><span class="lab">Body · 17/1.6</span><span class="scale-body" style="max-width:60ch">Cresus Casino propose plus de 2 000 machines à sous et un programme VIP à cinq paliers. Le retrait moyen est traité en 24 h, et la licence est délivrée par Curaçao.</span></div>
+      <div class="t-row"><span class="lab">Small · 14</span><span class="scale-sm" style="color:var(--ink-2)">Conditions de mise : 35× le montant du bonus, valable 30 jours.</span></div>
+      <div class="t-row"><span class="lab">Mono · meta</span><span class="scale-xs" style="color:var(--ink-3)">RTP 96.4% · MÀJ 06 JUIN 2026 · CURAÇAO 8048</span></div>
+    </div>
+  </div>
+  <div class="argue">
+    <div class="a"><span class="why">Hiérarchie SEO</span><span>Serif pour H1→H3 crée une cascade visuelle nette qui sert aussi la lisibilité de la structure Hn pour Google et le lecteur.</span></div>
+    <div class="a"><span class="why">Mono = preuve</span><span>JetBrains Mono pour les chiffres « durs » (RTP, dates MÀJ, n° de licence) — ça signale la donnée vérifiée et renforce l'EEAT visuellement.</span></div>
+  </div>
+</section>
+
+<!-- 04 SCALES -->
+<section class="block wrap">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Espacement, rayons &amp; ombres</h2></div>
+  <p class="sec-sub">Échelle <strong>4px base</strong>, rayons doux mais pas « bubble », ombres discrètes (jamais de glow). Sobriété structurelle = perception de sérieux.</p>
+  <div class="scales">
+    <div class="scalebox">
+      <h4>Spacing · base 4</h4>
+      <div class="sp-row"><div class="bar" style="width:4px"></div><span class="v">4 · xs</span></div>
+      <div class="sp-row"><div class="bar" style="width:8px"></div><span class="v">8 · sm</span></div>
+      <div class="sp-row"><div class="bar" style="width:16px"></div><span class="v">16 · md</span></div>
+      <div class="sp-row"><div class="bar" style="width:24px"></div><span class="v">24 · lg</span></div>
+      <div class="sp-row"><div class="bar" style="width:32px"></div><span class="v">32 · xl</span></div>
+      <div class="sp-row"><div class="bar" style="width:52px"></div><span class="v">52 · 2xl</span></div>
+      <div class="sp-row"><div class="bar" style="width:80px"></div><span class="v">80 · section</span></div>
+    </div>
+    <div class="scalebox">
+      <h4>Radius</h4>
+      <div class="rad-row"><div class="box" style="border-radius:6px"></div><span class="v">6 · inputs, chips</span></div>
+      <div class="rad-row"><div class="box" style="border-radius:10px"></div><span class="v">10 · boutons, badges</span></div>
+      <div class="rad-row"><div class="box" style="border-radius:16px"></div><span class="v">16 · cartes</span></div>
+      <div class="rad-row"><div class="box" style="border-radius:22px"></div><span class="v">22 · héros, modales</span></div>
+    </div>
+    <div class="scalebox">
+      <h4>Élévation</h4>
+      <div class="sh-row"><div class="box" style="box-shadow:var(--sh-1)"></div><span class="v">sh-1 · cartes au repos</span></div>
+      <div class="sh-row"><div class="box" style="box-shadow:var(--sh-2)"></div><span class="v">sh-2 · cartes featured</span></div>
+      <div class="sh-row"><div class="box" style="box-shadow:var(--sh-3)"></div><span class="v">sh-3 · sticky, drawers, modales</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 COMPONENT LAB -->
+<section class="block wrap">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Composants atomiques — premier échantillon</h2></div>
+  <p class="sec-sub">Un aperçu concret des briques de conversion, dans le système. Tout est rendu pour de vrai (états hover/focus actifs) et porte déjà les <strong>data-attributes GA4</strong>. La bibliothèque complète viendra une fois la direction validée.</p>
+
+  <div class="demo">
+    <div class="demo-label">CTAButton — primary / secondary / tertiary / disabled</div>
+    <div class="btnrow">
+      <a href="#" class="btn btn-primary btn-stack" data-event="affiliate_click" data-operator="cresus" data-placement="lab" data-bonus="200_euros">Obtenir le bonus <span class="sub">200 € + 100 tours</span></a>
+      <a href="#" class="btn btn-primary" data-event="affiliate_click">Voir le bonus <span class="arr">→</span></a>
+      <a href="#" class="btn btn-secondary" data-event="review_click">Lire l'avis complet</a>
+      <a href="#" class="btn btn-tertiary" data-event="toc_click"><u>Aller aux paiements</u></a>
+      <span class="btn btn-disabled">Indisponible en France</span>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">RatingDisplay — note /10 + étoiles + nb d'avis</div>
+    <div class="btnrow" style="gap:46px">
+      <div class="rating rating-block">
+        <span class="num">9.2<small>/10</small></span>
+        <div>
+          <div class="grade">Excellent</div>
+          <div class="stars" aria-label="4.5 sur 5 étoiles">
+            <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+            <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+            <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+            <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--star)" stroke-width="1.5"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6.4 1.9V2z" fill="var(--star)" stroke="none"/></svg>
+          </div>
+          <div class="cnt">sur la base de 1 248 avis</div>
+        </div>
+      </div>
+      <div class="rating">
+        <span class="num" style="color:var(--gold-ink)">8.7<small>/10</small></span>
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="var(--line-2)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">BonusBadge — montant + conditions de wager</div>
+    <div class="btnrow" style="gap:18px">
+      <div class="bonus-badge">
+        <span class="blab">Bonus de bienvenue</span>
+        <span class="bamt"><span>200 €</span> + 100 tours</span>
+        <span class="bcond">Wager 35× · min. dépôt 20 € · 30 jours</span>
+      </div>
+      <div class="bonus-badge gold">
+        <span class="blab">★ Top pick — Bonus exclusif</span>
+        <span class="bamt"><span>500 €</span> + 200 tours</span>
+        <span class="bcond">Wager 30× · sans code · retrait dès 24 h</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">OperatorCard — variante « hero featured »</div>
+    <div class="opcard featured">
+      <span class="op-rank">N°1</span>
+      <div class="op-logo"><div class="logo-ph">logo<br>Cresus.svg</div></div>
+      <div class="op-body">
+        <h3 class="op-name">Cresus Casino <span class="lic">Curaçao 8048</span></h3>
+        <p class="op-arg">Le meilleur équilibre ludothèque / retraits rapides pour le marché français — 2 100+ jeux et un VIP réellement gratifiant.</p>
+        <div class="op-features">
+          <span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Retrait 24 h</span>
+          <span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> 2 100+ jeux</span>
+          <span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Support FR 7j/7</span>
+          <span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Crypto acceptée</span>
+        </div>
+      </div>
+      <div class="op-cta">
+        <div class="rating" style="margin-bottom:2px"><span class="num">9.2<small>/10</small></span></div>
+        <div class="bonus-badge" style="min-width:0">
+          <span class="blab">Bonus</span>
+          <span class="bamt" style="font-size:22px"><span>200 €</span> + 100 tours</span>
+          <span class="bcond">Wager 35×</span>
+        </div>
+        <a href="#" class="btn btn-primary" data-event="affiliate_click" data-operator="cresus" data-placement="hero_card" data-bonus="200_euros" data-page-type="homepage" data-locale="fr">Obtenir le bonus <span class="arr">→</span></a>
+        <a href="#" class="btn btn-tertiary" style="justify-content:center" data-event="review_click"><u>Lire l'avis complet</u></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">OperatorCard — variante « comparison-row » (desktop) </div>
+    <div class="opcard rowv">
+      <span class="rk">2</span>
+      <div class="logo-ph">Lucky8.svg</div>
+      <div class="mid">
+        <h3 class="op-name">Lucky8</h3>
+        <p class="op-arg">Le spécialiste des tournois de machines à sous et du cashback hebdomadaire.</p>
+      </div>
+      <div class="rating"><span class="num" style="font-size:24px">8.9<small>/10</small></span></div>
+      <a href="#" class="btn btn-primary" data-event="affiliate_click" data-operator="lucky8" data-placement="comparison_row">Voir le bonus <span class="arr">→</span></a>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">OperatorCard — variante « compact-listing » + ProsCons</div>
+    <div class="btnrow" style="align-items:stretch;gap:18px">
+      <div class="opcard compact">
+        <div class="crow">
+          <div class="logo-ph" style="width:120px">WildSultan</div>
+          <span class="num" style="font-family:var(--serif);font-weight:600;font-size:22px">8.5<small style="font-size:13px;color:var(--ink-3)">/10</small></span>
+        </div>
+        <div class="bonus-badge" style="min-width:0;padding:10px 13px">
+          <span class="blab">Bonus</span>
+          <span class="bamt" style="font-size:19px"><span>500 €</span> + 20 tours</span>
+        </div>
+        <a href="#" class="btn btn-primary" style="width:100%" data-event="affiliate_click" data-operator="wild_sultan">Voir le bonus</a>
+      </div>
+      <div style="flex:1;min-width:300px">
+        <div class="proscons">
+          <div class="pros">
+            <h5>✅ Points forts</h5>
+            <ul>
+              <li><span class="m">+</span> Retraits crypto instantanés</li>
+              <li><span class="m">+</span> Catalogue live game premium</li>
+              <li><span class="m">+</span> Wager raisonnable (30×)</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h5>❌ Points faibles</h5>
+            <ul>
+              <li><span class="m">−</span> Pas de support téléphonique</li>
+              <li><span class="m">−</span> App mobile à améliorer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Conformité — Disclaimer 18+ &amp; Affiliate disclosure (visibles sans scroll)</div>
+    <div class="disc-row">
+      <div class="disclaimer d-18">
+        <span class="ic">18+</span>
+        <span><strong>Jeu interdit aux mineurs.</strong> Les jeux d'argent comportent des risques : endettement, isolement, dépendance. Appelez le <strong>09 74 75 13 13</strong> (Joueurs Info Service, appel non surtaxé).</span>
+      </div>
+      <div class="disclaimer d-aff">
+        <span class="ic">€</span>
+        <span><strong>Transparence.</strong> Nous percevons une commission lorsque vous vous inscrivez via nos liens. Cela ne change ni votre bonus, ni notre méthodologie de notation — <a href="#" style="color:var(--green)">en savoir plus</a>.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Convention data-attributes GA4 — câblée dès le design</div>
+    <div class="code-callout"><span class="tg">&lt;a</span> <span class="at">data-event</span>=<span class="st">"affiliate_click"</span>
+   <span class="at">data-operator</span>=<span class="st">"cresus"</span>
+   <span class="at">data-placement</span>=<span class="st">"hero_card"</span>
+   <span class="at">data-bonus</span>=<span class="st">"200_euros"</span>
+   <span class="at">data-page-type</span>=<span class="st">"homepage"</span>
+   <span class="at">data-locale</span>=<span class="st">"fr"</span><span class="tg">&gt;</span> Obtenir le bonus <span class="tg">&lt;/a&gt;</span></div>
+  </div>
+</section>
+
+<!-- ENDNOTE -->
+<section class="endnote wrap">
+  <div class="nx">
+    <h3>Si tu valides cette direction, voici l'ordre que je propose</h3>
+    <ol>
+      <li><b>Homepage</b> (fr) en desktop + mobile 375px — on aligne sur l'above-the-fold et les featured cards</li>
+      <li><b>Template review opérateur</b> — le gros driver de conversion, avec sticky mobile CTA</li>
+      <li><b>Template comparatif top 10</b> + <b>page liste casinos avec filtres</b></li>
+      <li>Puis priorité 2 (versus, alternatives, fiches jeux) et la bibliothèque de composants complète</li>
+    </ol>
+  </div>
+</section>
+
+<script>
+const root = document.documentElement;
+const btn = document.getElementById('toggle');
+const lbl = document.getElementById('toggle-label');
+btn.addEventListener('click', () => {
+  const dark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  lbl.textContent = dark ? 'Mode sombre' : 'Mode clair';
+});
+</script>
+</body>
+</html>

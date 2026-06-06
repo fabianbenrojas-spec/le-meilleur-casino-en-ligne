@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibliothèque de composants — le-meilleur-casino-en-ligne.fr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/review.css">
+<link rel="stylesheet" href="assets/comparatif.css">
+<link rel="stylesheet" href="assets/casinos.css">
+<link rel="stylesheet" href="assets/jeux.css">
+<link rel="stylesheet" href="assets/library.css">
+<style>
+  /* neutralise sticky/fixed positioning of certain comps for inline display */
+  .lib-static .filters, .lib-static .review-aside, .lib-static .site-header, .lib-static .breadcrumbs { position: static; }
+  .lib-static .sticky-cta { position: static; transform: none; display: flex; box-shadow: var(--sh-2); border-radius: var(--radius); }
+  .lib-static .cookie-overlay { position: static; display: block; background: none; backdrop-filter: none; padding: 0; }
+  .lib-static .cookie { max-width: 520px; }
+  .demo-table-wrap { width: 100%; overflow-x: auto; }
+  .star { width: 15px; height: 15px; }
+</style>
+</head>
+<body data-page-type="library" data-locale="fr">
+<div class="lib-layout lib-static">
+  <nav class="lib-nav">
+    <div class="lh"><span class="glyph">M</span><b>Composants</b></div>
+    <h5>Fondations</h5>
+    <a href="#boutons">Boutons (CTA)</a>
+    <a href="#notation">Notation</a>
+    <a href="#bonus">Bonus</a>
+    <h5>Opérateurs</h5>
+    <a href="#cards">Cartes opérateur</a>
+    <a href="#table">Tableau comparatif</a>
+    <a href="#filtres">Filtres</a>
+    <h5>Contenu</h5>
+    <a href="#proscons">Pros / Cons</a>
+    <a href="#faq">FAQ accordéon</a>
+    <a href="#toc">Sommaire (TOC)</a>
+    <a href="#author">Bio auteur</a>
+    <h5>Conformité</h5>
+    <a href="#legal">Disclaimers</a>
+    <a href="#rgbanner">Jeu responsable</a>
+    <h5>Navigation</h5>
+    <a href="#breadcrumbs">Fil d'Ariane</a>
+    <a href="#locale">Sélecteur de langue</a>
+    <h5>Conversion</h5>
+    <a href="#sticky">Sticky CTA mobile</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#cookies">Bandeau cookies</a>
+  </nav>
+
+  <main class="lib-main">
+    <h1 class="lib-title">Bibliothèque de composants</h1>
+    <p class="lib-intro">Tous les composants atomiques du design system, avec leurs variantes, leurs états, et la convention de tracking GA4 associée. Rendu en direct depuis les feuilles de styles partagées — chaque page du site réutilise exactement ces briques.</p>
+    <button class="lib-theme-btn" data-action="theme-toggle" data-event="dark_mode_toggle"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> Tester le mode sombre</button>
+
+    <!-- BOUTONS -->
+    <section class="lib-group" id="boutons">
+      <h2>Boutons — CTAButton</h2>
+      <div class="spec">
+        <div class="sh"><h3>Variantes</h3><code>.btn-primary · .btn-secondary · .btn-tertiary</code></div>
+        <p class="sd">Le primary (vert) est réservé à l'action de conversion (bonus). Le secondary (outline) pour les actions secondaires (lire l'avis). Le tertiary (texte souligné) pour les liens contextuels.</p>
+        <div class="spec-stage">
+          <a href="#" class="btn btn-primary">Obtenir le bonus <span class="arr">→</span></a>
+          <a href="#" class="btn btn-primary btn-stack">Obtenir le bonus <span class="sub">200 € + 100 tours</span></a>
+          <a href="#" class="btn btn-secondary">Lire l'avis complet</a>
+          <a href="#" class="btn btn-tertiary"><u>Aller aux paiements</u></a>
+        </div>
+      </div>
+      <div class="spec">
+        <div class="sh"><h3>États</h3><code>default · hover · focus · disabled</code></div>
+        <p class="sd">Tous les CTA respectent une zone cliquable de 48px minimum et un focus visible (accessibilité). Survolez et tabulez pour voir les états interactifs.</p>
+        <div class="spec-stage">
+          <div class="state-col"><span class="sl">Default</span><a href="#" class="btn btn-primary">Obtenir le bonus</a></div>
+          <div class="state-col"><span class="sl">Hover</span><a href="#" class="btn btn-primary" style="background:var(--green-700)">Obtenir le bonus</a></div>
+          <div class="state-col"><span class="sl">Focus</span><a href="#" class="btn btn-primary" style="outline:3px solid color-mix(in srgb,var(--green) 45%,transparent);outline-offset:2px">Obtenir le bonus</a></div>
+          <div class="state-col"><span class="sl">Disabled</span><span class="btn btn-disabled">Indisponible</span></div>
+          <div class="state-col"><span class="sl">Small</span><a href="#" class="btn btn-primary btn-sm">Bonus →</a></div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="affiliate_click" data-operator data-placement data-bonus data-page-type data-locale</div>
+      </div>
+    </section>
+
+    <!-- NOTATION -->
+    <section class="lib-group" id="notation">
+      <h2>Notation — RatingDisplay</h2>
+      <div class="spec">
+        <div class="sh"><h3>Score pill</h3><code>.score-pill / .score-pill.gold</code></div>
+        <p class="sd">Note synthétique /10. La variante or signale le top pick / featured.</p>
+        <div class="spec-stage">
+          <span class="score-pill gold">9.2<small>/10</small></span>
+          <span class="score-pill">8.9<small>/10</small></span>
+          <span class="score-pill">7.5<small>/10</small></span>
+        </div>
+      </div>
+      <div class="spec">
+        <div class="sh"><h3>Anneau de score &amp; étoiles</h3><code>.score-ring · .stars</code></div>
+        <p class="sd">L'anneau (hero review) et les étoiles avec note numérique et nombre d'avis.</p>
+        <div class="spec-stage">
+          <div class="score-ring" style="background:conic-gradient(var(--green) 92%, var(--line) 0)"><div class="inner"><div><div class="sv">9.2<small>/10</small></div><div class="sg">Excellent</div></div></div></div>
+          <div class="rating">
+            <span class="num">9.2<small>/10</small></span>
+            <div>
+              <div class="grade">Excellent</div>
+              <div class="stars">
+                <svg class="star" viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="var(--star)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+                <svg class="star" viewBox="0 0 24 24" fill="var(--line-2)"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.6 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+              </div>
+              <div class="cnt">sur la base de 1 248 avis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BONUS -->
+    <section class="lib-group" id="bonus">
+      <h2>Bonus — BonusBadge</h2>
+      <div class="spec">
+        <div class="sh"><h3>Encart bonus</h3><code>.bonus-badge / .bonus-badge.gold</code></div>
+        <p class="sd">Met en avant le montant ; les conditions de wager en mini-texte (transparence).</p>
+        <div class="spec-stage">
+          <div class="bonus-badge"><span class="blab">Bonus de bienvenue</span><span class="bamt"><span>200 €</span> + 100 tours</span><span class="bcond">Wager 35× · dépôt min. 20 €</span></div>
+          <div class="bonus-badge gold"><span class="blab">★ Top pick — exclusif</span><span class="bamt"><span>500 €</span> + 200 tours</span><span class="bcond">Wager 30× · sans code</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTES -->
+    <section class="lib-group" id="cards">
+      <h2>Cartes opérateur — OperatorCard</h2>
+      <div class="spec">
+        <div class="sh"><h3>Listing (comparison-row)</h3><code>.cas-card</code></div>
+        <div class="spec-stage block">
+          <article class="cas-card is-top" style="max-width:680px">
+            <div class="cas-logo"><div class="logo-ph">Cresus</div></div>
+            <div class="cas-mid"><div class="row1"><span class="nm">Cresus Casino</span><span class="lic">Curaçao 8048</span></div><div class="cas-feats"><span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Machines à sous</span><span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Live</span><span class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Crypto</span></div></div>
+            <div class="cas-side"><div class="top"><div class="bonus-line"><b><span>200 €</span></b> + 100 tours</div><span class="score-pill gold">9.2<small>/10</small></span></div><a href="#" class="btn btn-primary btn-block btn-sm">Obtenir le bonus <span class="arr">→</span></a></div>
+          </article>
+        </div>
+      </div>
+      <div class="spec">
+        <div class="sh"><h3>Compact &amp; ranked (mini-fiche)</h3><code>.podium-card · .rank-card</code></div>
+        <div class="spec-stage block">
+          <article class="rank-card" data-medal="1" style="max-width:720px">
+            <div class="rc-rank"><div class="rc-badge-top">★ Top pick</div><span class="n">1</span></div>
+            <div class="rc-main">
+              <div class="rc-head"><div class="logo-ph">Cresus</div><div><div class="nm">Cresus Casino</div><div class="lic">Curaçao 8048</div></div><span class="score-pill gold">9.2<small>/10</small></span></div>
+              <p class="rc-verdict">Le meilleur équilibre ludothèque / retraits rapides pour le marché français.</p>
+              <div class="rc-points"><div class="pt pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span>Retrait 24 h</span></div><div class="pt pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span>2 100+ jeux</span></div><div class="pt con"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg><span>Licence Curaçao</span></div></div>
+            </div>
+            <div class="rc-side"><div class="bonus-badge gold"><span class="blab">Bonus</span><span class="bamt"><span>200 €</span> + 100 tours</span></div><a href="#" class="btn btn-primary btn-block btn-sm">Obtenir le bonus →</a><a href="#" class="btn btn-tertiary" style="justify-content:center"><u>Lire l'avis</u></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE -->
+    <section class="lib-group" id="table">
+      <h2>Tableau comparatif — ComparisonTable</h2>
+      <div class="spec">
+        <div class="sh"><h3>Triable, sticky-header</h3><code>table.cmp</code></div>
+        <p class="sd">Colonnes triables (note, bonus, RTP), header collant, responsive (scroll horizontal sur mobile, en-tête sticky sur desktop).</p>
+        <div class="spec-stage block">
+          <div class="demo-table-wrap">
+          <table class="cmp">
+            <thead><tr><th>Rang</th><th>Opérateur</th><th class="sortable" aria-sort="descending">Note <span class="sar">↓</span></th><th class="sortable">Bonus <span class="sar">↕</span></th><th>Paiements</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="c-rank">1</td><td><div class="c-op"><div class="logo-ph">Cresus</div><div><div class="nm">Cresus Casino</div><div class="lic">Curaçao 8048</div></div></div></td><td><span class="score-pill gold">9.2<small>/10</small></span></td><td><strong>200 €</strong> <span class="muted">+ 100 tours</span></td><td><div class="pay-icons"><span class="pi">VISA</span><span class="pi">₿</span></div></td><td><a href="#" class="btn btn-primary btn-sm">Bonus →</a></td></tr>
+              <tr><td class="c-rank">2</td><td><div class="c-op"><div class="logo-ph">Lucky8</div><div><div class="nm">Lucky8</div><div class="lic">Curaçao</div></div></div></td><td><span class="score-pill">8.9<small>/10</small></span></td><td><strong>100 €</strong> <span class="muted">+ 100 tours</span></td><td><div class="pay-icons"><span class="pi">VISA</span><span class="pi">MC</span></div></td><td><a href="#" class="btn btn-primary btn-sm">Bonus →</a></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="comparison_sort_use" (clic sur en-tête triable)</div>
+      </div>
+    </section>
+
+    <!-- FILTRES -->
+    <section class="lib-group" id="filtres">
+      <h2>Filtres — FilterSidebar / chips</h2>
+      <div class="spec">
+        <div class="sh"><h3>Option de filtre &amp; chips actifs</h3><code>.fopt · .fchip</code></div>
+        <div class="spec-stage" style="align-items:flex-start">
+          <div class="filters" style="width:240px;position:static">
+            <div class="filter-group"><h3>Méthode de paiement</h3>
+              <label class="fopt"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Carte bancaire <span class="cnt">11</span></label>
+              <label class="fopt"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Crypto <span class="cnt">6</span></label>
+            </div>
+            <div class="filter-group"><h3>RTP minimum</h3><div class="rtp-row"><input type="range" min="94.5" max="96.5" value="95.8"><span class="rtp-val">95.8%</span></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px"><span class="state-label">Chips de filtres actifs</span><div class="active-chips" style="margin:0"><span class="fchip">Crypto <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></span><span class="fchip">RTP ≥ 95.8% <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></span></div></div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="comparison_filter_use" · sur mobile, la sidebar bascule en bottom-sheet (FilterBottomSheet)</div>
+      </div>
+    </section>
+
+    <!-- PROSCONS -->
+    <section class="lib-group" id="proscons">
+      <h2>Pros / Cons — ProsConsBox</h2>
+      <div class="spec">
+        <div class="sh"><h3>Deux colonnes ✅ / ❌</h3><code>.proscons</code></div>
+        <p class="sd">Indicateurs visuels qui ne reposent pas que sur la couleur (icône + texte), pour l'accessibilité.</p>
+        <div class="spec-stage block">
+          <div class="proscons" style="max-width:680px">
+            <div class="pros"><h4><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Points forts</h4><ul><li><span class="m">+</span> Retraits en 24 h</li><li><span class="m">+</span> 2 100+ jeux</li><li><span class="m">+</span> Support FR 7j/7</li></ul></div>
+            <div class="cons"><h4><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg> Points faibles</h4><ul><li><span class="m">−</span> Pas de licence UE</li><li><span class="m">−</span> Pas de téléphone</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="lib-group" id="faq">
+      <h2>FAQ accordéon — FAQAccordion</h2>
+      <div class="spec">
+        <div class="sh"><h3>Accordéon (schema FAQPage)</h3><code>[data-faq] .faq-item</code></div>
+        <div class="spec-stage block">
+          <div class="faq-list" data-faq style="max-width:680px">
+            <div class="faq-item open"><button class="faq-q" aria-expanded="true">Cresus Casino est-il fiable ? <span class="pm"></span></button><div class="faq-a"><p>Oui : licence Curaçao 8048, chiffrement SSL, et retraits honorés en moins de 24 h lors de nos tests.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">Comment obtenir le bonus ? <span class="pm"></span></button><div class="faq-a"><p>Déposez 20 € minimum : le bonus est crédité automatiquement, sans code.</p></div></div>
+          </div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="faq_open" (à l'ouverture d'un item)</div>
+      </div>
+    </section>
+
+    <!-- TOC -->
+    <section class="lib-group" id="toc">
+      <h2>Sommaire — TableOfContents</h2>
+      <div class="spec">
+        <div class="sh"><h3>TOC sticky + scroll-spy</h3><code>.toc / .art-toc</code></div>
+        <div class="spec-stage">
+          <nav class="toc" style="width:240px"><h4>Sommaire</h4><ul><li><a href="#" class="active">Verdict &amp; note</a></li><li><a href="#">Bonus de bienvenue</a></li><li><a href="#">Ludothèque</a></li><li><a href="#">Paiements &amp; retraits</a></li></ul></nav>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="toc_click" · sur mobile : drawer collapsible (&lt;details&gt;)</div>
+      </div>
+    </section>
+
+    <!-- AUTHOR -->
+    <section class="lib-group" id="author">
+      <h2>Bio auteur — AuthorBio</h2>
+      <div class="spec">
+        <div class="sh"><h3>Crédibilité &amp; date de MÀJ</h3><code>.author-bio</code></div>
+        <p class="sd">Photo, nom, crédentials, date de dernière mise à jour — crucial pour l'EEAT.</p>
+        <div class="spec-stage block">
+          <div class="author-bio" style="max-width:520px"><div class="avatar">photo<br>auteur</div><div><div class="aname">Julien Marchand <span style="font-weight:500;color:var(--ink-3);font-size:12px">· Rédacteur en chef</span></div><div class="arole">11 ans dans l'iGaming · a testé 200+ casinos</div><div class="acred mono" style="margin-top:4px">Dernière mise à jour : 7 juin 2026</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEGAL -->
+    <section class="lib-group" id="legal">
+      <h2>Conformité — Disclaimers</h2>
+      <div class="spec">
+        <div class="sh"><h3>18+ &amp; Affiliate disclosure</h3><code>.disclaimer · .aff-disc</code></div>
+        <div class="spec-stage col">
+          <div style="display:flex;gap:13px;align-items:flex-start;background:var(--red-50);border:1px solid color-mix(in srgb,var(--red) 30%,var(--line));border-radius:var(--radius);padding:15px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.5"><span style="flex:none;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--red);color:#fff;font-family:var(--mono)">18+</span><span><strong style="color:var(--red)">Jeu interdit aux mineurs.</strong> Les jeux d'argent comportent des risques. Appelez le <strong>09 74 75 13 13</strong> (Joueurs Info Service).</span></div>
+          <div class="aff-disc" style="width:100%"><strong>Transparence sur l'affiliation.</strong> Nous percevons une commission lorsque vous vous inscrivez via nos liens. Cela n'influence ni nos notes, ni nos classements.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RG BANNER -->
+    <section class="lib-group" id="rgbanner">
+      <h2>Bandeau jeu responsable — ResponsibleGamblingBanner</h2>
+      <div class="spec">
+        <div class="sh"><h3>Footer permanent</h3><code>.rg-banner</code></div>
+        <div class="spec-stage block" style="padding:0;overflow:hidden">
+          <div class="rg-banner" style="border-radius:var(--radius-lg)"><div class="in" style="padding:16px 20px"><span class="badge18">18+</span><span><strong>Le jeu doit rester un plaisir.</strong> En cas de dépendance, appelez le <strong>09 74 75 13 13</strong>.</span><span class="orgs"><span class="org-ph">Joueurs Info Service</span><span class="org-ph">ANJ</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BREADCRUMBS -->
+    <section class="lib-group" id="breadcrumbs">
+      <h2>Fil d'Ariane — Breadcrumbs</h2>
+      <div class="spec">
+        <div class="sh"><h3>Visuel + schema BreadcrumbList</h3><code>.breadcrumbs</code></div>
+        <div class="spec-stage block" style="padding:0;overflow:hidden">
+          <nav class="breadcrumbs" style="border-radius:var(--radius-lg);border:1px solid var(--line)"><div class="in"><a href="#">Accueil</a><span class="sep">›</span><a href="#">Casinos</a><span class="sep">›</span><span class="cur">Cresus Casino</span></div></nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCALE -->
+    <section class="lib-group" id="locale">
+      <h2>Sélecteur de langue — LocaleSwitcher</h2>
+      <div class="spec">
+        <div class="sh"><h3>FR / EN (hreflang)</h3><code>.locale</code></div>
+        <div class="spec-stage">
+          <button class="locale-btn"><span class="flag fr"></span> FR <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="locale-menu open" style="position:static;display:block"><a href="#"><span class="flag fr"></span> Français <span class="sub">FR</span></a><a href="#"><span class="flag gb"></span> English <span class="sub">EN</span></a></div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="locale_switch"</div>
+      </div>
+    </section>
+
+    <!-- STICKY -->
+    <section class="lib-group" id="sticky">
+      <h2>Sticky CTA mobile — StickyMobileCTA</h2>
+      <div class="spec">
+        <div class="sh"><h3>Barre fixe (bas d'écran mobile)</h3><code>.sticky-cta</code></div>
+        <p class="sd">Toujours visible en bas sur mobile, avec le bonus du contexte. Le driver de conversion mobile n°1.</p>
+        <div class="spec-stage block">
+          <div class="sticky-cta" style="max-width:420px"><div class="sc-info"><div class="sc-op"><span class="score-pill gold">9.2</span> Cresus Casino</div><div class="sc-bonus">200 € + 100 tours · Wager 35×</div></div><a href="#" class="btn btn-primary">Obtenir <span class="arr">→</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="lib-group" id="newsletter">
+      <h2>Newsletter — NewsletterCTA</h2>
+      <div class="spec">
+        <div class="sh"><h3>Capture e-mail</h3><code>.newsletter</code></div>
+        <div class="spec-stage block">
+          <div class="newsletter" style="grid-template-columns:1fr"><div><h3>Les meilleurs bonus, une fois par semaine.</h3><p>Offres vérifiées, nouveaux tests. Pas de spam.</p></div><form class="nl-form"><input type="email" placeholder="Votre adresse e-mail"><button class="btn btn-primary" type="button">S'abonner</button></form></div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="newsletter_submit"</div>
+      </div>
+    </section>
+
+    <!-- COOKIES -->
+    <section class="lib-group" id="cookies">
+      <h2>Bandeau cookies — CookieConsentBanner</h2>
+      <div class="spec">
+        <div class="sh"><h3>RGPD granulaire</h3><code>.cookie</code></div>
+        <p class="sd">Consentement par catégorie (essentiels / analytics / marketing). Refuser est aussi simple qu'accepter — pas de dark pattern.</p>
+        <div class="spec-stage block">
+          <div class="cookie">
+            <h3>Vos préférences de cookies</h3>
+            <p>Nous utilisons des cookies pour le site, la mesure d'audience et les offres. Vous choisissez.</p>
+            <div class="ck-row"><div><div class="ck-label">Essentiels</div><div class="ck-desc">Nécessaires au fonctionnement.</div></div><button class="toggle-sw" aria-checked="true" disabled></button></div>
+            <div class="ck-row"><div><div class="ck-label">Mesure d'audience</div><div class="ck-desc">Google Analytics 4.</div></div><button class="toggle-sw" aria-checked="true"></button></div>
+            <div class="ck-row"><div><div class="ck-label">Marketing</div><div class="ck-desc">Conversions d'affiliation.</div></div><button class="toggle-sw" aria-checked="false"></button></div>
+            <div class="cookie-actions"><button class="btn btn-secondary">Tout refuser</button><button class="btn btn-secondary">Enregistrer</button><button class="btn btn-primary">Tout accepter</button></div>
+          </div>
+        </div>
+        <div class="ga-note"><b>GA4</b>  data-event="cookie_consent" (choice: accept_all / reject_all / custom)</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+  // demo toggles inside library (cookie switches + faq already handled by site.js)
+  document.querySelectorAll('.lib-static .toggle-sw:not([disabled])').forEach(function(sw){
+    sw.addEventListener('click',function(){ sw.setAttribute('aria-checked', sw.getAttribute('aria-checked')==='true'?'false':'true'); });
+  });
+</script>
+</body>
+</html>

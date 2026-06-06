@@ -1,4 +1,4 @@
-Handoff — le-meilleur-casino-en-ligne.fr
+# Handoff — le-meilleur-casino-en-ligne.fr
 
 Package de référence design pour reconstruire le site dans ton environnement cible (**Next.js + Tailwind CSS + GA4 via GTM**, déploiement Vercel).
 

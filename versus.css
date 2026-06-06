@@ -1,0 +1,83 @@
+/* ============================================================
+   Versus (X vs Y) template — le-meilleur-casino-en-ligne.fr
+   Loaded AFTER site.css
+   ============================================================ */
+
+.breadcrumbs { border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.breadcrumbs .in { max-width: var(--maxw); margin: 0 auto; padding: 11px 32px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
+.breadcrumbs a { text-decoration: none; color: var(--ink-3); }
+.breadcrumbs a:hover { color: var(--green); }
+.breadcrumbs .sep { opacity: .5; }
+.breadcrumbs .cur { color: var(--ink); font-weight: 600; }
+
+.vs-head { padding: 40px 0 6px; text-align: center; }
+.vs-head .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; justify-content: center; }
+.vs-head .eyebrow::before, .vs-head .eyebrow::after { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.vs-head h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4.6vw, 50px); letter-spacing: -.02em; line-height: 1.06; margin: 0 auto 16px; max-width: 20ch; }
+.vs-head h1 em { font-style: italic; color: var(--green); }
+.vs-head .intro { font-size: 17px; color: var(--ink-2); max-width: 60ch; margin: 0 auto; line-height: 1.6; }
+
+/* hero panels */
+.vs-hero { display: grid; grid-template-columns: 1fr 78px 1fr; gap: 0; margin: 34px 0 8px; align-items: stretch; }
+.vs-panel { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--sh-2); padding: 28px 26px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.vs-panel.left { border-radius: var(--radius-xl) 0 0 var(--radius-xl); border-right: 0; }
+.vs-panel.right { border-radius: 0 var(--radius-xl) var(--radius-xl) 0; border-left: 0; }
+.vs-panel.win { border-color: color-mix(in srgb, var(--green) 42%, var(--line)); background: linear-gradient(180deg, var(--green-50), var(--surface) 70%); }
+.vs-panel .logo-ph { width: 150px; height: 56px; }
+.vs-panel .nm { font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+.vs-panel .win-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--green); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.vs-panel .win-tag svg { width: 13px; height: 13px; }
+.vs-panel .bonus-line { font-size: 13.5px; color: var(--ink-2); }
+.vs-panel .bonus-line b { font-family: var(--serif); font-size: 18px; color: var(--ink); font-weight: 600; }
+.vs-panel .bonus-line b span { color: var(--green); }
+.vs-center { display: grid; place-items: center; position: relative; z-index: 2; }
+.vs-badge { width: 64px; height: 64px; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 23px; display: grid; place-items: center; box-shadow: var(--sh-3); border: 4px solid var(--bg); }
+
+/* face-to-face table */
+.vs-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--sh-1); }
+.vs-table th { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; padding: 13px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); text-align: center; }
+.vs-table th.lbl { text-align: center; width: 26%; }
+.vs-table td { padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; text-align: center; vertical-align: middle; }
+.vs-table tr:last-child td { border-bottom: 0; }
+.vs-table td.lbl { font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); background: var(--surface-2); font-weight: 500; }
+.vs-table td.win { background: var(--green-50); position: relative; font-weight: 700; color: var(--ink); }
+.vs-table td.win::after { content: "✓"; color: var(--green); font-weight: 800; margin-left: 7px; }
+.vs-table .mono { font-family: var(--mono); }
+
+/* thematic split sections */
+.vs-section { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--sh-1); overflow: hidden; }
+.vs-sec-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid var(--line); background: var(--surface-2); gap: 14px; }
+.vs-sec-head h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0; }
+.vs-winner { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: var(--green-ink); background: var(--green-50); border: 1px solid color-mix(in srgb, var(--green) 28%, var(--line)); border-radius: 999px; padding: 5px 13px; }
+.vs-winner svg { width: 13px; height: 13px; color: var(--green); }
+.vs-split { display: grid; grid-template-columns: 1fr 1px 1fr; }
+.vs-split .col { padding: 20px 22px; }
+.vs-split .divider { background: var(--line); }
+.vs-split .col.win { background: var(--green-50); }
+.vs-split .who { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.vs-split .who .logo-ph { width: 88px; height: 30px; }
+.vs-split .who .score-pill { font-size: 13px; padding: 3px 8px; }
+.vs-split p { font-size: 14px; color: var(--ink-2); line-height: 1.6; margin: 0; }
+
+/* final verdict */
+.vs-final { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 34px; }
+.vs-rec { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--sh-1); }
+.vs-rec.win { border-color: color-mix(in srgb, var(--green) 38%, var(--line)); box-shadow: var(--sh-2); }
+.vs-rec .rh { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.vs-rec .rh .logo-ph { width: 100px; height: 34px; }
+.vs-rec h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0 0 12px; }
+.vs-rec ul { margin: 0 0 20px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.vs-rec li { display: flex; gap: 10px; font-size: 14px; color: var(--ink-2); align-items: flex-start; line-height: 1.45; }
+.vs-rec li svg { width: 16px; height: 16px; color: var(--green); flex: none; margin-top: 2px; }
+
+@media (max-width: 760px) {
+  .vs-hero { grid-template-columns: 1fr; gap: 0; }
+  .vs-panel.left { border-radius: var(--radius-xl) var(--radius-xl) 0 0; border-right: 1px solid var(--line); border-bottom: 0; }
+  .vs-panel.right { border-radius: 0 0 var(--radius-xl) var(--radius-xl); border-left: 1px solid var(--line); border-top: 0; }
+  .vs-center { padding: 0; height: 0; }
+  .vs-badge { position: relative; margin: -32px 0; }
+  .vs-table { display: block; overflow-x: auto; white-space: nowrap; }
+  .vs-split { grid-template-columns: 1fr; }
+  .vs-split .divider { height: 1px; }
+  .vs-final { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,40 @@
+/* ============================================================
+   Component library gallery chrome
+   Loaded AFTER all component stylesheets
+   ============================================================ */
+.lib-layout { display: grid; grid-template-columns: 232px 1fr; gap: 0; }
+.lib-nav { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; border-right: 1px solid var(--line); padding: 26px 18px; background: var(--surface-2); }
+.lib-nav .lh { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.lib-nav .lh .glyph { width: 28px; height: 28px; border-radius: 7px; background: var(--green); color: #fff; font-family: var(--serif); font-weight: 600; display: grid; place-items: center; font-size: 16px; }
+.lib-nav .lh b { font-size: 14px; }
+.lib-nav h5 { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 18px 0 7px; font-weight: 500; }
+.lib-nav a { display: block; text-decoration: none; color: var(--ink-2); font-size: 13.5px; font-weight: 500; padding: 6px 10px; border-radius: 7px; }
+.lib-nav a:hover { background: var(--bg-sunken); color: var(--ink); }
+.lib-main { min-width: 0; padding: 40px 48px 80px; max-width: 1000px; }
+.lib-title { font-family: var(--serif); font-weight: 500; font-size: 40px; letter-spacing: -.02em; margin: 0 0 8px; }
+.lib-intro { font-size: 17px; color: var(--ink-2); max-width: 64ch; margin: 0 0 16px; line-height: 1.6; }
+.lib-theme-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 999px; padding: 8px 15px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink); }
+
+.lib-group { margin-top: 52px; scroll-margin-top: 20px; }
+.lib-group > h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; letter-spacing: -.015em; margin: 0 0 4px; padding-bottom: 12px; border-bottom: 2px solid var(--line); }
+
+.spec { margin-top: 30px; }
+.spec .sh { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.spec .sh h3 { font-size: 17px; font-weight: 700; margin: 0; }
+.spec .sh code { font-family: var(--mono); font-size: 11.5px; color: var(--green); background: var(--green-50); padding: 2px 8px; border-radius: 5px; }
+.spec .sd { font-size: 14px; color: var(--ink-2); margin: 0 0 14px; max-width: 70ch; line-height: 1.5; }
+.spec-stage { background: var(--bg-sunken); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.spec-stage.col { flex-direction: column; align-items: stretch; }
+.spec-stage.block { display: block; }
+.state-label { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; width: 100%; }
+.state-col { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.state-col .sl { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; }
+
+.ga-note { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 12px; line-height: 1.7; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; }
+.ga-note b { color: var(--green); }
+
+@media (max-width: 860px) {
+  .lib-layout { grid-template-columns: 1fr; }
+  .lib-nav { display: none; }
+  .lib-main { padding: 28px 20px 70px; }
+}
