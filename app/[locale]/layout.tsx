@@ -12,6 +12,11 @@ import { routing, type Locale } from '@/i18n/routing'
 import { hankenGrotesk, jetbrainsMono, newsreader } from '@/lib/fonts'
 import { buildHreflang } from '@/lib/i18n/routes'
 
+// Prerender both locales (fr + en) at build time
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
 const antiFlashScript = `try{var t=localStorage.getItem('mc-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}`
 
 const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://le-meilleur-casino-en-ligne.fr'
