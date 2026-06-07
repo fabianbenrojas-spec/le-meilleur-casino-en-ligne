@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { hankenGrotesk, jetbrainsMono, newsreader } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,9 +14,19 @@ export const metadata: Metadata = {
   ),
 }
 
+// Runs before React hydration — prevents flash of unstyled theme (FOUC)
+const antiFlashScript = `try{var t=localStorage.getItem('mc-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html
+      lang="fr"
+      className={`${newsreader.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <head>
+        {/* Anti-flash: must execute before first paint, before React hydrates */}
+        <script dangerouslySetInnerHTML={{ __html: antiFlashScript }} />
+      </head>
       <body>{children}</body>
     </html>
   )
