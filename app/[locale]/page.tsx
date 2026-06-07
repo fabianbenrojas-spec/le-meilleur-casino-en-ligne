@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Check, Clock, Shield, TrendingUp } from 'lucide-react'
 
+// Homepage: re-validate every hour (operators data + rankings can change)
+export const revalidate = 3600
+
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { CTAButton } from '@/components/ui/cta-button'

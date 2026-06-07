@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 
+// Top 10 comparatif: re-validate hourly (rankings sensitive to operator changes)
+export const revalidate = 3600
+
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'

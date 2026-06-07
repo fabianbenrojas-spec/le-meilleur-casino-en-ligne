@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { WithContext, Review } from 'schema-dts'
 
+// Review pages: re-validate every 24h (bonus conditions may change)
+export const revalidate = 86400
+
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'

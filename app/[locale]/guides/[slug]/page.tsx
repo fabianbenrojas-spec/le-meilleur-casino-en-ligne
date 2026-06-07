@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+// Guides: re-validate weekly (stable editorial content)
+export const revalidate = 604800
+
 import { AuthorBio } from '@/components/ui/author-bio'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'

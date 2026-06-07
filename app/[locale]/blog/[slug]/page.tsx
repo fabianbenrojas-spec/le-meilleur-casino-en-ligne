@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+// Blog articles: re-validate every 24h
+export const revalidate = 86400
+
 import { AuthorBio } from '@/components/ui/author-bio'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
