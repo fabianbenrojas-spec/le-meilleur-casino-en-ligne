@@ -149,6 +149,133 @@ export const games: Game[] = [
     maxBet: 100,
     popular: true,
   },
+  // ── Roulette ───────────────────────────────────────────────────────────────
+  {
+    slug: 'lightning-roulette',
+    name: 'Lightning Roulette',
+    provider: 'Evolution Gaming',
+    category: 'roulette',
+    rtp: 97.3,
+    volatility: 'haute',
+    maxWin: '500×',
+    description:
+      'Lightning Roulette est la table live la plus jouée au monde. Des éclairs frappent 1 à 5 numéros à chaque tour et leur attribuent des multiplicateurs aléatoires de 50× à 500×. Une roulette européenne enrichie.',
+    features: [
+      'Multiplicateurs aléatoires 50×–500×',
+      '1 à 5 numéros Lightning par tour',
+      'Diffusion en HD depuis un studio Evolution',
+      'Mises dès 0,20 €',
+    ],
+    minBet: 0.2,
+    maxBet: 4000,
+    popular: true,
+  },
+  {
+    slug: 'roulette-europeenne',
+    name: 'Roulette Européenne',
+    provider: 'NetEnt',
+    category: 'roulette',
+    rtp: 97.3,
+    volatility: 'basse',
+    maxWin: '35×',
+    description:
+      'La roulette européenne est le point de départ de tout joueur sérieux : une seule case zéro, avantage maison de 2,7 % — moitié moins que la version américaine. La référence pour apprendre les systèmes de mise.',
+    features: [
+      'Avantage maison 2,7 % (vs 5,26 % américaine)',
+      'Mise en prison sur la règle La Partage',
+      'RNG certifié',
+      'Statistiques de tirage intégrées',
+    ],
+    minBet: 0.1,
+    maxBet: 500,
+    popular: false,
+  },
+
+  // ── Blackjack ──────────────────────────────────────────────────────────────
+  {
+    slug: 'infinite-blackjack',
+    name: 'Infinite Blackjack',
+    provider: 'Evolution Gaming',
+    category: 'blackjack',
+    rtp: 99.51,
+    volatility: 'basse',
+    maxWin: '3×',
+    description:
+      'Infinite Blackjack résout le problème des tables saturées : un nombre illimité de joueurs peuvent rejoindre la même table. Chaque joueur décide indépendamment de ses actions sur la même main de départ.',
+    features: [
+      'Nombre illimité de joueurs simultanés',
+      'RTP 99,51 % avec stratégie de base',
+      'Six Deck',
+      'Side bets : Any Pair, 21+3',
+    ],
+    minBet: 1,
+    maxBet: 2500,
+    popular: true,
+  },
+  {
+    slug: 'blackjack-classique',
+    name: 'Blackjack Classique',
+    provider: 'Microgaming',
+    category: 'blackjack',
+    rtp: 99.65,
+    volatility: 'basse',
+    maxWin: '3×',
+    description:
+      "Le blackjack classique de Microgaming est la référence pour pratiquer la stratégie de base. RTP de 99,65 % avec jeu optimal — l'un des meilleurs RTP de tous les jeux de casino.",
+    features: [
+      'RTP 99,65 % avec stratégie de base',
+      'Règles Vegas Strip',
+      "Double sur n'importe quelle main",
+      "Décomposition des paires jusqu'à 4 mains",
+    ],
+    minBet: 0.5,
+    maxBet: 200,
+    popular: false,
+  },
+
+  // ── Live ───────────────────────────────────────────────────────────────────
+  {
+    slug: 'crazy-time',
+    name: 'Crazy Time',
+    provider: 'Evolution Gaming',
+    category: 'live',
+    rtp: 96.08,
+    volatility: 'très haute',
+    maxWin: '20 000×',
+    description:
+      "Crazy Time est le game show live le plus populaire au monde. Une roue géante, 4 bonus games (Cash Hunt, Pachinko, Coin Flip, Crazy Time) et des multiplicateurs jusqu'à 20 000×.",
+    features: [
+      '4 bonus games interactifs',
+      "Multiplicateurs jusqu'à 20 000×",
+      'Top Slot avec multiplicateurs aléatoires',
+      'Chat en direct multi-joueur',
+    ],
+    minBet: 0.1,
+    maxBet: 1000,
+    popular: true,
+  },
+  {
+    slug: 'lightning-dice',
+    name: 'Lightning Dice',
+    provider: 'Evolution Gaming',
+    category: 'live',
+    rtp: 96.21,
+    volatility: 'haute',
+    maxWin: '1 000×',
+    description:
+      'Lightning Dice combine le lancer de trois dés avec des éclairs qui multiplient aléatoirement les gains. Simple à comprendre, intense à jouer — les multiplicateurs peuvent atteindre 1 000× sur certains totaux.',
+    features: [
+      '3 dés dans un tube électrique',
+      'Multiplicateurs 50×–1 000× par éclair',
+      'Paris sur les totaux de 3 à 18',
+      'Résultats en 30 secondes',
+    ],
+    minBet: 0.1,
+    maxBet: 5000,
+    popular: false,
+  },
+
+  // ── Crash ──────────────────────────────────────────────────────────────────
   {
     slug: 'aviator',
     name: 'Aviator',
