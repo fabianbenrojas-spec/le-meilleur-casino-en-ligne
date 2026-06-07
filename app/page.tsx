@@ -1,8 +1,7 @@
-export default function HomePage() {
-  return (
-    <main style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
-      <h1>Le Meilleur Casino en Ligne</h1>
-      <p>Phase 1 — infrastructure en place. Design system arrive en Phase 2.</p>
-    </main>
-  )
+// This route is handled by the next-intl middleware which rewrites / → /[locale]/
+// It should never be reached in production. Safety redirect for direct access.
+import { redirect } from 'next/navigation'
+
+export default function RootPage() {
+  redirect('/')
 }

@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "casinos": "Casinos",
+    "comparatifs": "Comparatifs",
+    "jeux": "Jeux",
+    "bonus": "Bonus",
+    "guides": "Guides",
+    "search": "Rechercher",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "footer": {
+    "tagline": "Le comparateur indépendant de casinos en ligne.",
+    "description": "Avis experts, bonus vérifiés, classements mis à jour mensuellement. Indépendant depuis 2020.",
+    "columns": {
+      "casinos": "Casinos",
+      "comparatifs": "Comparatifs",
+      "jeux": "Jeux",
+      "ressources": "Ressources"
+    },
+    "links": {
+      "top10": "Top 10 Casinos",
+      "bitcoin": "Casinos Bitcoin",
+      "nouveaux": "Nouveaux Casinos",
+      "live": "Casinos Live",
+      "fiables": "Casinos Fiables",
+      "comparTop10": "Comparatif Top 10",
+      "bonus": "Bonus Casino",
+      "vsVs": "Casino vs Casino",
+      "alternatives": "Alternatives",
+      "cashback": "Cashback Casino",
+      "slots": "Machines à Sous",
+      "roulette": "Roulette",
+      "blackjack": "Blackjack",
+      "poker": "Vidéo Poker",
+      "jackpots": "Jackpots Progressifs",
+      "guides": "Guides Casino",
+      "blog": "Blog",
+      "jeuResponsable": "Jeu Responsable",
+      "about": "À Propos",
+      "contact": "Contact"
+    },
+    "legal": "© 2026 le-meilleur-casino-en-ligne.fr — Tous droits réservés",
+    "legalLinks": {
+      "mentions": "Mentions légales",
+      "cookies": "Politique cookies",
+      "confidentialite": "Confidentialité"
+    }
+  },
+  "meta": {
+    "defaultTitle": "Le Meilleur Casino en Ligne — Comparateur FR",
+    "defaultDescription": "Comparateur indépendant de casinos en ligne. Avis experts, bonus vérifiés, classements mis à jour mensuellement."
+  },
+  "compliance": {
+    "disclaimer": "Les jeux d'argent comportent des risques. Jouez de façon responsable.",
+    "helpline": "Joueurs Info Service 09 74 75 13 13",
+    "age": "18+"
+  }
+}

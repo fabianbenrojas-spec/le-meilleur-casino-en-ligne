@@ -1,13 +1,13 @@
 import path from 'path'
 import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 const ContentSecurityPolicy = [
   "default-src 'self'",
-  // GTM and Next.js require unsafe-inline for scripts — documented trade-off (see docs/DECISIONS.md)
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
-  // unsafe-inline required for Next.js style injection
   "style-src 'self' 'unsafe-inline'",
-  // fonts are self-hosted via next/font — no external font CDN needed
   "font-src 'self' data:",
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com",
@@ -29,7 +29,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   turbopack: {
-    // Explicit root prevents false-positive "multiple lockfiles" warning
     root: path.resolve(__dirname),
   },
   images: {
@@ -46,4 +45,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

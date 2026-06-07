@@ -68,6 +68,14 @@ Léger journal de décisions techniques (ADR). Format : décision + raison + alt
 
 ---
 
+## ADR-010 — next-intl middleware vs proxy.ts (Next.js 16)
+
+**Décision :** Garder `middleware.ts` (convention dépréciée) plutôt que renommer en `proxy.ts`.
+
+**Raison :** Next.js 16 a renommé `middleware.ts` → `proxy.ts` mais `next-intl/middleware` génère une erreur de build si les deux fichiers coexistent (`proxy.ts` et `middleware.ts`). Comme il est impossible de supprimer `middleware.ts` une fois créé sans accès shell, on conserve le fichier d'origine avec un avertissement de dépréciation non-bloquant. À migrer vers `proxy.ts` dès que next-intl publie un support natif de la convention `proxy`.
+
+---
+
 ## ADR-009 — TypeScript strict+ : `noUncheckedIndexedAccess`
 
 **Décision :** `noUncheckedIndexedAccess: true` activé en plus de `strict: true`.

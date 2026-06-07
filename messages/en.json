@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "casinos": "Casinos",
+    "comparatifs": "Comparisons",
+    "jeux": "Games",
+    "bonus": "Bonuses",
+    "guides": "Guides",
+    "search": "Search",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "tagline": "The independent online casino comparison.",
+    "description": "Expert reviews, verified bonuses, rankings updated monthly. Independent since 2020.",
+    "columns": {
+      "casinos": "Casinos",
+      "comparatifs": "Comparisons",
+      "jeux": "Games",
+      "ressources": "Resources"
+    },
+    "links": {
+      "top10": "Top 10 Casinos",
+      "bitcoin": "Bitcoin Casinos",
+      "nouveaux": "New Casinos",
+      "live": "Live Casinos",
+      "fiables": "Trusted Casinos",
+      "comparTop10": "Top 10 Comparison",
+      "bonus": "Casino Bonuses",
+      "vsVs": "Casino vs Casino",
+      "alternatives": "Alternatives",
+      "cashback": "Cashback Casino",
+      "slots": "Slot Machines",
+      "roulette": "Roulette",
+      "blackjack": "Blackjack",
+      "poker": "Video Poker",
+      "jackpots": "Progressive Jackpots",
+      "guides": "Casino Guides",
+      "blog": "Blog",
+      "jeuResponsable": "Responsible Gambling",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "legal": "© 2026 le-meilleur-casino-en-ligne.fr — All rights reserved",
+    "legalLinks": {
+      "mentions": "Legal notice",
+      "cookies": "Cookie policy",
+      "confidentialite": "Privacy policy"
+    }
+  },
+  "meta": {
+    "defaultTitle": "Best Online Casino — Independent Comparison",
+    "defaultDescription": "Independent online casino comparison. Expert reviews, verified bonuses, monthly updated rankings."
+  },
+  "compliance": {
+    "disclaimer": "Gambling involves financial risks. Play responsibly.",
+    "helpline": "GamCare 0808 8020 133",
+    "age": "18+"
+  }
+}
