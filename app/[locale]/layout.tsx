@@ -11,6 +11,7 @@ import { SiteFooter } from '@/components/layout/site-footer'
 import { routing, type Locale } from '@/i18n/routing'
 import { hankenGrotesk, jetbrainsMono, newsreader } from '@/lib/fonts'
 import { buildHreflang } from '@/lib/i18n/routes'
+import { GTMNoScript, GTMScript } from '@/components/gtm/gtm-script'
 
 // Prerender both locales (fr + en) at build time
 export function generateStaticParams() {
@@ -77,8 +78,11 @@ export default async function LocaleLayout({
       {/* Anti-flash: reads mc-theme from localStorage before first paint */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: antiFlashScript }} />
+        <GTMScript />
       </head>
       <body className="flex min-h-screen flex-col">
+        {/* GTM noscript — must be first element in body */}
+        <GTMNoScript />
         <NextIntlClientProvider messages={messages}>
           {/* 1. Compliance topstrip — must be visible on every page */}
           <Disclaimer18Plus variant="topstrip" updatedAt={new Date().toISOString().slice(0, 10)} />
