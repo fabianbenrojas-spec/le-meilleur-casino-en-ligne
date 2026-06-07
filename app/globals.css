@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  CSS custom properties (design tokens) are declared in Phase 2.
+  See design_handoff_casino/reference/assets/site.css for the source.
+*/

@@ -1,0 +1,5 @@
+.next/
+node_modules/
+design_handoff_casino/
+*.html
+public/
