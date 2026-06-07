@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+export const revalidate = 3600
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'

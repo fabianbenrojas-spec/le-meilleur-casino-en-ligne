@@ -3,19 +3,23 @@
 import { useEffect, useState } from 'react'
 
 import { CTAButton } from './cta-button'
+import { hasConsent, pushConsentToGTM, storeConsent } from '@/lib/consent'
 
-type ConsentChoice = 'accept_all' | 'reject_all' | 'custom'
-
-interface ToggleProps {
+function ConsentToggle({
+  id,
+  label,
+  description,
+  checked,
+  disabled,
+  onChange,
+}: {
   id: string
   label: string
   description: string
   checked: boolean
   disabled?: boolean
   onChange: (checked: boolean) => void
-}
-
-function ConsentToggle({ id, label, description, checked, disabled, onChange }: ToggleProps) {
+}) {
   return (
     <div className="flex items-center justify-between gap-[14px] border-t border-line py-3">
       <div>
@@ -51,23 +55,33 @@ export function CookieConsentBanner() {
   const [marketing, setMarketing] = useState(false)
 
   useEffect(() => {
-    try {
-      if (!localStorage.getItem('mc-consent')) {
-        setTimeout(() => setVisible(true), 700)
-      }
-    } catch {
-      // private browsing
-    }
+    // Delay banner to avoid CLS during initial paint
+    const t = setTimeout(() => {
+      if (!hasConsent()) setVisible(true)
+    }, 700)
+    return () => clearTimeout(t)
   }, [])
 
-  function close(choice: ConsentChoice) {
-    try {
-      localStorage.setItem('mc-consent', choice)
-    } catch {
-      // private browsing
-    }
+  function save(state: { analytics: boolean; marketing: boolean }) {
+    storeConsent(state)
+    pushConsentToGTM(state)
     setVisible(false)
-    // GA4 event via GTM data-event attribute on buttons
+  }
+
+  function acceptAll() {
+    setAnalytics(true)
+    setMarketing(true)
+    save({ analytics: true, marketing: true })
+  }
+
+  function rejectAll() {
+    setAnalytics(false)
+    setMarketing(false)
+    save({ analytics: false, marketing: false })
+  }
+
+  function saveCustom() {
+    save({ analytics, marketing })
   }
 
   if (!visible) return null
@@ -84,7 +98,8 @@ export function CookieConsentBanner() {
           Vos préférences cookies
         </h2>
         <p className="mb-[18px] text-[13.5px] leading-[1.55] text-ink-2">
-          Nous utilisons des cookies pour améliorer votre expérience et analyser l&apos;audience.{' '}
+          Nous utilisons des cookies pour améliorer votre expérience et analyser l&apos;audience.
+          Refuser est aussi simple qu&apos;accepter.{' '}
           <a href="/politique-cookies" className="text-green hover:underline">
             Politique de cookies
           </a>
@@ -93,7 +108,7 @@ export function CookieConsentBanner() {
         <ConsentToggle
           id="cookie-essential"
           label="Essentiels"
-          description="Nécessaires au fonctionnement du site"
+          description="Nécessaires au fonctionnement du site (thème, session, préférences)"
           checked
           disabled
           onChange={() => {}}
@@ -101,24 +116,25 @@ export function CookieConsentBanner() {
         <ConsentToggle
           id="cookie-analytics"
           label="Analytiques"
-          description="Nous aident à comprendre comment vous utilisez le site"
+          description="GA4 via GTM — données anonymisées et agrégées"
           checked={analytics}
           onChange={setAnalytics}
         />
         <ConsentToggle
           id="cookie-marketing"
           label="Marketing"
-          description="Personnalisation des offres et publicités"
+          description="Mesure des conversions affiliées — nécessite votre accord explicite"
           checked={marketing}
           onChange={setMarketing}
         />
 
         <div className="mt-5 flex gap-2.5">
+          {/* Refuser — même niveau visuel qu'Accepter (pas de dark pattern) */}
           <CTAButton
             variant="secondary"
             size="sm"
             block
-            onClick={() => close('reject_all')}
+            onClick={rejectAll}
             data-event="cookie_consent"
             data-choice="reject_all"
           >
@@ -128,7 +144,7 @@ export function CookieConsentBanner() {
             variant="secondary"
             size="sm"
             block
-            onClick={() => close('custom')}
+            onClick={saveCustom}
             data-event="cookie_consent"
             data-choice="custom"
           >
@@ -138,7 +154,7 @@ export function CookieConsentBanner() {
             variant="primary"
             size="sm"
             block
-            onClick={() => close('accept_all')}
+            onClick={acceptAll}
             data-event="cookie_consent"
             data-choice="accept_all"
           >

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+export const revalidate = 3600
 
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
