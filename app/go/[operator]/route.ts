@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { operatorBySlug } from '@/config/operators'
+import { AFFILIATE_URLS, operatorBySlug } from '@/config/operators'
 
 // Affiliation interstitial — fires GA4 via dataLayer before redirecting.
 // Page is noindex, no-store, serves HTML with short JS delay then location.replace().
@@ -15,11 +15,9 @@ export async function GET(
     return new NextResponse('Casino non trouvé', { status: 404 })
   }
 
-  // Real affiliate URL (from config — placeholder in dev)
-  // In production, replace with real partner tracking links
-  const dest = op.affiliateUrl.startsWith('/go/')
-    ? `https://example.com/?ref=${slug}&utm_source=lmcel&utm_medium=affiliate&utm_campaign=${slug}`
-    : op.affiliateUrl
+  // Use the real registration URL from AFFILIATE_URLS map.
+  // Once affiliate programmes are approved, replace with tracking links here.
+  const dest = AFFILIATE_URLS[slug] ?? op.affiliateUrl
 
   const html = `<!DOCTYPE html>
 <html lang="fr">

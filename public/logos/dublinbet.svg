@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none">
+  <rect width="200" height="56" rx="8" fill="#0A1F0A"/>
+  <path d="M18,28 Q22,14 26,28 Q30,42 34,28" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="118" y="24" font-family="Georgia,serif" font-size="13" fill="#81C784" text-anchor="middle" letter-spacing="2">DUBLIN</text>
+  <text x="118" y="42" font-family="Georgia,serif" font-size="20" fill="white" text-anchor="middle" font-weight="700">BET</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none">
+  <rect width="200" height="56" rx="8" fill="#1A1000"/>
+  <ellipse cx="26" cy="26" rx="8" ry="5" fill="none" stroke="#F57F17" stroke-width="2"/>
+  <line x1="18" y1="26" x2="10" y2="30" stroke="#F57F17" stroke-width="2"/>
+  <line x1="18" y1="26" x2="10" y2="22" stroke="#F57F17" stroke-width="2"/>
+  <line x1="34" y1="26" x2="42" y2="30" stroke="#F57F17" stroke-width="2"/>
+  <line x1="34" y1="26" x2="42" y2="22" stroke="#F57F17" stroke-width="2"/>
+  <circle cx="26" cy="26" r="3" fill="#F57F17"/>
+  <text x="120" y="24" font-family="Georgia,serif" font-size="13" fill="#FFB300" text-anchor="middle" letter-spacing="2">HORUS</text>
+  <text x="120" y="42" font-family="Georgia,serif" font-size="16" fill="white" text-anchor="middle" font-weight="400" letter-spacing="3">CASINO</text>
+</svg>

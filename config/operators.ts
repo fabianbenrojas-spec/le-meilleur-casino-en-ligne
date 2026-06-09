@@ -25,6 +25,44 @@ export interface Operator {
   affiliateUrl: string // real external URL (placeholder for dev)
 }
 
+// Real registration URLs per operator.
+// Replace with affiliate tracking URLs once programmes are approved.
+export const AFFILIATE_URLS: Record<string, string> = {
+  cresus: 'https://cresuscasino-fr.net/fr/register',
+  lucky8: 'https://lucky8fr.fr/fr-fr/register',
+  'wild-sultan': 'https://www.wildsultan.com/fr/register',
+  madnix: 'https://www.madnix.com/fr/register',
+  'magical-spin': 'https://www.magicalspin.com/fr/register',
+  casinozer: 'https://casinozer.com/fr/register',
+  tortuga: 'https://www.tortuga.bet/fr/register',
+  'banzai-slots': 'https://www.banzaislots.com/fr/register',
+  stake: 'https://stake.com/fr/registration',
+  'bitcoin-penguin': 'https://bitcoinpenguin.org/register',
+  dublinbet: 'https://www.dublinbet.com/fr/register',
+  vegadream: 'https://vegadream.com/fr/register',
+  'horus-casino': 'https://www.horuscasino.com/fr/register',
+  'n1-casino': 'https://www.n1casino.com/fr/welcome-page',
+  'casino-extra': 'https://casinoextra-fr.fr/fr-fr/register',
+}
+
+const LOGO_URLS: Record<string, string> = {
+  cresus: '/logos/cresus.svg',
+  lucky8: '/logos/lucky8.svg',
+  'wild-sultan': '/logos/wild-sultan.svg',
+  madnix: '/logos/madnix.svg',
+  'magical-spin': '/logos/magical-spin.svg',
+  casinozer: '/logos/casinozer.svg',
+  tortuga: '/logos/tortuga.svg',
+  'banzai-slots': '/logos/banzai-slots.svg',
+  stake: '/logos/stake.svg',
+  'bitcoin-penguin': '/logos/bitcoin-penguin.svg',
+  dublinbet: '/logos/dublinbet.svg',
+  vegadream: '/logos/vegadream.svg',
+  'horus-casino': '/logos/horus-casino.svg',
+  'n1-casino': '/logos/n1-casino.svg',
+  'casino-extra': '/logos/casino-extra.svg',
+}
+
 function goUrl(slug: string) {
   return `/go/${slug}/`
 }
@@ -60,6 +98,7 @@ export const operators: Operator[] = [
     verdict:
       'Cresus est notre n°1 pour le marché français : meilleur équilibre bonus généreux, retraits rapides et service client francophone.',
     tagline: 'Le meilleur équilibre ludothèque / retraits rapides pour le marché français.',
+    logoUrl: LOGO_URLS['cresus'],
     affiliateUrl: goUrl('cresus'),
   },
   {
@@ -90,6 +129,7 @@ export const operators: Operator[] = [
     verdict:
       'Lucky8 se distingue par ses tournois et son cashback hebdomadaire, idéal pour les joueurs réguliers de slots.',
     tagline: 'Tournois de machines à sous et cashback hebdomadaire généreux.',
+    logoUrl: LOGO_URLS['lucky8'],
     affiliateUrl: goUrl('lucky8'),
   },
   {
@@ -120,6 +160,7 @@ export const operators: Operator[] = [
     verdict:
       'Wild Sultan est le choix idéal pour les joueurs crypto qui veulent des retraits immédiats et une expérience live haut de gamme.',
     tagline: 'Le spécialiste des retraits crypto instantanés et du live game premium.',
+    logoUrl: LOGO_URLS['wild-sultan'],
     affiliateUrl: goUrl('wild-sultan'),
   },
   {
@@ -150,6 +191,7 @@ export const operators: Operator[] = [
     verdict:
       'Madnix offre la plus grande ludothèque de notre comparatif, idéale pour les joueurs qui veulent de la variété.',
     tagline: 'La plus grande ludothèque et des missions de fidélité qui récompensent vraiment.',
+    logoUrl: LOGO_URLS['madnix'],
     affiliateUrl: goUrl('madnix'),
   },
   {
@@ -176,6 +218,7 @@ export const operators: Operator[] = [
     verdict:
       'Magical Spin propose le package de bienvenue le plus généreux en valeur absolue, avec un accompagnement VIP de qualité.',
     tagline: 'Le plus gros bonus de bienvenue du marché et un suivi VIP personnalisé.',
+    logoUrl: LOGO_URLS['magical-spin'],
     affiliateUrl: goUrl('magical-spin'),
   },
   {
@@ -206,6 +249,7 @@ export const operators: Operator[] = [
     verdict:
       'Casinozer est le meilleur choix si vous recherchez un grand nombre de tours gratuits et un cashback hebdomadaire.',
     tagline: '270 tours gratuits et cashback hebdomadaire — le meilleur rapport tours/bonus.',
+    logoUrl: LOGO_URLS['casinozer'],
     affiliateUrl: goUrl('casinozer'),
   },
   {
@@ -237,6 +281,7 @@ export const operators: Operator[] = [
     verdict:
       'Tortuga se distingue par ses conditions de wager basses, idéal pour les joueurs qui veulent réellement récupérer leurs bonus.',
     tagline: 'Le wager le plus bas du top 10 — les conditions les plus honnêtes du marché.',
+    logoUrl: LOGO_URLS['tortuga'],
     affiliateUrl: goUrl('tortuga'),
   },
   {
@@ -263,6 +308,7 @@ export const operators: Operator[] = [
     verdict:
       'Banzai Slots est le paradis des fans de machines à sous avec ses tournois quotidiens et ses exclusivités.',
     tagline: 'Tournois slots quotidiens et jeux exclusifs pour les amateurs de machines à sous.',
+    logoUrl: LOGO_URLS['banzai-slots'],
     affiliateUrl: goUrl('banzai-slots'),
   },
   {
@@ -294,6 +340,7 @@ export const operators: Operator[] = [
     verdict:
       'Stake est le meilleur casino crypto du marché avec des RTP imbattables sur ses jeux exclusifs.',
     tagline: 'Le leader mondial du casino crypto avec des RTP imbattables.',
+    logoUrl: LOGO_URLS['stake'],
     affiliateUrl: goUrl('stake'),
   },
   {
@@ -316,6 +363,7 @@ export const operators: Operator[] = [
     verdict:
       "BitcoinPenguin est idéal pour les joueurs crypto qui privilégient l'anonymat et acceptent des conditions de bonus plus strictes.",
     tagline: "Anonymat crypto garanti et large sélection d'altcoins pour les puristes.",
+    logoUrl: LOGO_URLS['bitcoin-penguin'],
     affiliateUrl: goUrl('bitcoin-penguin'),
   },
   // ── Nouveaux opérateurs Phase 9 ─────────────────────────────────────────────
@@ -348,6 +396,7 @@ export const operators: Operator[] = [
     verdict:
       'Dublinbet est la référence live du marché, avec la licence MGA qui offre le niveau de protection le plus élevé pour les joueurs.',
     tagline: 'Licence MGA et live casino premium — le choix sécurité pour les joueurs exigeants.',
+    logoUrl: LOGO_URLS['dublinbet'],
     affiliateUrl: goUrl('dublinbet'),
   },
   {
@@ -378,6 +427,7 @@ export const operators: Operator[] = [
     verdict:
       'Vegadream est le casino le mieux francisé de notre comparatif — interface, support et promotions pensés pour le marché FR.',
     tagline: 'Le casino le plus francophone du marché — support et interface 100 % FR.',
+    logoUrl: LOGO_URLS['vegadream'],
     affiliateUrl: goUrl('vegadream'),
   },
   {
@@ -409,6 +459,7 @@ export const operators: Operator[] = [
     verdict:
       'Horus Casino attire les chasseurs de jackpots : sa sélection de jackpots progressifs est parmi les plus généreuses du marché.',
     tagline: 'Jackpots progressifs record et thème égyptien immersif pour les chasseurs de gains.',
+    logoUrl: LOGO_URLS['horus-casino'],
     affiliateUrl: goUrl('horus-casino'),
   },
   {
@@ -435,6 +486,7 @@ export const operators: Operator[] = [
     verdict:
       "N1 Casino est une valeur sûre pour les joueurs qui privilégient la confiance : licence MGA et 8 ans d'activité sans incident notable.",
     tagline: "8 ans d'activité sous licence MGA — la confiance éprouvée dans le temps.",
+    logoUrl: LOGO_URLS['n1-casino'],
     affiliateUrl: goUrl('n1-casino'),
   },
   {
@@ -462,6 +514,7 @@ export const operators: Operator[] = [
     verdict:
       "Casino Extra mise sur l'expérience : 20 ans d'activité, un programme de fidélité bien rodé et les conditions de bonus les plus honnêtes de sa gamme de prix.",
     tagline: "20 ans d'expérience et le programme Extra Club le plus fidèle du marché.",
+    logoUrl: LOGO_URLS['casino-extra'],
     affiliateUrl: goUrl('casino-extra'),
   },
 ]

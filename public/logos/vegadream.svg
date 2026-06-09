@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none">
+  <rect width="200" height="56" rx="8" fill="#120820"/>
+  <polygon points="26,10 36,30 16,30" fill="none" stroke="#9C27B0" stroke-width="2"/>
+  <circle cx="26" cy="30" r="5" fill="#9C27B0"/>
+  <text x="118" y="24" font-family="Arial,sans-serif" font-size="13" fill="#CE93D8" text-anchor="middle" font-weight="700" letter-spacing="1">VEGA</text>
+  <text x="118" y="42" font-family="Arial,sans-serif" font-size="18" fill="white" text-anchor="middle" font-weight="700">DREAM</text>
+</svg>

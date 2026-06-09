@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none">
+  <rect width="200" height="56" rx="8" fill="#1A0D2E"/>
+  <circle cx="26" cy="28" r="12" stroke="#9C27B0" stroke-width="2" fill="none"/>
+  <path d="M20,28 Q26,18 32,28 Q26,38 20,28Z" fill="#9C27B0"/>
+  <text x="118" y="23" font-family="Georgia,serif" font-size="10" fill="#CE93D8" text-anchor="middle" letter-spacing="2">MAGICAL</text>
+  <text x="118" y="41" font-family="Georgia,serif" font-size="18" fill="white" text-anchor="middle" font-weight="700">SPIN</text>
+</svg>
