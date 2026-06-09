@@ -23,7 +23,7 @@ export function generateStaticParams() {
 
 const antiFlashScript = `try{var t=localStorage.getItem('mc-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}`
 
-const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://le-meilleur-casino-en-ligne.fr'
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
 export async function generateMetadata({
   params,

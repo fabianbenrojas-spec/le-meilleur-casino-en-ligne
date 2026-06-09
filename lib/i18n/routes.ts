@@ -13,7 +13,7 @@ export const routeSegments: Record<string, Record<Locale, string>> = {
   'mentions-legales': { fr: 'mentions-legales', en: 'legal-notice' },
 }
 
-const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://le-meilleur-casino-en-ligne.fr'
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
 /** Returns the URL for a given path in a given locale */
 export function localizeHref(path: string, locale: Locale): string {

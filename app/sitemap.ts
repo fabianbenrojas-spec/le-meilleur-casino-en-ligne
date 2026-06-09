@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 import { operators } from '@/config/operators'
 import { categories, games } from '@/config/games'
 
-const BASE = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://le-meilleur-casino-en-ligne.fr'
+const BASE = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
 const NOW = new Date()
 

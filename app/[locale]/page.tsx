@@ -18,7 +18,7 @@ import type { Locale } from '@/i18n/routing'
 import { TOP_10, TOP_3 } from '@/config/operators'
 import { buildHreflang } from '@/lib/i18n/routes'
 
-const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://le-meilleur-casino-en-ligne.fr'
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
 export async function generateMetadata({
   params,

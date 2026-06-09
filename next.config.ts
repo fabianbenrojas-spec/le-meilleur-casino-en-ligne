@@ -44,6 +44,22 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  // Apex → www canonical redirect (permanent 301)
+  // Vercel also handles this at the routing layer when www is set as primary domain,
+  // but having it in code ensures local dev + preview deployments behave correctly.
+  async redirects() {
+    const isProd = process.env['NEXT_PUBLIC_SITE_URL']?.includes('www.')
+    if (!isProd) return []
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'le-meilleur-casino-en-ligne.fr' }],
+        destination: 'https://www.le-meilleur-casino-en-ligne.fr/:path*',
+        permanent: true,
+      },
+    ]
+  },
+
   async headers() {
     return [
       // Security headers on all routes
