@@ -36,8 +36,26 @@ export default async function AlternativesHubPage({
   const isFr = locale === 'fr'
   const sorted = [...operators].sort((a, b) => b.rating - a.rating)
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? 'Alternatives aux casinos en ligne 2026' : 'Online casino alternatives 2026',
+    itemListElement: sorted.slice(0, 10).map((op, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: isFr ? `Alternatives à ${op.name}` : `Alternatives to ${op.name}`,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/alternatives/${op.slug}/`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

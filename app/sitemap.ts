@@ -83,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...versusEntries(),
 
     // ── Alternatives ─────────────────────────────────────────────────────
+    entry('/alternatives/', { priority: 0.6 }),
     ...operators.map((op) => entry(`/alternatives/${op.slug}/`, { priority: 0.5 })),
 
     // ── Jeux ─────────────────────────────────────────────────────────────
