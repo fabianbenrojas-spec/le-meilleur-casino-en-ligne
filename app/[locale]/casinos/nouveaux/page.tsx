@@ -103,8 +103,38 @@ export default async function CasinosNouveauxPage({
 
   const sorted = [...operators].sort((a, b) => b.bonusAmountNumber - a.bonusAmountNumber)
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? 'Nouveaux casinos en ligne France 2026' : 'New Online Casinos France 2026',
+    itemListElement: sorted.slice(0, 10).map((op, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: op.name,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/casinos/${op.slug}/`,
+    })),
+  }
+  const schemaFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: (isFr ? FAQ_FR : FAQ_EN).map((q) => ({
+      '@type': 'Question',
+      name: q.question,
+      acceptedAnswer: { '@type': 'Answer', text: q.answer },
+    })),
+  }
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

@@ -78,8 +78,40 @@ export default async function ComparatifTop10Page({
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr
+      ? 'Top 10 meilleurs casinos en ligne France 2026'
+      : 'Top 10 Best Online Casinos France 2026',
+    itemListElement: TOP_10.slice(0, 10).map((op, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: op.name,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/casinos/${op.slug}/`,
+    })),
+  }
+  const schemaFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: (isFr ? faq : faq_EN).map((q) => ({
+      '@type': 'Question',
+      name: q.question,
+      acceptedAnswer: { '@type': 'Answer', text: q.answer },
+    })),
+  }
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

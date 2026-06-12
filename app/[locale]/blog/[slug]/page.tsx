@@ -226,9 +226,48 @@ export default async function BlogArticlePage({
   if (!post) notFound()
 
   const isFr = locale === 'fr'
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: isFr ? post.title : post.titleEn,
+    description: isFr ? post.description : post.descriptionEn,
+    datePublished: post.date,
+    dateModified: post.updatedAt,
+    author: { '@type': 'Person', name: 'Julien Marchand' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'le-meilleur-casino-en-ligne.fr',
+      url: BASE_URL,
+    },
+    url: `${BASE_URL}${isFr ? '' : '/en'}/blog/${post.slug}/`,
+  }
+  const schemaFAQ =
+    post.faq.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faq.map((q) => ({
+            '@type': 'Question',
+            name: q.question,
+            acceptedAnswer: { '@type': 'Answer', text: q.answer },
+          })),
+        }
+      : null
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
+      />
+      {schemaFAQ && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
+        />
+      )}
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
