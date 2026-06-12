@@ -62,6 +62,8 @@ function FilterGroupUI({
             step={group.rangeStep ?? 0.1}
             value={current}
             onChange={(e) => onRangeChange?.(group.key, e.target.value)}
+            aria-label={group.label}
+            aria-valuetext={`${current}${group.rangeSuffix ?? ''}`}
             className="h-1 flex-1 accent-[var(--green)]"
             data-event="comparison_filter_use"
             data-filter-group={group.key}
