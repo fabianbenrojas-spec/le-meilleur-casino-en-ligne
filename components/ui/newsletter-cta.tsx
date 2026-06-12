@@ -19,6 +19,7 @@ export function NewsletterCTA({
 }: NewsletterCTAProps) {
   const isFr = locale === 'fr'
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
 
   const resolvedHeadline =
     headline ??
@@ -29,9 +30,25 @@ export function NewsletterCTA({
       ? 'Offres exclusives, nouvelles réglementations ANJ, guides experts — chaque semaine.'
       : 'Exclusive offers, new reviews, and expert guides — every week.')
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setError(false)
+    const form = e.currentTarget
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, locale }),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    }
   }
 
   return (
@@ -57,6 +74,7 @@ export function NewsletterCTA({
         >
           <input
             type="email"
+            name="email"
             required
             placeholder={isFr ? 'votre@email.fr' : 'your@email.com'}
             aria-label={isFr ? 'Adresse e-mail' : 'Email address'}
@@ -71,6 +89,11 @@ export function NewsletterCTA({
           >
             {isFr ? "S'inscrire" : 'Subscribe'}
           </CTAButton>
+          {error && (
+            <p className="mt-1 text-[12px] text-red">
+              {isFr ? 'Une erreur est survenue. Réessayez.' : 'Something went wrong. Try again.'}
+            </p>
+          )}
           <p className="mt-1 text-[11px] opacity-50">
             {isFr ? 'Pas de spam. Désabonnement en 1 clic.' : 'No spam. Unsubscribe in 1 click.'}
           </p>
