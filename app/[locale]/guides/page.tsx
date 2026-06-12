@@ -91,11 +91,11 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Comprendre avant de <em className="italic not-italic text-green">jouer</em>
+                Comprendre avant de <em className="italic text-green">jouer</em>
               </>
             ) : (
               <>
-                Understand before you <em className="italic not-italic text-green">play</em>
+                Understand before you <em className="italic text-green">play</em>
               </>
             )}
           </h1>

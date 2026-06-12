@@ -62,11 +62,11 @@ export default async function ComparatifsHubPage({
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Comparez les <em className="italic not-italic text-green">casinos en ligne</em>
+                Comparez les <em className="italic text-green">casinos en ligne</em>
               </>
             ) : (
               <>
-                Compare <em className="italic not-italic text-green">online casinos</em>
+                Compare <em className="italic text-green">online casinos</em>
               </>
             )}
           </h1>

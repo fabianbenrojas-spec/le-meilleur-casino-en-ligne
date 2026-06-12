@@ -77,11 +77,11 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Le <em className="italic not-italic text-green">Wirecutter</em> du casino en ligne
+                Le <em className="italic text-green">Wirecutter</em> du casino en ligne
               </>
             ) : (
               <>
-                The <em className="italic not-italic text-green">Wirecutter</em> of online casinos
+                The <em className="italic text-green">Wirecutter</em> of online casinos
               </>
             )}
           </h1>

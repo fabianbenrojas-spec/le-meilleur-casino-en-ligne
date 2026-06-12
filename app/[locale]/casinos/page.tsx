@@ -50,11 +50,11 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
           <h1 className="mb-[14px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Tous les <em className="italic not-italic text-green">casinos en ligne</em>
+                Tous les <em className="italic text-green">casinos en ligne</em>
               </>
             ) : (
               <>
-                All <em className="italic not-italic text-green">online casinos</em>
+                All <em className="italic text-green">online casinos</em>
               </>
             )}
           </h1>

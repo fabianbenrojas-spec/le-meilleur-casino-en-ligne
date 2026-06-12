@@ -84,14 +84,12 @@ export default async function ComparatifTop10Page({
           <h1 className="mb-[18px] max-w-[18ch] font-serif text-[clamp(32px,4.6vw,52px)] font-medium leading-[1.04] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Top 10 des{' '}
-                <em className="italic not-italic text-green">meilleurs casinos en ligne</em> en
+                Top 10 des <em className="italic text-green">meilleurs casinos en ligne</em> en
                 France
               </>
             ) : (
               <>
-                Top 10 <em className="italic not-italic text-green">best online casinos</em> in
-                France
+                Top 10 <em className="italic text-green">best online casinos</em> in France
               </>
             )}
           </h1>

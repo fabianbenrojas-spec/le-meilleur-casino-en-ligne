@@ -114,11 +114,11 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                <em className="italic not-italic text-green">Jeux de casino</em> en ligne
+                <em className="italic text-green">Jeux de casino</em> en ligne
               </>
             ) : (
               <>
-                Online <em className="italic not-italic text-green">casino games</em>
+                Online <em className="italic text-green">casino games</em>
               </>
             )}
           </h1>

@@ -53,11 +53,11 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? (
               <>
-                Meilleurs <em className="italic not-italic text-green">bonus casino</em> en ligne
+                Meilleurs <em className="italic text-green">bonus casino</em> en ligne
               </>
             ) : (
               <>
-                Best <em className="italic not-italic text-green">casino bonuses</em> online
+                Best <em className="italic text-green">casino bonuses</em> online
               </>
             )}
           </h1>
