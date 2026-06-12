@@ -69,8 +69,26 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? 'Blog casino en ligne — articles 2026' : 'Online casino blog — articles 2026',
+    itemListElement: articles.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: isFr ? a.title : a.titleEn,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/blog/${a.slug}/`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Breadcrumbs
         items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]}
         locale={locale}

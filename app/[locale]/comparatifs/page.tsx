@@ -46,8 +46,43 @@ export default async function ComparatifsHubPage({
     .flatMap((a, i) => top5.slice(i + 1).map((b) => [a, b] as const))
     .slice(0, 6)
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const thematicPages = [
+    {
+      name: isFr ? 'Top 10 casinos en ligne' : 'Top 10 online casinos',
+      path: '/comparatifs/top-10-casinos-en-ligne/',
+    },
+    {
+      name: isFr ? 'Meilleur bonus casino' : 'Best casino bonus',
+      path: '/comparatifs/meilleur-bonus/',
+    },
+    { name: isFr ? 'Casino cashback' : 'Cashback casino', path: '/comparatifs/cashback/' },
+    { name: isFr ? 'Casino live' : 'Live casino', path: '/comparatifs/live-casino/' },
+    { name: isFr ? 'Casino crypto' : 'Crypto casino', path: '/comparatifs/crypto/' },
+    {
+      name: isFr ? 'Retraits rapides' : 'Fast withdrawals',
+      path: '/comparatifs/retraits-rapides/',
+    },
+  ]
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? 'Comparatifs de casinos en ligne 2026' : 'Online casino comparisons 2026',
+    itemListElement: thematicPages.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.name,
+      url: `${BASE_URL}${isFr ? '' : '/en'}${p.path}`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

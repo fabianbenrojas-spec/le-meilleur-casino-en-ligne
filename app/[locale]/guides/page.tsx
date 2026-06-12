@@ -74,8 +74,26 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? 'Guides casino en ligne 2026' : 'Online casino guides 2026',
+    itemListElement: guides.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: isFr ? g.title : g.titleEn,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/guides/${g.slug}/`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
