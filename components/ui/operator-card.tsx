@@ -127,39 +127,15 @@ export function PodiumCard({
         <p className="m-0 font-serif text-[21px] font-semibold leading-tight tracking-[-0.01em] text-ink">
           {operator.name}
         </p>
-        {operator.tagline && (
-          <p className="m-0 mt-1 text-[13.5px] leading-[1.45] text-ink-2">{operator.tagline}</p>
-        )}
+        <p className="m-0 mt-1 text-sm text-ink-2">{operator.licence}</p>
       </div>
-
-      {operator.features && operator.features.length > 0 && (
-        <ul className="m-0 flex list-none flex-col gap-[7px] p-0">
-          {operator.features.slice(0, 3).map((feat) => (
-            <li key={feat} className="flex items-center gap-[8px] text-[13px] text-ink-2">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                className="h-[13px] w-[13px] shrink-0 text-green"
-                aria-hidden
-              >
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-              {feat}
-            </li>
-          ))}
-        </ul>
-      )}
 
       <BonusBadge
         amount={operator.bonusAmount}
         amountSuffix={operator.bonusSuffix}
         conditions={operator.bonusConditions}
         gold={isFirst}
-        label={isFirst ? (locale === 'fr' ? 'Bonus exclusif' : 'Exclusive bonus') : undefined}
-        locale={locale}
-        className="mt-auto w-full"
+        className="w-full"
       />
 
       <CTAButton
@@ -177,15 +153,16 @@ export function PodiumCard({
         {resolvedCtaBonus}
       </CTAButton>
 
-      <a
+      <CTAButton
         href={`/casinos/${operator.slug}/`}
-        className="mt-0 block text-center text-[13.5px] text-ink-2 underline underline-offset-2 transition-colors hover:text-green"
+        variant="secondary"
+        block
         data-event="review_click"
         data-operator={operator.slug}
         data-placement="hero_podium"
       >
         {resolvedCtaReview}
-      </a>
+      </CTAButton>
     </article>
   )
 }

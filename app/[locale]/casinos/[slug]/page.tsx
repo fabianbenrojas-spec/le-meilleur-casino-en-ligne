@@ -11,7 +11,6 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { ProsConsBox } from '@/components/ui/pros-cons-box'
-import { LogoOrPlaceholder } from '@/components/ui/operator-card'
 import { ScorePill } from '@/components/ui/score-pill'
 import { ScoreRing } from '@/components/ui/score-ring'
 import { StarRating } from '@/components/ui/star-rating'
@@ -37,14 +36,9 @@ export async function generateMetadata({
 
   const rd = getReviewData(slug)
 
-  const isFr = locale === 'fr'
   return {
-    title: isFr
-      ? `Avis ${op.name} 2026 : test complet, bonus & retraits`
-      : `${op.name} Review 2026 — full test, bonus & withdrawals`,
-    description: isFr
-      ? `Notre avis complet sur ${op.name} : ${op.rating}/10. Bonus ${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}, RTP ${op.rtp.toFixed(1)}%. Testé à l'argent réel. 18+`
-      : `Our full review of ${op.name}: ${op.rating}/10. Bonus ${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}, RTP ${op.rtp.toFixed(1)}%. Real-money tested. 18+`,
+    title: `Avis ${op.name} 2026 : test complet, bonus & retraits`,
+    description: `Notre avis complet sur ${op.name} : ${op.rating}/10. Bonus ${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}, RTP ${op.rtp.toFixed(1)}%. Testé à l'argent réel. 18+`,
     alternates: {
       languages: buildHreflang(
         `/casinos/${slug}/`,
@@ -55,7 +49,7 @@ export async function generateMetadata({
       'review:schema': JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Review',
-        name: isFr ? `Avis ${op.name}` : `${op.name} Review`,
+        name: `Avis ${op.name}`,
         reviewRating: {
           '@type': 'Rating',
           ratingValue: op.rating,
@@ -74,7 +68,7 @@ export async function generateMetadata({
   }
 }
 
-const TOC_ITEMS_FR = [
+const TOC_ITEMS = [
   { id: 'verdict', label: 'Verdict & note' },
   { id: 'bonus', label: 'Bonus de bienvenue' },
   { id: 'jeux', label: 'Ludothèque' },
@@ -85,21 +79,6 @@ const TOC_ITEMS_FR = [
   { id: 'vip', label: 'Programme VIP' },
   { id: 'securite', label: 'Sécurité & licence' },
   { id: 'recap', label: 'Récapitulatif' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'alternatives', label: 'Alternatives' },
-]
-
-const TOC_ITEMS_EN = [
-  { id: 'verdict', label: 'Verdict & rating' },
-  { id: 'bonus', label: 'Welcome bonus' },
-  { id: 'jeux', label: 'Game library' },
-  { id: 'live', label: 'Live games' },
-  { id: 'paiements', label: 'Payments & withdrawals' },
-  { id: 'support', label: 'Customer support' },
-  { id: 'mobile', label: 'Mobile app' },
-  { id: 'vip', label: 'VIP programme' },
-  { id: 'securite', label: 'Security & licence' },
-  { id: 'recap', label: 'Summary' },
   { id: 'faq', label: 'FAQ' },
   { id: 'alternatives', label: 'Alternatives' },
 ]
@@ -115,6 +94,20 @@ const SECTION_NUMBERS: Record<string, string> = {
   securite: '08',
 }
 
+function LogoPlaceholder({ name }: { name: string }) {
+  return (
+    <div
+      className="flex h-24 w-[150px] items-center justify-center rounded-lg border border-dashed border-line-2 font-mono text-[11px] text-ink-3"
+      style={{
+        background:
+          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
+      }}
+    >
+      {name}
+    </div>
+  )
+}
+
 function SideCtaCard({
   op,
   locale,
@@ -122,16 +115,9 @@ function SideCtaCard({
   op: ReturnType<typeof operatorBySlug.get> & {}
   locale: Locale
 }) {
-  const isFr = locale === 'fr'
   return (
     <div className="rounded-lg border-[1.5px] border-[color-mix(in_srgb,var(--green)_30%,var(--line))] bg-surface p-[18px] shadow-2">
-      <LogoOrPlaceholder
-        logoUrl={op.logoUrl}
-        name={op.shortName ?? op.name}
-        width={150}
-        height={60}
-        priority
-      />
+      <LogoPlaceholder name={op.shortName ?? op.name} />
       <div className="mt-3 font-serif text-[22px] font-semibold leading-[1.1] text-ink">
         <span className="text-green">{op.bonusAmount}</span>
         {op.bonusSuffix && ` ${op.bonusSuffix}`}
@@ -153,7 +139,7 @@ function SideCtaCard({
         data-page-type="review"
         data-locale={locale}
       >
-        {isFr ? 'Obtenir le bonus' : 'Get bonus'}
+        Obtenir le bonus
       </CTAButton>
     </div>
   )
@@ -232,12 +218,10 @@ export default async function ReviewPage({
   params: Promise<{ locale: Locale; slug: string }>
 }) {
   const { locale, slug } = await params
-  const isFr = locale === 'fr'
   const op = operatorBySlug.get(slug)
   if (!op) notFound()
 
   const rd = getReviewData(slug)
-  const tocItems = isFr ? TOC_ITEMS_FR : TOC_ITEMS_EN
 
   // 3 alternatives (exclude self)
   const altOps = Array.from(operatorBySlug.values())
@@ -248,7 +232,7 @@ export default async function ReviewPage({
   const reviewSchema: WithContext<Review> = {
     '@context': 'https://schema.org',
     '@type': 'Review',
-    name: isFr ? `Avis ${op.name}` : `${op.name} Review`,
+    name: `Avis ${op.name}`,
     reviewRating: {
       '@type': 'Rating',
       ratingValue: String(op.rating),
@@ -270,11 +254,10 @@ export default async function ReviewPage({
 
       <Breadcrumbs
         items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Casinos en ligne' : 'Online casinos', href: '/casinos/' },
+          { label: 'Accueil', href: '/' },
+          { label: 'Casinos en ligne', href: '/casinos/' },
           { label: op.name },
         ]}
-        locale={locale}
       />
 
       {/* ── Review Hero ───────────────────────────────── */}
@@ -290,12 +273,7 @@ export default async function ReviewPage({
               {/* Top: logo + info + score ring */}
               <div className="grid grid-cols-[auto_1fr_auto] items-center gap-[30px] p-[30px_32px] sm:grid-cols-1 sm:gap-5">
                 {/* Logo */}
-                <LogoOrPlaceholder
-                  logoUrl={op.logoUrl}
-                  name={op.shortName ?? op.name}
-                  width={150}
-                  height={60}
-                />
+                <LogoPlaceholder name={op.shortName ?? op.name} />
 
                 {/* Info */}
                 <div>
@@ -305,7 +283,7 @@ export default async function ReviewPage({
                   <div className="flex flex-wrap gap-2">
                     {[
                       op.licence,
-                      `${isFr ? 'Fondé en' : 'Founded'} ${rd.foundedYear}`,
+                      `Fondé en ${rd.foundedYear}`,
                       rd.currencies.join(' · '),
                       rd.languages.join(' · '),
                     ].map((chip) => (
@@ -322,19 +300,18 @@ export default async function ReviewPage({
                     reviewCount={rd.reviewCount}
                     showNumeric={false}
                     className="mt-2"
-                    locale={locale}
                   />
                 </div>
 
                 {/* Score ring */}
-                <ScoreRing score={op.rating} label={op.ratingLabel} locale={locale} />
+                <ScoreRing score={op.rating} label={op.ratingLabel} />
               </div>
 
               {/* Bonus band */}
               <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-8 py-6 sm:grid-cols-1">
                 <div>
                   <p className="mb-[5px] font-mono text-[11px] uppercase tracking-[0.1em] text-green-ink">
-                    {isFr ? 'Bonus de bienvenue exclusif' : 'Exclusive welcome bonus'}
+                    Bonus de bienvenue exclusif
                   </p>
                   <p className="font-serif text-[clamp(28px,4vw,40px)] font-semibold leading-[1.04] tracking-[-0.015em] text-ink">
                     <span className="text-green">{op.bonusAmount}</span>
@@ -356,7 +333,7 @@ export default async function ReviewPage({
                     data-page-type="review"
                     data-locale={locale}
                   >
-                    {isFr ? 'Obtenir le bonus' : 'Get bonus'}
+                    Obtenir le bonus
                   </CTAButton>
                   <CTAButton
                     href="#bonus"
@@ -365,7 +342,7 @@ export default async function ReviewPage({
                     data-event="toc_click"
                     data-target="bonus"
                   >
-                    {isFr ? "Lire l'avis complet" : 'Read the full review'}
+                    Lire l&apos;avis complet
                   </CTAButton>
                 </div>
               </div>
@@ -373,7 +350,7 @@ export default async function ReviewPage({
           </div>
         </div>
 
-        <AffiliateDisclosure variant="strip" locale={locale} />
+        <AffiliateDisclosure variant="strip" />
       </section>
 
       {/* ── Body: sidebar + content ───────────────────── */}
@@ -382,7 +359,7 @@ export default async function ReviewPage({
           {/* Sidebar */}
           <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-[18px] lg:flex">
             <SideCtaCard op={op} locale={locale} />
-            <TableOfContents items={tocItems} locale={locale} />
+            <TableOfContents items={TOC_ITEMS} />
           </aside>
 
           {/* Content */}
@@ -390,11 +367,11 @@ export default async function ReviewPage({
             {/* Mobile TOC */}
             <details className="mb-6 overflow-hidden rounded-lg border border-line bg-surface p-4 lg:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-semibold text-ink">
-                {isFr ? "Sommaire de l'avis" : 'Review contents'}
+                Sommaire de l&apos;avis
                 <span className="text-ink-3">▾</span>
               </summary>
               <ul className="mt-3 flex flex-col gap-1 pl-2">
-                {tocItems.map((item) => (
+                {TOC_ITEMS.map((item) => (
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
@@ -414,37 +391,26 @@ export default async function ReviewPage({
             >
               <div className="mb-7 rounded-lg border border-l-4 border-line border-l-green bg-surface p-[24px_26px] shadow-1">
                 <p className="mb-[10px] font-mono text-[11px] uppercase tracking-[0.1em] text-green">
-                  {isFr ? 'Verdict express' : 'Quick verdict'}
+                  Verdict express
                 </p>
                 <p className="m-0 font-serif text-[17.5px] leading-[1.6] text-ink">{rd.verdict}</p>
               </div>
-              <ProsConsBox pros={op.pros} cons={op.cons} locale={locale} />
+              <ProsConsBox pros={op.pros} cons={op.cons} />
             </section>
 
             {/* Dynamic sections */}
             {(Object.entries(rd.sections) as [string, typeof rd.sections.bonus][]).map(
               ([key, sec]) => {
-                const titles: Record<string, string> = isFr
-                  ? {
-                      bonus: 'Bonus de bienvenue',
-                      jeux: 'Ludothèque & machines à sous',
-                      live: 'Jeux en live',
-                      paiements: 'Paiements & retraits',
-                      support: 'Support client',
-                      mobile: 'Application & expérience mobile',
-                      vip: 'Programme VIP',
-                      securite: 'Sécurité & licence',
-                    }
-                  : {
-                      bonus: 'Welcome bonus',
-                      jeux: 'Game library & slots',
-                      live: 'Live games',
-                      paiements: 'Payments & withdrawals',
-                      support: 'Customer support',
-                      mobile: 'App & mobile experience',
-                      vip: 'VIP programme',
-                      securite: 'Security & licence',
-                    }
+                const titles: Record<string, string> = {
+                  bonus: 'Bonus de bienvenue',
+                  jeux: 'Ludothèque & machines à sous',
+                  live: 'Jeux en live',
+                  paiements: 'Paiements & retraits',
+                  support: 'Support client',
+                  mobile: 'Application & expérience mobile',
+                  vip: 'Programme VIP',
+                  securite: 'Sécurité & licence',
+                }
                 return (
                   <ReviewSection
                     key={key}
@@ -502,7 +468,7 @@ export default async function ReviewPage({
               className="py-[14px] [scroll-margin-top:calc(var(--header-h)+20px)]"
             >
               <h2 className="mb-4 font-serif text-[27px] font-medium leading-[1.15] tracking-[-0.015em] text-ink">
-                {isFr ? 'Récapitulatif' : 'Summary'}
+                Récapitulatif
               </h2>
               <div className="overflow-hidden rounded-lg border border-line shadow-1">
                 <table className="w-full border-collapse bg-surface">
@@ -525,7 +491,7 @@ export default async function ReviewPage({
             {/* FAQ */}
             <section id="faq" className="py-[14px] [scroll-margin-top:calc(var(--header-h)+20px)]">
               <h2 className="mb-4 font-serif text-[27px] font-medium tracking-[-0.015em] text-ink">
-                {isFr ? 'Questions fréquentes' : 'Frequently asked questions'}
+                Questions fréquentes
               </h2>
               <FAQAccordion items={rd.faq} includeSchema />
             </section>
@@ -533,20 +499,11 @@ export default async function ReviewPage({
             {/* Author bio */}
             <AuthorBio
               name="Julien Marchand"
-              role={
-                isFr
-                  ? "Rédacteur en chef · 11 ans dans l'iGaming"
-                  : 'Editor-in-chief · 11 years in iGaming'
-              }
-              credentials={
-                isFr
-                  ? 'Ex-analyste conformité · testé 200+ casinos'
-                  : 'Former compliance analyst · tested 200+ casinos'
-              }
+              role="Rédacteur en chef · 11 ans dans l'iGaming"
+              credentials="Ex-analyste conformité · testé 200+ casinos"
               lastUpdated="2026-06-07"
               nextRetest="2026-09-01"
               className="my-6"
-              locale={locale}
             />
 
             {/* Alternatives */}
@@ -555,7 +512,7 @@ export default async function ReviewPage({
               className="py-[14px] [scroll-margin-top:calc(var(--header-h)+20px)]"
             >
               <h2 className="mb-6 font-serif text-[27px] font-medium tracking-[-0.015em] text-ink">
-                {isFr ? `Alternatives à ${op.name}` : `Alternatives to ${op.name}`}
+                Alternatives à {op.name}
               </h2>
               <div className="flex flex-col gap-3">
                 {altOps.map((alt) => (
@@ -582,7 +539,7 @@ export default async function ReviewPage({
                         data-event="review_click"
                         data-operator={alt.slug}
                       >
-                        {isFr ? 'Avis' : 'Review'}
+                        Avis
                       </CTAButton>
                       <CTAButton
                         href={alt.affiliateUrl}
@@ -607,7 +564,7 @@ export default async function ReviewPage({
             {/* Final CTA */}
             <div className="mt-8 rounded-xl border border-green bg-green-50 p-8 text-center">
               <h3 className="mb-2 font-serif text-[24px] font-semibold text-ink">
-                {isFr ? `Prêt à rejoindre ${op.name} ?` : `Ready to join ${op.name}?`}
+                Prêt à rejoindre {op.name} ?
               </h3>
               <p className="mb-6 text-[15px] text-ink-2">
                 {op.bonusAmount}
@@ -626,10 +583,10 @@ export default async function ReviewPage({
                 data-page-type="review"
                 data-locale={locale}
               >
-                {isFr ? 'Obtenir le bonus' : 'Get bonus'}
+                Obtenir le bonus
               </CTAButton>
               <p className="mt-3 text-[11px] text-ink-3">
-                18+ · {isFr ? 'Jeu responsable' : 'Responsible gaming'} · {op.bonusConditions}
+                18+ · Jeu responsable · {op.bonusConditions}
               </p>
             </div>
           </main>
@@ -642,9 +599,6 @@ export default async function ReviewPage({
         rating={op.rating}
         bonusLabel={`${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''} · ${op.bonusConditions}`}
         affiliateUrl={op.affiliateUrl}
-        locale={locale}
-        pageType="review"
-        bonusSlug={op.bonusSlug}
       />
     </>
   )

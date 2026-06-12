@@ -5,11 +5,9 @@ import { notFound } from 'next/navigation'
 export const revalidate = 604800
 
 import { AuthorBio } from '@/components/ui/author-bio'
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ReadProgress } from '@/components/ui/read-progress'
 import { TableOfContents } from '@/components/ui/table-of-contents'
 import { ListingCard } from '@/components/ui/operator-card'
 import { TOP_10 } from '@/config/operators'
@@ -348,201 +346,98 @@ export default async function GuidePage({
 
   const isFr = locale === 'fr'
   const tocItems = guide.sections.map((s) => ({ id: s.id, label: s.title }))
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaArticle = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: isFr ? guide.title : guide.titleEn,
-    description: guide.description,
-    datePublished: guide.updatedAt,
-    dateModified: guide.updatedAt,
-    author: { '@type': 'Person', name: 'Julien Marchand' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'le-meilleur-casino-en-ligne.fr',
-      url: BASE_URL,
-    },
-    url: `${BASE_URL}${isFr ? '' : '/en'}/guides/${guide.slug}/`,
-  }
-  const schemaFAQ =
-    guide.faq.length > 0
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: guide.faq.map((q) => ({
-            '@type': 'Question',
-            name: q.question,
-            acceptedAnswer: { '@type': 'Answer', text: q.answer },
-          })),
-        }
-      : null
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
-      />
-      {schemaFAQ && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-        />
-      )}
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Guides' : 'Guides', href: '/guides/' },
           { label: isFr ? (guide.title.split('—')[0]?.trim() ?? guide.title) : guide.titleEn },
         ]}
-        locale={locale}
       />
+
       {/* Hero */}
-      <section className="pb-2 pt-10" data-page-type="guide" data-locale={locale}>
-        <div className="mx-auto max-w-[860px] px-8 sm:px-[18px]">
-          {/* Category badge */}
-          <div className="mb-[18px] flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.12em] text-green">
-            <span className="h-px w-[22px] bg-[var(--gold)]" aria-hidden />
+      <section className="pb-4 pt-10" data-page-type="guide" data-locale={locale}>
+        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {guide.eyebrow}
           </div>
-
-          <h1 className="mb-5 font-serif text-[clamp(32px,5vw,54px)] font-medium leading-[1.05] tracking-[-0.022em] text-ink">
+          <h1 className="mb-[18px] max-w-[22ch] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {isFr ? guide.title : guide.titleEn}
           </h1>
-
-          <p className="mb-[26px] font-serif text-[21px] font-normal leading-[1.55] text-ink-2">
+          <p className="m-0 max-w-[60ch] text-[17px] leading-[1.55] text-ink-2">
             {guide.description}
           </p>
-
-          {/* Byline */}
-          <div className="flex items-center gap-[14px] border-b border-t border-line py-4">
-            <div
-              className="grid h-[46px] w-[46px] shrink-0 place-items-center rounded-full border border-line bg-[repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken)_5px,var(--surface-2)_5px,var(--surface-2)_10px)] font-mono text-[7px] text-ink-3"
-              aria-hidden
-            >
-              JM
-            </div>
-            <div>
-              <p className="m-0 text-[14.5px] font-bold text-ink">Julien Marchand</p>
-              <p className="m-0 text-[12.5px] text-ink-3">
-                {isFr ? 'Rédacteur en chef' : 'Editor-in-chief'} ·{' '}
-                {isFr
-                  ? `Mis à jour le ${new Date(guide.updatedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}`
-                  : `Updated ${new Date(guide.updatedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`}
-              </p>
-            </div>
-            <div className="ml-auto flex gap-2">
-              <button
-                className="grid h-[38px] w-[38px] place-items-center rounded-[9px] border border-line bg-surface text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
-                aria-label={isFr ? 'Partager' : 'Share'}
-                data-event="share_click"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="h-4 w-4"
-                >
-                  <circle cx="18" cy="5" r="3" />
-                  <circle cx="6" cy="12" r="3" />
-                  <circle cx="18" cy="19" r="3" />
-                  <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
-                </svg>
-              </button>
-              <button
-                className="grid h-[38px] w-[38px] place-items-center rounded-[9px] border border-line bg-surface text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
-                aria-label={isFr ? 'Copier le lien' : 'Copy link'}
-                data-event="copy_link"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="h-4 w-4"
-                >
-                  <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1" />
-                  <path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" />
-                </svg>
-              </button>
-            </div>
-          </div>
         </div>
-
-        {/* Cover image */}
-        <figure className="mx-auto mt-7 max-w-[860px] px-8 sm:px-[18px]">
-          <div className="grid aspect-[16/8] place-items-center rounded-[var(--radius-lg)] border border-line bg-[repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken)_11px,var(--surface-2)_11px,var(--surface-2)_22px)]">
-            <span className="rounded-[5px] border border-line bg-surface px-[10px] py-1 font-mono text-[12px] text-ink-3">
-              illustration · 16:8 · {guide.eyebrow}
-            </span>
-          </div>
-          <figcaption className="mt-2 text-center text-[12.5px] text-ink-3">
-            {guide.eyebrow} — le-meilleur-casino-en-ligne.fr
-          </figcaption>
-        </figure>
       </section>
 
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
       {/* Body */}
-      <div className="mx-auto max-w-[1120px] px-8 sm:px-[18px]">
-        <div className="grid grid-cols-[240px_1fr] items-start gap-12 pb-16 pt-10 sm:grid-cols-1 sm:gap-0 sm:pt-6">
+      <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[240px_1fr]">
           {/* Sidebar TOC */}
-          <aside className="sticky top-[calc(var(--header-h,64px)+18px)] sm:static sm:mb-6">
-            <TableOfContents
-              items={tocItems}
-              locale={locale}
-              title={isFr ? 'Dans cet article' : 'In this article'}
-            />
-            <ReadProgress />
+          <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-4 lg:flex">
+            <TableOfContents items={tocItems} />
           </aside>
 
           {/* Content */}
           <main className="min-w-0">
+            {/* Mobile TOC */}
+            <details className="mb-6 rounded-lg border border-line bg-surface p-4 lg:hidden">
+              <summary className="flex cursor-pointer items-center justify-between font-semibold text-ink">
+                Sommaire <span className="text-ink-3">▾</span>
+              </summary>
+              <ul className="mt-3 flex flex-col gap-1 pl-2">
+                {tocItems.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="block py-1 text-[13.5px] text-ink-2 hover:text-green"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+
             {/* Sections */}
-            {guide.sections.map((section) => (
+            {guide.sections.map((section, i) => (
               <section
                 key={section.id}
                 id={section.id}
-                className="[scroll-margin-top:calc(var(--header-h,64px)+20px)]"
+                className="mb-8 [scroll-margin-top:calc(var(--header-h)+20px)]"
               >
-                <h2 className="mb-[14px] mt-[38px] font-serif text-[30px] font-medium leading-[1.12] tracking-[-0.018em] text-ink first:mt-0">
+                <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
+                  <span className="mr-3 font-mono text-[14px] text-green">0{i + 1}</span>
                   {section.title}
                 </h2>
                 {section.prose.map((p, pi) => (
-                  <p key={pi} className="mb-[18px] text-[17.5px] leading-[1.72] text-ink-2">
+                  <p
+                    key={pi}
+                    className="mb-[14px] max-w-[68ch] text-[16px] leading-[1.68] text-ink-2"
+                  >
                     {p}
                   </p>
                 ))}
                 {section.highlights && (
-                  <div className="my-7 rounded-lg border border-[color-mix(in_srgb,var(--green)_24%,var(--line))] bg-green-50 px-6 py-[22px]">
-                    <h4 className="mb-3 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-green-ink">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        className="h-[15px] w-[15px] shrink-0"
-                        aria-hidden
-                      >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      {isFr ? 'À retenir' : 'Key takeaways'}
-                    </h4>
-                    <ul className="m-0 list-none p-0 text-[15.5px] leading-[1.7]">
-                      {section.highlights.map((h, hi) => (
-                        <li key={hi} className="mb-[9px] flex items-start gap-3">
-                          <span
-                            className="mt-[11px] h-[7px] w-[7px] shrink-0 rounded-full bg-green"
-                            aria-hidden
-                          />
-                          <span className="text-ink-2">{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
+                    {section.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-3 text-[15px] text-ink-2">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="mt-0.5 h-[16px] w-[16px] shrink-0 text-green"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          aria-hidden
+                        >
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </section>
             ))}
@@ -563,7 +458,6 @@ export default async function GuidePage({
               lastUpdated={guide.updatedAt}
               nextRetest={guide.nextRetest}
               className="my-8"
-              locale={locale}
             />
 
             {/* FAQ */}
@@ -587,7 +481,6 @@ export default async function GuidePage({
                     key={op.id}
                     operator={op}
                     isTop={i === 0}
-                    ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                     ga4={{ 'data-page-type': 'guide', 'data-locale': locale }}
                   />
                 ))}
