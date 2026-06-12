@@ -9,7 +9,7 @@ import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { FeaturedCard, PodiumCard } from '@/components/ui/operator-card'
+import { PodiumCard } from '@/components/ui/operator-card'
 import { NewsletterCTA } from '@/components/ui/newsletter-cta'
 import { StickyMobileCTA } from '@/components/ui/sticky-mobile-cta'
 import { HomepageQuiz } from '@/components/homepage/homepage-quiz'
@@ -502,25 +502,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       {/* Affiliate disclosure — visible without scrolling, under hero */}
       <AffiliateDisclosure variant="strip" locale={locale} />
 
-      {/* ── EDITOR'S PICK ────────────────────────────────────────── */}
-      <section className="py-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <div className="mb-[22px]">
-            <div className="mb-[10px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-gold before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              {locale === 'fr' ? 'Coup de cœur' : "Editor's pick"}
-            </div>
-            <h2 className="m-0 font-serif text-[clamp(22px,3vw,32px)] font-medium leading-[1.1] tracking-[-0.016em] text-ink">
-              {locale === 'fr' ? 'Notre meilleur casino du moment' : 'Our top casino right now'}
-            </h2>
-          </div>
-          <FeaturedCard
-            operator={topOp}
-            locale={locale}
-            ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
-          />
-        </div>
-      </section>
-
       {/* ── TOP 10 TABLE ─────────────────────────────────────────── */}
       <section className="py-16" id="top10">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
@@ -593,11 +574,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 data-event="category_click"
                 data-category={cat.slug}
               >
-                <div className="relative flex aspect-[4/3] items-center justify-center border-b border-line bg-surface-2">
+                <div className="flex aspect-[4/3] items-center justify-center border-b border-line bg-surface-2">
                   {cat.icon}
-                  <span className="absolute bottom-[7px] left-[7px] rounded-[3px] border border-line bg-surface px-[5px] py-[2px] font-mono text-[9px] text-ink-3">
-                    illus · {cat.slug}
-                  </span>
                 </div>
                 <div className="px-[15px] py-[13px]">
                   <div className="text-[15px] font-bold">

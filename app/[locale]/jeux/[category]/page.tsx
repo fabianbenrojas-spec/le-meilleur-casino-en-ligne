@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 export const revalidate = 3600
 import { notFound } from 'next/navigation'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { ListingCard } from '@/components/ui/operator-card'
+import { GameGrid } from '@/components/games/game-grid'
 import {
   categories,
   getGamesByCategory,
@@ -192,6 +192,7 @@ export default async function GameCategoryPage({
   const isFr = locale === 'fr'
   const label = isFr ? cat.label : cat.labelEn
   const games = getGamesByCategory(category as GameCategory)
+  const providers = [...new Set(games.map((g) => g.provider))].slice(0, 5)
   const recommendedCasinos = TOP_10.slice(0, 5)
   const BASE_URL =
     process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
@@ -232,10 +233,12 @@ export default async function GameCategoryPage({
       >
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr ? `${cat.count} jeux · 2026` : `${cat.count} games · 2026`}
+            {isFr ? `Catégorie · ${cat.label}` : `Category · ${cat.labelEn}`}
           </div>
           <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            <em className="not-italic text-green">{label}</em> {isFr ? 'en ligne' : 'online'}
+            {isFr ? 'Les meilleures ' : 'The best '}
+            <em className="italic text-green">{label.toLowerCase()}</em>
+            {isFr ? ' en ligne' : ' online'}
           </h1>
           <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
             {cat.description}
@@ -275,68 +278,9 @@ export default async function GameCategoryPage({
 
       {/* ── Games grid ──────────────────────────────────────────────────── */}
       {games.length > 0 && (
-        <section className="py-12" id="jeux">
+        <section className="py-10 pt-2" id="jeux">
           <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-            <div className="mb-6 flex items-baseline justify-between">
-              <h2 className="font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-                {isFr ? `Jeux populaires — ${label}` : `Popular ${label} games`}
-              </h2>
-              <span className="font-mono text-[12px] text-ink-3">
-                {games.length} {isFr ? 'jeux' : 'games'}
-              </span>
-            </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {games.map((game) => (
-                <Link
-                  key={game.slug}
-                  href={`/jeux/${category}/avis/${game.slug}/`}
-                  className="group rounded-lg border border-line bg-surface p-5 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
-                  data-event="game_click"
-                  data-game={game.slug}
-                >
-                  <div className="mb-4 overflow-hidden rounded">
-                    {game.imageUrl ? (
-                      <Image
-                        src={game.imageUrl}
-                        alt={game.name}
-                        width={400}
-                        height={300}
-                        className="w-full object-cover"
-                      />
-                    ) : (
-                      <div
-                        className="aspect-[4/3] border border-dashed border-line-2 bg-surface-2"
-                        aria-hidden
-                      />
-                    )}
-                  </div>
-                  <h3 className="mb-1 font-serif text-[18px] font-semibold text-ink transition-colors group-hover:text-green">
-                    {game.name}
-                  </h3>
-                  <p className="mb-1 text-[12px] text-ink-3">{game.provider}</p>
-                  {game.theme && <p className="mb-3 text-[12px] italic text-ink-3">{game.theme}</p>}
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-[5px] border border-line bg-bg-sunken px-2 py-[2px] font-mono text-[10px] text-ink-3">
-                      RTP {game.rtp.toFixed(2)}%
-                    </span>
-                    <span className="rounded-[5px] border border-line bg-bg-sunken px-2 py-[2px] font-mono text-[10px] text-ink-3">
-                      Vol. {game.volatility}
-                    </span>
-                    <span className="rounded-[5px] border border-line bg-bg-sunken px-2 py-[2px] font-mono text-[10px] text-ink-3">
-                      Max {game.maxWin}
-                    </span>
-                    {game.popular && (
-                      <span className="rounded-[5px] border border-[color-mix(in_srgb,var(--gold)_35%,var(--line))] bg-gold-50 px-2 py-[2px] font-mono text-[10px] text-gold-ink">
-                        {isFr ? 'Populaire' : 'Popular'}
-                      </span>
-                    )}
-                  </div>
-                  <p className="mt-3 text-[11.5px] font-medium text-green">
-                    {isFr ? "Voir l'avis →" : 'Read review →'}
-                  </p>
-                </Link>
-              ))}
-            </div>
+            <GameGrid games={games} isFr={isFr} locale={locale} providers={providers} />
           </div>
         </section>
       )}
