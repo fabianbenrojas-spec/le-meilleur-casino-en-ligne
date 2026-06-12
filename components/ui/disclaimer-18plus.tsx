@@ -45,6 +45,8 @@ export function Disclaimer18Plus({
           ) : (
             <a
               href="https://www.gamcare.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
               className="shrink-0 underline underline-offset-[2px] opacity-85 hover:opacity-100"
             >
               GamCare
@@ -83,11 +85,21 @@ export function Disclaimer18Plus({
         ) : (
           <>
             Gambling involves financial risks. Play responsibly.{' '}
-            <a href="https://www.gamcare.org.uk" className="font-semibold text-red-ink">
+            <a
+              href="https://www.gamcare.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-red-ink"
+            >
               GamCare
             </a>
             {' · '}
-            <a href="https://www.begambleaware.org" className="font-semibold text-red-ink">
+            <a
+              href="https://www.begambleaware.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-red-ink"
+            >
               BeGambleAware
             </a>
           </>
