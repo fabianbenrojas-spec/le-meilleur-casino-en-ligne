@@ -57,6 +57,7 @@ export function SelfTest({ locale = 'fr' }: SelfTestProps) {
           <div className="flex shrink-0 gap-2">
             <button
               type="button"
+              aria-pressed={answers[i] === 'yes'}
               onClick={() => setAnswer(i, 'yes')}
               className={`font-inherit cursor-pointer rounded-lg border-[1.5px] border-solid px-[18px] py-2 text-[13px] font-bold transition-all duration-150 ${
                 answers[i] === 'yes'
@@ -68,6 +69,7 @@ export function SelfTest({ locale = 'fr' }: SelfTestProps) {
             </button>
             <button
               type="button"
+              aria-pressed={answers[i] === 'no'}
               onClick={() => setAnswer(i, 'no')}
               className={`font-inherit cursor-pointer rounded-lg border-[1.5px] border-solid px-[18px] py-2 text-[13px] font-bold transition-all duration-150 ${
                 answers[i] === 'no'
