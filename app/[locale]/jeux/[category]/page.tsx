@@ -192,9 +192,26 @@ export default async function GameCategoryPage({
   const label = isFr ? cat.label : cat.labelEn
   const games = getGamesByCategory(category as GameCategory)
   const recommendedCasinos = TOP_10.slice(0, 5)
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr ? `Meilleurs jeux ${label} en ligne 2026` : `Best online ${label} games 2026`,
+    itemListElement: games.slice(0, 10).map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: g.name,
+      url: `${BASE_URL}${isFr ? '' : '/en'}/jeux/${g.category}/avis/${g.slug}/`,
+    })),
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

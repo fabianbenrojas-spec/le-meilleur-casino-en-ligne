@@ -99,9 +99,44 @@ export default async function FicheJeuPage({
   const altGames = games.filter((g) => g.category === category && g.slug !== slug).slice(0, 3)
 
   const tocItems = isFr ? TOC_ITEMS_FR : TOC_ITEMS_EN
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+  const schemaArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: isFr
+      ? `${game.name} — Avis complet, RTP ${game.rtp.toFixed(2)}% & où jouer (2026)`
+      : `${game.name} — Full Review, RTP ${game.rtp.toFixed(2)}% & where to play (2026)`,
+    description: game.description,
+    author: { '@type': 'Person', name: 'Julien Marchand' },
+    publisher: { '@type': 'Organization', name: 'le-meilleur-casino-en-ligne.fr', url: BASE_URL },
+    url: `${BASE_URL}${isFr ? '' : '/en'}/jeux/${game.category}/avis/${game.slug}/`,
+  }
+  const schemaFAQ =
+    game.faq.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: game.faq.map((q) => ({
+            '@type': 'Question',
+            name: q.question,
+            acceptedAnswer: { '@type': 'Answer', text: q.answer },
+          })),
+        }
+      : null
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
+      />
+      {schemaFAQ && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
+        />
+      )}
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
