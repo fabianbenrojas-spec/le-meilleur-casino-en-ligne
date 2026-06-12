@@ -7,10 +7,10 @@ import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { LogoOrPlaceholder } from '@/components/ui/operator-card'
-import { ProsConsBox } from '@/components/ui/pros-cons-box'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Locale } from '@/i18n/routing'
 import { operatorBySlug, operators, type Operator } from '@/config/operators'
+import { getReviewData } from '@/config/review-content'
 import { buildHreflang } from '@/lib/i18n/routes'
 import { cn } from '@/lib/utils'
 
@@ -21,7 +21,7 @@ function parseVersusSlug(slug: string): [string, string] | null {
 }
 
 export async function generateStaticParams() {
-  const top15 = operators.sort((a, b) => b.rating - a.rating).slice(0, 15)
+  const top15 = [...operators].sort((a, b) => b.rating - a.rating).slice(0, 15)
   const pairs: { slug: string }[] = []
   for (let i = 0; i < top15.length; i++) {
     for (let j = i + 1; j < top15.length; j++) {
@@ -46,11 +46,11 @@ export async function generateMetadata({
   const isFr = locale === 'fr'
   return {
     title: isFr
-      ? `${opA.name} vs ${opB.name} — Comparatif 2026`
-      : `${opA.name} vs ${opB.name} — Comparison 2026`,
+      ? `${opA.name} vs ${opB.name} : lequel choisir en 2026 ?`
+      : `${opA.name} vs ${opB.name} — Which to Choose in 2026?`,
     description: isFr
-      ? `On compare ${opA.name} (${opA.rating}/10) et ${opB.name} (${opB.rating}/10) : bonus, retraits, ludothèque, paiements et licence. Quel casino choisir ?`
-      : `We compare ${opA.name} (${opA.rating}/10) and ${opB.name} (${opB.rating}/10): bonus, withdrawals, game library, payments and licence.`,
+      ? `Comparatif complet ${opA.name} vs ${opB.name} : bonus, RTP, retraits, support et licence. Notre verdict critère par critère. 18+`
+      : `Full comparison ${opA.name} vs ${opB.name}: bonus, RTP, withdrawals, support and licence. Our verdict by criterion. 18+`,
     alternates: { languages: buildHreflang(`/comparatifs/${slug}/`) },
   }
 }
@@ -60,14 +60,14 @@ export async function generateMetadata({
 type SectionWinner = 'a' | 'b' | 'tie'
 
 function winner(aVal: number, bVal: number): SectionWinner {
-  const diff = aVal - bVal
-  if (Math.abs(diff) < 0.001) return 'tie'
-  return diff > 0 ? 'a' : 'b'
+  if (Math.abs(aVal - bVal) < 0.001) return 'tie'
+  return aVal > bVal ? 'a' : 'b'
 }
 
 function licenceScore(licence: string): number {
-  if (licence.toLowerCase().includes('mga')) return 3
-  if (licence.toLowerCase().includes('cga')) return 2
+  const l = licence.toLowerCase()
+  if (l.includes('mga') || l.includes('malta') || l.includes('gibraltar')) return 3
+  if (l.includes('cga') || l.includes('8048')) return 2
   return 1
 }
 
@@ -80,117 +80,114 @@ function bonusScore(op: Operator): number {
   return op.bonusAmountNumber / extractWager(op.bonusConditions)
 }
 
+function hasCrypto(op: Operator): boolean {
+  return op.paymentMethods.some((m) =>
+    ['btc', '₿', 'eth', 'crypto', 'usdt', 'bitcoin'].some((c) => m.toLowerCase().includes(c))
+  )
+}
+
+function recapVal(slug: string, keyword: string): string {
+  const rd = getReviewData(slug)
+  return (
+    rd.recapRows.find((r) => r.label.toLowerCase().includes(keyword.toLowerCase()))?.value ?? '—'
+  )
+}
+
+function stripMd(s: string): string {
+  return s.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1')
+}
+
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
 function WinnerBadge({
-  result,
+  w,
   aName,
   bName,
   isFr,
 }: {
-  result: SectionWinner
+  w: SectionWinner
   aName: string
   bName: string
   isFr: boolean
 }) {
-  if (result === 'tie') {
+  if (w === 'tie') {
     return (
-      <span className="inline-flex items-center rounded-full border border-line bg-bg-sunken px-3 py-[3px] font-mono text-[10px] font-semibold text-ink-3">
-        {isFr ? 'Égalité' : 'Tie'}
+      <span className="inline-flex items-center rounded-full border border-line bg-bg-sunken px-3 py-[5px] font-mono text-[10.5px] font-semibold text-ink-3">
+        {isFr ? 'Match nul' : 'Tie'}
       </span>
     )
   }
-  const name = result === 'a' ? aName : bName
+  const name = w === 'a' ? aName : bName
   return (
-    <span
-      className={cn(
-        'inline-flex items-center rounded-full border px-3 py-[3px] font-mono text-[10px] font-semibold',
-        result === 'a'
-          ? 'border-[color-mix(in_srgb,var(--green)_35%,var(--line))] bg-green-50 text-green-ink'
-          : 'border-[#C4B5FD] bg-[#F5F3FF] text-[#5B21B6]'
-      )}
-    >
-      ↑ {name}
+    <span className="inline-flex items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--green)_28%,var(--line))] bg-green-50 px-3 py-[5px] font-[12.5px] font-semibold text-green-ink">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        className="h-[13px] w-[13px] text-green"
+        aria-hidden
+      >
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+      {isFr ? `Avantage ${name}` : `${name} wins`}
     </span>
   )
 }
 
-function ThematicSection({
+function VsSection({
   title,
-  aContent,
-  bContent,
-  result,
+  w,
   aName,
   bName,
+  aContent,
+  bContent,
   isFr,
 }: {
   title: string
-  aContent: React.ReactNode
-  bContent: React.ReactNode
-  result: SectionWinner
+  w: SectionWinner
   aName: string
   bName: string
+  aContent: React.ReactNode
+  bContent: React.ReactNode
   isFr: boolean
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-line bg-surface shadow-1">
-      <div className="flex items-center justify-between border-b border-line bg-surface-2 px-5 py-[11px]">
-        <span className="text-[13px] font-semibold text-ink">{title}</span>
-        <WinnerBadge result={result} aName={aName} bName={bName} isFr={isFr} />
+    <div className="mt-[18px] overflow-hidden rounded-lg border border-line bg-surface shadow-1">
+      <div className="flex items-center justify-between gap-4 border-b border-line bg-surface-2 px-[22px] py-4">
+        <h3 className="m-0 font-serif text-[20px] font-semibold text-ink">{title}</h3>
+        <WinnerBadge w={w} aName={aName} bName={bName} isFr={isFr} />
       </div>
-      <div className="grid grid-cols-2 divide-x divide-line sm:grid-cols-1 sm:divide-x-0 sm:divide-y">
-        <div className={cn('p-[16px_20px]', result === 'a' && 'bg-green-50')}>{aContent}</div>
-        <div className={cn('p-[16px_20px]', result === 'b' && 'bg-[#F5F3FF]')}>{bContent}</div>
+      <div className="grid grid-cols-[1fr_1px_1fr] sm:grid-cols-1">
+        <div className={cn('p-[20px_22px]', w === 'a' && 'bg-green-50')}>{aContent}</div>
+        <div className="bg-line sm:h-px sm:w-full" />
+        <div className={cn('p-[20px_22px]', w === 'b' && 'bg-green-50')}>{bContent}</div>
       </div>
     </div>
   )
 }
 
-function ChooseIf({
-  opName,
-  conditions,
-  variant,
-  isFr,
+function SplitColContent({
+  op,
+  text,
+  isWinner,
 }: {
-  opName: string
-  conditions: string[]
-  variant: 'green' | 'purple'
-  isFr: boolean
+  op: Operator
+  text: string
+  isWinner: boolean
 }) {
-  const s =
-    variant === 'green'
-      ? {
-          wrapper: 'border-[color-mix(in_srgb,var(--green)_35%,var(--line))] bg-green-50',
-          label: 'text-green-ink',
-          arrow: 'text-green',
-        }
-      : {
-          wrapper: 'border-[#C4B5FD] bg-[#F5F3FF]',
-          label: 'text-[#5B21B6]',
-          arrow: 'text-[#7C3AED]',
-        }
-
   return (
-    <div className={cn('flex-1 rounded-xl border-2 p-[22px_24px]', s.wrapper)}>
-      <p
-        className={cn(
-          'mb-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em]',
-          s.label
-        )}
-      >
-        {isFr ? `Choisissez ${opName} si…` : `Choose ${opName} if…`}
-      </p>
-      <ul className="flex flex-col gap-[10px]" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-        {conditions.map((c, i) => (
-          <li
-            key={i}
-            className="flex items-start gap-[10px] text-[14.5px] leading-[1.45] text-ink-2"
-          >
-            <span className={cn('mt-px shrink-0 font-bold', s.arrow)}>→</span>
-            {c}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <div className="mb-[10px] flex items-center gap-[10px]">
+        <LogoOrPlaceholder
+          logoUrl={op.logoUrl}
+          name={op.shortName ?? op.name}
+          width={88}
+          height={30}
+        />
+        <ScorePill score={op.rating} gold={isWinner} />
+      </div>
+      <p className="m-0 text-[14px] leading-[1.6] text-ink-2">{text}</p>
     </div>
   )
 }
@@ -212,6 +209,8 @@ export default async function VersusPage({
   if (!opA || !opB) notFound()
 
   const isFr = locale === 'fr'
+  const rdA = getReviewData(opA.slug)
+  const rdB = getReviewData(opB.slug)
   const overallWinner = opA.rating >= opB.rating ? opA : opB
 
   const sections = {
@@ -222,12 +221,93 @@ export default async function VersusPage({
     licence: winner(licenceScore(opA.licence), licenceScore(opB.licence)),
   }
 
-  const licenceLabel = (op: Operator, fr: boolean) => {
-    const score = licenceScore(op.licence)
-    if (score === 3) return fr ? 'Protection maximale' : 'Maximum protection'
-    if (score === 2) return fr ? 'Protection renforcée' : 'Enhanced protection'
-    return fr ? 'Licence standard' : 'Standard licence'
-  }
+  const withdrawalA = recapVal(opA.slug, 'retrait')
+  const withdrawalB = recapVal(opB.slug, 'retrait')
+  const catalogueA = recapVal(opA.slug, 'catalogue')
+  const catalogueB = recapVal(opB.slug, 'catalogue')
+  const supportA = recapVal(opA.slug, 'support')
+  const supportB = recapVal(opB.slug, 'support')
+
+  const wagerA = extractWager(opA.bonusConditions)
+  const wagerB = extractWager(opB.bonusConditions)
+
+  const tableRows: {
+    labelFr: string
+    labelEn: string
+    aVal: string
+    bVal: string
+    w: SectionWinner
+    mono?: boolean
+  }[] = [
+    {
+      labelFr: 'Note globale',
+      labelEn: 'Overall rating',
+      aVal: `${opA.rating}/10`,
+      bVal: `${opB.rating}/10`,
+      w: sections.note,
+    },
+    {
+      labelFr: 'Bonus de bienvenue',
+      labelEn: 'Welcome bonus',
+      aVal: `${opA.bonusAmount}${opA.bonusSuffix ? ` ${opA.bonusSuffix}` : ''}`,
+      bVal: `${opB.bonusAmount}${opB.bonusSuffix ? ` ${opB.bonusSuffix}` : ''}`,
+      w: sections.bonus,
+    },
+    {
+      labelFr: 'Conditions de mise',
+      labelEn: 'Wagering',
+      aVal: `${wagerA}×`,
+      bVal: `${wagerB}×`,
+      w: winner(wagerB, wagerA), // lower is better
+      mono: true,
+    },
+    {
+      labelFr: 'RTP moyen',
+      labelEn: 'Avg. RTP',
+      aVal: `${opA.rtp.toFixed(1)}%`,
+      bVal: `${opB.rtp.toFixed(1)}%`,
+      w: sections.rtp,
+      mono: true,
+    },
+    {
+      labelFr: 'Délai de retrait',
+      labelEn: 'Withdrawal time',
+      aVal: withdrawalA,
+      bVal: withdrawalB,
+      w: 'tie',
+    },
+    {
+      labelFr: 'Nombre de jeux',
+      labelEn: 'Game count',
+      aVal: catalogueA,
+      bVal: catalogueB,
+      w: 'tie',
+    },
+    {
+      labelFr: 'Paiement crypto',
+      labelEn: 'Crypto payment',
+      aVal: hasCrypto(opA) ? (isFr ? 'Oui' : 'Yes') : isFr ? 'Non' : 'No',
+      bVal: hasCrypto(opB) ? (isFr ? 'Oui' : 'Yes') : isFr ? 'Non' : 'No',
+      w: winner(hasCrypto(opA) ? 1 : 0, hasCrypto(opB) ? 1 : 0),
+    },
+    {
+      labelFr: 'Licence',
+      labelEn: 'Licence',
+      aVal: opA.licence,
+      bVal: opB.licence,
+      w: sections.licence,
+    },
+    {
+      labelFr: 'Support français',
+      labelEn: 'French support',
+      aVal: supportA,
+      bVal: supportB,
+      w: 'tie',
+    },
+  ]
+
+  const BASE_URL =
+    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
   const itemListSchema: WithContext<ItemList> = {
     '@context': 'https://schema.org',
@@ -240,7 +320,7 @@ export default async function VersusPage({
       '@type': 'ListItem',
       position: i + 1,
       name: op.name,
-      url: `https://le-meilleur-casino-en-ligne.fr/casinos/${op.slug}/`,
+      url: `${BASE_URL}/casinos/${op.slug}/`,
     })),
   }
 
@@ -250,6 +330,7 @@ export default async function VersusPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
+
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
@@ -262,156 +343,131 @@ export default async function VersusPage({
         locale={locale}
       />
 
-      {/* ── Hero 2-panel ────────────────────────────────────────── */}
-      <section className="pb-4 pt-10" data-page-type="versus" data-locale={locale}>
+      {/* ── VS HEAD — centered hero ──────────────────────────────── */}
+      <section className="pb-4 pt-10 text-center" data-page-type="versus" data-locale={locale}>
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr ? 'Comparatif 2026' : 'Comparison 2026'}
+          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-[''] after:h-px after:w-[22px] after:bg-gold after:content-['']">
+            {isFr ? 'Face-à-face' : 'Head-to-head'}
           </div>
-          <h1 className="mb-[10px] font-serif text-[clamp(28px,4vw,46px)] font-medium leading-tight tracking-[-0.02em] text-ink">
-            {opA.name} <span className="text-ink-3">vs</span> {opB.name}
+          <h1 className="mx-auto mb-4 max-w-[22ch] font-serif text-[clamp(30px,4.6vw,50px)] font-medium leading-[1.06] tracking-[-0.02em] text-ink">
+            {opA.name} <em className="italic not-italic text-green">vs</em> {opB.name}
+            {isFr ? ' : lequel choisir en 2026 ?' : ': which to choose in 2026?'}
           </h1>
-          <p className="mb-8 max-w-[60ch] text-[17px] text-ink-2">
+          <p className="mx-auto max-w-[60ch] text-[17px] leading-[1.6] text-ink-2">
             {isFr
-              ? `Comparaison détaillée sur 5 critères : bonus, RTP, paiements, licence et note globale.`
-              : `Detailed comparison across 5 criteria: bonus, RTP, payments, licence and overall rating.`}
+              ? `Deux casinos du marché français, testés côte à côte sur six critères décisifs. Verdict critère par critère.`
+              : `Two major online casinos, tested side by side across six decisive criteria. Our verdict by criterion.`}
           </p>
+        </div>
+      </section>
 
-          {/* Symmetric 2-panel + VS badge */}
-          <div className="relative grid grid-cols-2 items-start gap-[52px] sm:flex sm:flex-col sm:gap-4">
-            {/* VS badge — centered between panels, desktop only */}
-            <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 sm:hidden">
-              <div className="grid h-[48px] w-[48px] place-items-center rounded-full border-2 border-line bg-surface font-serif text-[18px] font-bold leading-none text-ink-3 shadow-2">
-                VS
-              </div>
-            </div>
-
+      {/* ── VS HERO PANELS ──────────────────────────────────────── */}
+      <section className="pb-2 pt-[34px]">
+        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+          <div className="grid grid-cols-[1fr_78px_1fr] items-stretch sm:grid-cols-1">
             {/* Panel A */}
             <div
               className={cn(
-                'flex flex-col gap-[14px] rounded-xl border bg-surface p-6 shadow-2',
+                'flex flex-col items-center gap-[14px] border p-7 text-center shadow-2',
+                'rounded-l-xl sm:rounded-b-none sm:rounded-t-xl',
+                'sm:border-b-0',
                 overallWinner.slug === opA.slug
-                  ? 'border-[color-mix(in_srgb,var(--gold)_40%,var(--line))] shadow-3'
-                  : 'border-line'
+                  ? 'border-[color-mix(in_srgb,var(--green)_42%,var(--line))] bg-green-50'
+                  : 'border-line bg-surface'
               )}
             >
-              {overallWinner.slug === opA.slug && (
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-gold-ink">
-                  ★ {isFr ? 'Recommandé' : 'Recommended'}
+              {overallWinner.slug === opA.slug ? (
+                <p className="inline-flex items-center gap-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    className="h-[13px] w-[13px]"
+                    aria-hidden
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  {isFr ? 'Notre préféré' : 'Our pick'}
+                </p>
+              ) : (
+                <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-ink-3">
+                  {isFr ? 'Le challenger' : 'The challenger'}
                 </p>
               )}
-              <div className="flex items-start justify-between gap-3">
-                <LogoOrPlaceholder
-                  logoUrl={opA.logoUrl}
-                  name={opA.shortName ?? opA.name}
-                  width={110}
-                  height={40}
-                />
-                <ScorePill score={opA.rating} gold={overallWinner.slug === opA.slug} />
-              </div>
-              <div>
-                <p className="font-serif text-[21px] font-semibold text-ink">{opA.name}</p>
-                <p className="mt-[3px] text-[13px] text-ink-3">{opA.tagline}</p>
-              </div>
-              <p className="text-[15px] text-ink-2">
-                <span className="font-serif text-[19px] font-semibold text-green">
+              <LogoOrPlaceholder
+                logoUrl={opA.logoUrl}
+                name={opA.shortName ?? opA.name}
+                width={150}
+                height={56}
+              />
+              <p className="font-serif text-[24px] font-semibold leading-tight text-ink">
+                {opA.name}
+              </p>
+              <ScorePill score={opA.rating} gold={overallWinner.slug === opA.slug} />
+              <p className="text-[13.5px] text-ink-2">
+                <span className="font-serif text-[18px] font-semibold text-ink">
                   {opA.bonusAmount}
                 </span>
                 {opA.bonusSuffix && ` ${opA.bonusSuffix}`}
-                <span className="ml-2 text-[12px] text-ink-3">{opA.bonusConditions}</span>
+                {` · wager ${wagerA}×`}
               </p>
-              <div className="mt-auto flex gap-2">
-                <CTAButton
-                  href={opA.affiliateUrl}
-                  variant="primary"
-                  size="sm"
-                  arrow
-                  block
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  data-event="affiliate_click"
-                  data-operator={opA.slug}
-                  data-placement="versus_hero_a"
-                  data-bonus={opA.bonusSlug}
-                  data-page-type="versus"
-                  data-locale={locale}
-                >
-                  {isFr ? 'Obtenir le bonus' : 'Get bonus'}
-                </CTAButton>
-                <CTAButton
-                  href={`/casinos/${opA.slug}/`}
-                  variant="secondary"
-                  size="sm"
-                  data-event="review_click"
-                  data-operator={opA.slug}
-                >
-                  {isFr ? 'Avis' : 'Review'}
-                </CTAButton>
+            </div>
+
+            {/* VS center badge */}
+            <div className="z-10 grid place-items-center sm:h-0">
+              <div className="grid h-16 w-16 place-items-center rounded-full border-4 border-[var(--bg)] bg-ink font-serif text-[23px] font-semibold italic text-bg shadow-3 sm:-my-8">
+                VS
               </div>
             </div>
 
             {/* Panel B */}
             <div
               className={cn(
-                'flex flex-col gap-[14px] rounded-xl border bg-surface p-6 shadow-2',
+                'flex flex-col items-center gap-[14px] border p-7 text-center shadow-2',
+                'rounded-r-xl sm:rounded-b-xl sm:rounded-t-none',
+                'sm:border-t-0',
                 overallWinner.slug === opB.slug
-                  ? 'border-[color-mix(in_srgb,var(--gold)_40%,var(--line))] shadow-3'
-                  : 'border-line'
+                  ? 'border-[color-mix(in_srgb,var(--green)_42%,var(--line))] bg-green-50'
+                  : 'border-line bg-surface'
               )}
             >
-              {overallWinner.slug === opB.slug && (
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-gold-ink">
-                  ★ {isFr ? 'Recommandé' : 'Recommended'}
+              {overallWinner.slug === opB.slug ? (
+                <p className="inline-flex items-center gap-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    className="h-[13px] w-[13px]"
+                    aria-hidden
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  {isFr ? 'Notre préféré' : 'Our pick'}
+                </p>
+              ) : (
+                <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-ink-3">
+                  {isFr ? 'Le challenger' : 'The challenger'}
                 </p>
               )}
-              <div className="flex items-start justify-between gap-3">
-                <LogoOrPlaceholder
-                  logoUrl={opB.logoUrl}
-                  name={opB.shortName ?? opB.name}
-                  width={110}
-                  height={40}
-                />
-                <ScorePill score={opB.rating} gold={overallWinner.slug === opB.slug} />
-              </div>
-              <div>
-                <p className="font-serif text-[21px] font-semibold text-ink">{opB.name}</p>
-                <p className="mt-[3px] text-[13px] text-ink-3">{opB.tagline}</p>
-              </div>
-              <p className="text-[15px] text-ink-2">
-                <span className="font-serif text-[19px] font-semibold text-green">
+              <LogoOrPlaceholder
+                logoUrl={opB.logoUrl}
+                name={opB.shortName ?? opB.name}
+                width={150}
+                height={56}
+              />
+              <p className="font-serif text-[24px] font-semibold leading-tight text-ink">
+                {opB.name}
+              </p>
+              <ScorePill score={opB.rating} gold={overallWinner.slug === opB.slug} />
+              <p className="text-[13.5px] text-ink-2">
+                <span className="font-serif text-[18px] font-semibold text-ink">
                   {opB.bonusAmount}
                 </span>
                 {opB.bonusSuffix && ` ${opB.bonusSuffix}`}
-                <span className="ml-2 text-[12px] text-ink-3">{opB.bonusConditions}</span>
+                {` · wager ${wagerB}×`}
               </p>
-              <div className="mt-auto flex gap-2">
-                <CTAButton
-                  href={opB.affiliateUrl}
-                  variant="primary"
-                  size="sm"
-                  arrow
-                  block
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  data-event="affiliate_click"
-                  data-operator={opB.slug}
-                  data-placement="versus_hero_b"
-                  data-bonus={opB.bonusSlug}
-                  data-page-type="versus"
-                  data-locale={locale}
-                >
-                  {isFr ? 'Obtenir le bonus' : 'Get bonus'}
-                </CTAButton>
-                <CTAButton
-                  href={`/casinos/${opB.slug}/`}
-                  variant="secondary"
-                  size="sm"
-                  data-event="review_click"
-                  data-operator={opB.slug}
-                >
-                  {isFr ? 'Avis' : 'Review'}
-                </CTAButton>
-              </div>
             </div>
           </div>
         </div>
@@ -419,403 +475,289 @@ export default async function VersusPage({
 
       <AffiliateDisclosure variant="strip" locale={locale} />
 
-      {/* ── Face-à-face table ──────────────────────────────────── */}
+      {/* ── SECTION 01 — Face-à-face table ──────────────────────── */}
       <section className="py-12">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr ? 'Tableau face-à-face' : 'Head-to-head table'}
+          <h2 className="mb-5 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
+            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">01</span>
+            {isFr ? "Le face-à-face en un coup d'oeil" : 'At a glance'}
           </h2>
-          <div className="overflow-x-auto rounded-lg border border-line shadow-1">
-            <table className="w-full border-collapse bg-surface">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse overflow-hidden rounded-lg border border-line bg-surface shadow-1">
               <thead>
                 <tr className="border-b border-line">
-                  <th className="sticky top-[var(--header-h)] z-[5] bg-surface-2 px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
-                    {isFr ? 'Critère' : 'Criterion'}
-                  </th>
-                  <th className="sticky top-[var(--header-h)] z-[5] bg-surface-2 px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
+                  <th className="w-[37%] bg-surface-2 px-[18px] py-[13px] text-center font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
                     {opA.name}
                   </th>
-                  <th className="sticky top-[var(--header-h)] z-[5] bg-surface-2 px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
+                  <th className="w-[26%] bg-surface-2 px-[18px] py-[13px] text-center font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
+                    {isFr ? 'Critère' : 'Criterion'}
+                  </th>
+                  <th className="w-[37%] bg-surface-2 px-[18px] py-[13px] text-center font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
                     {opB.name}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-line">
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'Note globale' : 'Overall rating'}
-                  </td>
-                  <td className={cn('px-5 py-[13px]', sections.note === 'a' && 'bg-green-50')}>
-                    <ScorePill score={opA.rating} gold={sections.note === 'a'} />
-                  </td>
-                  <td className={cn('px-5 py-[13px]', sections.note === 'b' && 'bg-green-50')}>
-                    <ScorePill score={opB.rating} gold={sections.note === 'b'} />
-                  </td>
-                </tr>
-                <tr className="border-b border-line">
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'Bonus de bienvenue' : 'Welcome bonus'}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[14px] text-ink-2',
-                      sections.bonus === 'a' && 'bg-green-50 font-semibold text-ink'
-                    )}
-                  >
-                    {opA.bonusAmount}
-                    {opA.bonusSuffix && ` ${opA.bonusSuffix}`}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[14px] text-ink-2',
-                      sections.bonus === 'b' && 'bg-green-50 font-semibold text-ink'
-                    )}
-                  >
-                    {opB.bonusAmount}
-                    {opB.bonusSuffix && ` ${opB.bonusSuffix}`}
-                  </td>
-                </tr>
-                <tr className="border-b border-line">
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'Wager' : 'Wagering'}
-                  </td>
-                  <td className="px-5 py-[13px] font-mono text-[13px] text-ink-2">
-                    {extractWager(opA.bonusConditions)}×
-                  </td>
-                  <td className="px-5 py-[13px] font-mono text-[13px] text-ink-2">
-                    {extractWager(opB.bonusConditions)}×
-                  </td>
-                </tr>
-                <tr className="border-b border-line">
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'RTP moyen' : 'Avg. RTP'}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] font-mono text-[13.5px]',
-                      sections.rtp === 'a' ? 'bg-green-50 font-semibold text-green-ink' : 'text-ink'
-                    )}
-                  >
-                    {opA.rtp.toFixed(1)}%
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] font-mono text-[13.5px]',
-                      sections.rtp === 'b' ? 'bg-green-50 font-semibold text-green-ink' : 'text-ink'
-                    )}
-                  >
-                    {opB.rtp.toFixed(1)}%
-                  </td>
-                </tr>
-                <tr className="border-b border-line">
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'Paiements' : 'Payments'}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[13px] text-ink-2',
-                      sections.paiements === 'a' && 'bg-green-50'
-                    )}
-                  >
-                    {opA.paymentMethods.join(' · ')}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[13px] text-ink-2',
-                      sections.paiements === 'b' && 'bg-green-50'
-                    )}
-                  >
-                    {opB.paymentMethods.join(' · ')}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-                    {isFr ? 'Licence' : 'Licence'}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[13px] text-ink-2',
-                      sections.licence === 'a' && 'bg-green-50'
-                    )}
-                  >
-                    {opA.licence}
-                  </td>
-                  <td
-                    className={cn(
-                      'px-5 py-[13px] text-[13px] text-ink-2',
-                      sections.licence === 'b' && 'bg-green-50'
-                    )}
-                  >
-                    {opB.licence}
-                  </td>
-                </tr>
+                {tableRows.map((row, i) => (
+                  <tr key={i} className="border-b border-line last:border-b-0">
+                    <td
+                      className={cn(
+                        'px-[18px] py-[14px] text-center align-middle text-[14.5px]',
+                        row.w === 'a' && 'bg-green-50 font-bold text-ink',
+                        row.mono && 'font-mono'
+                      )}
+                    >
+                      {row.aVal}
+                      {row.w === 'a' && (
+                        <span className="ml-[7px] font-bold text-green" aria-hidden>
+                          ✓
+                        </span>
+                      )}
+                    </td>
+                    <td className="bg-surface-2 px-[18px] py-[14px] text-center align-middle font-mono text-[11.5px] uppercase tracking-[0.04em] text-ink-3">
+                      {isFr ? row.labelFr : row.labelEn}
+                    </td>
+                    <td
+                      className={cn(
+                        'px-[18px] py-[14px] text-center align-middle text-[14.5px]',
+                        row.w === 'b' && 'bg-green-50 font-bold text-ink',
+                        row.mono && 'font-mono'
+                      )}
+                    >
+                      {row.bVal}
+                      {row.w === 'b' && (
+                        <span className="ml-[7px] font-bold text-green" aria-hidden>
+                          ✓
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      {/* ── Thematic split-view sections ──────────────────────── */}
+      {/* ── SECTION 02 — Détail par critère ─────────────────────── */}
       <section className="bg-bg-sunken py-12">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          {/* Legend */}
-          <div className="mb-5 flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-              <span className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,var(--green)_35%,var(--line))] bg-green-50 px-2 py-[2px] font-mono text-[10px] font-semibold text-green-ink">
-                ↑ A
-              </span>
-              {opA.name}
-            </div>
-            <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-              <span className="inline-flex items-center rounded-full border border-[#C4B5FD] bg-[#F5F3FF] px-2 py-[2px] font-mono text-[10px] font-semibold text-[#5B21B6]">
-                ↑ B
-              </span>
-              {opB.name}
-            </div>
-          </div>
-
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr ? 'Analyse par critère' : 'Criteria breakdown'}
+          <h2 className="mb-2 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
+            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">02</span>
+            {isFr ? 'Le détail, critère par critère' : 'Criteria breakdown'}
           </h2>
 
-          <div className="flex flex-col gap-3">
-            <ThematicSection
-              title={isFr ? 'Bonus & Conditions' : 'Bonus & Wagering'}
-              result={sections.bonus}
-              aName={opA.name}
-              bName={opB.name}
-              isFr={isFr}
-              aContent={
-                <div>
-                  <div className="font-serif text-[18px] font-semibold text-green">
-                    {opA.bonusAmount}
-                  </div>
-                  {opA.bonusSuffix && (
-                    <div className="text-[13px] text-ink-2">{opA.bonusSuffix}</div>
-                  )}
-                  <div className="mt-[4px] text-[12px] text-ink-3">{opA.bonusConditions}</div>
-                </div>
-              }
-              bContent={
-                <div>
-                  <div className="font-serif text-[18px] font-semibold text-green">
-                    {opB.bonusAmount}
-                  </div>
-                  {opB.bonusSuffix && (
-                    <div className="text-[13px] text-ink-2">{opB.bonusSuffix}</div>
-                  )}
-                  <div className="mt-[4px] text-[12px] text-ink-3">{opB.bonusConditions}</div>
-                </div>
-              }
-            />
+          <VsSection
+            title={isFr ? 'Bonus de bienvenue' : 'Welcome bonus'}
+            w={sections.bonus}
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={sections.bonus === 'a'}
+                text={stripMd(rdA.sections.bonus.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={sections.bonus === 'b'}
+                text={stripMd(rdB.sections.bonus.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
 
-            <ThematicSection
-              title={isFr ? 'Ludothèque & RTP' : 'Game Library & RTP'}
-              result={sections.rtp}
-              aName={opA.name}
-              bName={opB.name}
-              isFr={isFr}
-              aContent={
-                <div>
-                  <div className="font-mono text-[18px] font-semibold text-ink">
-                    {opA.rtp.toFixed(1)}%
-                  </div>
-                  <div className="mt-[2px] text-[12px] text-ink-3">
-                    {isFr ? 'RTP moyen' : 'Avg. RTP'}
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {opA.features.slice(0, 2).map((f) => (
-                      <span
-                        key={f}
-                        className="rounded-[4px] border border-line bg-bg-sunken px-[7px] py-[2px] text-[11px] text-ink-2"
-                      >
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              }
-              bContent={
-                <div>
-                  <div className="font-mono text-[18px] font-semibold text-ink">
-                    {opB.rtp.toFixed(1)}%
-                  </div>
-                  <div className="mt-[2px] text-[12px] text-ink-3">
-                    {isFr ? 'RTP moyen' : 'Avg. RTP'}
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {opB.features.slice(0, 2).map((f) => (
-                      <span
-                        key={f}
-                        className="rounded-[4px] border border-line bg-bg-sunken px-[7px] py-[2px] text-[11px] text-ink-2"
-                      >
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              }
-            />
+          <VsSection
+            title={isFr ? 'Ludothèque' : 'Game library'}
+            w={sections.rtp}
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={sections.rtp === 'a'}
+                text={stripMd(rdA.sections.jeux.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={sections.rtp === 'b'}
+                text={stripMd(rdB.sections.jeux.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
 
-            <ThematicSection
-              title={isFr ? 'Méthodes de paiement' : 'Payment methods'}
-              result={sections.paiements}
-              aName={opA.name}
-              bName={opB.name}
-              isFr={isFr}
-              aContent={
-                <div className="flex flex-wrap gap-[5px]">
-                  {opA.paymentMethods.map((pm) => (
-                    <span
-                      key={pm}
-                      className="grid min-w-[38px] place-items-center rounded-[4px] border border-line bg-bg-sunken px-1.5 py-[5px] font-mono text-[10px] font-semibold text-ink-3"
-                    >
-                      {pm}
-                    </span>
-                  ))}
-                </div>
-              }
-              bContent={
-                <div className="flex flex-wrap gap-[5px]">
-                  {opB.paymentMethods.map((pm) => (
-                    <span
-                      key={pm}
-                      className="grid min-w-[38px] place-items-center rounded-[4px] border border-line bg-bg-sunken px-1.5 py-[5px] font-mono text-[10px] font-semibold text-ink-3"
-                    >
-                      {pm}
-                    </span>
-                  ))}
-                </div>
-              }
-            />
+          <VsSection
+            title={isFr ? 'Paiements & retraits' : 'Payments & withdrawals'}
+            w={sections.paiements}
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={sections.paiements === 'a'}
+                text={stripMd(rdA.sections.paiements.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={sections.paiements === 'b'}
+                text={stripMd(rdB.sections.paiements.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
 
-            <ThematicSection
-              title={isFr ? 'Licence & Sécurité' : 'Licence & Security'}
-              result={sections.licence}
-              aName={opA.name}
-              bName={opB.name}
-              isFr={isFr}
-              aContent={
-                <div>
-                  <div className="font-mono text-[13px] font-semibold text-ink">{opA.licence}</div>
-                  <div className="mt-[4px] text-[12px] text-ink-3">{licenceLabel(opA, isFr)}</div>
-                </div>
-              }
-              bContent={
-                <div>
-                  <div className="font-mono text-[13px] font-semibold text-ink">{opB.licence}</div>
-                  <div className="mt-[4px] text-[12px] text-ink-3">{licenceLabel(opB, isFr)}</div>
-                </div>
-              }
-            />
-          </div>
+          <VsSection
+            title={isFr ? 'Support client' : 'Customer support'}
+            w="tie"
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={false}
+                text={stripMd(rdA.sections.support.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={false}
+                text={stripMd(rdB.sections.support.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
+
+          <VsSection
+            title={isFr ? 'Expérience mobile' : 'Mobile experience'}
+            w="tie"
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={false}
+                text={stripMd(rdA.sections.mobile.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={false}
+                text={stripMd(rdB.sections.mobile.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
+
+          <VsSection
+            title={isFr ? 'Sécurité & licence' : 'Security & licence'}
+            w={sections.licence}
+            aName={opA.name}
+            bName={opB.name}
+            isFr={isFr}
+            aContent={
+              <SplitColContent
+                op={opA}
+                isWinner={sections.licence === 'a'}
+                text={stripMd(rdA.sections.securite.prose[0] ?? opA.tagline)}
+              />
+            }
+            bContent={
+              <SplitColContent
+                op={opB}
+                isWinner={sections.licence === 'b'}
+                text={stripMd(rdB.sections.securite.prose[0] ?? opB.tagline)}
+              />
+            }
+          />
         </div>
       </section>
 
-      {/* ── Points forts / faibles ────────────────────────────── */}
+      {/* ── SECTION 03 — Verdict ────────────────────────────────── */}
       <section className="py-12">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr ? 'Points forts et faibles' : 'Strengths and weaknesses'}
+          <h2 className="mb-2 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
+            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">03</span>
+            {isFr ? 'Verdict : lequel choisir ?' : 'Verdict: which to choose?'}
           </h2>
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-1">
-            <div>
-              <h3 className="mb-3 font-serif text-[19px] font-semibold text-ink">{opA.name}</h3>
-              <ProsConsBox pros={opA.pros} cons={opA.cons} locale={locale} />
-            </div>
-            <div>
-              <h3 className="mb-3 font-serif text-[19px] font-semibold text-ink">{opB.name}</h3>
-              <ProsConsBox pros={opB.pros} cons={opB.cons} locale={locale} />
-            </div>
-          </div>
-        </div>
-      </section>
+          <p className="mb-6 max-w-[62ch] text-[15.5px] leading-[1.6] text-ink-2">
+            {isFr
+              ? `${overallWinner.name} l'emporte sur la majorité des critères. Mais chaque casino a ses atouts selon votre profil.`
+              : `${overallWinner.name} wins on most criteria. But each casino has strengths depending on your profile.`}
+          </p>
 
-      {/* ── Verdict : Choisissez si… ──────────────────────────── */}
-      <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr ? 'Notre verdict' : 'Our verdict'}
-          </h2>
-
-          {/* Overall winner banner */}
-          <div className="mb-6 rounded-lg border border-l-4 border-line border-l-green bg-surface p-[22px_24px] shadow-1">
-            <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.1em] text-green">
-              {isFr ? 'Gagnant global' : 'Overall winner'}
-            </p>
-            <p className="m-0 font-serif text-[17px] leading-[1.6] text-ink">
-              {overallWinner.slug === opA.slug
-                ? isFr
-                  ? `${opA.name} (${opA.rating}/10) l'emporte sur ${opB.name} (${opB.rating}/10). ${opA.verdict}`
-                  : `${opA.name} (${opA.rating}/10) beats ${opB.name} (${opB.rating}/10). ${opA.verdict}`
-                : isFr
-                  ? `${opB.name} (${opB.rating}/10) l'emporte sur ${opA.name} (${opA.rating}/10). ${opB.verdict}`
-                  : `${opB.name} (${opB.rating}/10) beats ${opA.name} (${opA.rating}/10). ${opB.verdict}`}
-            </p>
-          </div>
-
-          {/* Choose if… side by side */}
-          <div className="flex gap-5 sm:flex-col">
-            <ChooseIf
-              opName={opA.name}
-              conditions={opA.pros.slice(0, 3)}
-              variant="green"
-              isFr={isFr}
-            />
-            <ChooseIf
-              opName={opB.name}
-              conditions={opB.pros.slice(0, 3)}
-              variant="purple"
-              isFr={isFr}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Final CTAs côte à côte ───────────────────────────── */}
-      <section className="py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
-            {[opA, opB].map((op) => (
-              <div
-                key={op.id}
-                className="flex flex-col items-center gap-3 rounded-xl border border-green bg-green-50 p-[26px] text-center"
-              >
-                <LogoOrPlaceholder
-                  logoUrl={op.logoUrl}
-                  name={op.shortName ?? op.name}
-                  width={110}
-                  height={40}
-                />
-                <div>
-                  <p className="font-serif text-[21px] font-semibold text-ink">{op.name}</p>
-                  <p className="mt-[3px] text-[14px] text-ink-2">
-                    <span className="font-serif text-[18px] font-semibold text-green">
-                      {op.bonusAmount}
-                    </span>
-                    {op.bonusSuffix && ` ${op.bonusSuffix}`}
-                  </p>
-                  <p className="text-[11.5px] text-ink-3">{op.bonusConditions}</p>
-                </div>
-                <CTAButton
-                  href={op.affiliateUrl}
-                  variant="primary"
-                  arrow
-                  block
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  data-event="affiliate_click"
-                  data-operator={op.slug}
-                  data-placement="versus_verdict"
-                  data-bonus={op.bonusSlug}
-                  data-page-type="versus"
-                  data-locale={locale}
+          <div className="grid grid-cols-2 gap-[18px] sm:grid-cols-1">
+            {[opA, opB].map((op) => {
+              const isWinner = overallWinner.slug === op.slug
+              return (
+                <div
+                  key={op.id}
+                  className={cn(
+                    'rounded-lg border p-[26px] shadow-1',
+                    isWinner
+                      ? 'border-[color-mix(in_srgb,var(--green)_38%,var(--line))] shadow-2'
+                      : 'border-line'
+                  )}
                 >
-                  {isFr ? 'Obtenir le bonus' : 'Get bonus'}
-                </CTAButton>
-                <p className="text-[11px] text-ink-3">18+ · {op.bonusConditions}</p>
-              </div>
-            ))}
+                  <div className="mb-4 flex items-center gap-3">
+                    <LogoOrPlaceholder
+                      logoUrl={op.logoUrl}
+                      name={op.shortName ?? op.name}
+                      width={100}
+                      height={34}
+                    />
+                    <ScorePill score={op.rating} gold={isWinner} />
+                  </div>
+                  <h3 className="mb-3 font-serif text-[20px] font-semibold text-ink">
+                    {isFr ? `Choisissez ${op.name} si…` : `Choose ${op.name} if…`}
+                  </h3>
+                  <ul className="mb-5 flex flex-col gap-[10px] p-0" style={{ listStyle: 'none' }}>
+                    {op.pros.slice(0, 3).map((pro) => (
+                      <li
+                        key={pro}
+                        className="flex items-start gap-[10px] text-[14px] leading-[1.45] text-ink-2"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          className="mt-px h-4 w-4 shrink-0 text-green"
+                          aria-hidden
+                        >
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        {pro}
+                      </li>
+                    ))}
+                  </ul>
+                  <CTAButton
+                    href={op.affiliateUrl}
+                    variant={isWinner ? 'primary' : 'secondary'}
+                    block
+                    arrow
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    data-event="affiliate_click"
+                    data-operator={op.slug}
+                    data-placement="versus_verdict"
+                    data-bonus={op.bonusSlug}
+                    data-page-type="versus"
+                    data-locale={locale}
+                  >
+                    {isFr ? `Obtenir le bonus ${op.name}` : `Get ${op.name} bonus`}
+                  </CTAButton>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
