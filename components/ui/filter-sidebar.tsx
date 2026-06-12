@@ -90,7 +90,7 @@ function FilterGroupUI({
             >
               <input
                 type="checkbox"
-                className="absolute h-0 w-0 opacity-0"
+                className="peer absolute h-0 w-0 opacity-0"
                 checked={checked}
                 onChange={() => onToggle(group.key, opt.value)}
                 data-event="comparison_filter_use"
@@ -99,7 +99,7 @@ function FilterGroupUI({
               />
               <span
                 className={cn(
-                  'grid h-[19px] w-[19px] flex-none place-items-center rounded-[5px] border-[1.5px] border-solid transition-[border-color,background] duration-150',
+                  'grid h-[19px] w-[19px] flex-none place-items-center rounded-[5px] border-[1.5px] border-solid transition-[border-color,background] duration-150 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-green',
                   checked ? 'border-green bg-green' : 'border-line-2 bg-surface'
                 )}
               >
