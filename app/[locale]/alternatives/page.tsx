@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { LogoOrPlaceholder } from '@/components/ui/operator-card'
 import { ScorePill } from '@/components/ui/score-pill'
@@ -75,7 +76,7 @@ export default async function AlternativesHubPage({
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {sorted.map((op) => (
-              <a
+              <Link
                 key={op.id}
                 href={`/alternatives/${op.slug}/`}
                 className="flex items-center gap-4 rounded-xl border border-line bg-surface p-5 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
@@ -95,7 +96,7 @@ export default async function AlternativesHubPage({
                     {isFr ? 'Voir →' : 'View →'}
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { categories } from '@/config/games'
 import type { Locale } from '@/i18n/routing'
@@ -156,7 +157,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
               const href = isFr ? `/jeux/${cat.slug}/` : `/en/games/${cat.slug}/`
               const label = isFr ? cat.label : cat.labelEn
               return (
-                <a
+                <Link
                   key={cat.slug}
                   href={href}
                   className="flex flex-col gap-4 rounded-xl border border-line bg-surface p-6 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
@@ -180,7 +181,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
                       ? `Explorer ${label.toLowerCase()} →`
                       : `Explore ${label.toLowerCase()} →`}
                   </span>
-                </a>
+                </Link>
               )
             })}
           </div>

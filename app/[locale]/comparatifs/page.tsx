@@ -188,7 +188,7 @@ export default async function ComparatifsHubPage({
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {versusPairs.map(([a, b]) => (
-              <a
+              <Link
                 key={`${a.slug}-vs-${b.slug}`}
                 href={`/comparatifs/${versusSlug(a.slug, b.slug)}/`}
                 className="flex items-center gap-3 rounded-lg border border-line bg-surface p-4 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
@@ -204,7 +204,7 @@ export default async function ComparatifsHubPage({
                   <LogoOrPlaceholder logoUrl={b.logoUrl} name={b.name} width={80} height={30} />
                   <span className="truncate text-[12px] text-ink-2">{b.name}</span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -218,7 +218,7 @@ export default async function ComparatifsHubPage({
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
             {TOP_10.slice(0, 5).map((op) => (
-              <a
+              <Link
                 key={op.id}
                 href={`/alternatives/${op.slug}/`}
                 className="flex flex-col items-center gap-2 rounded-lg border border-line bg-surface p-4 text-center text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
@@ -230,7 +230,7 @@ export default async function ComparatifsHubPage({
                   {isFr ? 'Alternatives à' : 'Alternatives to'}
                 </p>
                 <p className="text-[13px] font-semibold text-ink">{op.name}</p>
-              </a>
+              </Link>
             ))}
           </div>
           <div className="mt-6 text-center">

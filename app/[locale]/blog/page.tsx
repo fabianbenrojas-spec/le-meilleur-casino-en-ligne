@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -115,7 +116,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
           <div className="flex flex-col divide-y divide-line">
             {articles.map((art) => (
               <article key={art.slug} className="py-8 first:pt-0 last:pb-0">
-                <a
+                <Link
                   href={`/blog/${art.slug}/`}
                   className="group block text-ink no-underline"
                   data-event="blog_click"
@@ -146,7 +147,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
                   <span className="mt-3 inline-block text-[14px] font-bold text-green">
                     {isFr ? 'Lire →' : 'Read →'}
                   </span>
-                </a>
+                </Link>
               </article>
             ))}
           </div>
