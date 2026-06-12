@@ -56,6 +56,8 @@ const TOC_ITEMS_FR = [
   { id: 'modifications', label: 'Modifications' },
 ]
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function ConfidentialitePage({
   params,
 }: {
@@ -64,8 +66,19 @@ export default async function ConfidentialitePage({
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: isFr ? 'Politique de confidentialité' : 'Privacy Policy',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/confidentialite/`,
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

@@ -23,9 +23,18 @@ export async function generateMetadata({
   }
 }
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function ContactPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   const isFr = locale === 'fr'
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: isFr ? 'Contact' : 'Contact us',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/contact/`,
+  }
 
   const topics = isFr
     ? [
@@ -45,6 +54,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Contact' }]}
         locale={locale}

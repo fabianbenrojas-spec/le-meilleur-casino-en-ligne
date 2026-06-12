@@ -54,6 +54,8 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   )
 }
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function MentionsLegalesPage({
   params,
 }: {
@@ -62,8 +64,19 @@ export default async function MentionsLegalesPage({
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: isFr ? 'Mentions légales' : 'Legal Notice',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/mentions-legales/`,
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

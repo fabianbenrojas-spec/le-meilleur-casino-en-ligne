@@ -57,12 +57,35 @@ const team = [
   },
 ]
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function AProposPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: isFr
+      ? 'À propos — le Wirecutter du casino en ligne'
+      : 'About us — the Wirecutter of online casinos',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/a-propos/`,
+    description: isFr
+      ? 'Qui sommes-nous, comment nous testons les casinos, notre modèle économique et nos engagements éditoriaux.'
+      : 'Who we are, how we test casinos, our business model and editorial commitments.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'le-meilleur-casino-en-ligne.fr',
+      url: BASE_URL,
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

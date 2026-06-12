@@ -238,6 +238,8 @@ const resources_EN: ResourceItem[] = [
 
 // ── Page ───────────────────────────────────────────────────────────────────────
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function JeuResponsablePage({
   params,
 }: {
@@ -250,8 +252,20 @@ export default async function JeuResponsablePage({
   const tools = isFr ? tools_FR : tools_EN
   const resources = isFr ? resources_FR : resources_EN
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: isFr ? 'Jeu responsable' : 'Responsible Gambling',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/jeu-responsable/`,
+    about: { '@type': 'Thing', name: isFr ? 'Jeu responsable' : 'Responsible gambling' },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },

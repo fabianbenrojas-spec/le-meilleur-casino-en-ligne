@@ -159,6 +159,8 @@ function Section({
   )
 }
 
+const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
+
 export default async function PolitiqueCookiesPage({
   params,
 }: {
@@ -167,12 +169,23 @@ export default async function PolitiqueCookiesPage({
   const { locale } = await params
   const isFr = locale === 'fr'
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: isFr ? 'Politique de cookies' : 'Cookie Policy',
+    url: `${BASE_URL}${isFr ? '' : '/en'}/politique-cookies/`,
+  }
+
   const essentials = COOKIES.filter((c) => c.category === 'essential')
   const analytics = COOKIES.filter((c) => c.category === 'analytics')
   const marketing = COOKIES.filter((c) => c.category === 'marketing')
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
