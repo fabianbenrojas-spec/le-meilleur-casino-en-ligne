@@ -30,13 +30,6 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
         { label: isFr ? 'Nouveaux Casinos' : 'New Casinos', href: l('/casinos/nouveaux/') },
         { label: isFr ? 'Casinos Live' : 'Live Casinos', href: l('/casinos/live/') },
         { label: isFr ? 'Casinos Fiables' : 'Trusted Casinos', href: l('/casinos/fiables/') },
-        { label: isFr ? 'Casino Mobile' : 'Mobile Casino', href: l('/casinos/mobile/') },
-        { label: isFr ? 'Casino eSports' : 'Esports Casino', href: l('/casinos/esports/') },
-        { label: isFr ? 'Casino PayPal' : 'PayPal Casino', href: l('/casinos/avec-paypal/') },
-        {
-          label: isFr ? 'Bonus Sans Dépôt' : 'No Deposit Bonus',
-          href: l('/casinos/bonus-sans-depot/'),
-        },
       ],
     },
     {
@@ -46,17 +39,10 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
           label: isFr ? 'Comparatif Top 10' : 'Top 10 Comparison',
           href: l('/comparatifs/top-10-casinos-en-ligne/'),
         },
-        { label: isFr ? 'Meilleur Bonus' : 'Best Bonus', href: l('/comparatifs/meilleur-bonus/') },
-        {
-          label: isFr ? 'Retraits Rapides' : 'Fast Withdrawals',
-          href: l('/comparatifs/retraits-rapides/'),
-        },
-        { label: isFr ? 'Live Casino' : 'Live Casino', href: l('/comparatifs/live-casino/') },
-        { label: isFr ? 'Casino Crypto' : 'Crypto Casino', href: l('/comparatifs/crypto/') },
-        { label: isFr ? 'Cashback Casino' : 'Cashback Casino', href: l('/comparatifs/cashback/') },
+        { label: isFr ? 'Bonus Casino' : 'Casino Bonuses', href: l('/bonus/') },
         { label: isFr ? 'Casino vs Casino' : 'Casino vs Casino', href: l('/comparatifs/') },
         { label: isFr ? 'Alternatives' : 'Alternatives', href: l('/alternatives/') },
-        { label: isFr ? 'Bonus Casino' : 'Casino Bonuses', href: l('/bonus/') },
+        { label: isFr ? 'Cashback Casino' : 'Cashback Casino', href: l('/comparatifs/cashback/') },
       ],
     },
     {
@@ -139,7 +125,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
         {/* Bottom bar */}
         <div className="mt-11 border-t border-line pt-[22px]">
           {/* Affiliate disclosure — full width */}
-          <AffiliateDisclosure variant="footer" className="mb-[18px]" locale={locale} />
+          <AffiliateDisclosure variant="footer" className="mb-[18px]" />
 
           {/* Legal */}
           <div className="flex flex-wrap items-center gap-4 text-[12.5px] text-ink-3">

@@ -23,7 +23,7 @@ export async function generateMetadata({
     description: isFr
       ? "Comparez les meilleurs bonus de bienvenue : montant, wager, délai, tours gratuits. Tous vérifiés et testés à l'argent réel. 18+."
       : 'Compare the best welcome bonuses: amount, wagering, deadline, free spins. All verified and tested with real money. 18+.',
-    alternates: { languages: buildHreflang('/bonus/') },
+    alternates: { languages: buildHreflang('/bonus/', '/bonuses/') },
   }
 }
 
@@ -36,32 +36,13 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
   // Also show best value (balance of amount + low wager)
   const byRating = [...operators].sort((a, b) => b.rating - a.rating).slice(0, 3)
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr ? 'Meilleurs bonus casino en ligne 2026' : 'Best online casino bonuses 2026',
-    itemListElement: byBonus.slice(0, 10).map((op, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: op.name,
-      url: `${BASE_URL}${isFr ? '' : '/en'}/casinos/${op.slug}/`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Bonus Casino' : 'Casino Bonuses' },
         ]}
-        locale={locale}
       />
 
       <section className="pb-2 pt-10" data-page-type="bonus_hub" data-locale={locale}>
@@ -88,7 +69,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
         </div>
       </section>
 
-      <AffiliateDisclosure variant="strip" locale={locale} />
+      <AffiliateDisclosure variant="strip" />
 
       {/* Best value picks */}
       <section className="py-10">
@@ -109,7 +90,6 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
                 key={op.id}
                 operator={op}
                 isTop={i === 0}
-                ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                 ga4={{ 'data-page-type': 'bonus_hub', 'data-locale': locale }}
               />
             ))}
@@ -134,7 +114,6 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
                 key={op.id}
                 operator={op}
                 isTop={false}
-                ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                 ga4={{ 'data-page-type': 'bonus_hub', 'data-locale': locale }}
               />
             ))}

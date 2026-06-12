@@ -62,8 +62,6 @@ function FilterGroupUI({
             step={group.rangeStep ?? 0.1}
             value={current}
             onChange={(e) => onRangeChange?.(group.key, e.target.value)}
-            aria-label={group.label}
-            aria-valuetext={`${current}${group.rangeSuffix ?? ''}`}
             className="h-1 flex-1 accent-[var(--green)]"
             data-event="comparison_filter_use"
             data-filter-group={group.key}
@@ -92,7 +90,7 @@ function FilterGroupUI({
             >
               <input
                 type="checkbox"
-                className="peer absolute h-0 w-0 opacity-0"
+                className="absolute h-0 w-0 opacity-0"
                 checked={checked}
                 onChange={() => onToggle(group.key, opt.value)}
                 data-event="comparison_filter_use"
@@ -101,7 +99,7 @@ function FilterGroupUI({
               />
               <span
                 className={cn(
-                  'grid h-[19px] w-[19px] flex-none place-items-center rounded-[5px] border-[1.5px] border-solid transition-[border-color,background] duration-150 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-green',
+                  'grid h-[19px] w-[19px] flex-none place-items-center rounded-[5px] border-[1.5px] border-solid transition-[border-color,background] duration-150',
                   checked ? 'border-green bg-green' : 'border-line-2 bg-surface'
                 )}
               >
@@ -145,9 +143,8 @@ export function FilterSidebar({
   active,
   onChange,
   className,
-  locale = 'fr',
+  locale: _locale,
 }: FilterSidebarProps) {
-  const isFr = locale === 'fr'
   const hasActive = Object.values(active).some((v) => v.length > 0)
 
   const toggle = useCallback(
@@ -194,9 +191,7 @@ export function FilterSidebar({
                 type="button"
                 onClick={() => toggle(chip.groupKey, chip.value)}
                 className="grid h-4 w-4 cursor-pointer place-items-center rounded-full border-0 bg-transparent text-green-ink hover:bg-[color-mix(in_srgb,var(--green)_18%,transparent)]"
-                aria-label={
-                  isFr ? `Supprimer le filtre ${chip.label}` : `Remove filter ${chip.label}`
-                }
+                aria-label={`Supprimer le filtre ${chip.label}`}
               >
                 <X size={12} aria-hidden />
               </button>
@@ -210,7 +205,7 @@ export function FilterSidebar({
         <div className="flex items-center justify-between border-b border-line px-[18px] py-4">
           <h2 className="m-0 flex items-center gap-2 text-[15px] font-bold text-ink">
             <Filter size={16} className="text-green" aria-hidden />
-            {isFr ? 'Filtres' : 'Filters'}
+            Filtres
           </h2>
           {hasActive && (
             <button
@@ -218,7 +213,7 @@ export function FilterSidebar({
               onClick={reset}
               className="cursor-pointer rounded-[6px] border-0 bg-transparent px-[6px] py-1 text-[12.5px] font-semibold text-green hover:bg-green-50"
             >
-              {isFr ? 'Réinitialiser' : 'Reset'}
+              Réinitialiser
             </button>
           )}
         </div>
@@ -248,9 +243,8 @@ export function FilterBottomSheet({
   groups,
   active,
   onChange,
-  locale = 'fr',
+  locale: _locale,
 }: FilterBottomSheetProps) {
-  const isFr = locale === 'fr'
   const [sheetOpen, setSheetOpen] = useState(false)
   const [draft, setDraft] = useState<ActiveFilters>(active)
 
@@ -298,7 +292,7 @@ export function FilterBottomSheet({
           className="font-inherit inline-flex min-h-[48px] w-full cursor-pointer items-center justify-center gap-[9px] rounded border-[1.5px] border-solid border-line-2 bg-surface text-[15px] font-bold text-ink"
         >
           <SlidersHorizontal size={17} aria-hidden />
-          {isFr ? 'Filtres' : 'Filters'}
+          Filtres
           {activeCount > 0 && (
             <span className="grid min-h-[19px] min-w-[19px] place-items-center rounded-full bg-green px-[5px] font-mono text-[11px] text-white">
               {activeCount}
@@ -318,14 +312,12 @@ export function FilterBottomSheet({
             style={{ animation: 'sheetUp .28s ease' }}
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-[18px]">
-              <h2 className="m-0 font-serif text-[20px] font-semibold text-ink">
-                {isFr ? 'Filtres' : 'Filters'}
-              </h2>
+              <h2 className="m-0 font-serif text-[20px] font-semibold text-ink">Filtres</h2>
               <button
                 type="button"
                 onClick={() => setSheetOpen(false)}
                 className="grid h-[38px] w-[38px] cursor-pointer place-items-center rounded-[9px] border border-line-2 bg-surface"
-                aria-label={isFr ? 'Fermer' : 'Close'}
+                aria-label="Fermer"
               >
                 <X size={18} aria-hidden />
               </button>
@@ -345,10 +337,10 @@ export function FilterBottomSheet({
 
             <div className="flex gap-3 border-t border-line p-[14px] pb-[calc(14px+env(safe-area-inset-bottom))]">
               <CTAButton variant="secondary" size="sm" block onClick={reset}>
-                {isFr ? 'Réinitialiser' : 'Reset'}
+                Réinitialiser
               </CTAButton>
               <CTAButton variant="primary" size="sm" block onClick={apply}>
-                {isFr ? 'Voir les résultats' : 'View results'}
+                Voir les résultats
               </CTAButton>
             </div>
           </div>

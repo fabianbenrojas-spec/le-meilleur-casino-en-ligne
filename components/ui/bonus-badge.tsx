@@ -1,25 +1,22 @@
 import { cn } from '@/lib/utils'
 
 interface BonusBadgeProps {
-  label?: string
-  amount: string
-  amountSuffix?: string
-  conditions?: string
-  gold?: boolean
-  locale?: string
+  label?: string // e.g. 'Bonus de bienvenue'
+  amount: string // e.g. '200 €'
+  amountSuffix?: string // e.g. '+ 100 tours'
+  conditions?: string // e.g. 'Wager 35× · dépôt min. 20 €'
+  gold?: boolean // featured / top pick variant
   className?: string
 }
 
 export function BonusBadge({
-  label,
+  label = 'Bonus de bienvenue',
   amount,
   amountSuffix,
   conditions,
   gold = false,
-  locale = 'fr',
   className,
 }: BonusBadgeProps) {
-  const resolvedLabel = label ?? (locale === 'fr' ? 'Bonus de bienvenue' : 'Welcome bonus')
   return (
     <div
       className={cn(
@@ -36,7 +33,7 @@ export function BonusBadge({
           gold ? 'text-gold-ink' : 'text-green-ink'
         )}
       >
-        {resolvedLabel}
+        {label}
       </span>
       <span className="font-serif text-[24px] font-semibold leading-[1.05] tracking-[-0.01em] text-ink">
         <span className={gold ? 'text-gold-ink' : 'text-green'}>{amount}</span>

@@ -19,7 +19,6 @@ export interface OperatorCardData {
   bonusAmount: string
   bonusSuffix?: string
   bonusConditions?: string
-  tagline?: string
   features?: string[]
   pros?: string[]
   cons?: string[]
@@ -49,13 +48,11 @@ export function LogoOrPlaceholder({
   name,
   width,
   height,
-  priority = false,
 }: {
   logoUrl?: string
   name: string
   width: number
   height: number
-  priority?: boolean
 }) {
   if (logoUrl) {
     return (
@@ -64,7 +61,6 @@ export function LogoOrPlaceholder({
         alt={`Logo ${name}`}
         width={width}
         height={height}
-        priority={priority}
         className="object-contain"
       />
     )
@@ -76,23 +72,10 @@ export function LogoOrPlaceholder({
 interface PodiumCardProps {
   operator: OperatorCardData
   rank: 1 | 2 | 3
-  ctaBonus?: string
-  ctaReview?: string
-  locale?: string
   ga4?: GA4DataAttrs
 }
 
-export function PodiumCard({
-  operator,
-  rank,
-  ctaBonus,
-  ctaReview,
-  locale = 'fr',
-  ga4,
-}: PodiumCardProps) {
-  const isFr = locale === 'fr'
-  const resolvedCtaBonus = ctaBonus ?? (isFr ? 'Obtenir le bonus' : 'Get bonus')
-  const resolvedCtaReview = ctaReview ?? (isFr ? "Lire l'avis" : 'Read review')
+export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
   const rankLabel = ['#1', '#2', '#3'][rank - 1] as string
   const isFirst = rank === 1
 
@@ -150,7 +133,7 @@ export function PodiumCard({
         data-placement="hero_podium"
         {...ga4}
       >
-        {resolvedCtaBonus}
+        Obtenir le bonus
       </CTAButton>
 
       <CTAButton
@@ -161,7 +144,7 @@ export function PodiumCard({
         data-operator={operator.slug}
         data-placement="hero_podium"
       >
-        {resolvedCtaReview}
+        Lire l&apos;avis
       </CTAButton>
     </article>
   )
@@ -253,123 +236,6 @@ export function ListingCard({
         >
           {resolvedCtaBonus}
         </CTAButton>
-      </div>
-    </article>
-  )
-}
-
-// ── 4. FeaturedCard — "Coup de cœur" editorial pick ───────────────────────
-interface FeaturedCardProps {
-  operator: OperatorCardData
-  badgeLabel?: string
-  ctaBonus?: string
-  ctaReview?: string
-  locale?: string
-  ga4?: GA4DataAttrs
-}
-
-export function FeaturedCard({
-  operator,
-  badgeLabel,
-  ctaBonus,
-  ctaReview,
-  locale = 'fr',
-  ga4,
-}: FeaturedCardProps) {
-  const isFr = locale === 'fr'
-  const resolvedBadgeLabel = badgeLabel ?? (isFr ? 'Coup de cœur' : "Editor's pick")
-  const resolvedCtaBonus = ctaBonus ?? (isFr ? 'Obtenir le bonus' : 'Get bonus')
-  const resolvedCtaReview = ctaReview ?? (isFr ? "Lire l'avis" : 'Read review')
-  return (
-    <article
-      className={cn(
-        'relative overflow-hidden rounded-xl border-2 bg-surface shadow-3',
-        'border-[color-mix(in_srgb,var(--gold)_55%,var(--line))]'
-      )}
-    >
-      {/* "Coup de cœur" badge */}
-      <div className="absolute -left-px -top-px rounded-br-xl rounded-tl-[18px] bg-gold px-[14px] py-[6px] font-mono text-[11px] font-semibold tracking-[0.04em] text-white">
-        ★ {resolvedBadgeLabel}
-      </div>
-
-      <div className="grid grid-cols-1 gap-5 p-[28px_26px] pt-10 lg:grid-cols-[1fr_300px]">
-        {/* Left: info */}
-        <div className="flex flex-col gap-[14px]">
-          <div className="flex flex-wrap items-center gap-[14px]">
-            <LogoOrPlaceholder
-              logoUrl={operator.logoUrl}
-              name={operator.name}
-              width={130}
-              height={46}
-            />
-            <ScorePill score={operator.rating} gold />
-            <span className="rounded-[5px] border border-line bg-bg-sunken px-2 py-[2px] font-mono text-[11px] text-ink-3">
-              {operator.licence}
-            </span>
-          </div>
-
-          <div>
-            <p className="font-serif text-[23px] font-semibold tracking-[-0.01em] text-ink">
-              {operator.name}
-            </p>
-            {operator.verdict && (
-              <p className="mt-[5px] text-[14.5px] leading-[1.55] text-ink-2">{operator.verdict}</p>
-            )}
-          </div>
-
-          {operator.pros && operator.pros.length > 0 && (
-            <ul
-              className="flex flex-col gap-[7px]"
-              style={{ listStyle: 'none', padding: 0, margin: 0 }}
-            >
-              {operator.pros.slice(0, 3).map((pro) => (
-                <li
-                  key={pro}
-                  className="flex items-start gap-[9px] text-[13.5px] leading-[1.4] text-ink-2"
-                >
-                  <Check size={14} className="mt-[2px] flex-none text-green" aria-hidden />
-                  {pro}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Right: bonus + CTAs */}
-        <div className="flex flex-col gap-[13px] lg:border-l lg:border-line lg:pl-6">
-          <BonusBadge
-            amount={operator.bonusAmount}
-            amountSuffix={operator.bonusSuffix}
-            conditions={operator.bonusConditions}
-            gold
-            locale={locale}
-            className="w-full"
-          />
-          <CTAButton
-            href={operator.affiliateUrl}
-            variant="primary"
-            block
-            arrow
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            data-event="affiliate_click"
-            data-operator={operator.slug}
-            data-placement="featured_card"
-            {...ga4}
-          >
-            {resolvedCtaBonus}
-          </CTAButton>
-          <CTAButton
-            href={`/casinos/${operator.slug}/`}
-            variant="secondary"
-            block
-            data-event="review_click"
-            data-operator={operator.slug}
-            data-placement="featured_card"
-          >
-            {resolvedCtaReview}
-          </CTAButton>
-        </div>
       </div>
     </article>
   )
@@ -475,7 +341,6 @@ export function RankCard({ operator, rank, medal, ctaBonus, locale = 'fr', ga4 }
           amountSuffix={operator.bonusSuffix}
           conditions={operator.bonusConditions}
           gold={medal === 1}
-          locale={locale}
           className="min-w-[160px] flex-1"
         />
         <CTAButton

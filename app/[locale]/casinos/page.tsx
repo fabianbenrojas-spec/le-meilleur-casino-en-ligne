@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { CasinosListingClient } from '@/components/listing/casinos-listing-client'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -33,34 +32,13 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
   // Sort by rating descending for the initial SSR render (SEO: best first)
   const sorted = [...operators].sort((a, b) => b.rating - a.rating)
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr
-      ? 'Tous les casinos en ligne — classement 2026'
-      : 'All online casinos — ranking 2026',
-    itemListElement: sorted.slice(0, 10).map((op, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: op.name,
-      url: `${BASE_URL}${isFr ? '' : '/en'}/casinos/${op.slug}/`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Tous les casinos' : 'All Casinos' },
         ]}
-        locale={locale}
       />
 
       {/* Page head */}
@@ -88,15 +66,8 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
       {/* Client listing with filters — receives SSR-sorted operators */}
-      <ListingPageClient
-        operators={sorted}
-        configKey="all"
-        pageType="casinos_list"
-        locale={locale}
-      />
+      <CasinosListingClient operators={sorted} />
     </>
   )
 }

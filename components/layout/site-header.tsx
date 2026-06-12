@@ -38,7 +38,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
         <a
           href={locale === 'fr' ? '/' : '/en/'}
           className="flex shrink-0 items-center gap-[11px] font-bold leading-none tracking-[-0.01em] text-ink no-underline"
-          aria-label={isFr ? 'le meilleur casino — accueil' : 'le meilleur casino — home'}
+          aria-label="le meilleur casino — accueil"
         >
           <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-[8px] bg-green font-serif text-[18px] font-semibold text-white shadow-1">
             M
@@ -49,10 +49,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
         </a>
 
         {/* Main nav — desktop only */}
-        <nav
-          className="hidden items-center gap-1 md:flex"
-          aria-label={isFr ? 'Navigation principale' : 'Main navigation'}
-        >
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -75,7 +72,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
             <Search size={18} aria-hidden />
           </button>
 
-          <ThemeToggle locale={locale} />
+          <ThemeToggle />
 
           <div className="hidden md:block">
             <LocaleSwitcher currentLocale={locale} localeUrls={localeUrls} />
@@ -85,7 +82,6 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
             items={navItems}
             labelOpen={isFr ? 'Ouvrir le menu' : 'Open menu'}
             labelClose={isFr ? 'Fermer le menu' : 'Close menu'}
-            locale={locale}
           />
         </div>
       </div>

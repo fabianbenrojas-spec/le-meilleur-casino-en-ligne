@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-export const revalidate = 3600
 
-import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -76,32 +74,13 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
   const { locale } = await params
   const isFr = locale === 'fr'
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr ? 'Guides casino en ligne 2026' : 'Online casino guides 2026',
-    itemListElement: guides.map((g, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: isFr ? g.title : g.titleEn,
-      url: `${BASE_URL}${isFr ? '' : '/en'}/guides/${g.slug}/`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Guides' : 'Guides' },
         ]}
-        locale={locale}
       />
 
       <section className="pb-2 pt-10">
@@ -132,7 +111,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {guides.map((guide) => (
-              <Link
+              <a
                 key={guide.slug}
                 href={`/guides/${guide.slug}/`}
                 className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
@@ -156,7 +135,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
                 <span className="font-bold text-green">
                   {isFr ? 'Lire le guide →' : 'Read guide →'}
                 </span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

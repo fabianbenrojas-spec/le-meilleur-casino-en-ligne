@@ -9,13 +9,13 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
     <div
       className="border-b border-t border-[color-mix(in_srgb,var(--red)_25%,var(--line))] border-t-[color-mix(in_srgb,var(--red)_25%,var(--line))] bg-red-50"
       role="complementary"
-      aria-label={isFr ? 'Jeu responsable' : 'Responsible gambling'}
+      aria-label="Jeu responsable"
     >
       <div className="mx-auto flex max-w-site flex-wrap items-center gap-4 px-8 py-4 text-[13.5px] text-ink-2 sm:px-[18px]">
         <span className="shrink-0 rounded-[5px] bg-red px-[9px] py-[3px] font-mono text-xs font-semibold text-white">
           18+
         </span>
-        <strong className="text-ink">{isFr ? 'Jeu responsable.' : 'Responsible gambling.'}</strong>
+        <strong className="text-ink">Jeu responsable.</strong>
         {isFr ? (
           <span>
             Les jeux d&apos;argent et de hasard peuvent être dangereux. Besoin d&apos;aide ?{' '}
@@ -29,8 +29,6 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
             Gambling can be harmful. For help:{' '}
             <a
               href="https://www.gamcare.org.uk"
-              target="_blank"
-              rel="noopener noreferrer"
               className="font-semibold text-red-ink hover:underline"
             >
               GamCare
@@ -38,8 +36,6 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
             ·{' '}
             <a
               href="https://www.begambleaware.org"
-              target="_blank"
-              rel="noopener noreferrer"
               className="font-semibold text-red-ink hover:underline"
             >
               BeGambleAware

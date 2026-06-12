@@ -31,19 +31,10 @@ export function OperatorRotator() {
   const name = NAMES[index] ?? NAMES[0]
 
   return (
-    // inline-grid stacking: invisible spacer (longest name) reserves width → zero CLS
-    <span className="relative inline-grid align-baseline">
+    <span className="inline-flex items-baseline align-baseline">
       <span
-        aria-hidden
-        className="invisible col-start-1 row-start-1 whitespace-nowrap border-b-2 border-transparent pb-[2px] italic text-gold-ink"
-      >
-        Magical Spin
-      </span>
-      <span
-        aria-live="polite"
-        aria-atomic="true"
         className={cn(
-          'col-start-1 row-start-1 whitespace-nowrap border-b-2 border-dotted pb-[2px] italic text-gold-ink',
+          'font-italic inline-block whitespace-nowrap border-b-2 border-dotted pb-[2px] italic text-gold-ink',
           'border-[color-mix(in_srgb,var(--gold)_55%,transparent)]',
           'transition-[opacity,transform] duration-[420ms] ease-[ease]',
           animating && '-translate-y-[0.32em] opacity-0'

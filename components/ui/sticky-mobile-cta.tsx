@@ -12,10 +12,6 @@ interface StickyMobileCTAProps {
   rating: number
   bonusLabel: string
   affiliateUrl: string
-  locale?: string
-  pageType?: string
-  ctaBonus?: string
-  bonusSlug?: string
 }
 
 export function StickyMobileCTA({
@@ -24,12 +20,7 @@ export function StickyMobileCTA({
   rating,
   bonusLabel,
   affiliateUrl,
-  locale = 'fr',
-  pageType = 'review',
-  ctaBonus,
-  bonusSlug,
 }: StickyMobileCTAProps) {
-  const label = ctaBonus ?? (locale === 'fr' ? 'Obtenir le bonus' : 'Get bonus')
   const [visible, setVisible] = useState(false)
   const ioRef = useRef<IntersectionObserver | null>(null)
 
@@ -55,7 +46,7 @@ export function StickyMobileCTA({
   return (
     <div
       className={cn(
-        'bg-surface/96 fixed bottom-0 left-0 right-0 z-[70] flex items-center gap-3 border-t border-line px-4 pb-[calc(10px+env(safe-area-inset-bottom))] pt-[10px] shadow-3 backdrop-blur-xl transition-transform duration-300 lg:hidden',
+        'bg-surface/96 fixed bottom-0 left-0 right-0 z-[70] hidden items-center gap-3 border-t border-line px-4 pb-[calc(10px+env(safe-area-inset-bottom))] pt-[10px] shadow-3 backdrop-blur-xl transition-transform duration-300 md:flex',
         visible ? 'translate-y-0' : 'translate-y-full'
       )}
       aria-hidden={!visible}
@@ -76,11 +67,8 @@ export function StickyMobileCTA({
         data-event="affiliate_click"
         data-operator={operatorSlug}
         data-placement="sticky_mobile"
-        data-page-type={pageType}
-        data-locale={locale}
-        {...(bonusSlug ? { 'data-bonus': bonusSlug } : {})}
       >
-        {label}
+        Obtenir le bonus
       </CTAButton>
     </div>
   )

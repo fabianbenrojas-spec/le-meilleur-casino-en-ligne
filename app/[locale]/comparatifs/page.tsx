@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 export const revalidate = 3600
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
-import { LogoOrPlaceholder } from '@/components/ui/operator-card'
+import { ScorePill } from '@/components/ui/score-pill'
 import { TOP_10, operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -24,7 +23,7 @@ export async function generateMetadata({
       locale === 'fr'
         ? "Top 10, versus casino vs casino, alternatives et comparatifs thématiques. Testés à l'argent réel."
         : 'Top 10, casino vs casino, alternatives and themed comparisons. Tested with real money.',
-    alternates: { languages: buildHreflang('/comparatifs/') },
+    alternates: { languages: buildHreflang('/comparatifs/', '/comparisons/') },
   }
 }
 
@@ -46,49 +45,13 @@ export default async function ComparatifsHubPage({
     .flatMap((a, i) => top5.slice(i + 1).map((b) => [a, b] as const))
     .slice(0, 6)
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const thematicPages = [
-    {
-      name: isFr ? 'Top 10 casinos en ligne' : 'Top 10 online casinos',
-      path: '/comparatifs/top-10-casinos-en-ligne/',
-    },
-    {
-      name: isFr ? 'Meilleur bonus casino' : 'Best casino bonus',
-      path: '/comparatifs/meilleur-bonus/',
-    },
-    { name: isFr ? 'Casino cashback' : 'Cashback casino', path: '/comparatifs/cashback/' },
-    { name: isFr ? 'Casino live' : 'Live casino', path: '/comparatifs/live-casino/' },
-    { name: isFr ? 'Casino crypto' : 'Crypto casino', path: '/comparatifs/crypto/' },
-    {
-      name: isFr ? 'Retraits rapides' : 'Fast withdrawals',
-      path: '/comparatifs/retraits-rapides/',
-    },
-  ]
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr ? 'Comparatifs de casinos en ligne 2026' : 'Online casino comparisons 2026',
-    itemListElement: thematicPages.map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: p.name,
-      url: `${BASE_URL}${isFr ? '' : '/en'}${p.path}`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Comparatifs' : 'Comparisons' },
         ]}
-        locale={locale}
       />
 
       <section className="pb-2 pt-10">
@@ -122,7 +85,7 @@ export default async function ComparatifsHubPage({
             {isFr ? 'Classements' : 'Rankings'}
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <Link
+            <a
               href="/comparatifs/top-10-casinos-en-ligne/"
               className="flex flex-col gap-3 rounded-xl border border-[color-mix(in_srgb,var(--gold)_35%,var(--line))] bg-surface p-6 text-ink no-underline shadow-2 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
               data-event="comparatif_click"
@@ -139,23 +102,17 @@ export default async function ComparatifsHubPage({
                   ? '47 opérateurs testés · notes /10 · re-testé tous les 90j'
                   : '47 operators tested · /10 ratings · re-tested every 90d'}
               </p>
-              <div className="mt-auto flex items-center gap-3">
+              <div className="mt-auto flex gap-2">
                 {TOP_10.slice(0, 3).map((op) => (
-                  <LogoOrPlaceholder
-                    key={op.id}
-                    logoUrl={op.logoUrl}
-                    name={op.name}
-                    width={72}
-                    height={28}
-                  />
+                  <ScorePill key={op.id} score={op.rating} className="text-[13px]" />
                 ))}
               </div>
               <span className="font-bold text-green">
                 {isFr ? 'Voir le classement →' : 'See ranking →'}
               </span>
-            </Link>
+            </a>
 
-            <Link
+            <a
               href="/casinos/"
               className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
               data-event="comparatif_click"
@@ -175,7 +132,7 @@ export default async function ComparatifsHubPage({
               <span className="mt-auto font-bold text-green">
                 {isFr ? 'Accéder au comparateur →' : 'Open comparison →'}
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -188,23 +145,23 @@ export default async function ComparatifsHubPage({
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {versusPairs.map(([a, b]) => (
-              <Link
+              <a
                 key={`${a.slug}-vs-${b.slug}`}
                 href={`/comparatifs/${versusSlug(a.slug, b.slug)}/`}
                 className="flex items-center gap-3 rounded-lg border border-line bg-surface p-4 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
                 data-event="versus_click"
                 data-slug={versusSlug(a.slug, b.slug)}
               >
-                <div className="flex min-w-0 flex-1 flex-col gap-1">
-                  <LogoOrPlaceholder logoUrl={a.logoUrl} name={a.name} width={80} height={30} />
-                  <span className="truncate text-[12px] text-ink-2">{a.name}</span>
+                <div className="flex min-w-0 flex-1 items-center gap-2">
+                  <ScorePill score={a.rating} className="px-[8px] py-[3px] text-[12px]" />
+                  <span className="truncate text-[14px] font-semibold">{a.name}</span>
                 </div>
                 <span className="shrink-0 font-mono text-[11px] text-ink-3">vs</span>
-                <div className="flex min-w-0 flex-1 flex-col items-end gap-1">
-                  <LogoOrPlaceholder logoUrl={b.logoUrl} name={b.name} width={80} height={30} />
-                  <span className="truncate text-[12px] text-ink-2">{b.name}</span>
+                <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+                  <span className="truncate text-[14px] font-semibold">{b.name}</span>
+                  <ScorePill score={b.rating} className="px-[8px] py-[3px] text-[12px]" />
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -218,19 +175,18 @@ export default async function ComparatifsHubPage({
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
             {TOP_10.slice(0, 5).map((op) => (
-              <Link
+              <a
                 key={op.id}
                 href={`/alternatives/${op.slug}/`}
-                className="flex flex-col items-center gap-2 rounded-lg border border-line bg-surface p-4 text-center text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
+                className="rounded-lg border border-line bg-surface p-4 text-center text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
                 data-event="alternative_click"
                 data-operator={op.slug}
               >
-                <LogoOrPlaceholder logoUrl={op.logoUrl} name={op.name} width={90} height={34} />
-                <p className="text-[11px] text-ink-3">
+                <p className="mb-1 text-[13px] font-semibold text-ink">
                   {isFr ? 'Alternatives à' : 'Alternatives to'}
                 </p>
-                <p className="text-[13px] font-semibold text-ink">{op.name}</p>
-              </Link>
+                <p className="font-bold text-ink">{op.name}</p>
+              </a>
             ))}
           </div>
           <div className="mt-6 text-center">

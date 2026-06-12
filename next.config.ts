@@ -22,18 +22,13 @@ const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
-  {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
   },
   { key: 'Content-Security-Policy', value: ContentSecurityPolicy },
 ]
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
   turbopack: {
     root: path.resolve(__dirname),
   },
@@ -54,20 +49,7 @@ const nextConfig: NextConfig = {
   // but having it in code ensures local dev + preview deployments behave correctly.
   async redirects() {
     const isProd = process.env['NEXT_PUBLIC_SITE_URL']?.includes('www.')
-
-    // English-friendly slug aliases → actual EN routes (FR slugs are the canonical Next.js paths)
-    const enSlugRedirects = [
-      { source: '/en/about/:path*', destination: '/en/a-propos/:path*' },
-      { source: '/en/responsible-gambling/:path*', destination: '/en/jeu-responsable/:path*' },
-      { source: '/en/games/:path*', destination: '/en/jeux/:path*' },
-      { source: '/en/comparisons/:path*', destination: '/en/comparatifs/:path*' },
-      { source: '/en/bonuses/:path*', destination: '/en/bonus/:path*' },
-      { source: '/en/privacy/:path*', destination: '/en/confidentialite/:path*' },
-      { source: '/en/legal-notice/:path*', destination: '/en/mentions-legales/:path*' },
-      { source: '/en/cookie-policy/:path*', destination: '/en/politique-cookies/:path*' },
-    ].map((r) => ({ ...r, permanent: true }))
-
-    if (!isProd) return enSlugRedirects
+    if (!isProd) return []
     return [
       {
         source: '/:path*',
@@ -75,7 +57,6 @@ const nextConfig: NextConfig = {
         destination: 'https://www.le-meilleur-casino-en-ligne.fr/:path*',
         permanent: true,
       },
-      ...enSlugRedirects,
     ]
   },
 

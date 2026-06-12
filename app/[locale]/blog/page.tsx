@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -70,30 +69,9 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
   const { locale } = await params
   const isFr = locale === 'fr'
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr ? 'Blog casino en ligne — articles 2026' : 'Online casino blog — articles 2026',
-    itemListElement: articles.map((a, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: isFr ? a.title : a.titleEn,
-      url: `${BASE_URL}${isFr ? '' : '/en'}/blog/${a.slug}/`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <Breadcrumbs
-        items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]}
-        locale={locale}
-      />
+      <Breadcrumbs items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]} />
 
       <section className="pb-2 pt-10">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
@@ -116,7 +94,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
           <div className="flex flex-col divide-y divide-line">
             {articles.map((art) => (
               <article key={art.slug} className="py-8 first:pt-0 last:pb-0">
-                <Link
+                <a
                   href={`/blog/${art.slug}/`}
                   className="group block text-ink no-underline"
                   data-event="blog_click"
@@ -147,7 +125,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
                   <span className="mt-3 inline-block text-[14px] font-bold text-green">
                     {isFr ? 'Lire →' : 'Read →'}
                   </span>
-                </Link>
+                </a>
               </article>
             ))}
           </div>

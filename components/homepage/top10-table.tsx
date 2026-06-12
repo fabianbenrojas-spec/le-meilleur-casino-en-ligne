@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
@@ -10,22 +9,20 @@ import { cn } from '@/lib/utils'
 
 interface Top10TableProps {
   operators: Operator[]
-  locale?: string
 }
 
 type SortKey = 'rating' | 'bonusAmountNumber' | 'rtp'
 type SortDir = 'asc' | 'desc'
 
-export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
-  const isFr = locale === 'fr'
+const columns: { key: SortKey; label: string }[] = [
+  { key: 'rating', label: 'Note' },
+  { key: 'bonusAmountNumber', label: 'Bonus' },
+  { key: 'rtp', label: 'RTP' },
+]
+
+export function Top10Table({ operators }: Top10TableProps) {
   const [sortKey, setSortKey] = useState<SortKey>('rating')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
-
-  const columns: { key: SortKey; label: string }[] = [
-    { key: 'rating', label: isFr ? 'Note' : 'Rating' },
-    { key: 'bonusAmountNumber', label: 'Bonus' },
-    { key: 'rtp', label: 'RTP' },
-  ]
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -54,13 +51,13 @@ export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
               scope="col"
               className="sticky top-[var(--header-h)] z-[5] border-b border-line bg-surface-2 px-4 py-[14px] text-left font-mono text-[11.5px] uppercase tracking-[0.05em] text-ink-3"
             >
-              {isFr ? 'Rang' : 'Rank'}
+              Rang
             </th>
             <th
               scope="col"
               className="sticky top-[var(--header-h)] z-[5] border-b border-line bg-surface-2 px-4 py-[14px] text-left font-mono text-[11.5px] uppercase tracking-[0.05em] text-ink-3"
             >
-              {isFr ? 'Opérateur' : 'Casino'}
+              Opérateur
             </th>
             {columns.map((col) => (
               <th
@@ -85,7 +82,7 @@ export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
               scope="col"
               className="sticky top-[var(--header-h)] z-[5] border-b border-line bg-surface-2 px-4 py-[14px] text-left font-mono text-[11.5px] uppercase tracking-[0.05em] text-ink-3"
             >
-              {isFr ? 'Paiements' : 'Payments'}
+              Paiements
             </th>
             <th className="sticky top-[var(--header-h)] z-[5] border-b border-line bg-surface-2 px-4 py-[14px]" />
           </tr>
@@ -103,28 +100,16 @@ export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
               {/* Operator */}
               <td className="px-4 py-4">
                 <div className="flex items-center gap-3">
-                  {op.logoUrl ? (
-                    <div className="relative h-[38px] w-[92px] shrink-0 overflow-hidden rounded-[6px] bg-bg-sunken">
-                      <Image
-                        src={op.logoUrl}
-                        alt={op.name}
-                        fill
-                        priority={rowIdx === 0}
-                        className="object-contain p-[3px]"
-                        sizes="92px"
-                      />
-                    </div>
-                  ) : (
-                    <div
-                      className="grid h-[38px] w-[92px] shrink-0 place-items-center rounded-[6px] border border-dashed border-line-2 font-mono text-[10px] text-ink-3"
-                      style={{
-                        background:
-                          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
-                      }}
-                    >
-                      {op.shortName ?? op.name.split(' ')[0]}
-                    </div>
-                  )}
+                  {/* Logo placeholder */}
+                  <div
+                    className="grid h-[38px] w-[92px] shrink-0 place-items-center rounded-[6px] border border-dashed border-line-2 font-mono text-[10px] text-ink-3"
+                    style={{
+                      background:
+                        'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
+                    }}
+                  >
+                    {op.shortName ?? op.name.split(' ')[0]}
+                  </div>
                   <div>
                     <div className="text-[15px] font-bold text-ink">{op.name}</div>
                     <div className="font-mono text-[11px] text-ink-3">{op.licence}</div>
@@ -173,7 +158,7 @@ export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
                   data-placement="top10_table"
                   data-bonus={op.bonusSlug}
                   data-page-type="homepage"
-                  data-locale={locale}
+                  data-locale="fr"
                 >
                   Bonus
                 </CTAButton>

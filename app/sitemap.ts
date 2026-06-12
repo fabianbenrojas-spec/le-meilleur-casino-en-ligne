@@ -58,16 +58,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entry(`/casinos/${op.slug}/`, { priority: 0.85, changeFrequency: 'monthly' })
     ),
 
-    // ── Casino listing pages ─────────────────────────────────────────────
-    entry('/casinos/avec-paypal/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/bitcoin/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/live/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/mobile/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/fiables/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/nouveaux/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/bonus-sans-depot/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/casinos/esports/', { priority: 0.7, changeFrequency: 'weekly' }),
-
     // ── Comparatifs ──────────────────────────────────────────────────────
     entry('/comparatifs/', { priority: 0.8 }),
     entry('/comparatifs/top-10-casinos-en-ligne/', {
@@ -75,15 +65,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
       changeFrequency: 'weekly',
     }),
-    entry('/comparatifs/cashback/', { priority: 0.72, changeFrequency: 'weekly' }),
-    entry('/comparatifs/crypto/', { priority: 0.72, changeFrequency: 'weekly' }),
-    entry('/comparatifs/live-casino/', { priority: 0.72, changeFrequency: 'weekly' }),
-    entry('/comparatifs/meilleur-bonus/', { priority: 0.75, changeFrequency: 'weekly' }),
-    entry('/comparatifs/retraits-rapides/', { priority: 0.72, changeFrequency: 'weekly' }),
     ...versusEntries(),
 
     // ── Alternatives ─────────────────────────────────────────────────────
-    entry('/alternatives/', { priority: 0.6 }),
     ...operators.map((op) => entry(`/alternatives/${op.slug}/`, { priority: 0.5 })),
 
     // ── Jeux ─────────────────────────────────────────────────────────────
@@ -98,9 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/guides/', { priority: 0.7 }),
     entry('/guides/legalite/', { priority: 0.6 }),
     entry('/guides/methodologie/', { priority: 0.6 }),
-    entry('/guides/rtp/', { priority: 0.6 }),
-    entry('/guides/paiements/', { priority: 0.6 }),
-    entry('/guides/bonus-casino/', { priority: 0.6 }),
 
     // ── Blog ──────────────────────────────────────────────────────────────
     entry('/blog/', { priority: 0.65, changeFrequency: 'weekly' }),

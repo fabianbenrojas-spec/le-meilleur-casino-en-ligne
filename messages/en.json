@@ -51,22 +51,6 @@
     "defaultTitle": "Best Online Casino — Independent Comparison",
     "defaultDescription": "Independent online casino comparison. Expert reviews, verified bonuses, monthly updated rankings."
   },
-  "cards": {
-    "getBonus": "Get bonus",
-    "readReview": "Read review",
-    "recommended": "Recommended",
-    "featuredLabel": "Editor's pick",
-    "referenceLabel": "Reference casino:",
-    "overallWinner": "Overall winner",
-    "tie": "Tie",
-    "chooseIf": "Choose {name} if…",
-    "whyConsider": "Why consider it",
-    "comparisonTable": "Head-to-head table",
-    "criteriaBreakdown": "Criteria breakdown",
-    "ourVerdict": "Our verdict",
-    "versusHeadline": "Comparison 2026",
-    "alternativesHeadline": "Similar casinos · 2026"
-  },
   "compliance": {
     "disclaimer": "Gambling involves financial risks. Play responsibly.",
     "helpline": "GamCare 0808 8020 133",

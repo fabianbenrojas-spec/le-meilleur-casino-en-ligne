@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-export const revalidate = 3600
 
-import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { categories } from '@/config/games'
 import type { Locale } from '@/i18n/routing'
@@ -21,7 +19,7 @@ export async function generateMetadata({
     description: isFr
       ? 'Guide complet des jeux de casino en ligne : machines à sous, roulette, blackjack, live, crash games. RTP, stratégies et meilleures variantes.'
       : 'Complete guide to online casino games: slots, roulette, blackjack, live, crash. RTP, strategies and best variants.',
-    alternates: { languages: buildHreflang('/jeux/') },
+    alternates: { languages: buildHreflang('/jeux/', '/games/') },
   }
 }
 
@@ -99,32 +97,13 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
   const { locale } = await params
   const isFr = locale === 'fr'
 
-  const BASE_URL =
-    process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
-  const schemaItemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: isFr ? 'Jeux de casino en ligne 2026' : 'Online casino games 2026',
-    itemListElement: categories.map((cat, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: isFr ? cat.label : cat.labelEn,
-      url: `${BASE_URL}${isFr ? '' : '/en'}/jeux/${cat.slug}/`,
-    })),
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Jeux' : 'Games' },
         ]}
-        locale={locale}
       />
 
       <section className="pb-2 pt-10">
@@ -158,7 +137,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
               const href = isFr ? `/jeux/${cat.slug}/` : `/en/games/${cat.slug}/`
               const label = isFr ? cat.label : cat.labelEn
               return (
-                <Link
+                <a
                   key={cat.slug}
                   href={href}
                   className="flex flex-col gap-4 rounded-xl border border-line bg-surface p-6 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
@@ -182,7 +161,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
                       ? `Explorer ${label.toLowerCase()} →`
                       : `Explore ${label.toLowerCase()} →`}
                   </span>
-                </Link>
+                </a>
               )
             })}
           </div>

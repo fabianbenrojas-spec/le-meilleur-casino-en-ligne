@@ -14,12 +14,9 @@ interface TableOfContentsProps {
   items: TOCItem[]
   title?: string
   className?: string
-  locale?: string
 }
 
-export function TableOfContents({ items, title, className, locale = 'fr' }: TableOfContentsProps) {
-  const isFr = locale === 'fr'
-  const resolvedTitle = title ?? (isFr ? 'Sommaire' : 'Contents')
+export function TableOfContents({ items, title = 'Sommaire', className }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -48,18 +45,20 @@ export function TableOfContents({ items, title, className, locale = 'fr' }: Tabl
 
   return (
     <nav
-      aria-label={isFr ? 'Table des matières' : 'Table of contents'}
+      aria-label="Table des matières"
       className={cn('rounded-lg border border-line bg-surface px-2 py-4 shadow-1', className)}
     >
       <p className="mb-2 px-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink-3">
-        {resolvedTitle}
+        {title}
       </p>
       <ul className="m-0 list-none p-0">
         {items.map((item) => (
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              aria-current={activeId === item.id ? 'true' : undefined}
+              onClick={() => {
+                // GA4 via GTM — data-event attribute handles it
+              }}
               className={cn(
                 'block rounded-[7px] border-l-2 px-3 py-2 text-[13.5px] font-medium leading-tight transition-[background,color,border-color] duration-150',
                 item.level === 3 && 'pl-5 text-[13px]',

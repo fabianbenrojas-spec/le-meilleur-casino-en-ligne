@@ -49,7 +49,6 @@ export function FAQAccordion({ items, includeSchema = true, className }: FAQAcco
       >
         {items.map((item, index) => {
           const isOpen = openIndex === index
-          const panelId = `faq-panel-${index}`
 
           return (
             <div
@@ -60,8 +59,13 @@ export function FAQAccordion({ items, includeSchema = true, className }: FAQAcco
                 type="button"
                 className="faq-q font-inherit flex w-full cursor-pointer items-center justify-between gap-4 border-0 bg-transparent py-[18px] text-left text-[16px] font-semibold text-ink"
                 aria-expanded={isOpen}
-                aria-controls={panelId}
-                onClick={() => setOpenIndex(isOpen ? null : index)}
+                onClick={() => {
+                  const next = isOpen ? null : index
+                  setOpenIndex(next)
+                  if (next !== null) {
+                    // data-event fires via GTM — no inline tracking needed
+                  }
+                }}
                 data-event="faq_open"
               >
                 <span>{item.question}</span>
@@ -70,7 +74,6 @@ export function FAQAccordion({ items, includeSchema = true, className }: FAQAcco
               </button>
 
               <div
-                id={panelId}
                 className="faq-a overflow-hidden transition-[max-height] duration-[280ms] ease-[ease]"
                 style={{ maxHeight: isOpen ? '360px' : '0' }}
               >
