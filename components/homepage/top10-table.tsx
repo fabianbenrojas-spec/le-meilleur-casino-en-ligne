@@ -109,6 +109,7 @@ export function Top10Table({ operators, locale = 'fr' }: Top10TableProps) {
                         src={op.logoUrl}
                         alt={op.name}
                         fill
+                        priority={rowIdx === 0}
                         className="object-contain p-[3px]"
                         sizes="92px"
                       />
