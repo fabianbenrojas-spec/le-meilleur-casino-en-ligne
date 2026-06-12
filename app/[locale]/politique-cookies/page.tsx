@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -423,9 +424,9 @@ export default async function PolitiqueCookiesPage({
             {isFr
               ? 'Pour toute question sur notre utilisation des cookies, contactez-nous via notre '
               : 'For any question about our use of cookies, contact us via our '}
-            <a href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
+            <Link href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
               {isFr ? 'formulaire de contact' : 'contact form'}
-            </a>
+            </Link>
             {isFr
               ? " (objet : 'Cookies'). Vous pouvez également déposer une réclamation auprès de la CNIL ("
               : " (subject: 'Cookies'). You can also lodge a complaint with the CNIL ("}

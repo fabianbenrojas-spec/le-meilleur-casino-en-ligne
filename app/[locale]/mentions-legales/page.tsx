@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -106,9 +107,9 @@ export default async function MentionsLegalesPage({
             <InfoRow
               label="Contact"
               value={
-                <a href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
+                <Link href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
                   {isFr ? 'Formulaire de contact' : 'Contact form'}
-                </a>
+                </Link>
               }
             />
           </div>

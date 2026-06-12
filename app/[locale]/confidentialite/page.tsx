@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -117,9 +118,9 @@ export default async function ConfidentialitePage({
             {isFr
               ? 'Le responsable du traitement des données est la société exploitant le site le-meilleur-casino-en-ligne.fr ([RAISON SOCIALE À COMPLÉTER], [ADRESSE]). Pour toute question relative à la protection de vos données, contactez-nous via notre'
               : 'The data controller is the company operating le-meilleur-casino-en-ligne.fr ([COMPANY NAME TO COMPLETE], [ADDRESS]). For any question relating to the protection of your data, contact us via our'}{' '}
-            <a href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
+            <Link href={isFr ? '/contact/' : '/en/contact/'} className="text-green underline">
               {isFr ? 'formulaire de contact' : 'contact form'}
-            </a>
+            </Link>
             .
           </p>
           <p>

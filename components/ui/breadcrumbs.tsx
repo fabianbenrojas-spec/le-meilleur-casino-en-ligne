@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import type { WithContext, BreadcrumbList } from 'schema-dts'
 
 export interface BreadcrumbItem {
@@ -56,9 +58,9 @@ export function Breadcrumbs({
                     {item.label}
                   </span>
                 ) : (
-                  <a href={item.href} className="transition-colors hover:text-green">
+                  <Link href={item.href} className="transition-colors hover:text-green">
                     {item.label}
-                  </a>
+                  </Link>
                 )}
               </li>
             )

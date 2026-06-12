@@ -1,5 +1,7 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
+import Link from 'next/link'
+
 import { cn } from '@/lib/utils'
 
 type Variant = 'primary' | 'secondary' | 'tertiary' | 'disabled'
@@ -96,9 +98,9 @@ export function CTAButton(props: CTAButtonProps) {
   if ('href' in rest && rest.href !== undefined) {
     const { href, ...anchorRest } = rest as AsAnchor
     return (
-      <a href={href} className={classes} {...anchorRest}>
+      <Link href={href} className={classes} {...anchorRest}>
         {content}
-      </a>
+      </Link>
     )
   }
 
