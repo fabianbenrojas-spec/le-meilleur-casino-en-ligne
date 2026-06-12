@@ -19,6 +19,7 @@ export interface OperatorCardData {
   bonusAmount: string
   bonusSuffix?: string
   bonusConditions?: string
+  tagline?: string
   features?: string[]
   pros?: string[]
   cons?: string[]
@@ -76,8 +77,8 @@ interface PodiumCardProps {
 }
 
 export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
-  const rankLabel = ['#1', '#2', '#3'][rank - 1] as string
   const isFirst = rank === 1
+  const rankLabel = isFirst ? '★ N°1' : `N°${rank}`
 
   return (
     <article
@@ -96,6 +97,7 @@ export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
         {rankLabel}
       </div>
 
+      {/* Logo + score */}
       <div className="flex items-center justify-between gap-3 pt-1.5">
         <LogoOrPlaceholder
           logoUrl={operator.logoUrl}
@@ -106,19 +108,47 @@ export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
         <ScorePill score={operator.rating} gold={isFirst} />
       </div>
 
+      {/* Name + tagline */}
       <div>
         <p className="m-0 font-serif text-[21px] font-semibold leading-tight tracking-[-0.01em] text-ink">
           {operator.name}
         </p>
-        <p className="m-0 mt-1 text-sm text-ink-2">{operator.licence}</p>
+        {operator.tagline && (
+          <p className="m-0 mt-[6px] text-[13.5px] leading-[1.5] text-ink-2">{operator.tagline}</p>
+        )}
       </div>
+
+      {/* Feature badges — only for #1 */}
+      {isFirst && operator.features && operator.features.length > 0 && (
+        <div className="flex flex-wrap gap-[7px]">
+          {operator.features.slice(0, 3).map((feat) => (
+            <span
+              key={feat}
+              className="inline-flex items-center gap-[5px] rounded-[6px] border border-line bg-bg-sunken px-[9px] py-[4px] font-mono text-[11.5px] text-ink-2"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                className="h-[11px] w-[11px] shrink-0 text-green"
+                aria-hidden
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              {feat}
+            </span>
+          ))}
+        </div>
+      )}
 
       <BonusBadge
         amount={operator.bonusAmount}
         amountSuffix={operator.bonusSuffix}
         conditions={operator.bonusConditions}
         gold={isFirst}
-        className="w-full"
+        label={isFirst ? 'Bonus exclusif' : undefined}
+        className="mt-auto w-full"
       />
 
       <CTAButton
@@ -136,16 +166,15 @@ export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
         Obtenir le bonus
       </CTAButton>
 
-      <CTAButton
+      <a
         href={`/casinos/${operator.slug}/`}
-        variant="secondary"
-        block
+        className="block text-center text-[13.5px] text-ink-2 transition-colors hover:text-green"
         data-event="review_click"
         data-operator={operator.slug}
         data-placement="hero_podium"
       >
-        Lire l&apos;avis
-      </CTAButton>
+        <u>Lire l&apos;avis complet</u>
+      </a>
     </article>
   )
 }
