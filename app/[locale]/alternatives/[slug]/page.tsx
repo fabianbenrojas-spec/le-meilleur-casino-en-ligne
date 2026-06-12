@@ -69,7 +69,7 @@ export default async function AlternativePage({
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="pb-6 pt-10" data-page-type="alternatives" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Alternatives' : 'Alternatives'}
           </div>
@@ -136,7 +136,7 @@ export default async function AlternativePage({
 
       {/* ── "Pourquoi chercher une alternative?" callout ─────────────────── */}
       <section className="pb-0 pt-2">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="max-w-[760px] rounded-lg border border-line bg-surface p-[24px_26px] shadow-1">
             <h2 className="mb-3 font-serif text-[20px] font-semibold text-ink">
               {isFr
@@ -176,7 +176,7 @@ export default async function AlternativePage({
 
       {/* ── Comparison table ─────────────────────────────────────────────── */}
       <section className="pb-0 pt-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-5 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-3 font-mono text-[14px] font-medium text-green">01</span>
             {isFr ? 'Comparatif rapide des alternatives' : 'Quick comparison of alternatives'}
@@ -278,7 +278,7 @@ export default async function AlternativePage({
 
       {/* ── Rank cards ───────────────────────────────────────────────────── */}
       <section className="bg-bg-sunken py-12 pb-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-8 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-3 font-mono text-[14px] font-medium text-green">02</span>
             {isFr ? 'Chaque alternative en détail' : 'Each alternative in detail'}

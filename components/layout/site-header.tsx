@@ -33,7 +33,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
       className="sticky top-0 z-[60] border-b border-line [backdrop-filter:saturate(150%)_blur(14px)] [background:color-mix(in_srgb,var(--bg)_88%,transparent)]"
       style={{ height: 'var(--header-h)' }}
     >
-      <div className="mx-auto flex h-full max-w-site items-center gap-[26px] px-8 sm:px-[18px]">
+      <div className="mx-auto flex h-full max-w-site items-center gap-[26px] px-[18px] md:px-8">
         {/* Logo */}
         <a
           href={locale === 'fr' ? '/' : '/en/'}

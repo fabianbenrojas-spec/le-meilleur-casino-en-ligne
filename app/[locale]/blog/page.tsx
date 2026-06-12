@@ -74,7 +74,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
       <Breadcrumbs items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]} />
 
       <section className="pb-2 pt-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Actualités & analyses' : 'News & analysis'}
           </div>
@@ -90,7 +90,7 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
       </section>
 
       <section className="py-12">
-        <div className="mx-auto max-w-[880px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[880px] px-[18px] md:px-8">
           <div className="flex flex-col divide-y divide-line">
             {articles.map((art) => (
               <article key={art.slug} className="py-8 first:pt-0 last:pb-0">

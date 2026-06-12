@@ -113,7 +113,7 @@ export function CasinosListingClient({ operators }: CasinosListingClientProps) {
   const activeChipCount = Object.values(active).reduce((s, arr) => s + arr.length, 0)
 
   return (
-    <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+    <div className="mx-auto max-w-site px-[18px] md:px-8">
       <div className="grid grid-cols-1 items-start gap-8 pb-16 pt-7 lg:grid-cols-[268px_1fr]">
         {/* Desktop sidebar */}
         <FilterSidebar groups={filterGroups} active={active} onChange={setActive} />

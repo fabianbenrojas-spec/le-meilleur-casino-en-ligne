@@ -115,7 +115,7 @@ export default async function VersusPage({
       />
 
       <section className="py-10" data-page-type="versus" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             Comparatif 2026
           </div>
@@ -134,7 +134,7 @@ export default async function VersusPage({
 
       {/* Head-to-head cards */}
       <section className="py-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             Vue d&apos;ensemble
           </h2>

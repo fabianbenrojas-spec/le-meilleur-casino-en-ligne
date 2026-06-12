@@ -359,7 +359,7 @@ export default async function GuidePage({
 
       {/* Hero */}
       <section className="pb-4 pt-10" data-page-type="guide" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {guide.eyebrow}
           </div>
@@ -373,7 +373,7 @@ export default async function GuidePage({
       </section>
 
       {/* Body */}
-      <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+      <div className="mx-auto max-w-site px-[18px] md:px-8">
         <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[240px_1fr]">
           {/* Sidebar TOC */}
           <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-4 lg:flex">

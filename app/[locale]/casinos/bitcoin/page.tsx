@@ -151,7 +151,7 @@ export default async function CasinosBitcoinPage({
       />
 
       <section className="pb-2 pt-10" data-page-type="casino_bitcoin" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr
               ? `${cryptoCasinos.length} casinos testés · BTC · ETH · USDT · 2026`
@@ -187,7 +187,7 @@ export default async function CasinosBitcoinPage({
 
       {/* SEO editorial section */}
       <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
           <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr
               ? 'Pourquoi jouer dans un casino Bitcoin en 2026 ?'

@@ -84,7 +84,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
       />
 
       <section className="pb-2 pt-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Guides essentiels · 2026' : 'Essential guides · 2026'}
           </div>
@@ -108,7 +108,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
       </section>
 
       <section className="py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {guides.map((guide) => (
               <a

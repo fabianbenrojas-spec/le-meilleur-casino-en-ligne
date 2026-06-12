@@ -35,7 +35,7 @@ export function Breadcrumbs({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <nav aria-label="Fil d'Ariane" className="border-b border-line bg-surface-2">
-        <ol className="mx-auto flex max-w-site flex-wrap items-center gap-2 px-8 py-[11px] text-[13px] text-ink-3 sm:px-[18px] md:px-8">
+        <ol className="mx-auto flex max-w-site flex-wrap items-center gap-2 px-[18px] py-[11px] text-[13px] text-ink-3 md:px-8">
           {items.map((item, index) => {
             const isLast = index === items.length - 1
             return (

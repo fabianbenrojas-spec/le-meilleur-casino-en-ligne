@@ -267,7 +267,7 @@ export default async function ReviewPage({
         data-operator={op.slug}
         data-locale={locale}
       >
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div data-sticky-sentinel>
             <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-2">
               {/* Top: logo + info + score ring */}
@@ -354,7 +354,7 @@ export default async function ReviewPage({
       </section>
 
       {/* ── Body: sidebar + content ───────────────────── */}
-      <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+      <div className="mx-auto max-w-site px-[18px] md:px-8">
         <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[264px_1fr]">
           {/* Sidebar */}
           <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-[18px] lg:flex">

@@ -77,7 +77,7 @@ export default async function ComparatifTop10Page({
 
       {/* Head */}
       <section className="pb-2 pt-10" data-page-type="comparatif" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Classement vérifié · 2026' : 'Verified ranking · 2026'}
           </div>
@@ -135,7 +135,7 @@ export default async function ComparatifTop10Page({
 
       {/* RankCards */}
       <section className="py-14">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-[10px] font-mono text-[14px] font-medium text-green">01</span>
             {isFr ? 'Notre sélection complète' : 'Our full selection'}
@@ -163,7 +163,7 @@ export default async function ComparatifTop10Page({
 
       {/* Methodology teaser */}
       <section className="bg-bg-sunken py-14">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-4 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-[10px] font-mono text-[14px] font-medium text-green">02</span>
             {isFr ? 'Nos critères de notation' : 'Our rating criteria'}
@@ -243,7 +243,7 @@ export default async function ComparatifTop10Page({
 
       {/* Author + FAQ */}
       <section className="py-14">
-        <div className="mx-auto max-w-[880px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[880px] px-[18px] md:px-8">
           <AuthorBio
             name="Julien Marchand"
             role={

@@ -238,7 +238,7 @@ export default async function BlogArticlePage({
       />
 
       <article className="py-10" data-page-type="blog" data-locale={locale}>
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           {/* Meta */}
           <div className="mb-5 flex flex-wrap items-center gap-[10px]">
             <span className="rounded-[5px] border border-line bg-bg-sunken px-[9px] py-[3px] font-mono text-[10px] uppercase tracking-[0.06em] text-green">

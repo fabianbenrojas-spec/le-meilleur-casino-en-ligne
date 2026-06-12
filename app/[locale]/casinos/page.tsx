@@ -43,7 +43,7 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
 
       {/* Page head */}
       <section className="pb-1.5 pt-9">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Comparateur filtrable' : 'Filterable comparison'}
           </div>

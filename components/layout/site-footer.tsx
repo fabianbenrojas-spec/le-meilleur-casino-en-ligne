@@ -77,7 +77,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
 
   return (
     <footer className="border-t border-line bg-bg-sunken pb-7 pt-14">
-      <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+      <div className="mx-auto max-w-site px-[18px] md:px-8">
         {/* Grid: brand + 4 columns */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand column */}

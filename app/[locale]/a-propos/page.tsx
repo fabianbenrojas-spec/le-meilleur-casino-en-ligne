@@ -70,7 +70,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
       />
 
       <section className="pb-2 pt-10">
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Notre mission' : 'Our mission'}
           </div>
@@ -100,7 +100,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
 
       {/* How we test */}
       <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,32px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? 'Comment nous testons' : 'How we test'}
           </h2>
@@ -165,7 +165,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
 
       {/* Business model */}
       <section className="py-12">
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,32px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? 'Notre modèle économique' : 'Our business model'}
           </h2>
@@ -186,7 +186,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
 
       {/* Team */}
       <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,32px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? "L'équipe" : 'The team'}
           </h2>

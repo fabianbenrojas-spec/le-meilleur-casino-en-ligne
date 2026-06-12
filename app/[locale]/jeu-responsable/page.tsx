@@ -148,7 +148,7 @@ export default async function JeuResponsablePage({
 
       {/* Hero */}
       <section className="pb-2 pt-11">
-        <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[820px] px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.13em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             Bien-être des joueurs
           </div>
@@ -194,7 +194,7 @@ export default async function JeuResponsablePage({
 
       {/* Warning signs */}
       <section className="py-[26px]">
-        <div className="mx-auto max-w-[900px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[900px] px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-tight tracking-[-0.016em] text-ink">
             Signaux d&apos;alerte à reconnaître
           </h2>
@@ -220,7 +220,7 @@ export default async function JeuResponsablePage({
 
       {/* Tools */}
       <section className="bg-bg-sunken py-[26px]">
-        <div className="mx-auto max-w-[900px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[900px] px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-tight tracking-[-0.016em] text-ink">
             Outils à votre disposition
           </h2>
@@ -249,7 +249,7 @@ export default async function JeuResponsablePage({
 
       {/* Self-test */}
       <section className="py-[26px]">
-        <div className="mx-auto max-w-[900px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[900px] px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-tight tracking-[-0.016em] text-ink">
             Auto-évaluation
           </h2>
@@ -263,7 +263,7 @@ export default async function JeuResponsablePage({
 
       {/* Resources */}
       <section className="bg-bg-sunken py-[26px]">
-        <div className="mx-auto max-w-[900px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[900px] px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(26px,3.4vw,34px)] font-medium leading-tight tracking-[-0.016em] text-ink">
             Ressources d&apos;aide
           </h2>

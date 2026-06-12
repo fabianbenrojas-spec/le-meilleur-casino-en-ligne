@@ -341,7 +341,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section className="pb-3 pt-14" data-page-type="homepage" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           {/* Eyebrow */}
           <div className="mb-5 inline-flex items-center gap-[9px] font-mono text-xs uppercase tracking-[0.14em] text-green before:h-px before:w-[26px] before:bg-gold before:content-['']">
             Comparatif indépendant · 2026
@@ -350,7 +350,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           {/* H1 — SEO-stable. "meilleur casino en ligne" always present server-side. */}
           <h1 className="mb-5 max-w-[19ch] font-serif text-[clamp(34px,5.4vw,60px)] font-medium leading-[1.05] tracking-[-0.022em] text-ink">
             On a testé <OperatorRotator /> et 46 autres pour élire le{' '}
-            <em className="italic not-italic text-green">meilleur casino en ligne</em>.
+            <em className="italic text-green">meilleur casino en ligne</em>.
           </h1>
 
           <p className="mb-0 max-w-[56ch] text-[19px] leading-[1.55] text-ink-2">
@@ -390,7 +390,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           {/* data-sticky-sentinel — StickyMobileCTA appears after this scrolls past */}
           <div
             data-sticky-sentinel
-            className="mt-4 grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr]"
+            className="mt-[40px] grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr]"
           >
             <PodiumCard
               operator={{ ...topOp, affiliateUrl: topOp.affiliateUrl }}
@@ -416,7 +416,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── TOP 10 TABLE ─────────────────────────────────────────── */}
       <section className="py-16" id="top10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
@@ -454,7 +454,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── GAME CATEGORIES ──────────────────────────────────────── */}
       <section className="bg-bg-sunken py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               Par type de jeu
@@ -491,7 +491,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── QUIZ FINDER ──────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               En 30 secondes
@@ -509,7 +509,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── GUIDES ───────────────────────────────────────────────── */}
       <section className="bg-bg-sunken py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               Guides essentiels
@@ -541,7 +541,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── METHODOLOGY / EEAT ───────────────────────────────────── */}
       <section className="py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
             {/* Left */}
             <div>
@@ -610,7 +610,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── BLOG ─────────────────────────────────────────────────── */}
       <section className="bg-bg-sunken py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
@@ -662,7 +662,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── FAQ ──────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="mx-auto max-w-[880px] px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-[880px] px-[18px] md:px-8">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               Questions fréquentes
@@ -677,7 +677,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
       {/* ── NEWSLETTER ───────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <NewsletterCTA
             placement="homepage_footer"
             headline="Les meilleurs bonus, une fois par semaine."

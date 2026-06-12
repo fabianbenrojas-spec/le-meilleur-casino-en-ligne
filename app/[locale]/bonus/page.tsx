@@ -46,7 +46,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
       />
 
       <section className="pb-2 pt-10" data-page-type="bonus_hub" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Bonus vérifiés · 2026' : 'Verified bonuses · 2026'}
           </div>
@@ -73,7 +73,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
 
       {/* Best value picks */}
       <section className="py-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr
               ? 'Notre sélection — meilleur rapport qualité/conditions'
@@ -99,7 +99,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
 
       {/* Full list sorted by bonus amount */}
       <section className="bg-bg-sunken py-10">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? 'Tous les bonus — triés par montant' : 'All bonuses — sorted by amount'}
           </h2>

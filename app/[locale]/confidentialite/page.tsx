@@ -55,7 +55,7 @@ export default async function ConfidentialitePage({
         ]}
       />
 
-      <div className="mx-auto max-w-[760px] px-8 py-12 sm:px-[18px]">
+      <div className="mx-auto max-w-[760px] px-[18px] py-12 md:px-8">
         <h1 className="mb-4 font-serif text-[clamp(28px,4vw,40px)] font-medium tracking-[-0.018em] text-ink">
           {isFr ? 'Politique de confidentialité' : 'Privacy Policy'}
         </h1>

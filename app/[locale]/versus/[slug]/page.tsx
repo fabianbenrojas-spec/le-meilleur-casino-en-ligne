@@ -69,7 +69,7 @@ export default async function VersusPage({
 
       {/* ── Hero head ────────────────────────────────────────────────────── */}
       <section className="pb-4 pt-10" data-page-type="versus" data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? 'Face-à-face' : 'Head-to-head'}
           </div>
@@ -83,7 +83,7 @@ export default async function VersusPage({
 
       {/* ── VS hero panels ───────────────────────────────────────────────── */}
       <section className="pb-0 pt-4">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="grid grid-cols-[1fr_64px_1fr] items-stretch gap-0 overflow-hidden rounded-xl border border-line bg-surface shadow-2 sm:grid-cols-1">
             {/* Winner panel */}
             <div className="relative flex flex-col items-center gap-4 p-8 text-center sm:pb-4">
@@ -155,7 +155,7 @@ export default async function VersusPage({
 
       {/* ── Section 01 — Quick comparison table ──────────────────────────── */}
       <section className="pb-0 pt-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-3 font-mono text-[14px] font-medium text-green">01</span>
             {isFr ? 'Le face-à-face en un coup d’œil' : 'Head-to-head at a glance'}
@@ -232,7 +232,7 @@ export default async function VersusPage({
 
       {/* ── Section 02 — Criterion by criterion ──────────────────────────── */}
       <section className="bg-bg-sunken py-14">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-3 font-mono text-[14px] font-medium text-green">02</span>
             {isFr ? 'Le détail, critère par critère' : 'Detailed breakdown, criterion by criterion'}
@@ -326,7 +326,7 @@ export default async function VersusPage({
 
       {/* ── Section 03 — Verdict ─────────────────────────────────────────── */}
       <section className="py-14">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-2 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             <span className="mr-3 font-mono text-[14px] font-medium text-green">03</span>
             {isFr ? 'Verdict : lequel choisir ?' : 'Verdict: which to choose?'}

@@ -11,7 +11,7 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
       role="complementary"
       aria-label="Jeu responsable"
     >
-      <div className="mx-auto flex max-w-site flex-wrap items-center gap-4 px-8 py-4 text-[13.5px] text-ink-2 sm:px-[18px]">
+      <div className="mx-auto flex max-w-site flex-wrap items-center gap-4 px-[18px] py-4 text-[13.5px] text-ink-2 md:px-8">
         <span className="shrink-0 rounded-[5px] bg-red px-[9px] py-[3px] font-mono text-xs font-semibold text-white">
           18+
         </span>

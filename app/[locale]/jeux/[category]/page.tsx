@@ -72,7 +72,7 @@ export default async function GameCategoryPage({
         data-category={category}
         data-locale={locale}
       >
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {isFr ? `Jeux de casino · ${cat.count} titres` : `Casino games · ${cat.count} titles`}
           </div>
@@ -87,7 +87,7 @@ export default async function GameCategoryPage({
 
       {/* Guide section */}
       <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {cat.guideTitle}
           </h2>
@@ -100,7 +100,7 @@ export default async function GameCategoryPage({
       {/* Games grid */}
       {games.length > 0 && (
         <section className="py-12">
-          <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+          <div className="mx-auto max-w-site px-[18px] md:px-8">
             <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
               {isFr ? `Jeux populaires — ${label}` : `Popular ${label} games`}
             </h2>
@@ -144,7 +144,7 @@ export default async function GameCategoryPage({
 
       {/* Casino recommendations for this category */}
       <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr
               ? `Meilleurs casinos pour les ${label.toLowerCase()}`

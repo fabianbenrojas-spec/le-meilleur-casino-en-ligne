@@ -74,7 +74,7 @@ export default async function FicheJeuPage({
 
       {/* Hero */}
       <section className="py-10" data-page-type="fiche_jeu" data-game={slug} data-locale={locale}>
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_360px]">
             <div>
               <div className="mb-3 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
@@ -154,7 +154,7 @@ export default async function FicheJeuPage({
 
       {/* Casino recommendations */}
       <section className="bg-bg-sunken py-12">
-        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
           <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr
               ? `Meilleurs casinos pour jouer à ${game.name}`

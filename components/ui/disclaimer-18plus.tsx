@@ -16,7 +16,7 @@ export function Disclaimer18Plus({
   if (variant === 'topstrip') {
     return (
       <div className={cn('bg-ink text-bg', className)} role="banner" aria-label="Avertissement 18+">
-        <div className="mx-auto flex max-w-site flex-nowrap items-center gap-[14px] overflow-hidden whitespace-nowrap px-8 py-[7px] text-[12.5px] tracking-[0.01em] sm:gap-2.5 sm:px-[18px] sm:text-[11.5px]">
+        <div className="mx-auto flex max-w-site flex-nowrap items-center gap-[14px] overflow-hidden whitespace-nowrap px-[18px] py-[7px] text-[11.5px] tracking-[0.01em] sm:gap-[10px] md:gap-[14px] md:px-8 md:text-[12.5px]">
           <span className="shrink-0 rounded-[5px] bg-red px-2 py-[2px] font-mono text-[11.5px] font-semibold text-white">
             18+
           </span>

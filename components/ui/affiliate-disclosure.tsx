@@ -16,7 +16,7 @@ export function AffiliateDisclosure({
   if (variant === 'strip') {
     // aff-strip: visible sans scroll sur les reviews
     return (
-      <div className={cn('mx-auto max-w-site px-8 pb-0 pt-[14px] sm:px-[18px]', className)}>
+      <div className={cn('mx-auto max-w-site px-[18px] pb-0 pt-[14px] md:px-8', className)}>
         <div className="flex items-start gap-3 rounded border border-line bg-surface-2 px-4 py-3 text-[12.5px] leading-[1.5] text-ink-2">
           <span className="mt-[1px] grid h-[26px] w-[26px] shrink-0 place-items-center rounded-[7px] bg-gold text-xs font-extrabold text-white">
             i
