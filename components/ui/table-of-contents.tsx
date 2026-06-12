@@ -59,9 +59,7 @@ export function TableOfContents({ items, title, className, locale = 'fr' }: Tabl
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              onClick={() => {
-                // GA4 via GTM — data-event attribute handles it
-              }}
+              aria-current={activeId === item.id ? 'true' : undefined}
               className={cn(
                 'block rounded-[7px] border-l-2 px-3 py-2 text-[13.5px] font-medium leading-tight transition-[background,color,border-color] duration-150',
                 item.level === 3 && 'pl-5 text-[13px]',
