@@ -4,23 +4,27 @@ import { AFFILIATE_URLS, operatorBySlug } from '@/config/operators'
 
 // Affiliation interstitial — fires GA4 via dataLayer before redirecting.
 // Page is noindex, no-store, serves HTML with short JS delay then location.replace().
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: Promise<{ operator: string }> }
-) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ operator: string }> }) {
   const { operator: slug } = await params
   const op = operatorBySlug.get(slug)
 
+  // Detect locale from Referer (comes from our own pages), fall back to Accept-Language
+  const referer = req.headers.get('referer') ?? ''
+  const acceptLang = req.headers.get('accept-language') ?? ''
+  const isEn = referer.includes('/en/') || (!referer && acceptLang.toLowerCase().startsWith('en'))
+  const lang = isEn ? 'en' : 'fr'
+
   if (!op) {
-    return new NextResponse('Casino non trouvé', { status: 404 })
+    return new NextResponse(isEn ? 'Casino not found' : 'Casino non trouvé', { status: 404 })
   }
 
   // Use the real registration URL from AFFILIATE_URLS map.
   // Once affiliate programmes are approved, replace with tracking links here.
   const dest = AFFILIATE_URLS[slug] ?? op.affiliateUrl
+  const redirectingText = isEn ? 'Redirecting…' : 'Redirection en cours…'
 
   const html = `<!DOCTYPE html>
-<html lang="fr">
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -38,7 +42,7 @@ export async function GET(
 <body>
 <div class="box">
   <div class="name">${op.name}</div>
-  <div class="sub">Redirection en cours…</div>
+  <div class="sub">${redirectingText}</div>
 </div>
 <script>
 (function(){
