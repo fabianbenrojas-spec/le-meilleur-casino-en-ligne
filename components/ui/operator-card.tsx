@@ -48,11 +48,13 @@ export function LogoOrPlaceholder({
   name,
   width,
   height,
+  priority = false,
 }: {
   logoUrl?: string
   name: string
   width: number
   height: number
+  priority?: boolean
 }) {
   if (logoUrl) {
     return (
@@ -61,6 +63,7 @@ export function LogoOrPlaceholder({
         alt={`Logo ${name}`}
         width={width}
         height={height}
+        priority={priority}
         className="object-contain"
       />
     )

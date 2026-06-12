@@ -130,6 +130,7 @@ function SideCtaCard({
         name={op.shortName ?? op.name}
         width={150}
         height={60}
+        priority
       />
       <div className="mt-3 font-serif text-[22px] font-semibold leading-[1.1] text-ink">
         <span className="text-green">{op.bonusAmount}</span>

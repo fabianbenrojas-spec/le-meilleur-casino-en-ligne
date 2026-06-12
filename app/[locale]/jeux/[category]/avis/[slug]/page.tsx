@@ -191,6 +191,7 @@ export default async function FicheJeuPage({
                   alt={isFr ? `Aperçu de ${game.name}` : `${game.name} preview`}
                   width={400}
                   height={300}
+                  priority
                   className="w-full rounded-t-xl object-cover"
                 />
               ) : (
