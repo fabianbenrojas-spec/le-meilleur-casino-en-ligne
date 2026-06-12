@@ -422,6 +422,7 @@ export function ListingPageClient({
             <select
               value={sortKey}
               onChange={(e) => setSortKey(e.target.value as SortKey)}
+              aria-label={locale === 'en' ? 'Sort casinos' : 'Trier les casinos'}
               className="font-inherit min-h-[48px] flex-1 appearance-none rounded border border-line-2 bg-surface px-3 text-[13.5px] font-semibold text-ink"
               data-event="comparison_sort_use"
               data-page-type={pageType}
@@ -455,6 +456,7 @@ export function ListingPageClient({
               <select
                 value={sortKey}
                 onChange={(e) => setSortKey(e.target.value as SortKey)}
+                aria-label={locale === 'en' ? 'Sort casinos' : 'Trier les casinos'}
                 className="font-inherit rounded-lg border border-line-2 bg-surface px-3 py-[9px] text-[13.5px] font-semibold text-ink"
                 data-event="comparison_sort_use"
                 data-page-type={pageType}
