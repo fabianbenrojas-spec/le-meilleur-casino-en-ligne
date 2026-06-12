@@ -29,6 +29,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   turbopack: {
     root: path.resolve(__dirname),
   },

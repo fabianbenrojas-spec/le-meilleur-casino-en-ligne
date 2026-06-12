@@ -53,6 +53,17 @@ export async function generateMetadata({
       type: 'website',
       siteName: 'le-meilleur-casino-en-ligne.fr',
       locale: isEn ? 'en_GB' : 'fr_FR',
+      url: isEn ? `${BASE_URL}/en/` : `${BASE_URL}/`,
+      title: isEn
+        ? 'Best Online Casino — Independent Comparison'
+        : 'Le Meilleur Casino en Ligne — Comparateur FR',
+      description: isEn
+        ? 'Independent online casino comparison. Expert reviews, verified bonuses, monthly updated rankings.'
+        : 'Comparateur indépendant de casinos en ligne. Avis experts, bonus vérifiés, classements mis à jour mensuellement.',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@lemeilleurcasino',
     },
   }
 }
