@@ -23,6 +23,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ oper
   const dest = AFFILIATE_URLS[slug] ?? op.affiliateUrl
   const redirectingText = isEn ? 'Redirecting…' : 'Redirection en cours…'
 
+  // JSON.stringify ensures all values are safely escaped in the inline script
+  const jsDest = JSON.stringify(dest)
+  const jsSlug = JSON.stringify(op.slug)
+  const jsName = JSON.stringify(op.name)
+
   const html = `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -50,12 +55,12 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ oper
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: 'affiliate_click',
-    operator: '${op.slug}',
-    operator_name: '${op.name}',
+    operator: ${jsSlug},
+    operator_name: ${jsName},
     placement: 'go_redirect',
-    destination: '${dest}'
+    destination: ${jsDest}
   });
-  setTimeout(function(){ window.location.replace('${dest}'); }, 200);
+  setTimeout(function(){ window.location.replace(${jsDest}); }, 200);
 })();
 </script>
 </body>
