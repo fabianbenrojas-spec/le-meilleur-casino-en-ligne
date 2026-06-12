@@ -29,6 +29,8 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
             Gambling can be harmful. For help:{' '}
             <a
               href="https://www.gamcare.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold text-red-ink hover:underline"
             >
               GamCare
@@ -36,6 +38,8 @@ export function ResponsibleGamblingBanner({ locale = 'fr' }: ResponsibleGambling
             ·{' '}
             <a
               href="https://www.begambleaware.org"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold text-red-ink hover:underline"
             >
               BeGambleAware
