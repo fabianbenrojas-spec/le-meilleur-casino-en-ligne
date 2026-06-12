@@ -23,7 +23,7 @@ export async function generateMetadata({
     description: isFr
       ? "Comparez les meilleurs bonus de bienvenue : montant, wager, délai, tours gratuits. Tous vérifiés et testés à l'argent réel. 18+."
       : 'Compare the best welcome bonuses: amount, wagering, deadline, free spins. All verified and tested with real money. 18+.',
-    alternates: { languages: buildHreflang('/bonus/', '/bonuses/') },
+    alternates: { languages: buildHreflang('/bonus/') },
   }
 }
 
@@ -43,6 +43,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Bonus Casino' : 'Casino Bonuses' },
         ]}
+        locale={locale}
       />
 
       <section className="pb-2 pt-10" data-page-type="bonus_hub" data-locale={locale}>
@@ -69,7 +70,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
         </div>
       </section>
 
-      <AffiliateDisclosure variant="strip" />
+      <AffiliateDisclosure variant="strip" locale={locale} />
 
       {/* Best value picks */}
       <section className="py-10">
@@ -90,6 +91,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
                 key={op.id}
                 operator={op}
                 isTop={i === 0}
+                ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                 ga4={{ 'data-page-type': 'bonus_hub', 'data-locale': locale }}
               />
             ))}
@@ -114,6 +116,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
                 key={op.id}
                 operator={op}
                 isTop={false}
+                ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                 ga4={{ 'data-page-type': 'bonus_hub', 'data-locale': locale }}
               />
             ))}

@@ -1,10 +1,12 @@
 interface ScoreRingProps {
   score: number // 0–10
   label?: string // e.g. 'Excellent'
+  locale?: string
 }
 
 // Rendered as a Server Component — conic-gradient is computed at render time
-export function ScoreRing({ score, label = 'Excellent' }: ScoreRingProps) {
+export function ScoreRing({ score, label = 'Excellent', locale = 'fr' }: ScoreRingProps) {
+  const isFr = locale === 'fr'
   const pct = Math.min(100, Math.max(0, score * 10))
 
   return (
@@ -14,7 +16,7 @@ export function ScoreRing({ score, label = 'Excellent' }: ScoreRingProps) {
         background: `conic-gradient(var(--green) ${pct}%, var(--line) 0)`,
       }}
       role="img"
-      aria-label={`Note : ${score}/10 — ${label}`}
+      aria-label={isFr ? `Note : ${score}/10 — ${label}` : `Score: ${score}/10 — ${label}`}
     >
       <div className="grid h-24 w-24 place-items-center rounded-full bg-surface text-center [box-shadow:inset_0_0_0_1px_var(--line)]">
         <div>

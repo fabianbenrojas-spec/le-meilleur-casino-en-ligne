@@ -355,6 +355,7 @@ export default async function GuidePage({
           { label: isFr ? 'Guides' : 'Guides', href: '/guides/' },
           { label: isFr ? (guide.title.split('—')[0]?.trim() ?? guide.title) : guide.titleEn },
         ]}
+        locale={locale}
       />
 
       {/* Hero */}
@@ -377,7 +378,7 @@ export default async function GuidePage({
         <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[240px_1fr]">
           {/* Sidebar TOC */}
           <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-4 lg:flex">
-            <TableOfContents items={tocItems} />
+            <TableOfContents items={tocItems} locale={locale} />
           </aside>
 
           {/* Content */}
@@ -385,7 +386,7 @@ export default async function GuidePage({
             {/* Mobile TOC */}
             <details className="mb-6 rounded-lg border border-line bg-surface p-4 lg:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-semibold text-ink">
-                Sommaire <span className="text-ink-3">▾</span>
+                {isFr ? 'Sommaire' : 'Contents'} <span className="text-ink-3">▾</span>
               </summary>
               <ul className="mt-3 flex flex-col gap-1 pl-2">
                 {tocItems.map((item) => (
@@ -458,6 +459,7 @@ export default async function GuidePage({
               lastUpdated={guide.updatedAt}
               nextRetest={guide.nextRetest}
               className="my-8"
+              locale={locale}
             />
 
             {/* FAQ */}
@@ -481,6 +483,7 @@ export default async function GuidePage({
                     key={op.id}
                     operator={op}
                     isTop={i === 0}
+                    ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                     ga4={{ 'data-page-type': 'guide', 'data-locale': locale }}
                   />
                 ))}

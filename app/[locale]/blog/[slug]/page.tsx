@@ -235,6 +235,7 @@ export default async function BlogArticlePage({
           { label: 'Blog', href: '/blog/' },
           { label: isFr ? (post.title.split(':')[0]?.trim() ?? post.title) : post.titleEn },
         ]}
+        locale={locale}
       />
 
       <article className="py-10" data-page-type="blog" data-locale={locale}>
@@ -299,6 +300,7 @@ export default async function BlogArticlePage({
             lastUpdated={post.updatedAt}
             nextRetest="2026-09-01"
             className="my-8"
+            locale={locale}
           />
 
           {/* FAQ */}
@@ -323,6 +325,7 @@ export default async function BlogArticlePage({
                     key={op.id}
                     operator={op}
                     isTop={i === 0}
+                    ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
                     ga4={{ 'data-page-type': 'blog', 'data-locale': locale }}
                   />
                 ))}

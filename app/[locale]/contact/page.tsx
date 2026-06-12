@@ -45,6 +45,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     <>
       <Breadcrumbs
         items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Contact' }]}
+        locale={locale}
       />
 
       <div className="mx-auto max-w-[680px] px-8 py-12 sm:px-[18px]">

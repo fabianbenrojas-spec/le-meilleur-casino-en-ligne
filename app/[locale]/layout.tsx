@@ -101,7 +101,11 @@ export default async function LocaleLayout({
 
         <NextIntlClientProvider messages={messages}>
           {/* 1. Compliance topstrip — must be visible on every page */}
-          <Disclaimer18Plus variant="topstrip" updatedAt={new Date().toISOString().slice(0, 10)} />
+          <Disclaimer18Plus
+            variant="topstrip"
+            updatedAt={new Date().toISOString().slice(0, 10)}
+            locale={resolvedLocale}
+          />
 
           {/* 2. Sticky header */}
           <SiteHeader locale={resolvedLocale} />
@@ -118,7 +122,7 @@ export default async function LocaleLayout({
           <SiteFooter locale={resolvedLocale} />
 
           {/* 6. Cookie consent overlay */}
-          <CookieConsentBanner />
+          <CookieConsentBanner locale={resolvedLocale} />
         </NextIntlClientProvider>
 
         {/* Web Vitals → GTM dataLayer (client island, fires after hydration) */}

@@ -8,9 +8,10 @@ import type { Operator } from '@/config/operators'
 
 interface HomepageQuizProps {
   topOperator: Operator
+  locale?: string
 }
 
-const QUESTIONS = [
+const QUESTIONS_FR = [
   {
     step: 'Question 1 / 3',
     text: "Qu'est-ce qui compte le plus pour vous ?",
@@ -182,7 +183,181 @@ const QUESTIONS = [
   },
 ]
 
-export function HomepageQuiz({ topOperator }: HomepageQuizProps) {
+const QUESTIONS_EN = [
+  {
+    step: 'Question 1 / 3',
+    text: 'What matters most to you?',
+    options: [
+      {
+        value: 'bonus',
+        label: 'The biggest bonus',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7a3 3 0 1 0-3-3 3 3 0 0 0 3 3z" />
+          </svg>
+        ),
+      },
+      {
+        value: 'payout',
+        label: 'Fast withdrawals',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+        ),
+      },
+      {
+        value: 'games',
+        label: 'A wide game selection',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M8 4v16M16 4v16" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
+    step: 'Question 2 / 3',
+    text: 'How would you like to pay?',
+    options: [
+      {
+        value: 'card',
+        label: 'Bank card',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <path d="M2 10h20" />
+          </svg>
+        ),
+      },
+      {
+        value: 'crypto',
+        label: 'Crypto (BTC, ETH)',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M9.5 8h4a2 2 0 0 1 0 4h-4zM9.5 12h4.5a2 2 0 0 1 0 4H9.5zM11 6v2M11 16v2" />
+          </svg>
+        ),
+      },
+      {
+        value: 'ewallet',
+        label: 'E-wallet',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <path d="M3 7h18v12H3zM3 7l3-3h12l3 3M16 13h2" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
+    step: 'Question 3 / 3',
+    text: 'Your playing style?',
+    options: [
+      {
+        value: 'slots',
+        label: 'Slot machines',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M8 4v16M16 4v16" />
+          </svg>
+        ),
+      },
+      {
+        value: 'live',
+        label: 'Live tables',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="12" cy="12" r="9" />
+          </svg>
+        ),
+      },
+      {
+        value: 'mix',
+        label: 'A bit of everything',
+        icon: (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[17px] w-[17px]"
+            aria-hidden
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        ),
+      },
+    ],
+  },
+]
+
+export function HomepageQuiz({ topOperator, locale = 'fr' }: HomepageQuizProps) {
+  const isFr = locale === 'fr'
+  const QUESTIONS = isFr ? QUESTIONS_FR : QUESTIONS_EN
   const [step, setStep] = useState<number | 'result'>(0)
 
   const currentQ = typeof step === 'number' ? QUESTIONS[step] : null
@@ -243,9 +418,11 @@ export function HomepageQuiz({ topOperator }: HomepageQuizProps) {
             </>
           ) : (
             <div className="flex flex-col gap-4">
-              <p className="font-mono text-xs tracking-[0.05em] text-green">✓ Quiz terminé</p>
+              <p className="font-mono text-xs tracking-[0.05em] text-green">
+                {isFr ? '✓ Quiz terminé' : '✓ Quiz done'}
+              </p>
               <h3 className="font-serif text-2xl font-semibold text-ink">
-                Votre recommandation est prête →
+                {isFr ? 'Votre recommandation est prête →' : 'Your recommendation is ready →'}
               </h3>
               <button
                 type="button"
@@ -253,7 +430,7 @@ export function HomepageQuiz({ topOperator }: HomepageQuizProps) {
                 className="btn btn-tertiary self-start text-sm"
                 data-restart
               >
-                <u>Recommencer le quiz</u>
+                <u>{isFr ? 'Recommencer le quiz' : 'Restart quiz'}</u>
               </button>
             </div>
           )}
@@ -278,13 +455,15 @@ export function HomepageQuiz({ topOperator }: HomepageQuizProps) {
                 </svg>
               </div>
               <p className="max-w-[30ch] font-mono text-xs leading-[1.6] text-ink-3">
-                Répondez aux 3 questions pour voir votre recommandation personnalisée.
+                {isFr
+                  ? 'Répondez aux 3 questions pour voir votre recommandation personnalisée.'
+                  : 'Answer the 3 questions to see your personalised recommendation.'}
               </p>
             </div>
           ) : (
             <div className="w-full">
               <p className="mb-[14px] font-mono text-xs tracking-[0.05em] text-green">
-                ✓ Votre recommandation
+                {isFr ? '✓ Votre recommandation' : '✓ Your recommendation'}
               </p>
               {/* Logo placeholder */}
               <div
@@ -317,9 +496,9 @@ export function HomepageQuiz({ topOperator }: HomepageQuizProps) {
                 data-placement="finder_result"
                 data-bonus={topOperator.bonusSlug}
                 data-page-type="homepage"
-                data-locale="fr"
+                data-locale={locale}
               >
-                Obtenir le bonus
+                {isFr ? 'Obtenir le bonus' : 'Get bonus'}
               </CTAButton>
             </div>
           )}

@@ -57,7 +57,7 @@ export function LocaleSwitcher({ currentLocale, localeUrls }: LocaleSwitcherProp
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="listbox"
-        aria-label="Changer la langue"
+        aria-label={currentLocale === 'fr' ? 'Changer la langue' : 'Change language'}
         className="font-inherit inline-flex h-10 items-center gap-[7px] rounded-[9px] border border-line-2 bg-surface px-3 text-[13.5px] font-semibold text-ink transition-colors hover:border-ink-3"
         data-action="locale-toggle"
       >
@@ -69,7 +69,7 @@ export function LocaleSwitcher({ currentLocale, localeUrls }: LocaleSwitcherProp
       {open && (
         <ul
           role="listbox"
-          aria-label="Choisir la langue"
+          aria-label={currentLocale === 'fr' ? 'Choisir la langue' : 'Choose language'}
           className="absolute right-0 top-12 z-50 min-w-[168px] rounded border border-line bg-surface p-[6px] shadow-3"
         >
           {/* Current locale (selected) */}

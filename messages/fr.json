@@ -51,6 +51,22 @@
     "defaultTitle": "Le Meilleur Casino en Ligne — Comparateur FR",
     "defaultDescription": "Comparateur indépendant de casinos en ligne. Avis experts, bonus vérifiés, classements mis à jour mensuellement."
   },
+  "cards": {
+    "getBonus": "Obtenir le bonus",
+    "readReview": "Lire l'avis",
+    "recommended": "Recommandé",
+    "featuredLabel": "Coup de cœur",
+    "referenceLabel": "Casino de référence :",
+    "overallWinner": "Gagnant global",
+    "tie": "Égalité",
+    "chooseIf": "Choisissez {name} si…",
+    "whyConsider": "Pourquoi l'envisager",
+    "comparisonTable": "Tableau face-à-face",
+    "criteriaBreakdown": "Analyse par critère",
+    "ourVerdict": "Notre verdict",
+    "versusHeadline": "Comparatif 2026",
+    "alternativesHeadline": "Casinos similaires · 2026"
+  },
   "compliance": {
     "disclaimer": "Les jeux d'argent comportent des risques. Jouez de façon responsable.",
     "helpline": "Joueurs Info Service 09 74 75 13 13",

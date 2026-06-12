@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { WithContext, ItemList } from 'schema-dts'
 export const revalidate = 3600
 import { notFound } from 'next/navigation'
 
@@ -8,7 +9,7 @@ import { CTAButton } from '@/components/ui/cta-button'
 import { ListingCard } from '@/components/ui/operator-card'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Locale } from '@/i18n/routing'
-import { operatorBySlug, operators } from '@/config/operators'
+import { operatorBySlug, operators, type Operator } from '@/config/operators'
 import { buildHreflang } from '@/lib/i18n/routes'
 
 export async function generateStaticParams() {
@@ -38,6 +39,46 @@ export async function generateMetadata({
   }
 }
 
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+function extractWager(conditions: string): number {
+  const m = conditions.match(/(\d+)×/)
+  return m ? parseInt(m[1]!, 10) : 40
+}
+
+function licenceScore(licence: string): number {
+  if (licence.toLowerCase().includes('mga')) return 3
+  if (licence.toLowerCase().includes('cga')) return 2
+  return 1
+}
+
+function getWhyConsider(alt: Operator, ref: Operator, isFr: boolean): string {
+  const altLicence = licenceScore(alt.licence)
+  const refLicence = licenceScore(ref.licence)
+  const rtpDiff = alt.rtp - ref.rtp
+  const altWager = extractWager(alt.bonusConditions)
+  const refWager = extractWager(ref.bonusConditions)
+
+  if (altLicence > refLicence) {
+    return isFr
+      ? `Licence ${alt.licence} — protection renforcée pour les joueurs.`
+      : `${alt.licence} licence — enhanced player protection.`
+  }
+  if (rtpDiff >= 0.3) {
+    return isFr
+      ? `RTP moyen de ${alt.rtp.toFixed(1)}% — ${rtpDiff.toFixed(1)} point${rtpDiff >= 1 ? 's' : ''} de plus que ${ref.name}.`
+      : `Average RTP of ${alt.rtp.toFixed(1)}% — ${rtpDiff.toFixed(1)} point${rtpDiff >= 1 ? 's' : ''} higher than ${ref.name}.`
+  }
+  if (altWager < refWager) {
+    return isFr
+      ? `Bonus plus accessible : wager ${altWager}× contre ${refWager}× chez ${ref.name}.`
+      : `Easier bonus to unlock: ${altWager}× wagering vs ${refWager}× at ${ref.name}.`
+  }
+  return alt.tagline
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────────
+
 export default async function AlternativePage({
   params,
 }: {
@@ -55,8 +96,27 @@ export default async function AlternativePage({
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 5)
 
+  const itemListSchema: WithContext<ItemList> = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: isFr
+      ? `Les meilleures alternatives à ${op.name} (2026)`
+      : `Best alternatives to ${op.name} (2026)`,
+    numberOfItems: alternatives.length,
+    itemListElement: alternatives.map((alt, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: alt.name,
+      url: `https://le-meilleur-casino-en-ligne.fr/casinos/${alt.slug}/`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <Breadcrumbs
         items={[
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
@@ -66,6 +126,7 @@ export default async function AlternativePage({
           },
           { label: isFr ? `Alternatives à ${op.name}` : `${op.name} Alternatives` },
         ]}
+        locale={locale}
       />
 
       <section className="py-10" data-page-type="alternative" data-locale={locale}>
@@ -124,7 +185,7 @@ export default async function AlternativePage({
         </div>
       </section>
 
-      <AffiliateDisclosure variant="strip" />
+      <AffiliateDisclosure variant="strip" locale={locale} />
 
       {/* Alternatives list */}
       <section className="pb-16 pt-8">
@@ -134,12 +195,23 @@ export default async function AlternativePage({
           </h2>
           <div className="flex flex-col gap-[14px]">
             {alternatives.map((alt, i) => (
-              <ListingCard
-                key={alt.id}
-                operator={alt}
-                isTop={i === 0}
-                ga4={{ 'data-page-type': 'alternative', 'data-locale': locale }}
-              />
+              <div key={alt.id} className="flex flex-col gap-[6px]">
+                <ListingCard
+                  operator={alt}
+                  isTop={i === 0}
+                  ctaBonus={isFr ? 'Obtenir le bonus' : 'Get bonus'}
+                  ga4={{ 'data-page-type': 'alternative', 'data-locale': locale }}
+                />
+                {/* Contextual "Pourquoi l'envisager" callout */}
+                <div className="flex items-start gap-[10px] rounded-b-lg border border-t-0 border-line bg-surface-2 px-[18px] py-[11px]">
+                  <span className="mt-[1px] shrink-0 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-green">
+                    {isFr ? 'Pourquoi l’envisager' : 'Why consider it'}
+                  </span>
+                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">
+                    {getWhyConsider(alt, op, isFr)}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

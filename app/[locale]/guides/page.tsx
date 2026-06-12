@@ -81,6 +81,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Guides' : 'Guides' },
         ]}
+        locale={locale}
       />
 
       <section className="pb-2 pt-10">

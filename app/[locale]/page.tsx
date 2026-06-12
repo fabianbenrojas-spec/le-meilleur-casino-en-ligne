@@ -8,8 +8,8 @@ import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
+import { FeaturedCard, PodiumCard } from '@/components/ui/operator-card'
 import { NewsletterCTA } from '@/components/ui/newsletter-cta'
-import { PodiumCard } from '@/components/ui/operator-card'
 import { StickyMobileCTA } from '@/components/ui/sticky-mobile-cta'
 import { HomepageQuiz } from '@/components/homepage/homepage-quiz'
 import { OperatorRotator } from '@/components/homepage/operator-rotator'
@@ -63,7 +63,9 @@ const categories = [
   {
     slug: 'machines-a-sous',
     label: 'Machines à sous',
+    labelEn: 'Slot machines',
     count: '2 840 jeux',
+    countEn: '2,840 games',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -81,7 +83,9 @@ const categories = [
   {
     slug: 'roulette',
     label: 'Roulette',
+    labelEn: 'Roulette',
     count: '120 tables',
+    countEn: '120 tables',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -100,7 +104,9 @@ const categories = [
   {
     slug: 'blackjack',
     label: 'Blackjack',
+    labelEn: 'Blackjack',
     count: '85 variantes',
+    countEn: '85 variants',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -118,7 +124,9 @@ const categories = [
   {
     slug: 'live',
     label: 'Casino live',
+    labelEn: 'Live casino',
     count: '340 tables',
+    countEn: '340 tables',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -136,7 +144,9 @@ const categories = [
   {
     slug: 'crash',
     label: 'Crash games',
+    labelEn: 'Crash games',
     count: '62 jeux',
+    countEn: '62 games',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -160,7 +170,9 @@ const guides = [
   {
     slug: 'legalite',
     title: 'Légalité en France',
+    titleEn: 'Legality in France',
     desc: "Casino en ligne et loi française : ce qui est autorisé, l'ANJ, et les risques réels.",
+    descEn: 'Online casinos and French law: what is permitted, the ANJ, and the real risks.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -177,7 +189,9 @@ const guides = [
   {
     slug: 'jeu-responsable',
     title: 'Jeu responsable',
+    titleEn: 'Responsible gambling',
     desc: "Reconnaître les signaux, fixer des limites, et où trouver de l'aide gratuitement.",
+    descEn: 'Recognising the signs, setting limits, and where to get free help.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -194,13 +208,17 @@ const guides = [
   {
     slug: 'rtp',
     title: 'Comprendre le RTP',
+    titleEn: 'Understanding RTP',
     desc: 'Taux de redistribution, volatilité, avantage maison : décoder les chiffres qui comptent.',
+    descEn: 'Return-to-player, volatility, house edge: decoding the numbers that matter.',
     icon: <TrendingUp size={21} aria-hidden />,
   },
   {
     slug: 'paiements',
     title: 'Méthodes de paiement',
+    titleEn: 'Payment methods',
     desc: 'CB, e-wallets, crypto : délais de retrait, frais cachés et sécurité comparés.',
+    descEn: 'Cards, e-wallets, crypto: withdrawal times, hidden fees and security compared.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -222,22 +240,30 @@ const guides = [
 const methodItems = [
   {
     title: 'Tests avec argent réel',
+    titleEn: 'Real-money testing',
     desc: 'Dépôt, mises, et demande de retrait effectifs sur chaque casino noté.',
+    descEn: 'Actual deposits, bets, and withdrawal requests on every rated casino.',
     icon: <Check size={18} aria-hidden />,
   },
   {
     title: 'Vitesse de retrait chronométrée',
+    titleEn: 'Timed withdrawal speed',
     desc: 'On mesure le délai réel entre la demande et la réception des fonds.',
+    descEn: 'We measure the real delay between request and receipt of funds.',
     icon: <Clock size={18} aria-hidden />,
   },
   {
     title: 'Vérification des licences',
+    titleEn: 'Licence verification',
     desc: 'Contrôle de la validité de la licence et des conditions de bonus, ligne par ligne.',
+    descEn: 'Checking licence validity and bonus terms, line by line.',
     icon: <Shield size={18} aria-hidden />,
   },
   {
     title: "Support mis à l'épreuve",
+    titleEn: 'Support stress-tested',
     desc: 'Questions pièges au support pour évaluer réactivité et compétence en français.',
+    descEn: 'Trap questions to support to assess responsiveness and competence.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -255,7 +281,7 @@ const methodItems = [
 
 // ── FAQ ──────────────────────────────────────────────────────────────────────
 
-const faqItems = [
+const faqItems_FR = [
   {
     question: 'Les casinos en ligne sont-ils légaux en France ?',
     answer:
@@ -278,29 +304,64 @@ const faqItems = [
   },
 ]
 
+const faqItems_EN = [
+  {
+    question: 'Are online casinos legal in France?',
+    answer:
+      'Online casinos are not regulated by the ANJ in France, unlike sports betting and poker. The operators we list hold valid European or international licences. We detail the legal framework and risks in our dedicated guide.',
+  },
+  {
+    question: 'How do you rate casinos?',
+    answer:
+      'Each casino is assessed on 38 criteria across 6 categories: bonuses, game library, payments, security, support, and mobile experience. We test with real money and re-test every 90 days.',
+  },
+  {
+    question: 'Are you paid by the casinos?',
+    answer:
+      "Yes, we earn a commission when a player signs up via our links. This never influences our ratings: a poorly-rated casino stays poorly rated, partner or not. That's the condition of our editorial independence.",
+  },
+  {
+    question: 'What to do if gambling becomes a problem?',
+    answer:
+      'If gambling is no longer fun, contact GamCare on 0808 8020 133 (free, 24/7). You can also request self-exclusion directly from each operator.',
+  },
+]
+
 // ── Blog articles ────────────────────────────────────────────────────────────
 
 const blogPosts = [
   {
     slug: 'anj-2026',
     category: 'Législation',
+    categoryEn: 'Regulation',
     date: '4 juin 2026',
+    dateEn: '4 June 2026',
     title: "Casino en ligne en France : ce qui change avec l'ANJ en 2026",
+    titleEn: '2026 ANJ Update: what changes for online players',
     excerpt: 'Le point complet sur le cadre légal et ce que ça implique pour les joueurs.',
+    excerptEn: 'The full breakdown of the legal framework and what it means for players.',
   },
   {
     slug: 'wager-pieges',
     category: 'Bonus',
+    categoryEn: 'Bonus',
     date: '1 juin 2026',
+    dateEn: '1 June 2026',
     title: 'Conditions de wager : les 5 pièges qui annulent votre bonus',
+    titleEn: 'Wagering conditions: the 5 traps that void your bonus',
     excerpt: 'Comment lire les petites lignes avant de réclamer une offre de bienvenue.',
+    excerptEn: 'How to read the fine print before claiming a welcome offer.',
   },
   {
     slug: 'retraits-crypto',
     category: 'Paiements',
+    categoryEn: 'Payments',
     date: '28 mai 2026',
+    dateEn: '28 May 2026',
     title: 'Retraits crypto : vraiment plus rapides ? Notre test chronométré',
+    titleEn: 'Crypto withdrawals: really faster? Our timed test',
     excerpt: 'On a comparé 12 casinos sur leurs délais de retrait réels en Bitcoin.',
+    excerptEn: 'We compared 12 casinos on their real Bitcoin withdrawal times.',
   },
 ]
 
@@ -331,6 +392,20 @@ function ItemListSchema({ locale }: { locale: Locale }) {
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  const isEn = locale === 'en'
+  const isFr = !isEn
+  const faqItems = isFr ? faqItems_FR : faqItems_EN
+  const methodStats = isFr
+    ? [
+        { v: '47', l: 'opérateurs testés' },
+        { v: '38', l: 'critères par casino' },
+        { v: '90j', l: 're-test systématique' },
+      ]
+    : [
+        { v: '47', l: 'operators tested' },
+        { v: '38', l: 'criteria per casino' },
+        { v: '90d', l: 'systematic re-test' },
+      ]
   const topOp = TOP_3[0]!
   const secondOp = TOP_3[1]!
   const thirdOp = TOP_3[2]!
@@ -344,46 +419,55 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           {/* Eyebrow */}
           <div className="mb-5 inline-flex items-center gap-[9px] font-mono text-xs uppercase tracking-[0.14em] text-green before:h-px before:w-[26px] before:bg-gold before:content-['']">
-            Comparatif indépendant · 2026
+            {isFr ? 'Comparatif indépendant · 2026' : 'Independent comparison · 2026'}
           </div>
 
-          {/* H1 — SEO-stable. "meilleur casino en ligne" always present server-side. */}
+          {/* H1 — SEO-stable. Key phrase always present server-side. */}
           <h1 className="mb-5 max-w-[19ch] font-serif text-[clamp(34px,5.4vw,60px)] font-medium leading-[1.05] tracking-[-0.022em] text-ink">
-            On a testé <OperatorRotator /> et 46 autres pour élire le{' '}
-            <em className="italic not-italic text-green">meilleur casino en ligne</em>.
+            {isFr ? (
+              <>
+                On a testé <OperatorRotator /> et 46 autres pour élire le{' '}
+                <em className="italic not-italic text-green">meilleur casino en ligne</em>.
+              </>
+            ) : (
+              <>
+                We tested <OperatorRotator /> and 46 others to find the{' '}
+                <em className="italic not-italic text-green">best online casino</em>.
+              </>
+            )}
           </h1>
 
           <p className="mb-0 max-w-[56ch] text-[19px] leading-[1.55] text-ink-2">
-            Nous analysons chaque opérateur sur 38 critères — bonus réels, vitesse de retrait,
-            sécurité, qualité du support — pour ne vous recommander que ceux qui tiennent leurs
-            promesses.
+            {isFr
+              ? 'Nous analysons chaque opérateur sur 38 critères — bonus réels, vitesse de retrait, sécurité, qualité du support — pour ne vous recommander que ceux qui tiennent leurs promesses.'
+              : 'We assess every operator on 38 criteria — real bonuses, withdrawal speed, security, support quality — to recommend only those that keep their promises.'}
           </p>
 
           {/* Trust row */}
           <div className="mt-[26px] flex flex-wrap items-center gap-[22px]">
             <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
               <Shield size={16} className="shrink-0 text-green" aria-hidden />
-              47 opérateurs analysés
+              {isFr ? '47 opérateurs analysés' : '47 operators tested'}
             </span>
             <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
               <Clock size={16} className="shrink-0 text-green" aria-hidden />
-              Mis à jour le 6 juin 2026
+              {isFr ? 'Mis à jour le 6 juin 2026' : 'Updated 6 June 2026'}
             </span>
             <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
               <span className="rounded-[5px] bg-red px-[7px] py-[2px] font-mono text-[11px] font-semibold text-white">
                 18+
               </span>
-              Jeu responsable
+              {isFr ? 'Jeu responsable' : 'Gamble responsibly'}
             </span>
           </div>
 
           {/* Podium */}
           <div className="mt-[44px] flex items-baseline justify-between">
             <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink-3">
-              Notre podium — juin 2026
+              {isFr ? 'Notre podium — juin 2026' : 'Our top 3 — June 2026'}
             </span>
             <CTAButton href="#top10" variant="tertiary" data-event="toc_click" data-section="top10">
-              <u>Voir le top 10 complet</u>
+              <u>{isFr ? 'Voir le top 10 complet' : 'See full top 10'}</u>
             </CTAButton>
           </div>
 
@@ -395,16 +479,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <PodiumCard
               operator={{ ...topOp, affiliateUrl: topOp.affiliateUrl }}
               rank={1}
+              locale={locale}
               ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
             />
             <PodiumCard
               operator={{ ...secondOp }}
               rank={2}
+              locale={locale}
               ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
             />
             <PodiumCard
               operator={{ ...thirdOp }}
               rank={3}
+              locale={locale}
               ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
             />
           </div>
@@ -412,7 +499,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       </section>
 
       {/* Affiliate disclosure — visible without scrolling, under hero */}
-      <AffiliateDisclosure variant="strip" />
+      <AffiliateDisclosure variant="strip" locale={locale} />
+
+      {/* ── EDITOR'S PICK ────────────────────────────────────────── */}
+      <section className="py-10">
+        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+          <div className="mb-[22px]">
+            <div className="mb-[10px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-gold before:h-px before:w-[22px] before:bg-gold before:content-['']">
+              {locale === 'fr' ? 'Coup de cœur' : "Editor's pick"}
+            </div>
+            <h2 className="m-0 font-serif text-[clamp(22px,3vw,32px)] font-medium leading-[1.1] tracking-[-0.016em] text-ink">
+              {locale === 'fr' ? 'Notre meilleur casino du moment' : 'Our top casino right now'}
+            </h2>
+          </div>
+          <FeaturedCard
+            operator={topOp}
+            locale={locale}
+            ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
+          />
+        </div>
+      </section>
 
       {/* ── TOP 10 TABLE ─────────────────────────────────────────── */}
       <section className="py-16" id="top10">
@@ -420,14 +526,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Classement
+                {isFr ? 'Classement' : 'Ranking'}
               </div>
               <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-                Top 10 des casinos en ligne en France
+                {isFr ? 'Top 10 des casinos en ligne en France' : 'Top 10 Best Online Casinos 2026'}
               </h2>
               <p className="mt-[14px] max-w-[64ch] text-[16.5px] text-ink-2">
-                Triable par note, bonus ou RTP moyen. Chaque opérateur est re-testé tous les 90
-                jours.
+                {isFr
+                  ? 'Triable par note, bonus ou RTP moyen. Chaque opérateur est re-testé tous les 90 jours.'
+                  : 'Sortable by rating, bonus, or average RTP. Every operator is re-tested every 90 days.'}
               </p>
             </div>
             <CTAButton
@@ -436,18 +543,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               data-event="review_click"
               data-placement="top10_header"
             >
-              Voir tous les casinos
+              {isFr ? 'Voir tous les casinos' : 'See all casinos'}
             </CTAButton>
           </div>
 
-          <Top10Table operators={TOP_10} />
+          <Top10Table operators={TOP_10} locale={locale} />
 
           <p className="mt-[14px] text-center text-[12.5px] text-ink-3">
-            Classement établi selon notre{' '}
-            <a href="/guides/methodologie/" className="text-green hover:underline">
-              méthodologie de notation
-            </a>
-            . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
+            {isFr ? (
+              <>
+                Classement établi selon notre{' '}
+                <a href="/guides/methodologie/" className="text-green hover:underline">
+                  méthodologie de notation
+                </a>
+                . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
+              </>
+            ) : (
+              <>
+                Ranking based on our{' '}
+                <a href="/guides/methodologie/" className="text-green hover:underline">
+                  rating methodology
+                </a>
+                . We earn a commission on sign-ups — with no impact on ratings.
+              </>
+            )}
           </p>
         </div>
       </section>
@@ -457,10 +576,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              Par type de jeu
+              {isFr ? 'Par type de jeu' : 'By game type'}
             </div>
             <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Explorez par catégorie
+              {isFr ? 'Explorez par catégorie' : 'Browse by category'}
             </h2>
           </div>
 
@@ -480,8 +599,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                   </span>
                 </div>
                 <div className="px-[15px] py-[13px]">
-                  <div className="text-[15px] font-bold">{cat.label}</div>
-                  <div className="mt-[2px] text-xs text-ink-3">{cat.count}</div>
+                  <div className="text-[15px] font-bold">
+                    {isFr ? cat.label : (cat.labelEn ?? cat.label)}
+                  </div>
+                  <div className="mt-[2px] text-xs text-ink-3">
+                    {isFr ? cat.count : (cat.countEn ?? cat.count)}
+                  </div>
                 </div>
               </a>
             ))}
@@ -494,16 +617,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              En 30 secondes
+              {isFr ? 'En 30 secondes' : 'In 30 seconds'}
             </div>
             <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Trouvez le casino fait pour vous
+              {isFr ? 'Trouvez le casino fait pour vous' : 'Find the casino made for you'}
             </h2>
             <p className="mt-[14px] max-w-[64ch] text-[16.5px] text-ink-2">
-              Trois questions, une recommandation personnalisée — sans inscription.
+              {isFr
+                ? 'Trois questions, une recommandation personnalisée — sans inscription.'
+                : 'Three questions, one personalised recommendation — no sign-up required.'}
             </p>
           </div>
-          <HomepageQuiz topOperator={topOp} />
+          <HomepageQuiz topOperator={topOp} locale={locale} />
         </div>
       </section>
 
@@ -512,10 +637,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              Guides essentiels
+              {isFr ? 'Guides essentiels' : 'Essential guides'}
             </div>
             <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Comprendre avant de jouer
+              {isFr ? 'Comprendre avant de jouer' : 'Understand before you play'}
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -530,9 +655,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 <span className="grid h-[42px] w-[42px] place-items-center rounded-[11px] bg-green-50 text-green">
                   {guide.icon}
                 </span>
-                <h3 className="m-0 font-serif text-[19px] font-semibold text-ink">{guide.title}</h3>
-                <p className="m-0 flex-1 text-[13.5px] leading-[1.5] text-ink-2">{guide.desc}</p>
-                <span className="text-[13px] font-bold text-green">Lire le guide →</span>
+                <h3 className="m-0 font-serif text-[19px] font-semibold text-ink">
+                  {isFr ? guide.title : (guide.titleEn ?? guide.title)}
+                </h3>
+                <p className="m-0 flex-1 text-[13.5px] leading-[1.5] text-ink-2">
+                  {isFr ? guide.desc : (guide.descEn ?? guide.desc)}
+                </p>
+                <span className="text-[13px] font-bold text-green">
+                  {isFr ? 'Lire le guide →' : 'Read guide →'}
+                </span>
               </a>
             ))}
           </div>
@@ -546,23 +677,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             {/* Left */}
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Pourquoi nous faire confiance
+                {isFr ? 'Pourquoi nous faire confiance' : 'Why trust us'}
               </div>
               <h2 className="mb-4 font-serif text-[clamp(27px,3.6vw,38px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
-                Une méthodologie, pas des opinions.
+                {isFr ? 'Une méthodologie, pas des opinions.' : 'A methodology, not opinions.'}
               </h2>
               <p className="mb-6 max-w-[52ch] text-[16px] text-ink-2">
-                Chaque opérateur est testé avec de l&apos;argent réel par notre équipe : on dépose,
-                on joue, on demande un retrait, on contacte le support. Aucune note n&apos;est
-                influencée par nos partenariats commerciaux.
+                {isFr
+                  ? "Chaque opérateur est testé avec de l'argent réel par notre équipe : on dépose, on joue, on demande un retrait, on contacte le support. Aucune note n'est influencée par nos partenariats commerciaux."
+                  : 'Every operator is tested with real money by our team: we deposit, play, request a withdrawal, and contact support. No rating is influenced by our commercial partnerships.'}
               </p>
               {/* Stats */}
               <div className="mb-7 flex flex-wrap gap-9">
-                {[
-                  { v: '47', l: 'opérateurs testés' },
-                  { v: '38', l: 'critères par casino' },
-                  { v: '90j', l: 're-test systématique' },
-                ].map((s) => (
+                {methodStats.map((s) => (
                   <div key={s.l}>
                     <div className="font-serif text-[42px] font-semibold leading-none tracking-[-0.02em] text-green">
                       {s.v}
@@ -573,10 +700,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               </div>
               <AuthorBio
                 name="Julien Marchand"
-                role="Rédacteur en chef · 11 ans dans l'iGaming"
-                credentials="Ex-analyste conformité · testé 200+ casinos"
+                role={
+                  isFr
+                    ? "Rédacteur en chef · 11 ans dans l'iGaming"
+                    : 'Editor-in-chief · 11 years in iGaming'
+                }
+                credentials={
+                  isFr
+                    ? 'Ex-analyste conformité · testé 200+ casinos'
+                    : 'Former compliance analyst · tested 200+ casinos'
+                }
                 lastUpdated="2026-06-06"
                 nextRetest="2026-09-01"
+                locale={locale}
               />
             </div>
 
@@ -589,8 +725,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                       {item.icon}
                     </span>
                     <div>
-                      <div className="text-[15px] font-bold text-ink">{item.title}</div>
-                      <div className="mt-[2px] text-[13.5px] text-ink-2">{item.desc}</div>
+                      <div className="text-[15px] font-bold text-ink">
+                        {isFr ? item.title : (item.titleEn ?? item.title)}
+                      </div>
+                      <div className="mt-[2px] text-[13.5px] text-ink-2">
+                        {isFr ? item.desc : (item.descEn ?? item.desc)}
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -601,7 +741,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 className="mt-6"
                 data-event="methodology_click"
               >
-                Lire notre méthodologie complète
+                {isFr ? 'Lire notre méthodologie complète' : 'Read our full methodology'}
               </CTAButton>
             </div>
           </div>
@@ -614,10 +754,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Le journal
+                {isFr ? 'Le journal' : 'Blog'}
               </div>
               <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-                Derniers articles &amp; analyses
+                {isFr ? 'Derniers articles & analyses' : 'Latest articles & analysis'}
               </h2>
             </div>
             <CTAButton
@@ -626,7 +766,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               data-event="blog_click"
               data-placement="section_header"
             >
-              Tous les articles
+              {isFr ? 'Tous les articles' : 'All articles'}
             </CTAButton>
           </div>
 
@@ -647,12 +787,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </div>
                 <div className="px-5 py-[18px] pb-[22px]">
                   <div className="mb-[9px] font-mono text-[11px] uppercase tracking-[0.04em] text-ink-3">
-                    {post.category} · {post.date}
+                    {isFr ? post.category : (post.categoryEn ?? post.category)} ·{' '}
+                    {isFr ? post.date : (post.dateEn ?? post.date)}
                   </div>
                   <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.25] text-ink">
-                    {post.title}
+                    {isFr ? post.title : (post.titleEn ?? post.title)}
                   </h3>
-                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{post.excerpt}</p>
+                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">
+                    {isFr ? post.excerpt : (post.excerptEn ?? post.excerpt)}
+                  </p>
                 </div>
               </a>
             ))}
@@ -665,10 +808,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-[880px] px-8 sm:px-[18px]">
           <div className="mb-[30px]">
             <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              Questions fréquentes
+              {isFr ? 'Questions fréquentes' : 'FAQ'}
             </div>
             <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Vous vous demandez…
+              {isFr ? 'Vous vous demandez…' : 'You may be wondering…'}
             </h2>
           </div>
           <FAQAccordion items={faqItems} includeSchema />
@@ -680,8 +823,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <NewsletterCTA
             placement="homepage_footer"
-            headline="Les meilleurs bonus, une fois par semaine."
-            subline="Offres vérifiées, nouveaux tests et alertes arnaques. Pas de spam, désinscription en un clic."
+            locale={locale}
+            headline={
+              isFr ? 'Les meilleurs bonus, une fois par semaine.' : 'The best bonuses, once a week.'
+            }
+            subline={
+              isFr
+                ? 'Offres vérifiées, nouveaux tests et alertes arnaques. Pas de spam, désinscription en un clic.'
+                : 'Verified offers, new reviews, and scam alerts. No spam, unsubscribe in one click.'
+            }
           />
         </div>
       </section>
@@ -693,6 +843,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         rating={topOp.rating}
         bonusLabel={`${topOp.bonusAmount}${topOp.bonusSuffix ? ` ${topOp.bonusSuffix}` : ''} · ${topOp.bonusConditions}`}
         affiliateUrl={topOp.affiliateUrl}
+        locale={locale}
+        pageType="homepage"
+        bonusSlug={topOp.bonusSlug}
       />
     </>
   )

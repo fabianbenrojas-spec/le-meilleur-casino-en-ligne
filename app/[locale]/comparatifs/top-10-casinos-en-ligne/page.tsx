@@ -9,6 +9,7 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { RankCard } from '@/components/ui/operator-card'
+import { Top10Table } from '@/components/homepage/top10-table'
 import type { Locale } from '@/i18n/routing'
 import { TOP_10 } from '@/config/operators'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -28,10 +29,7 @@ export async function generateMetadata({
       ? 'Our ranking of the 10 best online casinos in France 2026. Sortable table, /10 ratings, bonuses and RTP. Tested with real money. 18+'
       : "Notre classement des 10 meilleurs casinos en ligne en France en 2026. Tableau comparatif triable, notes /10, bonus et RTP. Testés à l'argent réel. 18+",
     alternates: {
-      languages: buildHreflang(
-        '/comparatifs/top-10-casinos-en-ligne/',
-        '/comparisons/top-10-online-casinos/'
-      ),
+      languages: buildHreflang('/comparatifs/top-10-casinos-en-ligne/'),
     },
   }
 }
@@ -54,6 +52,24 @@ const faq = [
   },
 ]
 
+const faq_EN = [
+  {
+    question: 'How do you establish this ranking?',
+    answer:
+      'Each casino is tested with real money by our team across 38 criteria: bonus, game library, payments, support, security and mobile. Ratings are updated every 90 days.',
+  },
+  {
+    question: 'Are these casinos legal in France?',
+    answer:
+      'Online casinos are not regulated by the ANJ. The operators in our ranking hold Curaçao or MGA licences, valid internationally. We detail the legal framework in our dedicated guide.',
+  },
+  {
+    question: 'What is the best online casino in France in 2026?',
+    answer:
+      'Crésus Casino is our #1 in 2026: withdrawals within 24h, 2,100+ games, €200 bonus + 100 spins with a reasonable 35× wagering requirement, and responsive support.',
+  },
+]
+
 export default async function ComparatifTop10Page({
   params,
 }: {
@@ -73,6 +89,7 @@ export default async function ComparatifTop10Page({
           },
           { label: isFr ? 'Top 10 casinos en ligne' : 'Top 10 online casinos' },
         ]}
+        locale={locale}
       />
 
       {/* Head */}
@@ -124,20 +141,33 @@ export default async function ComparatifTop10Page({
               />
               <div>
                 <p className="text-[12.5px] font-bold text-ink">Julien Marchand</p>
-                <p className="text-[11px] text-ink-3">Rédacteur en chef</p>
+                <p className="text-[11px] text-ink-3">
+                  {isFr ? 'Rédacteur en chef' : 'Editor-in-chief'}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <AffiliateDisclosure variant="strip" />
+      <AffiliateDisclosure variant="strip" locale={locale} />
+
+      {/* Sortable overview table */}
+      <section className="py-10">
+        <div className="mx-auto max-w-site px-8 sm:px-[18px]">
+          <h2 className="mb-5 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
+            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">01</span>
+            {isFr ? 'Tableau comparatif' : 'Comparison table'}
+          </h2>
+          <Top10Table operators={TOP_10} locale={locale} />
+        </div>
+      </section>
 
       {/* RankCards */}
       <section className="py-14">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">
           <h2 className="mb-6 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
-            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">01</span>
+            <span className="mr-[10px] font-mono text-[14px] font-medium text-green">02</span>
             {isFr ? 'Notre sélection complète' : 'Our full selection'}
           </h2>
 
@@ -148,6 +178,7 @@ export default async function ComparatifTop10Page({
                 operator={op}
                 rank={i + 1}
                 medal={i < 3 ? ((i + 1) as 1 | 2 | 3) : undefined}
+                locale={locale}
                 ga4={{ 'data-page-type': 'comparatif', 'data-locale': locale }}
               />
             ))}
@@ -259,11 +290,12 @@ export default async function ComparatifTop10Page({
             lastUpdated="2026-06-07"
             nextRetest="2026-09-01"
             className="mb-10"
+            locale={locale}
           />
           <h2 className="mb-6 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? 'Questions fréquentes' : 'Frequently asked questions'}
           </h2>
-          <FAQAccordion items={faq} includeSchema />
+          <FAQAccordion items={isFr ? faq : faq_EN} includeSchema />
         </div>
       </section>
     </>

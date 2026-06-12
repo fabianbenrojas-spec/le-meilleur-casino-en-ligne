@@ -19,7 +19,7 @@ export async function generateMetadata({
     description: isFr
       ? 'Guide complet des jeux de casino en ligne : machines à sous, roulette, blackjack, live, crash games. RTP, stratégies et meilleures variantes.'
       : 'Complete guide to online casino games: slots, roulette, blackjack, live, crash. RTP, strategies and best variants.',
-    alternates: { languages: buildHreflang('/jeux/', '/games/') },
+    alternates: { languages: buildHreflang('/jeux/') },
   }
 }
 
@@ -104,6 +104,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Jeux' : 'Games' },
         ]}
+        locale={locale}
       />
 
       <section className="pb-2 pt-10">

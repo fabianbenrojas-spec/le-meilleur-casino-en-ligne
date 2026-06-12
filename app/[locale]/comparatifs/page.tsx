@@ -3,7 +3,7 @@ export const revalidate = 3600
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
-import { ScorePill } from '@/components/ui/score-pill'
+import { LogoOrPlaceholder } from '@/components/ui/operator-card'
 import { TOP_10, operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -23,7 +23,7 @@ export async function generateMetadata({
       locale === 'fr'
         ? "Top 10, versus casino vs casino, alternatives et comparatifs thématiques. Testés à l'argent réel."
         : 'Top 10, casino vs casino, alternatives and themed comparisons. Tested with real money.',
-    alternates: { languages: buildHreflang('/comparatifs/', '/comparisons/') },
+    alternates: { languages: buildHreflang('/comparatifs/') },
   }
 }
 
@@ -52,6 +52,7 @@ export default async function ComparatifsHubPage({
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Comparatifs' : 'Comparisons' },
         ]}
+        locale={locale}
       />
 
       <section className="pb-2 pt-10">
@@ -102,9 +103,15 @@ export default async function ComparatifsHubPage({
                   ? '47 opérateurs testés · notes /10 · re-testé tous les 90j'
                   : '47 operators tested · /10 ratings · re-tested every 90d'}
               </p>
-              <div className="mt-auto flex gap-2">
+              <div className="mt-auto flex items-center gap-3">
                 {TOP_10.slice(0, 3).map((op) => (
-                  <ScorePill key={op.id} score={op.rating} className="text-[13px]" />
+                  <LogoOrPlaceholder
+                    key={op.id}
+                    logoUrl={op.logoUrl}
+                    name={op.name}
+                    width={72}
+                    height={28}
+                  />
                 ))}
               </div>
               <span className="font-bold text-green">
@@ -152,14 +159,14 @@ export default async function ComparatifsHubPage({
                 data-event="versus_click"
                 data-slug={versusSlug(a.slug, b.slug)}
               >
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <ScorePill score={a.rating} className="px-[8px] py-[3px] text-[12px]" />
-                  <span className="truncate text-[14px] font-semibold">{a.name}</span>
+                <div className="flex min-w-0 flex-1 flex-col gap-1">
+                  <LogoOrPlaceholder logoUrl={a.logoUrl} name={a.name} width={80} height={30} />
+                  <span className="truncate text-[12px] text-ink-2">{a.name}</span>
                 </div>
                 <span className="shrink-0 font-mono text-[11px] text-ink-3">vs</span>
-                <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
-                  <span className="truncate text-[14px] font-semibold">{b.name}</span>
-                  <ScorePill score={b.rating} className="px-[8px] py-[3px] text-[12px]" />
+                <div className="flex min-w-0 flex-1 flex-col items-end gap-1">
+                  <LogoOrPlaceholder logoUrl={b.logoUrl} name={b.name} width={80} height={30} />
+                  <span className="truncate text-[12px] text-ink-2">{b.name}</span>
                 </div>
               </a>
             ))}
@@ -178,14 +185,15 @@ export default async function ComparatifsHubPage({
               <a
                 key={op.id}
                 href={`/alternatives/${op.slug}/`}
-                className="rounded-lg border border-line bg-surface p-4 text-center text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
+                className="flex flex-col items-center gap-2 rounded-lg border border-line bg-surface p-4 text-center text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
                 data-event="alternative_click"
                 data-operator={op.slug}
               >
-                <p className="mb-1 text-[13px] font-semibold text-ink">
+                <LogoOrPlaceholder logoUrl={op.logoUrl} name={op.name} width={90} height={34} />
+                <p className="text-[11px] text-ink-3">
                   {isFr ? 'Alternatives à' : 'Alternatives to'}
                 </p>
-                <p className="font-bold text-ink">{op.name}</p>
+                <p className="text-[13px] font-semibold text-ink">{op.name}</p>
               </a>
             ))}
           </div>

@@ -10,10 +10,11 @@ interface AuthorBioProps {
   lastUpdated?: string // ISO date string
   nextRetest?: string // ISO date string
   className?: string
+  locale?: string
 }
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('fr-FR', {
+function formatDate(iso: string, locale: string = 'fr') {
+  return new Date(iso).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -28,7 +29,9 @@ export function AuthorBio({
   lastUpdated,
   nextRetest,
   className,
+  locale = 'fr',
 }: AuthorBioProps) {
+  const isFr = locale === 'fr'
   return (
     <div
       className={cn(
@@ -59,9 +62,17 @@ export function AuthorBio({
         {credentials && <p className="mt-1 text-[12px] text-ink-2">{credentials}</p>}
         {(lastUpdated ?? nextRetest) && (
           <p className="mt-1 font-mono text-[11px] text-ink-3">
-            {lastUpdated && <>MÀJ {formatDate(lastUpdated)}</>}
+            {lastUpdated && (
+              <>
+                {isFr ? 'MÀJ' : 'Updated'} {formatDate(lastUpdated, locale)}
+              </>
+            )}
             {lastUpdated && nextRetest && <span className="mx-1.5 opacity-50">·</span>}
-            {nextRetest && <>Re-test prévu {formatDate(nextRetest)}</>}
+            {nextRetest && (
+              <>
+                {isFr ? 'Re-test prévu' : 'Re-test due'} {formatDate(nextRetest, locale)}
+              </>
+            )}
           </p>
         )}
       </div>

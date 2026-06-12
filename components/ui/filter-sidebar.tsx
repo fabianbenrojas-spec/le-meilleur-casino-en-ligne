@@ -135,9 +135,17 @@ interface FilterSidebarProps {
   active: ActiveFilters
   onChange: (next: ActiveFilters) => void
   className?: string
+  locale?: string
 }
 
-export function FilterSidebar({ groups, active, onChange, className }: FilterSidebarProps) {
+export function FilterSidebar({
+  groups,
+  active,
+  onChange,
+  className,
+  locale = 'fr',
+}: FilterSidebarProps) {
+  const isFr = locale === 'fr'
   const hasActive = Object.values(active).some((v) => v.length > 0)
 
   const toggle = useCallback(
@@ -184,7 +192,9 @@ export function FilterSidebar({ groups, active, onChange, className }: FilterSid
                 type="button"
                 onClick={() => toggle(chip.groupKey, chip.value)}
                 className="grid h-4 w-4 cursor-pointer place-items-center rounded-full border-0 bg-transparent text-green-ink hover:bg-[color-mix(in_srgb,var(--green)_18%,transparent)]"
-                aria-label={`Supprimer le filtre ${chip.label}`}
+                aria-label={
+                  isFr ? `Supprimer le filtre ${chip.label}` : `Remove filter ${chip.label}`
+                }
               >
                 <X size={12} aria-hidden />
               </button>
@@ -198,7 +208,7 @@ export function FilterSidebar({ groups, active, onChange, className }: FilterSid
         <div className="flex items-center justify-between border-b border-line px-[18px] py-4">
           <h2 className="m-0 flex items-center gap-2 text-[15px] font-bold text-ink">
             <Filter size={16} className="text-green" aria-hidden />
-            Filtres
+            {isFr ? 'Filtres' : 'Filters'}
           </h2>
           {hasActive && (
             <button
@@ -206,7 +216,7 @@ export function FilterSidebar({ groups, active, onChange, className }: FilterSid
               onClick={reset}
               className="cursor-pointer rounded-[6px] border-0 bg-transparent px-[6px] py-1 text-[12.5px] font-semibold text-green hover:bg-green-50"
             >
-              Réinitialiser
+              {isFr ? 'Réinitialiser' : 'Reset'}
             </button>
           )}
         </div>
@@ -229,9 +239,16 @@ interface FilterBottomSheetProps {
   groups: FilterGroup[]
   active: ActiveFilters
   onChange: (next: ActiveFilters) => void
+  locale?: string
 }
 
-export function FilterBottomSheet({ groups, active, onChange }: FilterBottomSheetProps) {
+export function FilterBottomSheet({
+  groups,
+  active,
+  onChange,
+  locale = 'fr',
+}: FilterBottomSheetProps) {
+  const isFr = locale === 'fr'
   const [sheetOpen, setSheetOpen] = useState(false)
   const [draft, setDraft] = useState<ActiveFilters>(active)
 
@@ -279,7 +296,7 @@ export function FilterBottomSheet({ groups, active, onChange }: FilterBottomShee
           className="font-inherit inline-flex min-h-[48px] w-full cursor-pointer items-center justify-center gap-[9px] rounded border-[1.5px] border-solid border-line-2 bg-surface text-[15px] font-bold text-ink"
         >
           <SlidersHorizontal size={17} aria-hidden />
-          Filtres
+          {isFr ? 'Filtres' : 'Filters'}
           {activeCount > 0 && (
             <span className="grid min-h-[19px] min-w-[19px] place-items-center rounded-full bg-green px-[5px] font-mono text-[11px] text-white">
               {activeCount}
@@ -299,12 +316,14 @@ export function FilterBottomSheet({ groups, active, onChange }: FilterBottomShee
             style={{ animation: 'sheetUp .28s ease' }}
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-[18px]">
-              <h2 className="m-0 font-serif text-[20px] font-semibold text-ink">Filtres</h2>
+              <h2 className="m-0 font-serif text-[20px] font-semibold text-ink">
+                {isFr ? 'Filtres' : 'Filters'}
+              </h2>
               <button
                 type="button"
                 onClick={() => setSheetOpen(false)}
                 className="grid h-[38px] w-[38px] cursor-pointer place-items-center rounded-[9px] border border-line-2 bg-surface"
-                aria-label="Fermer"
+                aria-label={isFr ? 'Fermer' : 'Close'}
               >
                 <X size={18} aria-hidden />
               </button>
@@ -324,10 +343,10 @@ export function FilterBottomSheet({ groups, active, onChange }: FilterBottomShee
 
             <div className="flex gap-3 border-t border-line p-[14px] pb-[calc(14px+env(safe-area-inset-bottom))]">
               <CTAButton variant="secondary" size="sm" block onClick={reset}>
-                Réinitialiser
+                {isFr ? 'Réinitialiser' : 'Reset'}
               </CTAButton>
               <CTAButton variant="primary" size="sm" block onClick={apply}>
-                Voir les résultats
+                {isFr ? 'Voir les résultats' : 'View results'}
               </CTAButton>
             </div>
           </div>

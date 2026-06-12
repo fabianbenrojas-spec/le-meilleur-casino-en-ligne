@@ -72,7 +72,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
             <Search size={18} aria-hidden />
           </button>
 
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
 
           <div className="hidden md:block">
             <LocaleSwitcher currentLocale={locale} localeUrls={localeUrls} />
@@ -82,6 +82,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
             items={navItems}
             labelOpen={isFr ? 'Ouvrir le menu' : 'Open menu'}
             labelClose={isFr ? 'Fermer le menu' : 'Close menu'}
+            locale={locale}
           />
         </div>
       </div>

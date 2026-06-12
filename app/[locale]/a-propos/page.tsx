@@ -19,7 +19,7 @@ export async function generateMetadata({
     description: isFr
       ? 'Qui sommes-nous, comment nous testons les casinos, notre modèle économique et nos engagements éditoriaux.'
       : 'Who we are, how we test casinos, our business model and editorial commitments.',
-    alternates: { languages: buildHreflang('/a-propos/', '/about/') },
+    alternates: { languages: buildHreflang('/a-propos/') },
   }
 }
 
@@ -67,6 +67,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'À propos' : 'About' },
         ]}
+        locale={locale}
       />
 
       <section className="pb-2 pt-10">
@@ -199,6 +200,7 @@ export default async function AProposPage({ params }: { params: Promise<{ locale
                 credentials={(isFr ? member.credentials : member.credentialsEn).join(' · ')}
                 lastUpdated={member.lastUpdated}
                 nextRetest={member.nextRetest}
+                locale={locale}
               />
             ))}
           </div>

@@ -8,12 +8,14 @@ export interface BreadcrumbItem {
 interface BreadcrumbsProps {
   items: BreadcrumbItem[]
   baseUrl?: string
+  locale?: string
 }
 
 // Generates BreadcrumbList schema.org JSON-LD alongside the visual trail
 export function Breadcrumbs({
   items,
   baseUrl = 'https://le-meilleur-casino-en-ligne.fr',
+  locale = 'fr',
 }: BreadcrumbsProps) {
   const schema: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -32,7 +34,10 @@ export function Breadcrumbs({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <nav aria-label="Fil d'Ariane" className="border-b border-line bg-surface-2">
+      <nav
+        aria-label={locale === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}
+        className="border-b border-line bg-surface-2"
+      >
         <ol className="mx-auto flex max-w-site flex-wrap items-center gap-2 px-8 py-[11px] text-[13px] text-ink-3 sm:px-[18px] md:px-8">
           {items.map((item, index) => {
             const isLast = index === items.length - 1

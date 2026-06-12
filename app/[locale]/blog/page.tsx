@@ -71,7 +71,10 @@ export default async function BlogListingPage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      <Breadcrumbs items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]} />
+      <Breadcrumbs
+        items={[{ label: isFr ? 'Accueil' : 'Home', href: '/' }, { label: 'Blog' }]}
+        locale={locale}
+      />
 
       <section className="pb-2 pt-10">
         <div className="mx-auto max-w-site px-8 sm:px-[18px]">

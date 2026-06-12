@@ -49,7 +49,12 @@ function ConsentToggle({
   )
 }
 
-export function CookieConsentBanner() {
+interface CookieConsentBannerProps {
+  locale?: string
+}
+
+export function CookieConsentBanner({ locale = 'fr' }: CookieConsentBannerProps) {
+  const isFr = locale === 'fr'
   const [visible, setVisible] = useState(false)
   const [analytics, setAnalytics] = useState(false)
   const [marketing, setMarketing] = useState(false)
@@ -91,45 +96,69 @@ export function CookieConsentBanner() {
       className="fixed inset-0 z-[90] flex items-end justify-center bg-[rgba(10,10,8,.4)] p-5 backdrop-blur-[2px]"
       role="dialog"
       aria-modal
-      aria-label="Paramètres de cookies"
+      aria-label={isFr ? 'Paramètres de cookies' : 'Cookie settings'}
     >
       <div className="w-full max-w-[560px] rounded-lg border border-line bg-surface p-[26px] shadow-3">
         <h2 className="mb-2 font-serif text-[21px] font-semibold text-ink">
-          Vos préférences cookies
+          {isFr ? 'Vos préférences cookies' : 'Your cookie preferences'}
         </h2>
         <p className="mb-[18px] text-[13.5px] leading-[1.55] text-ink-2">
-          Nous utilisons des cookies pour améliorer votre expérience et analyser l&apos;audience.
-          Refuser est aussi simple qu&apos;accepter.{' '}
-          <a href="/politique-cookies" className="text-green hover:underline">
-            Politique de cookies
-          </a>
+          {isFr ? (
+            <>
+              Nous utilisons des cookies pour améliorer votre expérience et analyser
+              l&apos;audience. Refuser est aussi simple qu&apos;accepter.{' '}
+              <a href="/politique-cookies" className="text-green hover:underline">
+                Politique de cookies
+              </a>
+            </>
+          ) : (
+            <>
+              We use cookies to improve your experience and analyse traffic. Refusing is as easy as
+              accepting.{' '}
+              <a href="/en/cookie-policy/" className="text-green hover:underline">
+                Cookie policy
+              </a>
+            </>
+          )}
         </p>
 
         <ConsentToggle
           id="cookie-essential"
-          label="Essentiels"
-          description="Nécessaires au fonctionnement du site (thème, session, préférences)"
+          label={isFr ? 'Essentiels' : 'Essential'}
+          description={
+            isFr
+              ? 'Nécessaires au fonctionnement du site (thème, session, préférences)'
+              : 'Required for the site to work (theme, session, preferences)'
+          }
           checked
           disabled
           onChange={() => {}}
         />
         <ConsentToggle
           id="cookie-analytics"
-          label="Analytiques"
-          description="GA4 via GTM — données anonymisées et agrégées"
+          label={isFr ? 'Analytiques' : 'Analytics'}
+          description={
+            isFr
+              ? 'GA4 via GTM — données anonymisées et agrégées'
+              : 'GA4 via GTM — anonymised and aggregated data'
+          }
           checked={analytics}
           onChange={setAnalytics}
         />
         <ConsentToggle
           id="cookie-marketing"
-          label="Marketing"
-          description="Mesure des conversions affiliées — nécessite votre accord explicite"
+          label={isFr ? 'Marketing' : 'Marketing'}
+          description={
+            isFr
+              ? 'Mesure des conversions affiliées — nécessite votre accord explicite'
+              : 'Affiliate conversion tracking — requires your explicit consent'
+          }
           checked={marketing}
           onChange={setMarketing}
         />
 
         <div className="mt-5 flex gap-2.5">
-          {/* Refuser — même niveau visuel qu'Accepter (pas de dark pattern) */}
+          {/* Refuse — same visual weight as Accept (no dark pattern) */}
           <CTAButton
             variant="secondary"
             size="sm"
@@ -138,7 +167,7 @@ export function CookieConsentBanner() {
             data-event="cookie_consent"
             data-choice="reject_all"
           >
-            Refuser
+            {isFr ? 'Refuser' : 'Reject all'}
           </CTAButton>
           <CTAButton
             variant="secondary"
@@ -148,7 +177,7 @@ export function CookieConsentBanner() {
             data-event="cookie_consent"
             data-choice="custom"
           >
-            Enregistrer
+            {isFr ? 'Enregistrer' : 'Save choices'}
           </CTAButton>
           <CTAButton
             variant="primary"
@@ -158,7 +187,7 @@ export function CookieConsentBanner() {
             data-event="cookie_consent"
             data-choice="accept_all"
           >
-            Tout accepter
+            {isFr ? 'Tout accepter' : 'Accept all'}
           </CTAButton>
         </div>
       </div>

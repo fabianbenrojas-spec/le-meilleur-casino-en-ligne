@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none">
-  <rect width="200" height="56" rx="8" fill="#0F1923"/>
-  <path d="M16,20 L28,20 L32,28 L28,36 L16,36 L20,28Z" fill="#1A9C3E"/>
-  <text x="116" y="35" font-family="Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="900" letter-spacing="-1">stake</text>
-  <text x="174" y="35" font-family="Arial,sans-serif" font-size="10" fill="#1A9C3E" text-anchor="middle">.com</text>
-</svg>

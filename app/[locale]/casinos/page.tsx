@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
+import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { CasinosListingClient } from '@/components/listing/casinos-listing-client'
+import { ListingPageClient } from '@/components/listing/listing-page-client'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -39,6 +40,7 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
           { label: isFr ? 'Accueil' : 'Home', href: '/' },
           { label: isFr ? 'Tous les casinos' : 'All Casinos' },
         ]}
+        locale={locale}
       />
 
       {/* Page head */}
@@ -66,8 +68,15 @@ export default async function CasinosListPage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
+      <AffiliateDisclosure variant="strip" locale={locale} />
+
       {/* Client listing with filters — receives SSR-sorted operators */}
-      <CasinosListingClient operators={sorted} />
+      <ListingPageClient
+        operators={sorted}
+        configKey="all"
+        pageType="casinos_list"
+        locale={locale}
+      />
     </>
   )
 }

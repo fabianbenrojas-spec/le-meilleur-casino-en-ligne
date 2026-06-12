@@ -14,9 +14,12 @@ interface TableOfContentsProps {
   items: TOCItem[]
   title?: string
   className?: string
+  locale?: string
 }
 
-export function TableOfContents({ items, title = 'Sommaire', className }: TableOfContentsProps) {
+export function TableOfContents({ items, title, className, locale = 'fr' }: TableOfContentsProps) {
+  const isFr = locale === 'fr'
+  const resolvedTitle = title ?? (isFr ? 'Sommaire' : 'Contents')
   const [activeId, setActiveId] = useState<string | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -45,11 +48,11 @@ export function TableOfContents({ items, title = 'Sommaire', className }: TableO
 
   return (
     <nav
-      aria-label="Table des matières"
+      aria-label={isFr ? 'Table des matières' : 'Table of contents'}
       className={cn('rounded-lg border border-line bg-surface px-2 py-4 shadow-1', className)}
     >
       <p className="mb-2 px-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink-3">
-        {title}
+        {resolvedTitle}
       </p>
       <ul className="m-0 list-none p-0">
         {items.map((item) => (

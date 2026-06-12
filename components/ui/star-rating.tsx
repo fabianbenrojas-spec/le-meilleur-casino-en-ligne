@@ -7,6 +7,7 @@ interface StarRatingProps {
   showNumeric?: boolean
   size?: 'default' | 'lg'
   className?: string
+  locale?: string
 }
 
 function StarIcon({ fill }: { fill: 'full' | 'half' | 'empty' }) {
@@ -40,7 +41,9 @@ export function StarRating({
   showNumeric = true,
   size = 'default',
   className,
+  locale = 'fr',
 }: StarRatingProps) {
+  const isFr = locale === 'fr'
   const starSize = size === 'lg' ? 'w-4 h-4' : 'w-[15px] h-[15px]'
 
   const stars = Array.from({ length: 5 }, (_, i) => {
@@ -63,7 +66,11 @@ export function StarRating({
             {grade}
           </p>
         )}
-        <div className="flex gap-0.5" role="img" aria-label={`${rating} étoiles sur 5`}>
+        <div
+          className="flex gap-0.5"
+          role="img"
+          aria-label={isFr ? `${rating} étoiles sur 5` : `${rating} stars out of 5`}
+        >
           {stars.map((fill, i) => (
             <span key={i} className={starSize}>
               <StarIcon fill={fill} />
@@ -72,7 +79,9 @@ export function StarRating({
         </div>
         {reviewCount != null && (
           <p className="mt-0.5 text-[12.5px] text-ink-3">
-            sur la base de {reviewCount.toLocaleString('fr-FR')} avis
+            {isFr
+              ? `sur la base de ${reviewCount.toLocaleString('fr-FR')} avis`
+              : `based on ${reviewCount.toLocaleString('en-GB')} reviews`}
           </p>
         )}
       </div>

@@ -14,9 +14,11 @@ interface MobileNavProps {
   items: NavItem[]
   labelOpen: string
   labelClose: string
+  locale?: string
 }
 
-export function MobileNav({ items, labelOpen, labelClose }: MobileNavProps) {
+export function MobileNav({ items, labelOpen, labelClose, locale = 'fr' }: MobileNavProps) {
+  const isFr = locale === 'fr'
   const [open, setOpen] = useState(false)
 
   // Close on Escape
@@ -56,7 +58,7 @@ export function MobileNav({ items, labelOpen, labelClose }: MobileNavProps) {
           className="fixed inset-0 z-[80] md:hidden"
           role="dialog"
           aria-modal
-          aria-label="Menu principal"
+          aria-label={isFr ? 'Menu principal' : 'Main menu'}
         >
           {/* Backdrop */}
           <div
@@ -99,7 +101,7 @@ export function MobileNav({ items, labelOpen, labelClose }: MobileNavProps) {
             {/* Footer strip */}
             <div className="mt-auto border-t border-line px-5 py-4">
               <p className="font-mono text-[10px] uppercase tracking-widest text-ink-3">
-                18+ · Jouez responsable
+                {isFr ? '18+ · Jouez responsable' : '18+ · Gamble responsibly'}
               </p>
             </div>
           </nav>
