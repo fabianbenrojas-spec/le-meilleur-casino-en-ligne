@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { cn } from '@/lib/utils'
 
 type Variant = 'strip' | 'footer'
@@ -31,9 +33,9 @@ export function AffiliateDisclosure({
                 <strong className="text-ink">
                   Elles n&apos;influencent pas nos notes ni notre classement.
                 </strong>{' '}
-                <a href="/mentions-legales" className="text-green hover:underline">
+                <Link href="/mentions-legales" className="text-green hover:underline">
                   En savoir plus
-                </a>
+                </Link>
               </>
             ) : (
               <>
@@ -41,9 +43,9 @@ export function AffiliateDisclosure({
                 commission when you sign up via our links. These commissions fund our independent
                 testing.{' '}
                 <strong className="text-ink">They do not influence our ratings or rankings.</strong>{' '}
-                <a href="/en/legal-notice/" className="text-green hover:underline">
+                <Link href="/en/legal-notice/" className="text-green hover:underline">
                   Learn more
-                </a>
+                </Link>
               </>
             )}
           </p>
@@ -65,18 +67,18 @@ export function AffiliateDisclosure({
           <strong className="text-ink">Affiliation :</strong> Nous percevons une commission lorsque
           vous utilisez nos liens. Cela finance nos tests indépendants et ne modifie ni nos notes ni
           l&apos;ordre de notre classement.{' '}
-          <a href="/mentions-legales" className="text-green hover:underline">
+          <Link href="/mentions-legales" className="text-green hover:underline">
             Mentions légales
-          </a>
+          </Link>
         </>
       ) : (
         <>
           <strong className="text-ink">Affiliate disclosure:</strong> We earn a commission when you
           use our links. This funds our independent testing and does not affect our ratings or
           ranking order.{' '}
-          <a href="/en/legal-notice/" className="text-green hover:underline">
+          <Link href="/en/legal-notice/" className="text-green hover:underline">
             Legal notice
-          </a>
+          </Link>
         </>
       )}
     </div>

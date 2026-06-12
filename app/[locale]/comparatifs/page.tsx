@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 export const revalidate = 3600
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
@@ -86,7 +87,7 @@ export default async function ComparatifsHubPage({
             {isFr ? 'Classements' : 'Rankings'}
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <a
+            <Link
               href="/comparatifs/top-10-casinos-en-ligne/"
               className="flex flex-col gap-3 rounded-xl border border-[color-mix(in_srgb,var(--gold)_35%,var(--line))] bg-surface p-6 text-ink no-underline shadow-2 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
               data-event="comparatif_click"
@@ -117,9 +118,9 @@ export default async function ComparatifsHubPage({
               <span className="font-bold text-green">
                 {isFr ? 'Voir le classement →' : 'See ranking →'}
               </span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="/casinos/"
               className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-3"
               data-event="comparatif_click"
@@ -139,7 +140,7 @@ export default async function ComparatifsHubPage({
               <span className="mt-auto font-bold text-green">
                 {isFr ? 'Accéder au comparateur →' : 'Open comparison →'}
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

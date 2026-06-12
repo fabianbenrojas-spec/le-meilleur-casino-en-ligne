@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Check, Clock, Shield, TrendingUp } from 'lucide-react'
 
 // Homepage: re-validate every hour (operators data + rankings can change)
@@ -553,17 +554,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             {isFr ? (
               <>
                 Classement établi selon notre{' '}
-                <a href="/guides/methodologie/" className="text-green hover:underline">
+                <Link href="/guides/methodologie/" className="text-green hover:underline">
                   méthodologie de notation
-                </a>
+                </Link>
                 . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
               </>
             ) : (
               <>
                 Ranking based on our{' '}
-                <a href="/guides/methodologie/" className="text-green hover:underline">
+                <Link href="/guides/methodologie/" className="text-green hover:underline">
                   rating methodology
-                </a>
+                </Link>
                 . We earn a commission on sign-ups — with no impact on ratings.
               </>
             )}

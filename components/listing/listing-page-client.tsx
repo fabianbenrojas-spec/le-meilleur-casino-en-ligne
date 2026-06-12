@@ -396,7 +396,7 @@ export function ListingPageClient({
       return 0
     })
     return result
-  }, [operators, active, sortKey])
+  }, [operators, active, sortKey, locale])
 
   const activeChipCount = Object.values(active).reduce((s, arr) => s + arr.length, 0)
 

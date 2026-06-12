@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { CTAButton } from './cta-button'
@@ -107,17 +108,17 @@ export function CookieConsentBanner({ locale = 'fr' }: CookieConsentBannerProps)
             <>
               Nous utilisons des cookies pour améliorer votre expérience et analyser
               l&apos;audience. Refuser est aussi simple qu&apos;accepter.{' '}
-              <a href="/politique-cookies" className="text-green hover:underline">
+              <Link href="/politique-cookies" className="text-green hover:underline">
                 Politique de cookies
-              </a>
+              </Link>
             </>
           ) : (
             <>
               We use cookies to improve your experience and analyse traffic. Refusing is as easy as
               accepting.{' '}
-              <a href="/en/cookie-policy/" className="text-green hover:underline">
+              <Link href="/en/cookie-policy/" className="text-green hover:underline">
                 Cookie policy
-              </a>
+              </Link>
             </>
           )}
         </p>

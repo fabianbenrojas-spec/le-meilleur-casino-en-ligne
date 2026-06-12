@@ -48,6 +48,7 @@ export function GTMScript() {
   return (
     <>
       {/* Consent Mode v2 defaults — must precede GTM container */}
+      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
       <Script
         id="gtm-consent-init"
         strategy="beforeInteractive"
