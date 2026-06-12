@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
@@ -220,6 +221,7 @@ export default async function GameCategoryPage({
         ]}
         locale={locale}
       />
+      <AffiliateDisclosure variant="strip" locale={locale} />
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section
