@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 export const revalidate = 86400
 
 import { AuthorBio } from '@/components/ui/author-bio'
+import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { ListingCard } from '@/components/ui/operator-card'
@@ -276,6 +277,7 @@ export default async function BlogArticlePage({
         ]}
         locale={locale}
       />
+      <AffiliateDisclosure variant="strip" locale={locale} />
 
       <article className="py-10" data-page-type="blog" data-locale={locale}>
         <div className="mx-auto max-w-[820px] px-8 sm:px-[18px]">

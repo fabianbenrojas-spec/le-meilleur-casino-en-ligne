@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 export const revalidate = 604800
 
 import { AuthorBio } from '@/components/ui/author-bio'
+import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
@@ -396,6 +397,7 @@ export default async function GuidePage({
         ]}
         locale={locale}
       />
+      <AffiliateDisclosure variant="strip" locale={locale} />
 
       {/* Hero */}
       <section className="pb-4 pt-10" data-page-type="guide" data-locale={locale}>
