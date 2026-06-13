@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
+import { cn } from '@/lib/utils'
 import { categories, gameBySlug, games, type GameCategory } from '@/config/games'
 import { TOP_10 } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
@@ -82,12 +83,15 @@ function SpecRow({
   return (
     <tr>
       <td
-        className={`w-[42%] bg-surface-2 px-[18px] py-3 text-[14.5px] font-semibold text-ink${isLast ? '' : 'border-b border-line'}`}
+        className={cn(
+          'w-[42%] bg-surface-2 px-[18px] py-3 text-[14.5px] font-semibold text-ink',
+          !isLast && 'border-b border-line'
+        )}
       >
         {label}
       </td>
       <td
-        className={`px-[18px] py-3 text-[14.5px] text-ink-2${isLast ? '' : 'border-b border-line'}`}
+        className={cn('px-[18px] py-3 text-[14.5px] text-ink-2', !isLast && 'border-b border-line')}
       >
         {value}
       </td>
