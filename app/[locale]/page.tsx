@@ -392,11 +392,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             data-sticky-sentinel
             className="mt-[40px] grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr]"
           >
-            <PodiumCard
-              operator={{ ...topOp, affiliateUrl: topOp.affiliateUrl }}
-              rank={1}
-              ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
-            />
+            {/* N°1 spans full width at 2-col (sm–lg), reverts to 1 col at 3-col (lg+) */}
+            <div className="sm:col-span-2 lg:col-span-1">
+              <PodiumCard
+                operator={{ ...topOp, affiliateUrl: topOp.affiliateUrl }}
+                rank={1}
+                ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
+              />
+            </div>
             <PodiumCard
               operator={{ ...secondOp }}
               rank={2}
