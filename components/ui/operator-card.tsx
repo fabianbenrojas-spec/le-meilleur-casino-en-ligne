@@ -200,12 +200,12 @@ export function ListingCard({
     <article
       className={cn(
         'grid items-center gap-[22px] rounded-lg border border-line bg-surface px-5 py-[18px] shadow-1 transition-shadow duration-[180ms] hover:shadow-3',
-        'grid-cols-1 sm:grid-cols-[132px_1fr_220px]',
+        'grid-cols-1 md:grid-cols-[132px_1fr_220px]',
         isTop && 'border-[color-mix(in_srgb,var(--gold)_38%,var(--line))]'
       )}
     >
       {/* Logo column */}
-      <div className="flex items-center justify-between gap-2 sm:flex-col sm:items-start sm:justify-start">
+      <div className="flex items-center justify-between gap-2 md:flex-col md:items-start md:justify-start">
         <LogoOrPlaceholder
           logoUrl={operator.logoUrl}
           name={operator.name}
@@ -240,7 +240,7 @@ export function ListingCard({
       </div>
 
       {/* CTA column */}
-      <div className="flex flex-col gap-[9px] border-t border-line pt-[14px] sm:border-0 sm:pt-0">
+      <div className="flex flex-col gap-[9px] border-t border-line pt-[14px] md:border-0 md:pt-0">
         <div className="flex items-center justify-between gap-2.5">
           <p className="text-[13px] text-ink-2">
             <span className="font-serif text-[17px] font-semibold text-ink">

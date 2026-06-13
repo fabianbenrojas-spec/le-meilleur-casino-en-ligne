@@ -271,7 +271,7 @@ export default async function ReviewPage({
           <div data-sticky-sentinel>
             <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-2">
               {/* Top: logo + info + score ring */}
-              <div className="grid grid-cols-[auto_1fr_auto] items-center gap-[30px] p-[30px_32px] sm:grid-cols-1 sm:gap-5">
+              <div className="grid grid-cols-[auto_1fr_auto] items-center gap-[30px] p-[30px_32px] md:grid-cols-1 md:gap-5">
                 {/* Logo */}
                 <LogoPlaceholder name={op.shortName ?? op.name} />
 
@@ -308,7 +308,7 @@ export default async function ReviewPage({
               </div>
 
               {/* Bonus band */}
-              <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-8 py-6 sm:grid-cols-1">
+              <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-8 py-6 md:grid-cols-1">
                 <div>
                   <p className="mb-[5px] font-mono text-[11px] uppercase tracking-[0.1em] text-green-ink">
                     Bonus de bienvenue exclusif
@@ -355,9 +355,9 @@ export default async function ReviewPage({
 
       {/* ── Body: sidebar + content ───────────────────── */}
       <div className="mx-auto max-w-site px-[18px] md:px-8">
-        <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[264px_1fr]">
+        <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 xl:grid-cols-[264px_1fr]">
           {/* Sidebar */}
-          <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-[18px] lg:flex">
+          <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-[18px] xl:flex">
             <SideCtaCard op={op} locale={locale} />
             <TableOfContents items={TOC_ITEMS} />
           </aside>
@@ -365,7 +365,7 @@ export default async function ReviewPage({
           {/* Content */}
           <main className="min-w-0">
             {/* Mobile TOC */}
-            <details className="mb-6 overflow-hidden rounded-lg border border-line bg-surface p-4 lg:hidden">
+            <details className="mb-6 overflow-hidden rounded-lg border border-line bg-surface p-4 xl:hidden">
               <summary className="flex cursor-pointer items-center justify-between font-semibold text-ink">
                 Sommaire de l&apos;avis
                 <span className="text-ink-3">▾</span>
