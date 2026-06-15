@@ -273,7 +273,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
           <h2 className="mb-[18px] font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {isFr ? 'Questions fréquentes' : 'Frequently asked questions'}
           </h2>
-          <FAQAccordion items={faqItems} className="max-w-[760px]" />
+          <FAQAccordion items={faqItems} includeSchema className="max-w-[760px]" />
         </div>
       </section>
 
