@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================================
-   DESIGN TOKENS — transposés depuis design_handoff_casino/reference/assets/site.css
+   DESIGN TOKENS — transposés depuis design_handoff_casino_revamp/assets/site.css
    ============================================================ */
 
 :root {
@@ -160,5 +160,24 @@ img {
 @media (max-width: 760px) {
   .wrap {
     padding: 0 18px;
+  }
+}
+
+/* ============================================================
+   MATCHMAKER — animation d'entrée (transform-only, reduced-motion safe)
+   ============================================================ */
+
+@keyframes mmFade {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mm-step-enter {
+    animation: mmFade 0.28s ease;
   }
 }
