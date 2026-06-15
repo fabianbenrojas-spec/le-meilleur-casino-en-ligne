@@ -1,0 +1,829 @@
+/* ============================================================
+   Catégorie jeux v2 — machines à sous (revamp)
+   Loaded AFTER site.css + jeux.css. Reuses .game-tile, .jx-pill,
+   .where-card from jeux.css.
+   ============================================================ */
+
+.breadcrumbs {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.breadcrumbs .in {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 11px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+}
+.breadcrumbs a {
+  text-decoration: none;
+  color: var(--ink-3);
+}
+.breadcrumbs a:hover {
+  color: var(--green);
+}
+.breadcrumbs .sep {
+  opacity: 0.5;
+}
+.breadcrumbs .cur {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ============================================================
+   HERO — text + "casino du moment" spotlight (no dead space)
+   ============================================================ */
+.jx2-hero {
+  padding: 36px 0 8px;
+}
+.jx2-grid {
+  display: grid;
+  grid-template-columns: 1fr 332px;
+  gap: 36px;
+  align-items: center;
+}
+.jx2-left .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.jx2-left .eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+}
+.jx2-left h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 4.4vw, 48px);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  margin: 0 0 14px;
+}
+.jx2-left h1 em {
+  font-style: italic;
+  color: var(--green);
+}
+.jx2-left .lead {
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0 0 12px;
+  line-height: 1.62;
+}
+.jx2-left .lead2 {
+  font-size: 15px;
+  color: var(--ink-2);
+  max-width: 64ch;
+  margin: 0;
+  line-height: 1.62;
+}
+.jx2-left .lead2 a,
+.jx2-left .lead a {
+  color: var(--green);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--green) 35%, transparent);
+}
+.jx2-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 18px 0 0;
+}
+.jx2-stats .s .v {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.jx2-stats .s .l {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
+
+/* spotlight casino card */
+.jx2-spot {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--sh-2);
+  padding: 22px;
+}
+.jx2-spot .sk {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 13px;
+}
+.jx2-spot .sk svg {
+  width: 13px;
+  height: 13px;
+}
+.jx2-spot .srow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.jx2-spot .srow .logo-ph {
+  width: 92px;
+  height: 38px;
+  flex: none;
+}
+.jx2-spot .srow .si .nm {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+}
+.jx2-spot .srow .si .sc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.jx2-spot .srow .si .sc .score-pill {
+  font-size: 12px;
+  padding: 2px 7px;
+}
+.jx2-spot .bonusbox {
+  background: var(--green-50);
+  border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line));
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 13px;
+}
+.jx2-spot .bonusbox .bl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--green-ink);
+  margin-bottom: 3px;
+}
+.jx2-spot .bonusbox .ba {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.05;
+}
+.jx2-spot .bonusbox .ba span {
+  color: var(--green);
+}
+.jx2-spot .bonusbox .bc {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-top: 3px;
+}
+.jx2-spot .btn {
+  width: 100%;
+}
+.jx2-spot .seereview {
+  display: block;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  margin-top: 9px;
+}
+.jx2-spot .seereview:hover {
+  color: var(--green);
+}
+
+/* ============================================================
+   TOOLBAR — search + provider pills + rtp toggle + sort + count
+   ============================================================ */
+.jx2-toolbar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-1);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 30;
+}
+.jx2-tb-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.jx2-search {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+.jx2-search svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.jx2-search input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid var(--line-2);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14.5px;
+  padding: 0 14px 0 38px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.jx2-search input:focus {
+  border-color: var(--green);
+}
+.jx2-search input::placeholder {
+  color: var(--ink-3);
+}
+.jx2-sortwrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.jx2-sortwrap label {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.jx2-sort {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line-2);
+  border-radius: 9px;
+  padding: 9px 30px 9px 12px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371757E' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.jx2-rtp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px solid var(--line-2);
+  border-radius: 9px;
+  padding: 8px 13px;
+  cursor: pointer;
+  user-select: none;
+}
+.jx2-rtp input {
+  display: none;
+}
+.jx2-rtp .sw {
+  width: 32px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--line-2);
+  position: relative;
+  transition: background 0.15s;
+  flex: none;
+}
+.jx2-rtp .sw::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.jx2-rtp input:checked + .sw {
+  background: var(--green);
+}
+.jx2-rtp input:checked + .sw::after {
+  transform: translateX(14px);
+}
+.jx2-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.jx2-count {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  white-space: nowrap;
+}
+.jx2-count b {
+  color: var(--ink);
+}
+.jx2-random {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-ink);
+  background: var(--green-50);
+  border: 1.5px solid color-mix(in srgb, var(--green) 22%, var(--line));
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.jx2-random svg {
+  width: 14px;
+  height: 14px;
+}
+.jx2-random:hover {
+  border-color: var(--green);
+}
+
+/* real-money CTA inside tile + flash on random */
+.game-tile .game-actions .btn {
+  min-height: 38px;
+}
+.game-tile.flash {
+  animation: jxflash 1.1s ease;
+}
+@keyframes jxflash {
+  0%,
+  100% {
+    box-shadow: var(--sh-1);
+  }
+  30% {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--green) 55%, transparent),
+      var(--sh-3);
+    transform: translateY(-4px);
+  }
+}
+.jx2-empty {
+  display: none;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--ink-3);
+}
+.jx2-empty.show {
+  display: block;
+}
+.jx2-empty svg {
+  width: 34px;
+  height: 34px;
+  color: var(--line-2);
+  margin-bottom: 12px;
+}
+.jx2-empty h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+.jx2-empty p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+.jx2-sh {
+  margin-bottom: 20px;
+}
+.jx2-sh .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.jx2-sh .eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+}
+.jx2-sh h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.015em;
+  margin: 0;
+  line-height: 1.1;
+}
+.jx2-sh p {
+  font-size: 15.5px;
+  color: var(--ink-2);
+  max-width: 70ch;
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   INTERNAL-LINK TILES (other game types / guides)
+   ============================================================ */
+.jx2-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.jx2-type {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--sh-1);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+.jx2-type:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-3);
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line));
+}
+.jx2-type .gi {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--green-50);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.jx2-type .gi svg {
+  width: 20px;
+  height: 20px;
+}
+.jx2-type .tn {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+.jx2-type .tc {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 1px;
+  font-family: var(--mono);
+}
+.jx2-type .ar {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+.jx2-type:hover .ar {
+  color: var(--green);
+}
+
+/* ============================================================
+   LONG-FORM GUIDE (SEO)
+   ============================================================ */
+.jx2-guide {
+  max-width: 760px;
+}
+.jx2-guide h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: -0.015em;
+  margin: 0 0 16px;
+}
+.jx2-guide h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 26px 0 8px;
+  color: var(--ink);
+}
+.jx2-guide p {
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.72;
+  margin: 0 0 14px;
+}
+.jx2-guide p strong {
+  color: var(--ink);
+}
+.jx2-guide ul {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.jx2-guide ul li {
+  display: flex;
+  gap: 11px;
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.jx2-guide ul li svg {
+  width: 17px;
+  height: 17px;
+  color: var(--green);
+  flex: none;
+  margin-top: 2px;
+}
+.jx2-guide .callout {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.jx2-guide .callout strong {
+  color: var(--ink);
+}
+
+/* faq (compatible with site.js [data-faq]) */
+.jx2-faq {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 4px 22px;
+  box-shadow: var(--sh-1);
+  max-width: 760px;
+}
+.jx2-faq .faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.jx2-faq .faq-item:last-child {
+  border-bottom: 0;
+}
+.jx2-faq .faq-q {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  padding: 18px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+.jx2-faq .faq-q .pm {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+.jx2-faq .faq-q .pm::before,
+.jx2-faq .faq-q .pm::after {
+  content: '';
+  position: absolute;
+  background: var(--green);
+  border-radius: 2px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.jx2-faq .faq-q .pm::before {
+  width: 13px;
+  height: 2px;
+}
+.jx2-faq .faq-q .pm::after {
+  width: 2px;
+  height: 13px;
+  transition: transform 0.2s;
+}
+.jx2-faq .faq-item.open .faq-q .pm::after {
+  transform: translate(-50%, -50%) scaleY(0);
+}
+.jx2-faq .faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s ease;
+}
+.jx2-faq .faq-item.open .faq-a {
+  max-height: 320px;
+}
+.jx2-faq .faq-a p {
+  margin: 0 0 18px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   FORK (jouer / voir les casinos)
+   ============================================================ */
+.jx2-fork {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.jx2-fork .fk {
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+}
+.jx2-fork .fk.go {
+  background: var(--ink);
+  color: var(--bg);
+}
+.jx2-fork .fk.alt {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+}
+.jx2-fork .fk .fk-k {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+.jx2-fork .fk.alt .fk-k {
+  color: var(--ink-3);
+  opacity: 1;
+}
+.jx2-fork .fk h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+.jx2-fork .fk p {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.jx2-fork .fk.go p {
+  opacity: 0.82;
+}
+.jx2-fork .fk.alt p {
+  color: var(--ink-2);
+}
+.jx2-fork .fk .fk-amt {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 21px;
+  margin-bottom: 13px;
+}
+.jx2-fork .fk.go .fk-amt span {
+  color: var(--green);
+}
+[data-theme='dark'] .jx2-fork .fk.go .fk-amt span {
+  color: var(--green-ink);
+}
+.jx2-fork .fk .btn {
+  margin-top: auto;
+}
+
+/* ============================================================
+   STICKY BONUS BAR (top casino)
+   ============================================================ */
+.jx2-stickybar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 75;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  backdrop-filter: saturate(150%) blur(14px);
+  border-top: 1px solid var(--line-2);
+  box-shadow: var(--sh-3);
+  transform: translateY(115%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.jx2-stickybar.show {
+  transform: translateY(0);
+}
+.jx2-stickybar .in {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 10px 32px calc(10px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.jx2-stickybar .logo-ph {
+  width: 60px;
+  height: 30px;
+  flex: none;
+}
+.jx2-stickybar .sb-id {
+  min-width: 0;
+}
+.jx2-stickybar .sb-id .nm {
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.jx2-stickybar .sb-id .nm .score-pill {
+  font-size: 12px;
+  padding: 2px 7px;
+}
+.jx2-stickybar .sb-id .bn {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.jx2-stickybar .sb-id .bn b {
+  color: var(--green);
+  font-weight: 700;
+}
+.jx2-stickybar .sb-spacer {
+  flex: 1;
+}
+.jx2-stickybar .btn {
+  flex: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .jx2-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .jx2-types {
+    grid-template-columns: 1fr;
+  }
+  .jx2-fork {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .jx2-toolbar {
+    position: static;
+  }
+  .jx2-count {
+    margin-left: 0;
+    width: 100%;
+  }
+  .jx2-stickybar .in {
+    padding: 9px 16px calc(9px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+  .jx2-stickybar .logo-ph {
+    display: none;
+  }
+  .jx2-stickybar .sb-id .bn {
+    display: none;
+  }
+  body {
+    padding-bottom: 74px;
+  }
+}

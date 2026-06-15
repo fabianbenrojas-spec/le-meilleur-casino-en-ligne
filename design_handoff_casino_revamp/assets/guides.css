@@ -1,0 +1,542 @@
+/* ============================================================
+   Guides index (hub) + Bonus page extras — shared helpers
+   Loaded AFTER site.css (+ casinos.css on the bonus page).
+   ============================================================ */
+
+.breadcrumbs {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.breadcrumbs .in {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 11px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+}
+.breadcrumbs a {
+  text-decoration: none;
+  color: var(--ink-3);
+}
+.breadcrumbs a:hover {
+  color: var(--green);
+}
+.breadcrumbs .sep {
+  opacity: 0.5;
+}
+.breadcrumbs .cur {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ============================================================
+   GUIDES — page head
+   ============================================================ */
+.gx-head {
+  padding: 40px 0 8px;
+}
+.gx-head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.gx-head .eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+}
+.gx-head h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(31px, 4.5vw, 50px);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  margin: 0 0 14px;
+}
+.gx-head h1 em {
+  font-style: italic;
+  color: var(--green);
+}
+.gx-head p {
+  font-size: 17.5px;
+  color: var(--ink-2);
+  max-width: 64ch;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* search + topic filter */
+.gx-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 24px 0 4px;
+}
+.gx-search {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+.gx-search svg {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.gx-search input {
+  width: 100%;
+  height: 46px;
+  border: 1.5px solid var(--line-2);
+  border-radius: 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  padding: 0 16px 0 42px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.gx-search input:focus {
+  border-color: var(--green);
+}
+.gx-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.gx-topic {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px solid var(--line-2);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.gx-topic:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+.gx-topic.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+/* ============================================================
+   FEATURED GUIDE
+   ============================================================ */
+.gx-featured {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-2);
+  margin-top: 22px;
+}
+.gx-featured .fx-art {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--bg-sunken),
+    var(--bg-sunken) 10px,
+    var(--surface-2) 10px,
+    var(--surface-2) 20px
+  );
+  position: relative;
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--line);
+}
+.gx-featured .fx-art .ph {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.gx-featured .fx-art .fx-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gold);
+  padding: 5px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: var(--sh-2);
+}
+.gx-featured .fx-art .fx-badge svg {
+  width: 13px;
+  height: 13px;
+}
+.gx-featured .fx-body {
+  padding: 32px 34px;
+  display: flex;
+  flex-direction: column;
+}
+.gx-featured .fx-cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.gx-featured h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  margin: 0 0 12px;
+}
+.gx-featured p {
+  font-size: 15.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+.gx-featured .fx-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.gx-featured .fx-meta .m {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.gx-featured .fx-meta .m svg {
+  width: 14px;
+  height: 14px;
+  color: var(--green);
+}
+.gx-featured .fx-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   GUIDE CARDS GRID (extends .blog-* look, filterable)
+   ============================================================ */
+.gx-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.gx-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--sh-1);
+  text-decoration: none;
+  color: var(--ink);
+  transition:
+    transform 0.16s,
+    box-shadow 0.16s;
+}
+.gx-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-3);
+}
+.gx-card .gc-thumb {
+  aspect-ratio: 16/9;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--bg-sunken),
+    var(--bg-sunken) 9px,
+    var(--surface-2) 9px,
+    var(--surface-2) 18px
+  );
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.gx-card .gc-thumb .ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--sh-1);
+}
+.gx-card .gc-thumb .ico svg {
+  width: 22px;
+  height: 22px;
+  color: var(--green);
+}
+.gx-card .gc-thumb .gc-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--green-ink);
+  background: var(--green-50);
+  border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line));
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.gx-card .gc-body {
+  padding: 17px 19px 19px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.gx-card .gc-body h3 {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+.gx-card .gc-body p {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+.gx-card .gc-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.gx-card .gc-rt {
+  font-size: 12px;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.gx-card .gc-rt svg {
+  width: 13px;
+  height: 13px;
+}
+.gx-card .gc-go {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.gx-empty {
+  display: none;
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--ink-3);
+  background: var(--surface);
+  border: 1px dashed var(--line-2);
+  border-radius: var(--radius-lg);
+}
+.gx-empty.show {
+  display: block;
+}
+.gx-empty h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+.gx-empty p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ============================================================
+   TOPIC TILES (par thème) — reuses .cat look
+   ============================================================ */
+.gx-themes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.gx-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--sh-1);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+.gx-theme:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-3);
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line));
+}
+.gx-theme .ti {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: var(--green-50);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+}
+.gx-theme .ti svg {
+  width: 21px;
+  height: 21px;
+}
+.gx-theme .tn {
+  font-weight: 700;
+  font-size: 15.5px;
+  margin-top: 4px;
+}
+.gx-theme .tc {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.gx-theme .tlink {
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* ============================================================
+   CROSS-LINK BANNER (vers casinos / comparatifs / bonus)
+   ============================================================ */
+.gx-cross {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.gx-crosscard {
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.gx-crosscard:hover {
+  transform: translateY(-3px);
+}
+.gx-crosscard.alt {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+}
+.gx-crosscard .ck {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 9px;
+}
+.gx-crosscard.alt .ck {
+  color: var(--ink-3);
+  opacity: 1;
+}
+.gx-crosscard h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+.gx-crosscard p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+  opacity: 0.85;
+}
+.gx-crosscard .cgo {
+  margin-top: auto;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+[data-theme='dark'] .gx-crosscard:not(.alt) .cgo {
+  color: var(--green-ink);
+}
+
+@media (max-width: 980px) {
+  .gx-featured {
+    grid-template-columns: 1fr;
+  }
+  .gx-featured .fx-art {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    min-height: 180px;
+  }
+  .gx-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gx-themes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gx-cross {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 620px) {
+  .gx-grid {
+    grid-template-columns: 1fr;
+  }
+  .gx-themes {
+    grid-template-columns: 1fr;
+  }
+}
