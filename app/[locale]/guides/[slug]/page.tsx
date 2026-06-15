@@ -9,7 +9,9 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { TableOfContents } from '@/components/ui/table-of-contents'
-import { ListingCard } from '@/components/ui/operator-card'
+import { ReviewStickyBar } from '@/components/review/review-sticky-bar'
+import { LlmButtons } from '@/components/guides/llm-buttons'
+import { ReadProgressBar } from '@/components/guides/read-progress-bar'
 import { TOP_10 } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -29,6 +31,11 @@ interface GuideData {
   titleEn: string
   description: string
   eyebrow: string
+  tldr: string[]
+  readTime: number
+  difficulty: 'Débutant' | 'Intermédiaire' | 'Avancé'
+  topic: 'bonus' | 'jeux' | 'paiements' | 'securite' | 'legal'
+  iconPath: string
   sections: GuideSection[]
   faq: { question: string; answer: string }[]
   updatedAt: string
@@ -43,6 +50,15 @@ const guides: GuideData[] = [
     description:
       "Casino en ligne et loi française : ce qui est autorisé, le rôle de l'ANJ, et les risques réels pour les joueurs.",
     eyebrow: 'Guide juridique',
+    tldr: [
+      "Jouer sur un casino étranger n'est pas illégal pour un particulier en France.",
+      "Seuls les opérateurs sans licence ANJ sont dans l'illégalité — pas les joueurs.",
+      'Vos gains aux jeux de hasard ne sont pas imposables en France.',
+    ],
+    readTime: 5,
+    difficulty: 'Débutant',
+    topic: 'legal',
+    iconPath: 'M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z',
     sections: [
       {
         id: 'cadre',
@@ -96,6 +112,15 @@ const guides: GuideData[] = [
     description:
       "Comment nous évaluons les casinos en ligne : 38 critères, tests à l'argent réel, re-tests tous les 90 jours.",
     eyebrow: 'Transparence éditoriale',
+    tldr: [
+      "Chaque casino est testé avec de l'argent réel avant notation — pas de note sur dossier.",
+      '38 critères répartis en 9 familles : le bonus pèse 20 %, les paiements 18 %.',
+      "Un partenariat d'affiliation ne peut jamais modifier notre note — processus séparé.",
+    ],
+    readTime: 7,
+    difficulty: 'Débutant',
+    topic: 'securite',
+    iconPath: 'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',
     sections: [
       {
         id: 'principe',
@@ -137,6 +162,15 @@ const guides: GuideData[] = [
     description:
       'RTP, volatilité, avantage maison : décryptez les chiffres qui déterminent vos chances réelles avant de jouer.',
     eyebrow: 'Guide technique',
+    tldr: [
+      'Un RTP de 96 % signifie que le jeu redistribue statistiquement 96 € pour 100 € misés.',
+      'Le RTP seul ne suffit pas : combinez-le toujours avec la volatilité du jeu.',
+      "Pendant le wager d'un bonus, privilégiez les jeux à basse volatilité (RTP stable).",
+    ],
+    readTime: 8,
+    difficulty: 'Intermédiaire',
+    topic: 'jeux',
+    iconPath: 'M3 3v18h18M7 16l4-8 4 4 4-6',
     sections: [
       {
         id: 'definition',
@@ -195,6 +229,15 @@ const guides: GuideData[] = [
     description:
       'CB, e-wallets, crypto : délais de retrait réels, frais cachés et sécurité comparés. Notre guide pour choisir la meilleure méthode.',
     eyebrow: 'Guide pratique',
+    tldr: [
+      'La méthode la plus rapide : crypto (10 min–2h) mais attention à la volatilité du cours.',
+      "Effectuez le KYC dès l'inscription pour que votre premier retrait ne soit pas retardé.",
+      "La carte bancaire (VISA/MC) reste la méthode la plus équilibrée : délai 24–96h selon l'opérateur.",
+    ],
+    readTime: 6,
+    difficulty: 'Débutant',
+    topic: 'paiements',
+    iconPath: 'M2 5h20v14H2zM2 10h20',
     sections: [
       {
         id: 'comparatif',
@@ -254,6 +297,15 @@ const guides: GuideData[] = [
     description:
       'Bonus de bienvenue, cashback, tours gratuits : comment lire les conditions de mise et identifier les offres vraiment avantageuses.',
     eyebrow: 'Guide bonus',
+    tldr: [
+      'Un wager de 35× maximum est notre seuil de recommandation — au-delà, le bonus est difficile à convertir.',
+      'Ne comparez jamais deux bonus sur le montant seul : calculez le coût statistique réel.',
+      'Les 5 clauses pièges : wager, mise max, jeux exclus, délai de validité, plafond de gains.',
+    ],
+    readTime: 10,
+    difficulty: 'Intermédiaire',
+    topic: 'bonus',
+    iconPath: 'M4 9h16v11H4zM4 13h16M8 9V5a4 4 0 018 0v4',
     sections: [
       {
         id: 'types',
@@ -272,7 +324,7 @@ const guides: GuideData[] = [
         title: 'Décrypter le wager',
         prose: [
           "Le wager (ou mise de dégagement) est le nombre de fois que vous devez miser le bonus avant de pouvoir retirer. C'est le critère le plus important pour évaluer un bonus.",
-          "Notre seuil de recommandation : **35× maximum**. Au-delà de 40×, le bonus est statistiquement difficile à convertir en gains réels. Le wager s'applique différemment selon les opérateurs : sur le bonus uniquement (favorable) ou sur le dépôt + bonus (défavorable).",
+          "Notre seuil de recommandation : 35× maximum. Au-delà de 40×, le bonus est statistiquement difficile à convertir en gains réels. Le wager s'applique différemment selon les opérateurs : sur le bonus uniquement (favorable) ou sur le dépôt + bonus (défavorable).",
         ],
         highlights: [
           '< 25× : excellent — les meilleures offres du marché',
@@ -314,6 +366,26 @@ const guides: GuideData[] = [
 const guideMap = new Map(guides.map((g) => [g.slug, g]))
 const allSlugs = guides.map((g) => ({ slug: g.slug }))
 
+// ── Inline sub-components ─────────────────────────────────────────────────────
+
+function MetaChip({ iconPath, label }: { iconPath: string; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-[7px] rounded-full border border-line bg-bg-sunken px-[12px] py-[5px] font-sans text-[12.5px] font-semibold text-ink-2">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        className="h-[13px] w-[13px] shrink-0 text-green"
+        aria-hidden
+      >
+        <path d={iconPath} />
+      </svg>
+      {label}
+    </span>
+  )
+}
+
 export async function generateStaticParams() {
   return allSlugs
 }
@@ -345,7 +417,9 @@ export default async function GuidePage({
   if (!guide) notFound()
 
   const isFr = locale === 'fr'
+  const topOp = TOP_10[0]!
   const tocItems = guide.sections.map((s) => ({ id: s.id, label: s.title }))
+  const guideTitle = isFr ? guide.title : guide.titleEn
 
   return (
     <>
@@ -357,56 +431,201 @@ export default async function GuidePage({
         ]}
       />
 
-      {/* Hero */}
-      <section className="pb-4 pt-10" data-page-type="guide" data-locale={locale}>
+      {/* ── Article hero ────────────────────────────────────────────────── */}
+      <section className="pb-4 pt-10" data-page-type="article" data-locale={locale}>
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+          {/* Eyebrow */}
+          <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
             {guide.eyebrow}
           </div>
-          <h1 className="mb-[18px] max-w-[22ch] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? guide.title : guide.titleEn}
+
+          {/* H1 */}
+          <h1 className="mb-[14px] max-w-[22ch] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
+            {guideTitle}
           </h1>
-          <p className="m-0 max-w-[60ch] text-[17px] leading-[1.55] text-ink-2">
+
+          {/* Lead */}
+          <p className="mb-[18px] max-w-[62ch] text-[17px] leading-[1.6] text-ink-2">
             {guide.description}
           </p>
+
+          {/* Byline */}
+          <div className="mb-[16px] flex flex-wrap items-center gap-[12px_18px]">
+            <span className="text-[13px] text-ink-3">
+              Par <strong className="font-semibold text-ink">Julien Marchand</strong>
+              {' · '}
+              <time dateTime={guide.updatedAt}>
+                Mis à jour le{' '}
+                {new Date(guide.updatedAt).toLocaleDateString('fr-FR', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </time>
+            </span>
+          </div>
+
+          {/* Art2-meta chips */}
+          <div className="mb-[24px] flex flex-wrap gap-[8px]">
+            <MetaChip
+              iconPath="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 6v6l3.5 2"
+              label={`${guide.readTime} min de lecture`}
+            />
+            <MetaChip
+              iconPath="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+              label="Vérifié & mis à jour"
+            />
+            <MetaChip
+              iconPath="M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7z"
+              label={guide.difficulty}
+            />
+          </div>
+
+          {/* TL;DR card */}
+          <div
+            className="mb-[28px] max-w-[860px] rounded-[14px] bg-surface p-[22px_24px_20px] shadow-1"
+            style={{ border: '1px solid var(--line)', borderLeft: '4px solid var(--green)' }}
+          >
+            <div className="mb-[14px] font-mono text-[11.5px] font-semibold uppercase tracking-[0.12em] text-green">
+              En bref
+            </div>
+            <ul className="mb-0 flex list-none flex-col gap-[11px] p-0">
+              {guide.tldr.map((point, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-[12px] text-[15.5px] leading-[1.5] text-ink"
+                >
+                  <span className="mt-[1px] shrink-0 font-extrabold text-green" aria-hidden>
+                    →
+                  </span>
+                  <span className="min-w-0 flex-1">{point}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="my-[16px] h-px bg-line" />
+            <div className="flex flex-wrap items-center gap-[12px_14px]">
+              <span className="inline-flex items-center gap-[7px] font-mono text-[12px] font-semibold text-ink-3">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-[14px] w-[14px] text-green"
+                  aria-hidden
+                >
+                  <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z" />
+                </svg>
+                Résumer avec
+              </span>
+              <LlmButtons title={guideTitle} />
+            </div>
+          </div>
+
+          {/* Art2-summary — inline numbered TOC */}
+          <nav
+            className="mb-0 max-w-[860px] rounded-[14px] border border-line bg-bg-sunken p-[18px_22px_20px]"
+            aria-label="Sommaire de l'article"
+          >
+            <div className="mb-[12px] flex items-center gap-[8px] font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink-3">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-[14px] w-[14px]"
+                aria-hidden
+              >
+                <path d="M4 6h16M4 12h10M4 18h6" />
+              </svg>
+              Au sommaire — cliquez pour naviguer
+            </div>
+            <ol className="grid list-none grid-cols-1 gap-[6px_16px] p-0 sm:grid-cols-2">
+              {tocItems.map((item, i) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className="flex items-start gap-[11px] rounded-[9px] px-[10px] py-[8px] text-[14px] font-semibold text-ink-2 no-underline transition-[background,color] duration-[140ms] hover:bg-surface hover:text-green"
+                  >
+                    <span
+                      className="grid h-[24px] w-[24px] shrink-0 place-items-center rounded-[6px] border border-line bg-surface font-mono text-[11px] font-semibold text-green"
+                      aria-hidden
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="min-w-0 flex-1 pt-[2px]">{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
         </div>
       </section>
 
-      {/* Body */}
+      {/* Sticky sentinel — triggers sticky bar */}
+      <div data-sticky-sentinel aria-hidden />
+
+      {/* ── Article body ─────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-site px-[18px] md:px-8">
         <div className="grid grid-cols-1 items-start gap-10 pb-16 pt-10 lg:grid-cols-[240px_1fr]">
-          {/* Sidebar TOC */}
-          <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-4 lg:flex">
+          {/* ── Sidebar ──────────────────────────────────────────────────── */}
+          <aside className="sticky top-[calc(var(--header-h)+18px)] hidden flex-col gap-6 lg:flex">
             <TableOfContents items={tocItems} />
+            <ReadProgressBar />
+
+            {/* Sidebar CTA card */}
+            <div
+              className="overflow-hidden rounded-[14px] bg-surface p-[16px] text-center shadow-2"
+              style={{
+                border: '1px solid color-mix(in srgb,var(--green) 28%,var(--line))',
+              }}
+            >
+              {/* Logo placeholder */}
+              <div
+                className="mx-auto mb-[10px] h-[32px] w-[90px] rounded border border-dashed border-line-2"
+                style={{
+                  background:
+                    'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
+                }}
+                aria-hidden
+              />
+              {/* Amount */}
+              <div className="font-serif text-[19px] font-semibold leading-[1.1] text-ink">
+                <span style={{ color: 'var(--green)' }}>{topOp.bonusAmount}</span>
+                {topOp.bonusSuffix && (
+                  <span className="text-[14px] text-ink-2"> {topOp.bonusSuffix}</span>
+                )}
+              </div>
+              {/* Conditions */}
+              <p className="mb-[11px] mt-[3px] text-[10.5px] leading-[1.4] text-ink-3">
+                {topOp.bonusConditions} · notre n°1 ({topOp.rating}/10)
+              </p>
+              <CTAButton
+                href={topOp.affiliateUrl}
+                variant="primary"
+                size="sm"
+                arrow
+                block
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-event="affiliate_click"
+                data-operator={topOp.slug}
+                data-placement="article_sidebar"
+                data-bonus={topOp.bonusSlug}
+                data-page-type="article"
+                data-locale={locale}
+              >
+                Obtenir le bonus
+              </CTAButton>
+              <p className="mt-[8px] text-[9.5px] text-ink-3">18+ · T&amp;C s&apos;appliquent</p>
+            </div>
           </aside>
 
-          {/* Content */}
-          <main className="min-w-0">
-            {/* Mobile TOC */}
-            <details className="mb-6 rounded-lg border border-line bg-surface p-4 lg:hidden">
-              <summary className="flex cursor-pointer items-center justify-between font-semibold text-ink">
-                Sommaire <span className="text-ink-3">▾</span>
-              </summary>
-              <ul className="mt-3 flex flex-col gap-1 pl-2">
-                {tocItems.map((item) => (
-                  <li key={item.id}>
-                    <a
-                      href={`#${item.id}`}
-                      className="block py-1 text-[13.5px] text-ink-2 hover:text-green"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-
+          {/* ── Main prose ───────────────────────────────────────────────── */}
+          <main className="min-w-0" id="article-body">
             {/* Sections */}
             {guide.sections.map((section, i) => (
               <section
                 key={section.id}
                 id={section.id}
-                className="mb-8 [scroll-margin-top:calc(var(--header-h)+20px)]"
+                className="mb-10 [scroll-margin-top:calc(var(--header-h)+20px)]"
               >
                 <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
                   <span className="mr-3 font-mono text-[14px] text-green">0{i + 1}</span>
@@ -462,7 +681,7 @@ export default async function GuidePage({
 
             {/* FAQ */}
             {guide.faq.length > 0 && (
-              <div>
+              <div id="faq" className="mb-10 [scroll-margin-top:calc(var(--header-h)+20px)]">
                 <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
                   {isFr ? 'Questions fréquentes' : 'FAQ'}
                 </h2>
@@ -470,36 +689,191 @@ export default async function GuidePage({
               </div>
             )}
 
-            {/* Casino recommendations */}
-            <div className="mt-10 rounded-xl border border-line bg-surface-2 p-6">
-              <h3 className="mb-4 font-serif text-[21px] font-semibold text-ink">
-                {isFr ? 'Casinos recommandés' : 'Recommended casinos'}
-              </h3>
-              <div className="flex flex-col gap-3">
-                {TOP_10.slice(0, 3).map((op, i) => (
-                  <ListingCard
-                    key={op.id}
-                    operator={op}
-                    isTop={i === 0}
-                    ga4={{ 'data-page-type': 'guide', 'data-locale': locale }}
-                  />
+            {/* Art2-band — internal-link section */}
+            <div className="mb-10 overflow-hidden rounded-[14px] border border-line bg-bg-sunken">
+              <div className="border-b border-line px-[20px] py-[13px]">
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-3">
+                  À lire aussi
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                {[
+                  {
+                    href: '/casinos/',
+                    label: 'Top 10 des meilleurs casinos',
+                    sub: 'Comparatif mis à jour',
+                    iconPath: 'M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7z',
+                  },
+                  {
+                    href: '/bonus/',
+                    label: 'Comparer les bonus casino',
+                    sub: 'Wager, montant, délai',
+                    iconPath: 'M4 9h16v11H4zM8 9V5a4 4 0 018 0v4',
+                  },
+                  {
+                    href: `/casinos/${topOp.slug}/`,
+                    label: `Avis ${topOp.name}`,
+                    sub: `Notre n°1 · ${topOp.rating}/10`,
+                    iconPath: 'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',
+                  },
+                  {
+                    href: '/jeux/machines-a-sous/',
+                    label: 'Guide machines à sous',
+                    sub: 'RTP, volatilité, stratégie',
+                    iconPath: 'M3 3v18h18M7 16l4-8 4 4 4-6',
+                  },
+                ].map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="flex items-center gap-[13px] border-b border-r-0 border-line p-[14px_18px] text-ink no-underline transition-[background] last:border-b-0 hover:bg-surface sm:[&:nth-child(2)]:border-b sm:[&:nth-child(2)]:border-r sm:[&:nth-child(3)]:border-b-0 sm:[&:nth-child(odd)]:border-r"
+                    data-event="internal_link"
+                    data-placement="article_band"
+                    data-page-type="article"
+                    data-locale={locale}
+                  >
+                    <div className="grid h-[36px] w-[36px] shrink-0 place-items-center rounded-[9px] border border-line bg-surface">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        className="h-[17px] w-[17px] text-green"
+                        aria-hidden
+                      >
+                        <path d={link.iconPath} />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[14px] font-semibold leading-[1.2] text-ink">
+                        {link.label}
+                      </div>
+                      <div className="text-[12px] text-ink-3">{link.sub}</div>
+                    </div>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="h-[16px] w-[16px] shrink-0 text-ink-3"
+                      aria-hidden
+                    >
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </a>
                 ))}
               </div>
-              <div className="mt-4 text-center">
+            </div>
+
+            {/* Art2-fork — conversion bifurcation */}
+            <div className="mb-2 grid grid-cols-1 gap-0 overflow-hidden rounded-[16px] border border-line sm:grid-cols-2">
+              {/* Left: play CTA (dark) */}
+              <div
+                className="flex flex-col justify-between p-[22px_24px_20px]"
+                style={{ background: 'var(--ink)', color: 'var(--surface)' }}
+              >
+                <div className="mb-[14px]">
+                  <div
+                    className="mb-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em]"
+                    style={{ color: 'color-mix(in srgb,#fff 55%,transparent)' }}
+                  >
+                    Prêt à jouer ?
+                  </div>
+                  <div className="font-serif text-[22px] font-semibold leading-[1.1]">
+                    {topOp.name}
+                  </div>
+                  <div
+                    className="mt-[4px] font-serif text-[17px]"
+                    style={{ color: 'var(--green)' }}
+                  >
+                    {topOp.bonusAmount}
+                    {topOp.bonusSuffix && (
+                      <span className="text-[13px] text-white opacity-70">
+                        {' '}
+                        {topOp.bonusSuffix}
+                      </span>
+                    )}
+                  </div>
+                  <p
+                    className="mt-[6px] text-[12px] leading-[1.5]"
+                    style={{ color: 'color-mix(in srgb,#fff 55%,transparent)' }}
+                  >
+                    {topOp.bonusConditions}
+                  </p>
+                </div>
+                <CTAButton
+                  href={topOp.affiliateUrl}
+                  variant="primary"
+                  size="sm"
+                  arrow
+                  block
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  data-event="affiliate_click"
+                  data-operator={topOp.slug}
+                  data-placement="article_fork_cta"
+                  data-bonus={topOp.bonusSlug}
+                  data-page-type="article"
+                  data-locale={locale}
+                >
+                  Obtenir le bonus {topOp.name}
+                </CTAButton>
+                <p
+                  className="mt-[8px] text-center text-[10px]"
+                  style={{ color: 'color-mix(in srgb,#fff 40%,transparent)' }}
+                >
+                  18+ · T&amp;C s&apos;appliquent · Jouer de façon responsable
+                </p>
+              </div>
+
+              {/* Right: compare CTA (light) */}
+              <div className="flex flex-col justify-between border-t border-line p-[22px_24px_20px] sm:border-l sm:border-t-0">
+                <div className="mb-[14px]">
+                  <div className="mb-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em] text-ink-3">
+                    Vous hésitez encore ?
+                  </div>
+                  <div className="font-serif text-[22px] font-semibold leading-[1.1] text-ink">
+                    Comparer les casinos
+                  </div>
+                  <p className="mt-[6px] text-[14px] leading-[1.5] text-ink-2">
+                    Notre comparatif indépendant — 15 casinos testés à l&apos;argent réel, notes
+                    vérifiées tous les 90 jours.
+                  </p>
+                </div>
                 <CTAButton
                   href="/casinos/"
                   variant="secondary"
                   size="sm"
-                  data-event="review_click"
-                  data-placement="guide_footer"
+                  arrow
+                  block
+                  data-event="internal_link"
+                  data-placement="article_fork_compare"
+                  data-page-type="article"
+                  data-locale={locale}
                 >
-                  {isFr ? 'Voir tous les casinos' : 'See all casinos'}
+                  Voir le comparatif →
                 </CTAButton>
               </div>
             </div>
           </main>
         </div>
       </div>
+
+      {/* ── Sticky bonus bar ─────────────────────────────────────────────── */}
+      <ReviewStickyBar
+        operatorName={topOp.name}
+        operatorSlug={topOp.slug}
+        rating={topOp.rating}
+        bonusAmount={topOp.bonusAmount}
+        bonusSuffix={topOp.bonusSuffix}
+        bonusConditions={topOp.bonusConditions}
+        bonusSlug={topOp.bonusSlug}
+        affiliateUrl={topOp.affiliateUrl}
+        locale={locale}
+        pageType="article"
+        placement="article_sticky_bar"
+        showAlt={false}
+      />
     </>
   )
 }
