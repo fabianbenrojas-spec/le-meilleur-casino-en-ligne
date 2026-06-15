@@ -16,6 +16,9 @@ interface ReviewStickyBarProps {
   bonusSlug: string
   affiliateUrl: string
   locale: string
+  pageType?: string
+  placement?: string
+  showAlt?: boolean
 }
 
 function LogoPh({ name }: { name: string }) {
@@ -43,6 +46,9 @@ export function ReviewStickyBar({
   bonusSlug,
   affiliateUrl,
   locale,
+  pageType = 'review',
+  placement = 'review_sticky_bar',
+  showAlt = true,
 }: ReviewStickyBarProps) {
   const [visible, setVisible] = useState(false)
   const ioRef = useRef<IntersectionObserver | null>(null)
@@ -94,16 +100,18 @@ export function ReviewStickyBar({
           </p>
         </div>
         <div className="flex-1" />
-        <a
-          href="#alternatives"
-          className="hidden whitespace-nowrap text-[13px] font-semibold text-ink-2 no-underline hover:text-green sm:block"
-          data-event="internal_link"
-          data-target="alternatives"
-          data-page-type="review"
-          data-locale={locale}
-        >
-          Voir les alternatives
-        </a>
+        {showAlt && (
+          <a
+            href="#alternatives"
+            className="hidden whitespace-nowrap text-[13px] font-semibold text-ink-2 no-underline hover:text-green sm:block"
+            data-event="internal_link"
+            data-target="alternatives"
+            data-page-type={pageType}
+            data-locale={locale}
+          >
+            Voir les alternatives
+          </a>
+        )}
         <CTAButton
           href={affiliateUrl}
           variant="primary"
@@ -112,9 +120,9 @@ export function ReviewStickyBar({
           rel="noopener noreferrer nofollow"
           data-event="affiliate_click"
           data-operator={operatorSlug}
-          data-placement="review_sticky_bar"
+          data-placement={placement}
           data-bonus={bonusSlug}
-          data-page-type="review"
+          data-page-type={pageType}
           data-locale={locale}
         >
           Obtenir le bonus

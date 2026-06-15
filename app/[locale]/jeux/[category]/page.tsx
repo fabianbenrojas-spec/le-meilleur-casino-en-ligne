@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
+import { ScorePill } from '@/components/ui/score-pill'
+import { GameGrid } from '@/components/games/game-grid'
+import { ReviewStickyBar } from '@/components/review/review-sticky-bar'
 import { categories, getGamesByCategory, type GameCategory } from '@/config/games'
 import { TOP_10 } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
@@ -38,12 +41,17 @@ export async function generateMetadata({
   }
 }
 
-function volLevel(v: string): number {
-  return ({ basse: 1, moyenne: 2, haute: 4, 'très haute': 5 } as Record<string, number>)[v] ?? 3
-}
-
-function provSlug(provider: string): string {
-  return provider.toLowerCase().replace(/[^a-z0-9]/g, '')
+function LogoPh({ name: _name }: { name: string }) {
+  return (
+    <div
+      className="h-[40px] w-[92px] shrink-0 rounded border border-dashed border-line-2 font-mono text-[9px] text-ink-3"
+      style={{
+        background:
+          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 5px,transparent 5px,transparent 10px)',
+      }}
+      aria-hidden
+    />
+  )
 }
 
 export default async function GameCategoryPage({
@@ -59,9 +67,16 @@ export default async function GameCategoryPage({
   const label = isFr ? cat.label : cat.labelEn
   const games = getGamesByCategory(category as GameCategory)
   const casinos = TOP_10.slice(0, 3)
+  const spotOp = TOP_10[0]!
 
   // Unique providers for toolbar pills
   const providers = Array.from(new Set(games.map((g) => g.provider)))
+
+  // Hero stats
+  const avgRtp = games.length > 0 ? games.reduce((s, g) => s + g.rtp, 0) / games.length : 96.5
+
+  // Other game categories (maillage interne)
+  const otherCats = categories.filter((c) => c.slug !== category)
 
   return (
     <>
@@ -73,179 +88,165 @@ export default async function GameCategoryPage({
         ]}
       />
 
-      {/* Category head */}
+      {/* ── Hero — 2 col (text + spotlight casino) ───────────────────────── */}
       <section
-        className="pb-2 pt-[38px]"
+        className="pb-4 pt-[38px]"
         data-page-type="jeux_categorie"
         data-category={category}
         data-locale={locale}
       >
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr ? `Catégorie · ${label}` : `Category · ${label}`}
-          </div>
-          <h1 className="mb-[14px] font-serif text-[clamp(30px,4.4vw,48px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Les meilleures <em className="italic text-green">{label.toLowerCase()}</em> en ligne
-              </>
-            ) : (
-              <>
-                Best online <em className="italic text-green">{label.toLowerCase()}</em>
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[64ch] text-[17px] leading-[1.6] text-ink-2">{cat.description}</p>
-        </div>
-      </section>
+          <div data-sticky-sentinel>
+            <div className="grid grid-cols-1 items-start gap-8 xl:grid-cols-[1fr_332px]">
+              {/* Left: eyebrow + H1 + description + stats */}
+              <div>
+                <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+                  {isFr ? `Catégorie · ${label}` : `Category · ${label}`}
+                </div>
+                <h1 className="mb-[14px] font-serif text-[clamp(30px,4.4vw,48px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
+                  {isFr ? (
+                    <>
+                      Les meilleures <em className="italic text-green">{label.toLowerCase()}</em> en
+                      ligne
+                    </>
+                  ) : (
+                    <>
+                      Best online <em className="italic text-green">{label.toLowerCase()}</em>
+                    </>
+                  )}
+                </h1>
+                <p className="m-0 max-w-[60ch] text-[17px] leading-[1.6] text-ink-2">
+                  {cat.description}
+                </p>
 
-      {/* Toolbar + game grid */}
-      <section className="pb-12 pt-2">
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          {/* Toolbar */}
-          <div className="mb-[6px] mt-6 flex flex-wrap items-center gap-[10px]">
-            <div className="flex flex-wrap gap-2">
-              <button
-                className="cursor-pointer rounded-full border-[1.5px] border-green bg-green px-[15px] py-2 text-[13px] font-semibold text-white transition-colors"
-                data-prov="all"
-                data-event="comparison_filter_use"
-                type="button"
-                aria-pressed="true"
-              >
-                {isFr ? 'Tous' : 'All'}
-              </button>
-              {providers.map((prov) => (
-                <button
-                  key={prov}
-                  className="cursor-pointer rounded-full border-[1.5px] border-line-2 bg-surface px-[15px] py-2 text-[13px] font-semibold text-ink-2 transition-colors hover:border-ink-3"
-                  data-prov={provSlug(prov)}
-                  data-event="comparison_filter_use"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  {prov}
-                </button>
-              ))}
-            </div>
-            {/* Sort */}
-            <div className="ml-auto">
-              <select
-                className="cursor-pointer appearance-none rounded-[8px] border border-line-2 bg-surface px-[13px] py-[9px] pr-8 text-[13.5px] font-semibold text-ink"
-                id="gameSort"
-                aria-label={isFr ? 'Trier les jeux' : 'Sort games'}
-                data-event="comparison_sort_use"
-              >
-                <option value="pop">{isFr ? 'Populaires' : 'Popular'}</option>
-                <option value="rtp">{isFr ? 'RTP décroissant' : 'RTP descending'}</option>
-                <option value="az">A → Z</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Game grid — auto-fill minmax(196px, 1fr) */}
-          {games.length > 0 && (
-            <div
-              id="gameGrid"
-              className="mt-2 grid gap-[18px]"
-              style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(196px, 1fr))' }}
-            >
-              {games.map((game) => (
-                <article
-                  key={game.slug}
-                  className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] hover:-translate-y-1 hover:shadow-3"
-                  data-prov={provSlug(game.provider)}
-                  data-rtp={game.rtp}
-                  data-pop={game.popular ? '1' : '0'}
-                  data-name={game.name}
-                >
-                  {/* Thumbnail — 1:1 aspect */}
-                  <div
-                    className="relative border-b border-line"
-                    style={{
-                      aspectRatio: '1/1',
-                      background:
-                        'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 9px,var(--surface-2) 9px,var(--surface-2) 18px)',
-                      display: 'grid',
-                      placeItems: 'center',
-                    }}
-                  >
-                    {/* RTP badge — top right */}
-                    <span className="absolute right-2 top-2 rounded-[5px] bg-green px-[7px] py-[3px] font-mono text-[10px] font-semibold text-white">
-                      RTP {game.rtp.toFixed(1)}%
+                {/* Stats row */}
+                <div className="mt-[26px] flex flex-wrap items-center gap-[24px_40px]">
+                  <div className="flex items-baseline gap-[6px]">
+                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                      {cat.count}+
                     </span>
-                    {/* Play button — center, visible on hover */}
-                    <span className="grid h-[46px] w-[46px] scale-90 place-items-center rounded-full bg-white/90 opacity-0 shadow-2 transition-[opacity,transform] duration-[180ms] group-hover:scale-100 group-hover:opacity-100 [article:hover_&]:scale-100 [article:hover_&]:opacity-100">
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="ml-[2px] h-5 w-5 text-green"
-                        fill="currentColor"
-                        aria-hidden
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </span>
-                    {/* Provider tag — bottom left */}
-                    <span className="absolute bottom-2 left-2 rounded-[3px] border border-line bg-surface px-[6px] py-[2px] font-mono text-[9px] text-ink-3">
-                      {game.provider}
+                    <span className="font-mono text-[12px] text-ink-3">
+                      {isFr ? 'jeux' : 'games'}
                     </span>
                   </div>
+                  <div className="flex items-baseline gap-[6px]">
+                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                      {avgRtp.toFixed(1)}%
+                    </span>
+                    <span className="font-mono text-[12px] text-ink-3">
+                      {isFr ? 'RTP moyen' : 'avg RTP'}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-[6px]">
+                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                      {providers.length}
+                    </span>
+                    <span className="font-mono text-[12px] text-ink-3">
+                      {isFr ? 'fournisseurs' : 'providers'}
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-                  {/* Game body */}
-                  <div className="flex flex-1 flex-col gap-2 p-[13px_15px_15px]">
+              {/* Right: spotlight casino card */}
+              <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-2">
+                {/* Header */}
+                <div className="border-b border-line px-[22px] py-[13px]">
+                  <p className="m-0 inline-flex items-center gap-[7px] font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[color:var(--gold)]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-[11px] w-[11px]"
+                      aria-hidden
+                    >
+                      <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
+                    </svg>
+                    {isFr ? 'Casino du moment' : 'Top casino'}
+                  </p>
+                </div>
+
+                {/* Logo + name + score */}
+                <div className="px-[22px] pt-[18px]">
+                  <div className="flex items-center gap-[12px]">
+                    <LogoPh name={spotOp.name} />
                     <div>
-                      <div className="text-[15px] font-bold leading-[1.2] text-ink">
-                        {game.name}
+                      <div className="font-serif text-[18px] font-semibold text-ink">
+                        {spotOp.name}
                       </div>
-                      <div className="font-mono text-[11.5px] text-ink-3">{game.provider}</div>
-                    </div>
-                    <div className="mt-auto flex flex-wrap gap-[6px]">
-                      <span className="rounded-[5px] border border-line bg-bg-sunken px-[7px] py-[2px] text-[11px] text-ink-2">
-                        Max <strong className="text-ink">{game.maxWin}</strong>
-                      </span>
-                      <span className="rounded-[5px] border border-line bg-bg-sunken px-[7px] py-[2px] text-[11px] text-ink-2">
-                        Vol. {volLevel(game.volatility)}/5
-                      </span>
-                    </div>
-                    <div className="mt-1 grid grid-cols-2 gap-[7px]">
-                      <CTAButton
-                        href={`/jeux/${category}/avis/${game.slug}/`}
-                        variant="secondary"
-                        size="sm"
-                        data-event="game_demo_click"
-                        data-placement="category_grid"
-                        data-page-type="jeux_categorie"
-                        data-locale={locale}
-                      >
-                        {isFr ? 'Démo' : 'Demo'}
-                      </CTAButton>
-                      <CTAButton
-                        href={`/jeux/${category}/avis/${game.slug}/`}
-                        variant="primary"
-                        size="sm"
-                        data-event="game_review_click"
-                        data-placement="category_grid"
-                        data-page-type="jeux_categorie"
-                        data-locale={locale}
-                      >
-                        {isFr ? 'Avis' : 'Review'}
-                      </CTAButton>
+                      <ScorePill
+                        score={spotOp.rating}
+                        className="mt-1 px-[7px] py-[2px] text-[12px]"
+                      />
                     </div>
                   </div>
-                </article>
-              ))}
+                </div>
+
+                {/* Bonus box */}
+                <div
+                  className="mx-[22px] mt-[16px] rounded-lg p-[12px_14px]"
+                  style={{
+                    border: '1px solid color-mix(in srgb,var(--green) 22%,var(--line))',
+                    background: 'var(--green-50)',
+                  }}
+                >
+                  <div className="font-serif text-[20px] font-semibold text-green">
+                    {spotOp.bonusAmount}
+                    {spotOp.bonusSuffix ? ` ${spotOp.bonusSuffix}` : ''}
+                  </div>
+                  <div className="mt-[3px] font-mono text-[11px] text-ink-3">
+                    {spotOp.bonusConditions}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="p-[16px_22px_22px]">
+                  <CTAButton
+                    href={spotOp.affiliateUrl}
+                    block
+                    arrow
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    data-event="affiliate_click"
+                    data-operator={spotOp.slug}
+                    data-placement="category_hero_spot"
+                    data-bonus={spotOp.bonusSlug}
+                    data-page-type="jeux_categorie"
+                    data-locale={locale}
+                  >
+                    {isFr ? 'Obtenir le bonus' : 'Claim bonus'}
+                  </CTAButton>
+                  <a
+                    href={`/casinos/${spotOp.slug}/`}
+                    className="mt-2 block text-center font-mono text-[12px] text-ink-3 no-underline hover:text-green"
+                    data-event="review_click"
+                    data-operator={spotOp.slug}
+                    data-page-type="jeux_categorie"
+                    data-locale={locale}
+                  >
+                    {isFr ? "Lire l'avis complet →" : 'Read full review →'}
+                  </a>
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* Casino recommendations — where-grid */}
+      {/* ── Game grid (client-side filtering) ────────────────────────────── */}
+      <section className="pb-12 pt-4">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <GameGrid games={games} isFr={isFr} locale={locale} providers={providers} />
+        </div>
+      </section>
+
+      {/* ── Où jouer ─────────────────────────────────────────────────────── */}
       <section className="bg-bg-sunken py-12">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[24px]">
-            <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+            <div className="mb-[8px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               {isFr ? 'Où jouer' : 'Where to play'}
             </div>
-            <h2 className="m-0 font-serif text-[clamp(24px,3vw,34px)] font-medium tracking-[-0.015em] text-ink">
+            <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,32px)] font-medium tracking-[-0.015em] text-ink">
               {isFr
                 ? `Les meilleurs casinos pour les ${label.toLowerCase()}`
                 : `Best casinos for ${label.toLowerCase()}`}
@@ -261,7 +262,6 @@ export default async function GameCategoryPage({
                     : 'border-line'
                 }`}
               >
-                {/* Logo placeholder */}
                 <div className="grid h-9 w-[92px] shrink-0 place-items-center rounded border border-dashed border-line-2 bg-bg-sunken font-mono text-[10px] text-ink-3">
                   {op.name}
                 </div>
@@ -297,10 +297,10 @@ export default async function GameCategoryPage({
         </div>
       </section>
 
-      {/* Guide section — max-width 760px */}
+      {/* ── Guide ────────────────────────────────────────────────────────── */}
       <section className="py-12">
         <div className="mx-auto max-w-[760px] px-[18px] md:px-8">
-          <h2 className="mb-4 font-serif text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.015em] text-ink">
+          <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
             {cat.guideTitle}
           </h2>
           <p className="mb-[14px] text-[16px] leading-[1.7] text-ink-2">{cat.guideSummary}</p>
@@ -325,6 +325,146 @@ export default async function GameCategoryPage({
           </p>
         </div>
       </section>
+
+      {/* ── Autres types de jeux (maillage interne) ──────────────────────── */}
+      <section className="border-t border-line pb-12 pt-10">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <div className="mb-6">
+            <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.1em] text-green">
+              {isFr ? 'Explorer' : 'Explore'}
+            </p>
+            <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,30px)] font-medium text-ink">
+              {isFr ? 'Autres types de jeux' : 'Other game types'}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-[12px] sm:grid-cols-3">
+            {otherCats.map((c) => (
+              <a
+                key={c.slug}
+                href={`/jeux/${c.slug}/`}
+                className="flex items-center justify-between rounded-lg border border-line bg-surface p-[14px_16px] text-ink no-underline transition-[border-color,transform] duration-[150ms] hover:translate-x-[2px] hover:border-green"
+                data-event="internal_link"
+                data-target={c.slug}
+                data-page-type="jeux_categorie"
+                data-locale={locale}
+              >
+                <div>
+                  <div className="font-serif text-[15px] font-semibold leading-[1.2]">
+                    {isFr ? c.label : c.labelEn}
+                  </div>
+                  <div className="mt-[2px] font-mono text-[11px] text-ink-3">{c.count}+ jeux</div>
+                </div>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="h-4 w-4 shrink-0 text-ink-3"
+                  aria-hidden
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Fork block ───────────────────────────────────────────────────── */}
+      <section className="pb-16 pt-2">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* Dark panel */}
+            <div
+              className="flex flex-col items-start gap-6 rounded-xl p-[32px_36px]"
+              style={{ background: 'var(--ink)' }}
+            >
+              <div>
+                <p className="mb-[6px] font-mono text-[11px] uppercase tracking-[0.1em] text-white/60">
+                  {isFr ? 'Prêt à jouer ?' : 'Ready to play?'}
+                </p>
+                <p className="m-0 font-serif text-[22px] font-semibold leading-[1.2] text-white">
+                  {isFr
+                    ? `Tentez votre chance sur les meilleures ${label.toLowerCase()}`
+                    : `Try your luck on the best ${label.toLowerCase()}`}
+                </p>
+              </div>
+              <CTAButton
+                href={spotOp.affiliateUrl}
+                variant="primary"
+                arrow
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-event="affiliate_click"
+                data-operator={spotOp.slug}
+                data-placement="category_fork_cta"
+                data-bonus={spotOp.bonusSlug}
+                data-page-type="jeux_categorie"
+                data-locale={locale}
+              >
+                {isFr ? `Jouer sur ${spotOp.name}` : `Play on ${spotOp.name}`}
+              </CTAButton>
+            </div>
+
+            {/* Light panel */}
+            <div className="flex flex-col justify-between gap-4 rounded-xl border border-line bg-surface p-[32px_36px]">
+              <div>
+                <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-3">
+                  {isFr ? 'Vous hésitez ?' : 'Still deciding?'}
+                </p>
+                <p className="m-0 font-serif text-[20px] font-semibold text-ink">
+                  {isFr ? 'Comparez tous les casinos' : 'Compare all casinos'}
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                {casinos.map((op) => (
+                  <a
+                    key={op.id}
+                    href={`/casinos/${op.slug}/`}
+                    className="flex items-center gap-3 text-[14px] font-semibold text-ink no-underline hover:text-green"
+                    data-event="review_click"
+                    data-operator={op.slug}
+                    data-page-type="jeux_categorie"
+                    data-locale={locale}
+                  >
+                    <span
+                      className="inline-block h-[2px] w-[16px] shrink-0"
+                      style={{ background: 'var(--gold)' }}
+                      aria-hidden
+                    />
+                    {op.name}
+                  </a>
+                ))}
+                <a
+                  href={`/${locale}/casinos/`}
+                  className="mt-1 text-[13px] font-semibold text-green no-underline hover:underline"
+                  data-event="internal_link"
+                  data-page-type="jeux_categorie"
+                  data-locale={locale}
+                >
+                  {isFr ? 'Voir tous les casinos →' : 'See all casinos →'}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Sticky bonus bar ─────────────────────────────────────────────── */}
+      <ReviewStickyBar
+        operatorName={spotOp.name}
+        operatorSlug={spotOp.slug}
+        rating={spotOp.rating}
+        bonusAmount={spotOp.bonusAmount}
+        bonusSuffix={spotOp.bonusSuffix}
+        bonusConditions={spotOp.bonusConditions}
+        bonusSlug={spotOp.bonusSlug}
+        affiliateUrl={spotOp.affiliateUrl}
+        locale={locale}
+        pageType="jeux_categorie"
+        placement="category_sticky_bar"
+        showAlt={false}
+      />
     </>
   )
 }
