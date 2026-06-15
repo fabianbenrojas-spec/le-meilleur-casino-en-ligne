@@ -11,7 +11,7 @@ import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { NewsletterCTA } from '@/components/ui/newsletter-cta'
 import { PodiumCard } from '@/components/ui/operator-card'
 import { StickyMobileCTA } from '@/components/ui/sticky-mobile-cta'
-import { HomepageQuiz } from '@/components/homepage/homepage-quiz'
+import { CasinoMatchmaker } from '@/components/homepage/casino-matchmaker'
 import { OperatorRotator } from '@/components/homepage/operator-rotator'
 import { Top10Table } from '@/components/homepage/top10-table'
 import type { Locale } from '@/i18n/routing'
@@ -503,10 +503,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               Trouvez le casino fait pour vous
             </h2>
             <p className="mt-[14px] max-w-[64ch] text-[16.5px] text-ink-2">
-              Trois questions, une recommandation personnalisée — sans inscription.
+              8 questions, une recommandation personnalisée — sans inscription.
             </p>
           </div>
-          <HomepageQuiz topOperator={topOp} />
+          <CasinoMatchmaker />
         </div>
       </section>
 
