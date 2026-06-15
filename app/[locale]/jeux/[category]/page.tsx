@@ -208,7 +208,7 @@ export default async function GameCategoryPage({
                     rel="noopener noreferrer nofollow"
                     data-event="affiliate_click"
                     data-operator={spotOp.slug}
-                    data-placement="category_hero_spot"
+                    data-placement="category_hero_spotlight"
                     data-bonus={spotOp.bonusSlug}
                     data-page-type="jeux_categorie"
                     data-locale={locale}

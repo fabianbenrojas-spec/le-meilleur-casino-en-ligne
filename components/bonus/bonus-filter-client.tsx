@@ -141,7 +141,7 @@ function BonusCard({ op, rank, locale }: { op: Operator; rank: number; locale: s
             className="min-h-[54px] text-[16px] shadow-[0_4px_14px_-4px_color-mix(in_srgb,var(--green)_60%,transparent)]"
             data-event="affiliate_click"
             data-operator={op.slug}
-            data-placement="bonus_card"
+            data-placement="bonus_listing"
             data-bonus={op.bonusSlug}
             data-page-type="bonus_hub"
             data-locale={locale}

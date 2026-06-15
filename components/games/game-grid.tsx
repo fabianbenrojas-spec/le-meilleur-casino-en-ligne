@@ -301,7 +301,7 @@ export function GameGrid({ games, isFr, locale, providers }: GameGridProps) {
                   variant="secondary"
                   size="sm"
                   data-event="game_demo_click"
-                  data-placement="category_grid"
+                  data-placement="category_game_tile"
                   data-page-type="jeux_categorie"
                   data-locale={locale}
                 >
@@ -312,7 +312,7 @@ export function GameGrid({ games, isFr, locale, providers }: GameGridProps) {
                   variant="primary"
                   size="sm"
                   data-event="game_review_click"
-                  data-placement="category_grid"
+                  data-placement="category_game_tile"
                   data-page-type="jeux_categorie"
                   data-locale={locale}
                 >
