@@ -142,13 +142,13 @@ const GAME_TYPES = [
   },
 ]
 
-const POPULAR_GAMES = [
-  { name: 'Book of Dead', provider: "Play'n GO", rtp: '96.21' },
-  { name: 'Starburst', provider: 'NetEnt', rtp: '96.09' },
-  { name: 'Mega Moolah', provider: 'Microgaming', rtp: '88.12' },
-  { name: "Gonzo's Quest", provider: 'NetEnt', rtp: '95.97' },
-  { name: 'Immortal Romance', provider: 'Microgaming', rtp: '96.86' },
-  { name: 'Lightning Roulette', provider: 'Evolution', rtp: '97.30' },
+const POPULAR_GAMES: { name: string; slug: string; provider: string; rtp: string }[] = [
+  { name: 'Book of Dead', slug: 'book-of-dead', provider: "Play'n GO", rtp: '96.21' },
+  { name: 'Starburst', slug: 'starburst', provider: 'NetEnt', rtp: '96.09' },
+  { name: 'Mega Moolah', slug: 'mega-moolah', provider: 'Microgaming', rtp: '88.12' },
+  { name: "Gonzo's Quest", slug: 'gonzos-quest', provider: 'NetEnt', rtp: '95.97' },
+  { name: 'Immortal Romance', slug: 'immortal-romance', provider: 'Microgaming', rtp: '96.86' },
+  { name: 'Lightning Roulette', slug: 'lightning-roulette', provider: 'Evolution', rtp: '97.30' },
 ]
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -610,7 +610,7 @@ export default async function ReviewPage({
                         <div className="font-mono text-[11.5px] text-ink-3">{game.provider}</div>
                         <div className="mt-[11px] flex gap-2">
                           <CTAButton
-                            href={`/jeux/${game.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`}
+                            href={`/jeux/${game.slug}/`}
                             variant="secondary"
                             size="sm"
                             className="flex-1"
@@ -629,7 +629,7 @@ export default async function ReviewPage({
                             rel="noopener noreferrer nofollow"
                             data-event="affiliate_click"
                             data-operator={op.slug}
-                            data-placement="review_game_card"
+                            data-placement={`review_game_${game.slug}`}
                             data-bonus={op.bonusSlug}
                             data-page-type="review"
                             data-locale={locale}
