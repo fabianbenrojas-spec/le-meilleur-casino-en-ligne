@@ -10,13 +10,16 @@ import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { NewsletterCTA } from '@/components/ui/newsletter-cta'
 import { PodiumCard } from '@/components/ui/operator-card'
+import { ScorePill } from '@/components/ui/score-pill'
 import { StickyMobileCTA } from '@/components/ui/sticky-mobile-cta'
 import { CasinoMatchmaker } from '@/components/homepage/casino-matchmaker'
 import { OperatorRotator } from '@/components/homepage/operator-rotator'
 import { Top10Table } from '@/components/homepage/top10-table'
 import type { Locale } from '@/i18n/routing'
+import { categories as gameCategories, type GameCategory } from '@/config/games'
 import { TOP_10, TOP_3 } from '@/config/operators'
 import { buildHreflang } from '@/lib/i18n/routes'
+import { cn } from '@/lib/utils'
 
 const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
@@ -134,6 +137,58 @@ const categories = [
     ),
   },
 ]
+
+// ── Category grid icons (cat-grid, B-S4) — keyed by config/games.ts slug ────
+
+const CAT_GRID_ICONS: Record<GameCategory, React.ReactNode> = {
+  'machines-a-sous': (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M8 4v16M16 4v16" />
+    </svg>
+  ),
+  roulette: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  ),
+  blackjack: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="5" y="3" width="11" height="15" rx="2" />
+      <path d="M8 21h11a2 2 0 0 0 2-2V8" />
+    </svg>
+  ),
+  live: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  ),
+  crash: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M3 19l7-7 4 4 7-9" />
+      <path d="M21 7v5h-5" />
+    </svg>
+  ),
+  'video-poker': (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3" y="6" width="18" height="12" rx="2" />
+      <path d="M3 10h18" />
+    </svg>
+  ),
+}
+
+// 5 catégories affichées en home, dans l'ordre éditorial de la maquette
+// (video-poker existe dans config/games.ts mais n'a pas de tuile dédiée)
+const CAT_GRID_SLUGS: GameCategory[] = ['machines-a-sous', 'roulette', 'blackjack', 'live', 'crash']
 
 // ── Guides ──────────────────────────────────────────────────────────────────
 
@@ -352,10 +407,13 @@ function ItemListSchema({ locale }: { locale: Locale }) {
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-function MeshLogoPlaceholder() {
+function MeshLogoPlaceholder({ className }: { className?: string } = {}) {
   return (
     <div
-      className="h-5 w-[30px] shrink-0 rounded-[4px] border border-dashed border-line-2"
+      className={cn(
+        'h-5 w-[30px] shrink-0 rounded-[4px] border border-dashed border-line-2',
+        className
+      )}
       style={{
         background:
           'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
@@ -506,6 +564,123 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               </a>
               . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          HP-TOPLINKS — accès rapide aux casinos les mieux notés (B-S4)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="bg-bg-sunken py-12">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <div className="mb-[20px] flex flex-wrap items-baseline justify-between gap-4">
+            <div>
+              <div className="mb-[8px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+                Accès rapide
+              </div>
+              <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,28px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
+                Les casinos les mieux notés
+              </h2>
+            </div>
+            <CTAButton
+              href="/bonus/"
+              variant="secondary"
+              data-event="internal_link"
+              data-target="bonus"
+            >
+              Voir tous les bonus
+            </CTAButton>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {TOP_10.slice(0, 4).map((op) => (
+              <a
+                key={op.slug}
+                href={`/casinos/${op.slug}/`}
+                className="flex items-center gap-3 rounded-[10px] border border-line bg-surface px-[15px] py-[13px] no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-150 hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                data-event="review_click"
+                data-operator={op.slug}
+                data-placement="home_toplink"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                <MeshLogoPlaceholder className="h-[30px] w-[56px]" />
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-[7px] text-[14px] font-bold text-ink">
+                    {op.name}
+                    <ScorePill
+                      score={op.rating}
+                      gold={op.slug === topOp.slug}
+                      className="px-[6px] py-[1px] text-[11px]"
+                    />
+                  </span>
+                  <span className="text-[11.5px] text-ink-3">
+                    {op.bonusAmount}
+                    {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}
+                  </span>
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  className="shrink-0 text-ink-3 transition-colors group-hover:text-green"
+                  aria-hidden
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          CAT-GRID — explorer par catégorie de jeu (B-S4)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="py-12">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <div className="mb-[20px]">
+            <div className="mb-[8px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+              Par type de jeu
+            </div>
+            <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,28px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
+              Explorez par catégorie
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {CAT_GRID_SLUGS.map((slug) => {
+              const cat = gameCategories.find((c) => c.slug === slug)
+              if (!cat) return null
+              return (
+                <a
+                  key={cat.slug}
+                  href={`/jeux/${cat.slug}/`}
+                  className="flex flex-col overflow-hidden rounded-[14px] border border-line bg-surface no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[180ms] hover:-translate-y-[3px] hover:border-line-2 hover:shadow-3"
+                  data-event="category_click"
+                  data-category={cat.slug}
+                  data-placement="home_category_tile"
+                  data-page-type="homepage"
+                  data-locale={locale}
+                >
+                  <div
+                    className="grid aspect-[4/3] place-items-center border-b border-line text-green [&_svg]:h-[34px] [&_svg]:w-[34px]"
+                    style={{
+                      background:
+                        'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 9px,var(--surface-2,var(--surface)) 9px,var(--surface-2,var(--surface)) 18px)',
+                    }}
+                  >
+                    {CAT_GRID_ICONS[cat.slug]}
+                  </div>
+                  <div className="px-[15px] py-[14px]">
+                    <div className="text-[15px] font-bold text-ink">{cat.label}</div>
+                  </div>
+                </a>
+              )
+            })}
           </div>
         </div>
       </section>
