@@ -144,18 +144,17 @@ const reviews: ReviewData[] = [
     ],
     pourQui: {
       idealSi: [
-        'Veut récupérer ses gains vite : retraits testés en moins de 24h, carte bancaire incluse.',
-        'Choisit un casino avec chat francophone 7j/7 et délai de réponse inférieur à 2 minutes.',
-        'Cherche le meilleur rapport bonus/conditions du marché FR : wager 35×, sans code promo.',
+        'Vous retirez vos gains régulièrement : 3 tests de retrait crédités en moins de 24 h, carte bancaire incluse.',
+        'Vous contactez le support en français : chat 7j/7, délai de réponse moyen mesuré à 2 minutes.',
+        'Vous activez le bonus de bienvenue : 200 € + 100 tours dès 20 € déposés, wager 35×, sans code promo.',
       ],
       bonChoixSi: [
-        'Apprécie la variété : catalogue de 2 100+ jeux incluant Nolimit City et Hacksaw Gaming.',
-        'Joue principalement en soirée : tables live Evolution en français disponibles de 18h à 2h.',
+        'Vous testez les jeux de studios pointus comme Nolimit City ou Hacksaw Gaming : catalogue de 2 100+ titres.',
+        'Vous jouez au live en soirée : 90 tables Evolution et Pragmatic Live, en français pour blackjack et roulette.',
       ],
       aEviterSi: [
-        "Exige une interface moderne : le design n'a pas été refait depuis plusieurs années.",
-        'Gagne des sommes importantes régulièrement : retrait plafonné à 5 000 € par semaine.',
-        'Recherche un cashback hebdomadaire sans conditions : Crésus ne propose pas cette mécanique.',
+        "Vous retirez régulièrement plus de 5 000 € par semaine : c'est précisément le plafond hebdomadaire imposé.",
+        "Vous voulez la protection juridique d'une licence européenne (MGA Malte) en cas de litige : Crésus est sous Curaçao 8048.",
       ],
     },
   },
