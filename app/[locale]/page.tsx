@@ -314,29 +314,33 @@ const faqItems = [
   },
 ]
 
-// ── Blog articles ────────────────────────────────────────────────────────────
+// ── Guides permanents (teaser homepage) ─────────────────────────────────────
+// Sous-ensemble de `guides` (app/[locale]/guides/[slug]/page.tsx) choisi pour
+// matcher les 3 catégories de la maquette (Bonus / Jeux / Paiements).
 
-const blogPosts = [
+const homeGuides = [
   {
-    slug: 'anj-2026',
-    category: 'Législation',
-    date: '4 juin 2026',
-    title: "Casino en ligne en France : ce qui change avec l'ANJ en 2026",
-    excerpt: 'Le point complet sur le cadre légal et ce que ça implique pour les joueurs.',
-  },
-  {
-    slug: 'wager-pieges',
+    slug: 'bonus-casino',
     category: 'Bonus',
-    date: '1 juin 2026',
-    title: 'Conditions de wager : les 5 pièges qui annulent votre bonus',
-    excerpt: 'Comment lire les petites lignes avant de réclamer une offre de bienvenue.',
+    readTime: 10,
+    title: 'Choisir son bonus',
+    excerpt:
+      'Bonus de bienvenue, cashback, tours gratuits : lire les conditions avant de réclamer.',
   },
   {
-    slug: 'retraits-crypto',
+    slug: 'rtp',
+    category: 'Jeux',
+    readTime: 8,
+    title: 'Comprendre le RTP',
+    excerpt:
+      'Taux de redistribution, volatilité, avantage maison — décoder les chiffres qui comptent.',
+  },
+  {
+    slug: 'paiements',
     category: 'Paiements',
-    date: '28 mai 2026',
-    title: 'Retraits crypto : vraiment plus rapides ? Notre test chronométré',
-    excerpt: 'On a comparé 12 casinos sur leurs délais de retrait réels en Bitcoin.',
+    readTime: 6,
+    title: 'Méthodes de paiement',
+    excerpt: 'CB, e-wallets, crypto : délais de retrait réels, frais cachés et sécurité comparés.',
   },
 ]
 
@@ -1079,38 +1083,37 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          BLOG — CONSERVÉ INTÉGRALEMENT
-          ══════════════════════════════════════════════════════════════ */}
+      {/* ── GUIDES (guides permanents — teaser homepage) ────────────── */}
       <section className="bg-bg-sunken py-16">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Le journal
+                Guides essentiels
               </div>
               <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-                Derniers articles &amp; analyses
+                Comprendre avant de jouer
               </h2>
             </div>
             <CTAButton
-              href="/blog/"
+              href="/guides/"
               variant="secondary"
-              data-event="blog_click"
-              data-placement="section_header"
+              data-event="guide_click"
+              data-placement="home_guides_seeall"
             >
-              Tous les articles
+              Tous les guides
             </CTAButton>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-            {blogPosts.map((post) => (
+            {homeGuides.map((guide) => (
               <a
-                key={post.slug}
-                href={`/blog/${post.slug}/`}
+                key={guide.slug}
+                href={`/guides/${guide.slug}/`}
                 className="overflow-hidden rounded-lg border border-line bg-surface text-ink no-underline shadow-1 transition-[transform,box-shadow] duration-[180ms] hover:-translate-y-[3px] hover:shadow-3"
-                data-event="blog_click"
-                data-article={post.slug}
+                data-event="guide_click"
+                data-target={guide.slug}
+                data-placement="home_guides_card"
               >
                 {/* Thumbnail placeholder 16:9 */}
                 <div className="relative aspect-[16/9] border-b border-line bg-surface-2">
@@ -1120,12 +1123,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </div>
                 <div className="px-5 py-[18px] pb-[22px]">
                   <div className="mb-[9px] font-mono text-[11px] uppercase tracking-[0.04em] text-ink-3">
-                    {post.category} · {post.date}
+                    {guide.category} · {guide.readTime} min
                   </div>
                   <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.25] text-ink">
-                    {post.title}
+                    {guide.title}
                   </h3>
-                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{post.excerpt}</p>
+                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{guide.excerpt}</p>
                 </div>
               </a>
             ))}
