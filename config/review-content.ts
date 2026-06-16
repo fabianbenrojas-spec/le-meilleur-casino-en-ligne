@@ -392,17 +392,17 @@ const reviews: ReviewData[] = [
     ],
     pourQui: {
       idealSi: [
-        "Utilise Bitcoin ou Ethereum et veut récupérer ses gains en moins d'une heure (testé 4 fois).",
-        "Joue au blackjack VIP : tables haute mise jusqu'à 10 000 € via Evolution et Ezugi.",
-        'Cherche un wager parmi les plus bas : 30× sur bonus uniquement, actif depuis 2015.',
+        'Vous retirez en Bitcoin ou Ethereum : 4 retraits testés, le plus long traité en 47 minutes.',
+        "Vous jouez au blackjack live haute mise : tables VIP Evolution et Ezugi acceptant jusqu'à 10 000€ par main, testées sans latence.",
+        'Vous jouez et déposez en crypto sur mobile : LCP mesuré à 1,7s en 4G, dépôt BTC/ETH directement intégré.',
       ],
       bonChoixSi: [
-        'Préfère un opérateur établi : Wild Sultan est actif depuis 2015, le plus ancien du top 3.',
+        "Vous activez le bonus de bienvenue : 500€ + 20 tours, wager 30×, l'un des plus bas du comparatif.",
+        'Vous jouez les machines à sous haute volatilité : Nolimit City, Hacksaw Gaming et Big Time Gaming au catalogue (1 500+ jeux).',
       ],
       aEviterSi: [
-        'Paie exclusivement par carte bancaire classique : très peu de méthodes fiat disponibles ici.',
-        'Préfère une interface en français : la navigation et le lobby sont principalement en anglais.',
-        'Contacte le support en français la nuit : disponible en FR seulement de 10h à 22h.',
+        'Vous payez par e-wallet (Skrill, Neteller) ou autre carte que VISA : Wild Sultan propose surtout les paiements crypto.',
+        "Vous voulez un site et un support en français : l'interface est surtout anglophone, FR limité de 10h à 22h.",
       ],
     },
   },

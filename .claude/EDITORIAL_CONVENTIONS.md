@@ -52,7 +52,14 @@ empêche les fiches d'être interchangeables.
   cagnottes en espèces, plafond journalier 2 000€, KYC long 24-72h
 - ❌ Interdits ailleurs : cashback (unique au repo), tournois (unique)
 
-### Wild Sultan (rang 3) — à définir lors du prochain brief
+### Wild Sultan (rang 3) — territoire éditorial
+
+- ✅ Réservés : retrait crypto BTC/ETH < 1h, live VIP haute mise jusqu'à
+  10 000€, mobile crypto (LCP 1,7s + dépôt crypto intégré), wager 30×
+  (le plus bas du repo), Big Time Gaming au catalogue, interface EN /
+  FR limité 10h-22h en aEviterSi, e-wallets/MC absents en aEviterSi
+- ❌ Interdits ailleurs : crypto rapide (BTC/ETH < 1h), tables live VIP
+  10 000€, BTG (Big Time Gaming), wager 30× comme plus bas
 
 ### Madnix (rang 4) — à définir lors du prochain brief
 
