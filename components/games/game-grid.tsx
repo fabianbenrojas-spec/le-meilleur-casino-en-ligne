@@ -145,7 +145,7 @@ export function GameGrid({ games, isFr, locale, providers }: GameGridProps) {
             onClick={handleRandom}
             className="hidden shrink-0 items-center gap-[7px] rounded-[8px] bg-green-50 px-[12px] py-[8px] font-sans text-[13px] font-semibold text-green transition-colors hover:bg-green hover:text-white sm:flex"
             aria-label={isFr ? 'Choisir un jeu au hasard' : 'Random game'}
-            data-event="comparison_filter_use"
+            data-event="game_random_pick"
             data-filter="random"
             data-page-type="jeux_categorie"
             data-locale={locale}

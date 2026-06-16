@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import { CTAButton } from '@/components/ui/cta-button'
 import { cn } from '@/lib/utils'
 
 export interface CritData {
@@ -9,6 +10,8 @@ export interface CritData {
   label: string
   num: string
   iconPath: string
+  /** 'label' skips the 0-100 progress bar — use when no comparable score exists (default 'bar') */
+  displayMode?: 'bar' | 'label'
   barA: number // 0-100
   barB: number // 0-100
   labelA: string
@@ -20,12 +23,17 @@ export interface CritData {
   deepB: string[]
 }
 
+interface OperatorCtaInfo {
+  name: string
+  slug: string
+  affiliateUrl: string
+  bonusSlug: string
+}
+
 interface VersusCritsProps {
   crits: CritData[]
-  nameA: string
-  slugA: string
-  nameB: string
-  slugB: string
+  opA: OperatorCtaInfo
+  opB: OperatorCtaInfo
   winnerSlug: string
   locale: string
 }
@@ -60,7 +68,19 @@ function ChevronDown({ className }: { className?: string }) {
   )
 }
 
-function CritBlock({ crit, nameA, nameB }: { crit: CritData; nameA: string; nameB: string }) {
+function CritBlock({
+  crit,
+  opA,
+  opB,
+  locale,
+}: {
+  crit: CritData
+  opA: OperatorCtaInfo
+  opB: OperatorCtaInfo
+  locale: string
+}) {
+  const nameA = opA.name
+  const nameB = opB.name
   const [animated, setAnimated] = useState(false)
   const [deepOpen, setDeepOpen] = useState(false)
   const blockRef = useRef<HTMLDivElement>(null)
@@ -143,67 +163,114 @@ function CritBlock({ crit, nameA, nameB }: { crit: CritData; nameA: string; name
         </div>
       </div>
 
-      {/* Animated bars */}
-      <div className="flex flex-col gap-[12px] px-[22px] pb-[4px] pt-[18px]">
-        {/* Bar A */}
-        <div
-          className="grid items-center gap-[12px]"
-          style={{ gridTemplateColumns: '96px 1fr 42px' }}
-        >
-          <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+      {/* Comparison row: animated bar (score-based criteria) or label-only (no invented score) */}
+      {crit.displayMode === 'label' ? (
+        <div className="flex flex-col gap-[10px] px-[22px] pb-[4px] pt-[18px]">
+          {/* Row A */}
+          <div className="flex items-center justify-between gap-[12px]">
+            <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+              <span
+                className={cn(
+                  'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
+                  winA ? 'bg-green' : 'bg-ink-3'
+                )}
+                aria-hidden
+              />
+              <span className="truncate">{nameA}</span>
+            </div>
             <span
               className={cn(
-                'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
-                winA ? 'bg-green' : 'bg-ink-3'
+                'font-mono text-[13px] font-semibold',
+                winA ? 'text-green-ink' : 'text-ink-2'
               )}
-              aria-hidden
-            />
-            <span className="truncate">{nameA}</span>
+            >
+              {crit.labelA}
+            </span>
           </div>
-          <div className="block h-[9px] overflow-hidden rounded-[5px] bg-bg-sunken">
-            <span
-              className="block h-full rounded-[5px]"
-              style={{
-                width: animated ? `${crit.barA}%` : '0%',
-                background: winA ? 'var(--green)' : 'var(--ink-3)',
-                transition: animated ? 'width 1.05s cubic-bezier(0.2,0.7,0.25,1)' : 'none',
-              }}
-            />
-          </div>
-          <span className="text-right font-mono text-[12.5px] font-medium text-ink-2">
-            {crit.labelA}
-          </span>
-        </div>
-        {/* Bar B */}
-        <div
-          className="grid items-center gap-[12px]"
-          style={{ gridTemplateColumns: '96px 1fr 42px' }}
-        >
-          <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+          {/* Row B */}
+          <div className="flex items-center justify-between gap-[12px]">
+            <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+              <span
+                className={cn(
+                  'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
+                  winB ? 'bg-green' : 'bg-ink-3'
+                )}
+                aria-hidden
+              />
+              <span className="truncate">{nameB}</span>
+            </div>
             <span
               className={cn(
-                'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
-                winB ? 'bg-green' : 'bg-ink-3'
+                'font-mono text-[13px] font-semibold',
+                winB ? 'text-green-ink' : 'text-ink-2'
               )}
-              aria-hidden
-            />
-            <span className="truncate">{nameB}</span>
+            >
+              {crit.labelB}
+            </span>
           </div>
-          <div className="block h-[9px] overflow-hidden rounded-[5px] bg-bg-sunken">
-            <span
-              className="block h-full rounded-[5px]"
-              style={{
-                width: animated ? `${crit.barB}%` : '0%',
-                background: winB ? 'var(--green)' : 'var(--ink-3)',
-                transition: animated ? 'width 1.05s cubic-bezier(0.2,0.7,0.25,1)' : 'none',
-              }}
-            />
-          </div>
-          <span className="text-right font-mono text-[12.5px] font-medium text-ink-2">
-            {crit.labelB}
-          </span>
         </div>
-      </div>
+      ) : (
+        <div className="flex flex-col gap-[12px] px-[22px] pb-[4px] pt-[18px]">
+          {/* Bar A */}
+          <div
+            className="grid items-center gap-[12px]"
+            style={{ gridTemplateColumns: '96px 1fr 42px' }}
+          >
+            <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+              <span
+                className={cn(
+                  'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
+                  winA ? 'bg-green' : 'bg-ink-3'
+                )}
+                aria-hidden
+              />
+              <span className="truncate">{nameA}</span>
+            </div>
+            <div className="block h-[9px] overflow-hidden rounded-[5px] bg-bg-sunken">
+              <span
+                className="block h-full rounded-[5px]"
+                style={{
+                  width: animated ? `${crit.barA}%` : '0%',
+                  background: winA ? 'var(--green)' : 'var(--ink-3)',
+                  transition: animated ? 'width 1.05s cubic-bezier(0.2,0.7,0.25,1)' : 'none',
+                }}
+              />
+            </div>
+            <span className="text-right font-mono text-[12.5px] font-medium text-ink-2">
+              {crit.labelA}
+            </span>
+          </div>
+          {/* Bar B */}
+          <div
+            className="grid items-center gap-[12px]"
+            style={{ gridTemplateColumns: '96px 1fr 42px' }}
+          >
+            <div className="flex items-center gap-[8px] text-[13px] font-semibold text-ink">
+              <span
+                className={cn(
+                  'inline-block h-[9px] w-[9px] shrink-0 rounded-full',
+                  winB ? 'bg-green' : 'bg-ink-3'
+                )}
+                aria-hidden
+              />
+              <span className="truncate">{nameB}</span>
+            </div>
+            <div className="block h-[9px] overflow-hidden rounded-[5px] bg-bg-sunken">
+              <span
+                className="block h-full rounded-[5px]"
+                style={{
+                  width: animated ? `${crit.barB}%` : '0%',
+                  background: winB ? 'var(--green)' : 'var(--ink-3)',
+                  transition: animated ? 'width 1.05s cubic-bezier(0.2,0.7,0.25,1)' : 'none',
+                }}
+              />
+            </div>
+            <span className="text-right font-mono text-[12.5px] font-medium text-ink-2">
+              {crit.labelB}
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Prose split */}
       <div className="mt-[4px] grid grid-cols-1 sm:grid-cols-[1fr_1px_1fr]">
@@ -220,6 +287,24 @@ function CritBlock({ crit, nameA, nameB }: { crit: CritData; nameA: string; name
             />
           </div>
           <p className="m-0 text-[14px] leading-[1.62] text-ink-2">{crit.proseA}</p>
+          {!isTie && (
+            <CTAButton
+              href={opA.affiliateUrl}
+              variant={winA ? 'primary' : 'secondary'}
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="mt-[14px]"
+              data-event="affiliate_click"
+              data-operator={opA.slug}
+              data-placement={`versus_section_${crit.id}`}
+              data-bonus={opA.bonusSlug}
+              data-page-type="versus"
+              data-locale={locale}
+            >
+              {winA ? `Jouer chez ${nameA} →` : `Voir ${nameA}`}
+            </CTAButton>
+          )}
         </div>
         <div className="h-px bg-line sm:h-auto" />
         <div
@@ -235,6 +320,24 @@ function CritBlock({ crit, nameA, nameB }: { crit: CritData; nameA: string; name
             />
           </div>
           <p className="m-0 text-[14px] leading-[1.62] text-ink-2">{crit.proseB}</p>
+          {!isTie && (
+            <CTAButton
+              href={opB.affiliateUrl}
+              variant={winB ? 'primary' : 'secondary'}
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="mt-[14px]"
+              data-event="affiliate_click"
+              data-operator={opB.slug}
+              data-placement={`versus_section_${crit.id}`}
+              data-bonus={opB.bonusSlug}
+              data-page-type="versus"
+              data-locale={locale}
+            >
+              {winB ? `Jouer chez ${nameB} →` : `Voir ${nameB}`}
+            </CTAButton>
+          )}
         </div>
       </div>
 
@@ -307,17 +410,15 @@ function CritBlock({ crit, nameA, nameB }: { crit: CritData; nameA: string; name
 
 export function VersusCrits({
   crits,
-  nameA,
-  slugA: _slugA,
-  nameB,
-  slugB: _slugB,
+  opA,
+  opB,
   winnerSlug: _winnerSlug,
-  locale: _locale,
+  locale,
 }: VersusCritsProps) {
   return (
     <div className="flex flex-col gap-[18px]">
       {crits.map((crit) => (
-        <CritBlock key={crit.id} crit={crit} nameA={nameA} nameB={nameB} />
+        <CritBlock key={crit.id} crit={crit} opA={opA} opB={opB} locale={locale} />
       ))}
     </div>
   )

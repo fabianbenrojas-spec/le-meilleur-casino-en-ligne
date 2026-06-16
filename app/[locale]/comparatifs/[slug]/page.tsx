@@ -11,6 +11,7 @@ import { WagerSimulator } from '@/components/versus/wager-simulator'
 import { VersusCrits, type CritData } from '@/components/versus/versus-crits'
 import type { Locale } from '@/i18n/routing'
 import { operatorBySlug, operators, TOP_10 } from '@/config/operators'
+import { VERSUS_EXTRA_CRITS } from '@/config/versus-extra-crits'
 import { buildHreflang } from '@/lib/i18n/routes'
 
 function parseVersusSlug(slug: string): [string, string] | null {
@@ -205,6 +206,33 @@ export default async function VersusPage({
     },
   ]
 
+  const extra = VERSUS_EXTRA_CRITS[slug]
+  if (extra) {
+    crits.push(
+      {
+        id: 'support',
+        label: 'Support client',
+        num: '06',
+        iconPath:
+          'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z',
+        displayMode: 'label',
+        barA: 0,
+        barB: 0,
+        ...extra.support,
+      },
+      {
+        id: 'mobile',
+        label: 'Expérience mobile',
+        num: '07',
+        iconPath: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM11 18h2',
+        displayMode: 'label',
+        barA: 0,
+        barB: 0,
+        ...extra.mobile,
+      }
+    )
+  }
+
   return (
     <>
       <Breadcrumbs
@@ -239,8 +267,8 @@ export default async function VersusPage({
 
           <p className="m-0 mx-auto max-w-[64ch] text-[17.5px] leading-[1.62] text-ink-2">
             {isFr
-              ? `Analyse comparative sur 5 critères clés — bonus, RTP, paiements, expérience et note globale — pour vous aider à choisir entre ${opA.name} et ${opB.name}.`
-              : `A comparative analysis across 5 key criteria — bonuses, RTP, payments, UX and overall score — to help you choose between ${opA.name} and ${opB.name}.`}
+              ? `Analyse comparative sur ${crits.length} critères clés — note globale, bonus, RTP, paiements, expérience, support et mobile — pour vous aider à choisir entre ${opA.name} et ${opB.name}.`
+              : `A comparative analysis across ${crits.length} key criteria — overall score, bonuses, RTP, payments, UX, support and mobile — to help you choose between ${opA.name} and ${opB.name}.`}
           </p>
 
           {/* Head meta */}
@@ -569,10 +597,18 @@ export default async function VersusPage({
           />
           <VersusCrits
             crits={crits}
-            nameA={opA.name}
-            slugA={opA.slug}
-            nameB={opB.name}
-            slugB={opB.slug}
+            opA={{
+              name: opA.name,
+              slug: opA.slug,
+              affiliateUrl: opA.affiliateUrl,
+              bonusSlug: opA.bonusSlug,
+            }}
+            opB={{
+              name: opB.name,
+              slug: opB.slug,
+              affiliateUrl: opB.affiliateUrl,
+              bonusSlug: opB.bonusSlug,
+            }}
             winnerSlug={winner.slug}
             locale={locale}
           />
