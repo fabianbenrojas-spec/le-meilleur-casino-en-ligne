@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { WithContext, Review } from 'schema-dts'
@@ -69,7 +70,7 @@ export async function generateMetadata({
 
 // ── TOC items ─────────────────────────────────────────────────────────────────
 
-const TOC_ITEMS = [
+const TOC_BASE = [
   { id: 'verdict', label: 'Verdict' },
   { id: 'bonus', label: 'Bonus' },
   { id: 'jeux', label: 'Jeux' },
@@ -80,8 +81,94 @@ const TOC_ITEMS = [
   { id: 'vip', label: 'VIP' },
   { id: 'securite', label: 'Sécurité' },
   { id: 'recap', label: 'Récap' },
+  { id: 'methode', label: 'Méthode' },
+]
+
+const TOC_END = [
   { id: 'faq', label: 'FAQ' },
   { id: 'alternatives', label: 'Alternatives' },
+]
+
+// ── Méthode de test ───────────────────────────────────────────────────────────
+
+const METHODE_STEPS: { title: string; desc: string; icon: React.ReactNode }[] = [
+  {
+    title: 'Inscription & KYC',
+    desc: 'Ouvrons un compte réel et soumettons les 3 pièces KYC standard (CNI recto-verso, justificatif de domicile < 3 mois, RIB) — mesurons le délai entre le premier envoi et la notification de validation.',
+    icon: (
+      <>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </>
+    ),
+  },
+  {
+    title: 'Dépôt & activation bonus',
+    desc: "Déposons le minimum requis via carte bancaire puis e-wallet ; vérifions que le bonus s'active automatiquement en moins de 5 minutes et que le wager en conditions réelles correspond aux conditions affichées.",
+    icon: (
+      <>
+        <rect x="2" y="6" width="20" height="13" rx="2" />
+        <path d="M2 10h20" />
+      </>
+    ),
+  },
+  {
+    title: 'Ludothèque & RTP',
+    desc: "Échantillonnons 50 jeux populaires et vérifions la version RTP servie par l'opérateur (certains fournisseurs comme Pragmatic Play proposent plusieurs versions du même jeu : 96 %, 94 %, 90 %) — signalons tout écart avec la version standard la plus généreuse.",
+    icon: (
+      <>
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </>
+    ),
+  },
+  {
+    title: 'Live casino & tables',
+    desc: "Testons 4 catégories de tables en heure de pointe (roulette, blackjack, baccarat, game show) — mesurons le délai d'attente pour obtenir une place assise et la stabilité du flux vidéo sur connexion 20 Mbps pendant 30 minutes.",
+    icon: (
+      <>
+        <polygon points="23 7 16 12 23 17 23 7" />
+        <rect x="1" y="5" width="15" height="14" rx="2" />
+      </>
+    ),
+  },
+  {
+    title: 'Retrait chronométré',
+    desc: 'Trois retraits minutés en conditions réelles (CB, e-wallet, virement SEPA) à différents moments de la semaine — du clic « retirer » au crédit visible en compte bancaire.',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </>
+    ),
+  },
+  {
+    title: 'Support client',
+    desc: "Soumettons 5 questions identiques (technique, bonus, KYC, paiement, jeu responsable) via chat en direct, e-mail et téléphone le cas échéant — mesurons le délai de première réponse et l'exactitude par canal.",
+    icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />,
+  },
+  {
+    title: 'Mobile & ergonomie',
+    desc: "Jouons 1 heure sur iOS Safari et Chrome Android, application native si disponible — évaluons 5 critères : zones tactiles conformes aux standards d'accessibilité, LCP < 2,5 s, lisibilité des cotes, navigation à une main, comportement au changement d'orientation.",
+    icon: (
+      <>
+        <rect x="5" y="2" width="14" height="20" rx="2" />
+        <line x1="12" y1="18" x2="12.01" y2="18" />
+      </>
+    ),
+  },
+  {
+    title: 'Sécurité & licence',
+    desc: "Consultons le registre officiel de l'émetteur (CGCB pour Curaçao, MGA pour Malte) pour confirmer la validité de la licence affichée — vérifions les en-têtes de sécurité HTTPS (HSTS, CSP) et la présence d'un audit RNG certifié par eCOGRA, GLI, iTech Labs ou BMM.",
+    icon: (
+      <>
+        <path d="M12 22s8-4.5 8-11.8A8 8 0 0 0 12 2a8 8 0 0 0-8 8.2c0 7.3 8 11.8 8 11.8z" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+  },
 ]
 
 const SECTION_NUMBERS: Record<string, string> = {
@@ -257,6 +344,58 @@ function MiniCTA({
   )
 }
 
+function ProfileCard({
+  title,
+  items,
+  type,
+}: {
+  title: string
+  items: string[]
+  type: 'yes' | 'no'
+}) {
+  const isNo = type === 'no'
+  return (
+    <div
+      className={`rounded-[14px] border bg-surface p-[18px] shadow-1${isNo ? 'border-[color-mix(in_srgb,var(--red)_25%,var(--line))]' : 'border-line'}`}
+    >
+      <div
+        className={`mb-3 grid h-10 w-10 place-items-center rounded-full${isNo ? 'bg-[color-mix(in_srgb,var(--red)_10%,transparent)] text-[var(--red)]' : 'bg-green-50 text-green'}`}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          className="h-5 w-5"
+          aria-hidden
+        >
+          {isNo ? <path d="M18 6 6 18M6 6l12 12" /> : <path d="M20 6 9 17l-5-5" />}
+        </svg>
+      </div>
+      <h3 className="mb-[10px] font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-ink-3">
+        {title}
+      </h3>
+      <ul className="m-0 flex list-none flex-col gap-[9px] p-0">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-[9px] text-[14px] leading-[1.55] text-ink-2">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              className={`mt-[3px] h-[14px] w-[14px] shrink-0${isNo ? 'text-[var(--red)]' : 'text-green'}`}
+              aria-hidden
+            >
+              {isNo ? <path d="M18 6 6 18M6 6l12 12" /> : <path d="M20 6 9 17l-5-5" />}
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function BandHeader({ title, seeAllHref }: { title: string; seeAllHref?: string }) {
   return (
     <div className="mb-[14px] flex items-baseline justify-between gap-4">
@@ -293,6 +432,13 @@ export default async function ReviewPage({
   const altOps = Array.from(operatorBySlug.values())
     .filter((o) => o.slug !== slug)
     .slice(0, 3)
+
+  const rank = operators.findIndex((o) => o.slug === slug) + 1
+  const tocItems = [
+    ...TOC_BASE,
+    ...(rd.pourQui ? [{ id: 'pour-qui', label: 'Pour qui ?' }] : []),
+    ...TOC_END,
+  ]
 
   // Review JSON-LD
   const reviewSchema: WithContext<Review> = {
@@ -471,7 +617,7 @@ export default async function ReviewPage({
       </section>
 
       {/* ── Horizontal sticky sub-nav (scroll-spy) ──────────────────────── */}
-      <ReviewSubNav items={TOC_ITEMS} />
+      <ReviewSubNav items={tocItems} />
 
       {/* ── Content — single column, max-w 880px ────────────────────────── */}
       <div className="mx-auto max-w-[880px] px-[18px] pb-16 md:px-8">
@@ -535,150 +681,40 @@ export default async function ReviewPage({
               )}
             </ReviewSection>
 
-            {/* Maillage: game type tiles after jeux */}
-            {key === 'jeux' && (
-              <div className="my-[30px]">
-                <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {GAME_TYPES.map((gt) => (
-                    <a
-                      key={gt.label}
-                      href={gt.href}
-                      className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                      data-event="internal_link"
-                      data-target={gt.href}
-                      data-page-type="review"
-                      data-locale={locale}
-                    >
-                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="h-5 w-5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          aria-hidden
-                        >
-                          {gt.circle && <circle cx="12" cy="12" r="10" />}
-                          <path d={gt.icon} />
-                        </svg>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[14.5px] font-bold">{gt.label}</div>
-                        <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
-                      </div>
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="h-4 w-4 shrink-0 text-ink-3"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        aria-hidden
-                      >
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Maillage: popular game cards after live */}
-            {key === 'live' && (
-              <div className="my-[30px]">
-                <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
-                <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
-                  {POPULAR_GAMES.map((game) => (
-                    <div
-                      key={game.name}
-                      className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
-                    >
-                      <div
-                        className="relative grid aspect-[16/10] place-items-center border-b border-line"
-                        style={{
-                          background:
-                            'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
-                        }}
-                      >
-                        <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
-                        <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
-                          {game.rtp}%
-                        </span>
-                      </div>
-                      <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
-                        <div className="text-[15px] font-bold text-ink">{game.name}</div>
-                        <div className="font-mono text-[11.5px] text-ink-3">{game.provider}</div>
-                        <div className="mt-[11px] flex gap-2">
-                          <CTAButton
-                            href={`/jeux/${game.slug}/`}
-                            variant="secondary"
-                            size="sm"
-                            className="flex-1"
-                            data-event="internal_link"
-                            data-page-type="review"
-                            data-locale={locale}
-                          >
-                            Fiche
-                          </CTAButton>
-                          <CTAButton
-                            href={op.affiliateUrl}
-                            variant="primary"
-                            size="sm"
-                            className="flex-1"
-                            target="_blank"
-                            rel="noopener noreferrer nofollow"
-                            data-event="affiliate_click"
-                            data-operator={op.slug}
-                            data-placement={`review_game_${game.slug}`}
-                            data-bonus={op.bonusSlug}
-                            data-page-type="review"
-                            data-locale={locale}
-                          >
-                            Jouer
-                          </CTAButton>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Maillage: comparatifs links after securite */}
+            {/* Maillage: all 3 bands after securite */}
             {key === 'securite' && (
-              <div className="my-[30px]">
-                <BandHeader title={`${op.name} dans nos comparatifs`} />
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {altOps.slice(0, 2).map((alt) => {
-                    const [slugA, slugB] = [op.slug, alt.slug].sort()
-                    return (
+              <>
+                {/* Band 1 — Types de jeux */}
+                <div className="my-[30px]">
+                  <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {GAME_TYPES.map((gt) => (
                       <a
-                        key={alt.slug}
-                        href={`/comparatifs/${slugA}-vs-${slugB}/`}
-                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                        key={gt.label}
+                        href={gt.href}
+                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
                         data-event="internal_link"
+                        data-target={gt.href}
+                        data-placement="review_band_game_types"
                         data-page-type="review"
                         data-locale={locale}
                       >
-                        <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
                           <svg
                             viewBox="0 0 24 24"
-                            className="h-[19px] w-[19px]"
+                            className="h-5 w-5"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2"
                             aria-hidden
                           >
-                            <path d="M18 20V10M12 20V4M6 20v-6" />
+                            {gt.circle && <circle cx="12" cy="12" r="10" />}
+                            <path d={gt.icon} />
                           </svg>
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[14.5px] font-bold">
-                            {op.name} vs {alt.name}
-                          </div>
-                          <div className="mt-[1px] text-[12.5px] text-ink-3">
-                            Notre analyse comparative
-                          </div>
+                          <div className="text-[14.5px] font-bold">{gt.label}</div>
+                          <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
                         </div>
                         <svg
                           viewBox="0 0 24 24"
@@ -691,10 +727,199 @@ export default async function ReviewPage({
                           <path d="M9 18l6-6-6-6" />
                         </svg>
                       </a>
-                    )
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
+
+                {/* Band 2 — Jeux populaires */}
+                <div className="my-[30px]">
+                  <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
+                  <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
+                    {POPULAR_GAMES.map((game) => (
+                      <div
+                        key={game.name}
+                        className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
+                      >
+                        <div
+                          className="relative grid aspect-[16/10] place-items-center border-b border-line"
+                          style={{
+                            background:
+                              'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
+                          }}
+                        >
+                          <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
+                          <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
+                            {game.rtp}%
+                          </span>
+                        </div>
+                        <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
+                          <div className="text-[15px] font-bold text-ink">{game.name}</div>
+                          <div className="font-mono text-[11.5px] text-ink-3">{game.provider}</div>
+                          <div className="mt-[11px] flex gap-2">
+                            <CTAButton
+                              href={`/jeux/${game.slug}/`}
+                              variant="secondary"
+                              size="sm"
+                              className="flex-1"
+                              data-event="internal_link"
+                              data-placement="review_band_jeux_pop"
+                              data-page-type="review"
+                              data-locale={locale}
+                            >
+                              Fiche
+                            </CTAButton>
+                            <CTAButton
+                              href={op.affiliateUrl}
+                              variant="primary"
+                              size="sm"
+                              className="flex-1"
+                              target="_blank"
+                              rel="noopener noreferrer nofollow"
+                              data-event="affiliate_click"
+                              data-operator={op.slug}
+                              data-placement={`review_jeux_pop_${game.slug}`}
+                              data-bonus={op.bonusSlug}
+                              data-page-type="review"
+                              data-locale={locale}
+                            >
+                              Jouer
+                            </CTAButton>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Band 3 — Comparatifs (4 links) */}
+                <div className="my-[30px]">
+                  <BandHeader title={`${op.name} dans nos comparatifs`} />
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {/* Link 1 — position dans le top 15 */}
+                    <a
+                      href="/casinos/"
+                      className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                      data-event="internal_link"
+                      data-placement="review_band_comparatifs_top15"
+                      data-page-type="review"
+                      data-locale={locale}
+                    >
+                      <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-green-50 text-green">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-[19px] w-[19px]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden
+                        >
+                          <path d="M18 20V10M12 20V4M6 20v-6" />
+                        </svg>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[14.5px] font-bold">Top 15 des casinos en ligne</div>
+                        <div className="mt-[1px] text-[12.5px] text-ink-3">
+                          {op.name} classé N°{rank} dans notre sélection
+                        </div>
+                      </div>
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4 shrink-0 text-ink-3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        aria-hidden
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </a>
+                    {/* Links 2 & 3 — versus */}
+                    {altOps.slice(0, 2).map((alt) => {
+                      const [slugA, slugB] = [op.slug, alt.slug].sort()
+                      return (
+                        <a
+                          key={alt.slug}
+                          href={`/comparatifs/${slugA}-vs-${slugB}/`}
+                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                          data-event="internal_link"
+                          data-placement="review_band_comparatifs_versus"
+                          data-page-type="review"
+                          data-locale={locale}
+                        >
+                          <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-[19px] w-[19px]"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              aria-hidden
+                            >
+                              <path d="M18 20V10M12 20V4M6 20v-6" />
+                            </svg>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[14.5px] font-bold">
+                              {op.name} vs {alt.name}
+                            </div>
+                            <div className="mt-[1px] text-[12.5px] text-ink-3">
+                              Notre analyse comparative
+                            </div>
+                          </div>
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-4 w-4 shrink-0 text-ink-3"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            aria-hidden
+                          >
+                            <path d="M9 18l6-6-6-6" />
+                          </svg>
+                        </a>
+                      )
+                    })}
+                    {/* Link 4 — page alternatives */}
+                    <a
+                      href="/casinos/alternatives/"
+                      className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                      data-event="internal_link"
+                      data-placement="review_band_comparatifs_alternatives"
+                      data-page-type="review"
+                      data-locale={locale}
+                    >
+                      <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-[19px] w-[19px]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden
+                        >
+                          <path d="M4 6h16M4 12h10M4 18h7" />
+                        </svg>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[14.5px] font-bold">Alternatives à {op.name}</div>
+                        <div className="mt-[1px] text-[12.5px] text-ink-3">
+                          Tous les casinos similaires
+                        </div>
+                      </div>
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4 shrink-0 text-ink-3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        aria-hidden
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         ))}
@@ -719,6 +944,62 @@ export default async function ReviewPage({
             </table>
           </div>
         </section>
+
+        {/* Méthode de test */}
+        <section id="methode" className="py-[14px] [scroll-margin-top:calc(var(--header-h)+56px)]">
+          <h2 className="mb-2 font-serif text-[27px] font-medium leading-[1.15] tracking-[-0.015em] text-ink">
+            Notre méthode de test
+          </h2>
+          <p className="mb-[22px] text-[15px] leading-[1.65] text-ink-2">
+            Chaque casino de notre comparatif est testé à l&apos;argent réel selon 8 critères
+            mesurables.
+          </p>
+          <div className="grid grid-cols-2 gap-[14px] xl:grid-cols-4">
+            {METHODE_STEPS.map((step, i) => (
+              <div
+                key={step.title}
+                className="rounded-[14px] border border-line bg-surface p-[18px] shadow-1"
+              >
+                <div className="mb-[12px] grid h-10 w-10 place-items-center rounded-[10px] bg-green-50 text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-5 w-5"
+                    aria-hidden
+                  >
+                    {step.icon}
+                  </svg>
+                </div>
+                <p className="mb-[5px] font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-green">
+                  Étape {i + 1}
+                </p>
+                <h3 className="mb-[7px] font-sans text-[15px] font-bold leading-[1.2] text-ink">
+                  {step.title}
+                </h3>
+                <p className="m-0 text-[13px] leading-[1.6] text-ink-3">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Pour quel profil de joueur ? */}
+        {rd.pourQui && (
+          <section
+            id="pour-qui"
+            className="py-[14px] [scroll-margin-top:calc(var(--header-h)+56px)]"
+          >
+            <h2 className="mb-4 font-serif text-[27px] font-medium tracking-[-0.015em] text-ink">
+              Pour quel profil de joueur ?
+            </h2>
+            <div className="grid grid-cols-1 gap-[14px] lg:grid-cols-3">
+              <ProfileCard type="yes" title="Idéal si vous…" items={rd.pourQui.idealSi} />
+              <ProfileCard type="yes" title="Bon choix si vous…" items={rd.pourQui.bonChoixSi} />
+              <ProfileCard type="no" title="À éviter si vous…" items={rd.pourQui.aEviterSi} />
+            </div>
+          </section>
+        )}
 
         {/* FAQ */}
         <section id="faq" className="py-[14px] [scroll-margin-top:calc(var(--header-h)+56px)]">
