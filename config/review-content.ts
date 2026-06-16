@@ -261,17 +261,17 @@ const reviews: ReviewData[] = [
     ],
     pourQui: {
       idealSi: [
-        'Joue régulièrement : le cashback 10 % hebdomadaire versé le lundi rembourse les pertes nettes sans wager.',
-        'Participe aux tournois de machines à sous hebdomadaires avec cagnottes distribuées en espèces réelles.',
+        'Vous misez régulièrement sur la durée : 10% de vos pertes nettes hebdomadaires sont versés chaque lundi en argent réel, sans wager.',
+        'Vous participez aux tournois de machines à sous hebdomadaires : cagnottes en espèces versées en moins de 24 h.',
+        'Vous activez le bonus de bienvenue : 100€ + 100 tours dès 20€ déposés, wager 35×, sans code promo.',
       ],
       bonChoixSi: [
-        'Préfère éviter les codes promo : bonus de bienvenue activé automatiquement dès 20 € déposés.',
-        'Joue principalement entre 8h et minuit : chat francophone disponible dans ces horaires.',
+        'Vous jouez et participez aux tournois depuis votre mobile : ergonomie identique au bureau, LCP mesuré à 1,9 s en 4G.',
+        'Vous jouez principalement en journée et en soirée : chat en français disponible de 8h à minuit, délai de réponse moyen de 4 minutes.',
       ],
       aEviterSi: [
-        "A besoin d'une assistance la nuit : le chat est fermé entre minuit et 8h.",
-        'Prévoit des retraits importants fréquents : plafond journalier limité à 2 000 €.',
-        'Anticipe un KYC rapide : le processus de vérification initiale peut prendre 24 à 72h.',
+        "Vous retirez régulièrement plus de 2 000 € en une seule fois : c'est précisément le plafond journalier imposé chez Lucky8.",
+        'Vous voulez pouvoir retirer dès vos premiers gains : la vérification KYC initiale prend de 24 à 72 h.',
       ],
     },
   },
