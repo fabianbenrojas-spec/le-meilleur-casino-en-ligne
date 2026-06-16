@@ -515,7 +515,7 @@ export default async function GuidePage({
                 </svg>
                 Résumer avec
               </span>
-              <LlmButtons title={guideTitle} />
+              <LlmButtons title={guideTitle} locale={locale} />
             </div>
           </div>
 
