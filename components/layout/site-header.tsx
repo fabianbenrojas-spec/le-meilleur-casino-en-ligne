@@ -30,7 +30,7 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
 
   return (
     <header
-      className="sticky top-0 z-[60] border-b border-line [backdrop-filter:saturate(150%)_blur(14px)] [background:color-mix(in_srgb,var(--bg)_88%,transparent)]"
+      className="site-header-bg sticky top-0 z-[60] border-b border-line [backdrop-filter:saturate(150%)_blur(14px)]"
       style={{ height: 'var(--header-h)' }}
     >
       <div className="mx-auto flex h-full max-w-site items-center gap-[26px] px-[18px] md:px-8">

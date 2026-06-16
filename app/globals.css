@@ -131,6 +131,19 @@ img {
 }
 
 /* ============================================================
+   HEADER BACKGROUND — color-mix() with solid-color fallback
+   ============================================================ */
+
+.site-header-bg {
+  background: var(--bg); /* fallback: solid color on browsers without color-mix() */
+  background: color-mix(
+    in srgb,
+    var(--bg) 88%,
+    transparent
+  ); /* modern: translucent for backdrop-filter */
+}
+
+/* ============================================================
    THEME TOGGLE — CSS-driven icon swap (no React state needed)
    ============================================================ */
 
