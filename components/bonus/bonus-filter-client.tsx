@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { CTAButton } from '@/components/ui/cta-button'
@@ -207,6 +207,81 @@ const TYPE_CHIPS: { type: BonusType; label: string; iconPath: string }[] = [
   },
 ]
 
+// ── Filter controls (shared between desktop inline toolbar and mobile sheet) ──
+
+function FilterControls({
+  idPrefix,
+  activeType,
+  setActiveType,
+  sortKey,
+  setSortKey,
+  locale,
+}: {
+  idPrefix: string
+  activeType: BonusType
+  setActiveType: (t: BonusType) => void
+  sortKey: SortKey
+  setSortKey: (s: SortKey) => void
+  locale: string
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-[9px]">
+      {TYPE_CHIPS.map((chip) => (
+        <button
+          key={chip.type}
+          type="button"
+          onClick={() => setActiveType(chip.type)}
+          className={cn(
+            'inline-flex cursor-pointer items-center gap-[8px] rounded-full border px-[16px] py-[9px] font-sans text-[13.5px] font-semibold transition-all duration-[150ms]',
+            activeType === chip.type
+              ? 'border-green bg-green text-white'
+              : 'border-line-2 bg-surface text-ink-2 hover:border-ink-3 hover:text-ink'
+          )}
+          data-event="comparison_filter_use"
+          data-filter={chip.type}
+          data-page-type="bonus_hub"
+          data-locale={locale}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[14px] w-[14px] shrink-0"
+            aria-hidden
+          >
+            <path d={chip.iconPath} />
+          </svg>
+          {chip.label}
+        </button>
+      ))}
+
+      {/* Sort — pushed right */}
+      <div className="ml-auto flex items-center gap-[8px]">
+        <label
+          htmlFor={`${idPrefix}-sort`}
+          className="hidden whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3 sm:block"
+        >
+          Trier par
+        </label>
+        <select
+          id={`${idPrefix}-sort`}
+          value={sortKey}
+          onChange={(e) => setSortKey(e.target.value as SortKey)}
+          className="cursor-pointer rounded-[8px] border border-line-2 bg-surface px-[10px] py-[8px] font-sans text-[13px] font-semibold text-ink outline-none hover:border-green"
+          data-event="comparison_sort_use"
+          data-page-type="bonus_hub"
+          data-locale={locale}
+        >
+          <option value="note">Note</option>
+          <option value="amount">Montant</option>
+          <option value="wager">Wager (↑)</option>
+        </select>
+      </div>
+    </div>
+  )
+}
+
 // ── Main export ───────────────────────────────────────────────────────────────
 
 export function BonusFilterClient({
@@ -218,6 +293,11 @@ export function BonusFilterClient({
 }) {
   const [activeType, setActiveType] = useState<BonusType>('all')
   const [sortKey, setSortKey] = useState<SortKey>('note')
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
+
+  const sheetRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
 
   const filtered = useMemo(() => {
     const list =
@@ -232,61 +312,180 @@ export function BonusFilterClient({
     })
   }, [operators, activeType, sortKey])
 
+  const openSheet = () => setIsSheetOpen(true)
+  const closeSheet = () => setIsSheetOpen(false)
+  const resetFilters = () => setActiveType('all')
+
+  // Body scroll lock while the sheet is open
+  useEffect(() => {
+    if (!isSheetOpen) return
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isSheetOpen])
+
+  // Focus management: move focus into the sheet on open, back to the trigger on close
+  useEffect(() => {
+    if (isSheetOpen) {
+      closeRef.current?.focus()
+    } else {
+      triggerRef.current?.focus()
+    }
+  }, [isSheetOpen])
+
+  // ESC closes the sheet; Tab/Shift+Tab is trapped within the sheet's focusable elements
+  useEffect(() => {
+    if (!isSheetOpen) return
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        closeSheet()
+        return
+      }
+      if (e.key !== 'Tab' || !sheetRef.current) return
+
+      const focusable = sheetRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]!
+      const last = focusable[focusable.length - 1]!
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isSheetOpen])
+
   return (
     <div>
-      {/* Toolbar: type chips + sort */}
-      <div className="mb-[20px] flex flex-wrap items-center gap-[9px]">
-        {TYPE_CHIPS.map((chip) => (
-          <button
-            key={chip.type}
-            type="button"
-            onClick={() => setActiveType(chip.type)}
-            className={cn(
-              'inline-flex cursor-pointer items-center gap-[8px] rounded-full border px-[16px] py-[9px] font-sans text-[13.5px] font-semibold transition-all duration-[150ms]',
-              activeType === chip.type
-                ? 'border-green bg-green text-white'
-                : 'border-line-2 bg-surface text-ink-2 hover:border-ink-3 hover:text-ink'
-            )}
-            data-event="comparison_filter_use"
-            data-filter={chip.type}
-            data-page-type="bonus_hub"
-            data-locale={locale}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="h-[14px] w-[14px] shrink-0"
-              aria-hidden
-            >
-              <path d={chip.iconPath} />
-            </svg>
-            {chip.label}
-          </button>
-        ))}
+      {/* Toolbar: type chips + sort — desktop inline */}
+      <div className="mb-[20px] hidden lg:flex">
+        <FilterControls
+          idPrefix="bn"
+          activeType={activeType}
+          setActiveType={setActiveType}
+          sortKey={sortKey}
+          setSortKey={setSortKey}
+          locale={locale}
+        />
+      </div>
 
-        {/* Sort — pushed right */}
-        <div className="ml-auto flex items-center gap-[8px]">
-          <label
-            htmlFor="bn-sort"
-            className="hidden whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3 sm:block"
+      {/* Mobile filter trigger */}
+      <div className="mb-[20px] flex lg:hidden">
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={openSheet}
+          className="relative inline-flex min-h-[48px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-line-2 bg-surface px-[16px] font-sans text-[13.5px] font-semibold text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
+          aria-label={activeType !== 'all' ? 'Filtres (un filtre actif)' : 'Filtres'}
+          data-event="comparison_filter_open"
+          data-page-type="bonus_hub"
+          data-locale={locale}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-[16px] w-[16px] shrink-0"
+            aria-hidden
           >
-            Trier par
-          </label>
-          <select
-            id="bn-sort"
-            value={sortKey}
-            onChange={(e) => setSortKey(e.target.value as SortKey)}
-            className="cursor-pointer rounded-[8px] border border-line-2 bg-surface px-[10px] py-[8px] font-sans text-[13px] font-semibold text-ink outline-none hover:border-green"
-            data-event="comparison_sort_use"
-            data-page-type="bonus_hub"
-            data-locale={locale}
+            <path d="M4 6h16M7 12h10M10 18h4" />
+          </svg>
+          Filtres
+          {activeType !== 'all' && (
+            <span
+              className="absolute right-[-3px] top-[-3px] h-[8px] w-[8px] rounded-full bg-green"
+              aria-hidden
+            />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile filter sheet */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[95] items-end justify-center bg-black/45 backdrop-blur-[2px]',
+          isSheetOpen ? 'flex' : 'hidden'
+        )}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closeSheet()
+        }}
+      >
+        <div
+          ref={sheetRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filtres"
+          className={cn(
+            'max-h-[86vh] w-full max-w-[560px] overflow-y-auto rounded-t-[16px] bg-surface shadow-3 transition-transform duration-[280ms] ease-out',
+            isSheetOpen ? 'translate-y-0' : 'translate-y-full'
+          )}
+        >
+          <div className="flex items-center justify-between border-b border-line px-[20px] py-[16px]">
+            <h2 className="font-serif text-[18px] font-semibold text-ink">Filtres</h2>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={closeSheet}
+              aria-label="Fermer"
+              className="grid h-[36px] w-[36px] cursor-pointer place-items-center rounded-[8px] text-ink-2 hover:bg-bg-sunken hover:text-ink"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-[18px] w-[18px]"
+                aria-hidden
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="px-[20px] py-[18px]">
+            <FilterControls
+              idPrefix="bn-mobile"
+              activeType={activeType}
+              setActiveType={setActiveType}
+              sortKey={sortKey}
+              setSortKey={setSortKey}
+              locale={locale}
+            />
+          </div>
+
+          <div
+            className="flex gap-[12px] border-t border-line px-[20px] py-[14px]"
+            style={{ paddingBottom: 'calc(14px + env(safe-area-inset-bottom))' }}
           >
-            <option value="note">Note</option>
-            <option value="amount">Montant</option>
-            <option value="wager">Wager (↑)</option>
-          </select>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="flex-1 cursor-pointer rounded-[8px] border border-line-2 px-[16px] py-[11px] font-sans text-[13.5px] font-semibold text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
+              data-event="comparison_filter_reset"
+              data-page-type="bonus_hub"
+              data-locale={locale}
+            >
+              Réinitialiser
+            </button>
+            <button
+              type="button"
+              onClick={closeSheet}
+              className="flex-1 cursor-pointer rounded-[8px] bg-green px-[16px] py-[11px] font-sans text-[13.5px] font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              Voir {filtered.length} bonus
+            </button>
+          </div>
         </div>
       </div>
 
