@@ -300,10 +300,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
               data-locale={locale}
             >
               <div>
-                <div
-                  className="mb-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em]"
-                  style={{ color: 'color-mix(in srgb,#fff 50%,transparent)' }}
-                >
+                <div className="text-fade-50 mb-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em]">
                   Comparer
                 </div>
                 <h3
@@ -312,10 +309,7 @@ export default async function GuidesHubPage({ params }: { params: Promise<{ loca
                 >
                   {isFr ? 'Meilleurs bonus casino' : 'Best casino bonuses'}
                 </h3>
-                <p
-                  className="mb-[16px] text-[13.5px] leading-[1.55]"
-                  style={{ color: 'color-mix(in srgb,#fff 60%,transparent)' }}
-                >
+                <p className="text-fade-60 mb-[16px] text-[13.5px] leading-[1.55]">
                   {isFr
                     ? 'Wager, montant réel, délai — tous vérifiés.'
                     : 'Wagering, real amount, deadline — all verified.'}

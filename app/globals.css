@@ -143,6 +143,26 @@ img {
   ); /* modern: translucent for backdrop-filter */
 }
 
+.sticky-bar-bg {
+  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+}
+
+.sticky-subnav-bg {
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+}
+
+.text-fade-50 {
+  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, #fff 50%, transparent);
+}
+
+.text-fade-60 {
+  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, #fff 60%, transparent);
+}
+
 /* ============================================================
    THEME TOGGLE — CSS-driven icon swap (no React state needed)
    ============================================================ */

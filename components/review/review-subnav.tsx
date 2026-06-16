@@ -35,9 +35,8 @@ export function ReviewSubNav({ items }: { items: NavItem[] }) {
 
   return (
     <nav
-      className="sticky top-[var(--header-h)] z-40 mb-6 border-b border-line"
+      className="sticky-subnav-bg sticky top-[var(--header-h)] z-40 mb-6 border-b border-line"
       style={{
-        background: 'color-mix(in srgb,var(--bg) 92%,transparent)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
       }}

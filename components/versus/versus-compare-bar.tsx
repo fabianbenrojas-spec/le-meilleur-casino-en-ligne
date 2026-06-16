@@ -62,11 +62,10 @@ export function VersusCompareBar({ opA, opB, winnerSlug, locale }: VersusCompare
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-[75] border-t border-line-2 shadow-3 transition-transform duration-300',
+        'sticky-bar-bg fixed bottom-0 left-0 right-0 z-[75] border-t border-line-2 shadow-3 transition-transform duration-300',
         visible ? 'translate-y-0' : 'translate-y-full'
       )}
       style={{
-        background: 'color-mix(in srgb,var(--surface) 94%,transparent)',
         backdropFilter: 'saturate(150%) blur(14px)',
         WebkitBackdropFilter: 'saturate(150%) blur(14px)',
       }}
