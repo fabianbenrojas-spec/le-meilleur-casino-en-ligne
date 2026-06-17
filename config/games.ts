@@ -13,6 +13,7 @@ export interface Game {
   minBet: number
   maxBet: number
   popular?: boolean
+  imageUrl?: string
 }
 
 export type GameCategory =
@@ -108,6 +109,7 @@ export const games: Game[] = [
     minBet: 0.2,
     maxBet: 125,
     popular: true,
+    imageUrl: '/jeux/sweet-bonanza.png',
   },
   {
     slug: 'gates-of-olympus',
@@ -128,6 +130,7 @@ export const games: Game[] = [
     minBet: 0.2,
     maxBet: 100,
     popular: true,
+    imageUrl: '/jeux/gates-of-olympus.png',
   },
   {
     slug: 'book-of-dead',
@@ -148,6 +151,7 @@ export const games: Game[] = [
     minBet: 0.01,
     maxBet: 100,
     popular: true,
+    imageUrl: '/jeux/book-of-dead.webp',
   },
   // ── Roulette ───────────────────────────────────────────────────────────────
   {
@@ -169,6 +173,7 @@ export const games: Game[] = [
     minBet: 0.2,
     maxBet: 4000,
     popular: true,
+    imageUrl: '/jeux/lightning-roulette.jpg',
   },
   {
     slug: 'roulette-europeenne',
@@ -189,6 +194,7 @@ export const games: Game[] = [
     minBet: 0.1,
     maxBet: 500,
     popular: false,
+    imageUrl: '/jeux/roulette-europeenne.jpg',
   },
 
   // ── Blackjack ──────────────────────────────────────────────────────────────
@@ -211,6 +217,7 @@ export const games: Game[] = [
     minBet: 1,
     maxBet: 2500,
     popular: true,
+    imageUrl: '/jeux/infinite-blackjack.jpg',
   },
   {
     slug: 'blackjack-classique',
@@ -231,6 +238,7 @@ export const games: Game[] = [
     minBet: 0.5,
     maxBet: 200,
     popular: false,
+    imageUrl: '/jeux/blackjack-classique.jpg',
   },
 
   // ── Live ───────────────────────────────────────────────────────────────────
@@ -253,6 +261,7 @@ export const games: Game[] = [
     minBet: 0.1,
     maxBet: 1000,
     popular: true,
+    imageUrl: '/jeux/crazy-time.svg',
   },
   {
     slug: 'lightning-dice',
@@ -273,6 +282,7 @@ export const games: Game[] = [
     minBet: 0.1,
     maxBet: 5000,
     popular: false,
+    imageUrl: '/jeux/lightning-dice.jpg',
   },
 
   // ── Crash ──────────────────────────────────────────────────────────────────
@@ -295,6 +305,7 @@ export const games: Game[] = [
     minBet: 0.1,
     maxBet: 100,
     popular: true,
+    imageUrl: '/jeux/aviator.webp',
   },
 ]
 
