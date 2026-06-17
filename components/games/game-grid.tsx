@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useRef } from 'react'
+import Image from 'next/image'
 
 import type { Game } from '@/config/games'
 import { CTAButton } from '@/components/ui/cta-button'
@@ -254,19 +255,32 @@ export function GameGrid({ games, isFr, locale, providers }: GameGridProps) {
           >
             {/* Thumbnail — 1:1 aspect */}
             <div
-              className="relative border-b border-line"
+              className="relative overflow-hidden border-b border-line"
               style={{
                 aspectRatio: '1/1',
-                background:
-                  'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 9px,var(--surface-2) 9px,var(--surface-2) 18px)',
+                ...(game.imageUrl
+                  ? {}
+                  : {
+                      background:
+                        'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 9px,var(--surface-2) 9px,var(--surface-2) 18px)',
+                    }),
                 display: 'grid',
                 placeItems: 'center',
               }}
             >
-              <span className="absolute right-2 top-2 rounded-[5px] bg-green px-[7px] py-[3px] font-mono text-[10px] font-semibold text-white">
+              {game.imageUrl && (
+                <Image
+                  src={game.imageUrl}
+                  alt={game.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
+                />
+              )}
+              <span className="absolute right-2 top-2 z-10 rounded-[5px] bg-green px-[7px] py-[3px] font-mono text-[10px] font-semibold text-white">
                 RTP {game.rtp.toFixed(1)}%
               </span>
-              <span className="grid h-[46px] w-[46px] scale-90 place-items-center rounded-full bg-white/90 opacity-0 shadow-2 transition-[opacity,transform] duration-[180ms] [article:hover_&]:scale-100 [article:hover_&]:opacity-100">
+              <span className="relative z-10 grid h-[46px] w-[46px] scale-90 place-items-center rounded-full bg-white/90 opacity-0 shadow-2 transition-[opacity,transform] duration-[180ms] [article:hover_&]:scale-100 [article:hover_&]:opacity-100">
                 <svg
                   viewBox="0 0 24 24"
                   className="ml-[2px] h-5 w-5 text-green"
@@ -276,7 +290,7 @@ export function GameGrid({ games, isFr, locale, providers }: GameGridProps) {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-              <span className="absolute bottom-2 left-2 rounded-[3px] border border-line bg-surface px-[6px] py-[2px] font-mono text-[9px] text-ink-3">
+              <span className="absolute bottom-2 left-2 z-10 rounded-[3px] border border-line bg-surface px-[6px] py-[2px] font-mono text-[9px] text-ink-3">
                 {game.provider}
               </span>
             </div>
