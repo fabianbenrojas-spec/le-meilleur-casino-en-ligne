@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
-import { LogoOrPlaceholder } from '@/components/ui/operator-card'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Locale } from '@/i18n/routing'
 import { operatorBySlug } from '@/config/operators'
@@ -101,12 +101,7 @@ export default async function VersusPage({
                 {isFr ? 'Notre préféré' : 'Our pick'}
               </div>
               <div className="mt-6">
-                <LogoOrPlaceholder
-                  logoUrl={winner.logoUrl}
-                  name={winner.name}
-                  width={120}
-                  height={44}
-                />
+                <CasinoLogo logoUrl={winner.logoUrl} name={winner.name} width={120} height={44} />
               </div>
               <div className="font-serif text-[20px] font-semibold text-ink">{winner.name}</div>
               <ScorePill score={winner.rating} gold />
@@ -131,7 +126,7 @@ export default async function VersusPage({
                 {isFr ? 'Le challenger' : 'The challenger'}
               </div>
               <div className="mt-6">
-                <LogoOrPlaceholder
+                <CasinoLogo
                   logoUrl={challenger.logoUrl}
                   name={challenger.name}
                   width={120}
@@ -287,12 +282,7 @@ export default async function VersusPage({
                       className={`p-6 ${aWins ? 'bg-[color-mix(in_srgb,var(--green)_4%,var(--surface))]' : ''}`}
                     >
                       <div className="mb-3 flex items-center gap-3">
-                        <LogoOrPlaceholder
-                          logoUrl={opA.logoUrl}
-                          name={opA.name}
-                          width={80}
-                          height={30}
-                        />
+                        <CasinoLogo logoUrl={opA.logoUrl} name={opA.name} width={80} height={30} />
                         <ScorePill score={opA.rating} gold={aWins} />
                       </div>
                       <p className="m-0 text-[14px] leading-[1.65] text-ink-2">{sec.aText}</p>
@@ -306,12 +296,7 @@ export default async function VersusPage({
                       className={`p-6 ${sec.winner === 'b' ? 'bg-[color-mix(in_srgb,var(--green)_4%,var(--surface))]' : ''}`}
                     >
                       <div className="mb-3 flex items-center gap-3">
-                        <LogoOrPlaceholder
-                          logoUrl={opB.logoUrl}
-                          name={opB.name}
-                          width={80}
-                          height={30}
-                        />
+                        <CasinoLogo logoUrl={opB.logoUrl} name={opB.name} width={80} height={30} />
                         <ScorePill score={opB.rating} gold={sec.winner === 'b'} />
                       </div>
                       <p className="m-0 text-[14px] leading-[1.65] text-ink-2">{sec.bText}</p>
@@ -339,12 +324,7 @@ export default async function VersusPage({
             {/* Winner card */}
             <div className="flex flex-col gap-5 rounded-xl border border-[color-mix(in_srgb,var(--green)_30%,var(--line))] bg-surface p-7 shadow-2">
               <div className="flex items-center gap-3">
-                <LogoOrPlaceholder
-                  logoUrl={winner.logoUrl}
-                  name={winner.name}
-                  width={100}
-                  height={38}
-                />
+                <CasinoLogo logoUrl={winner.logoUrl} name={winner.name} width={100} height={38} />
                 <ScorePill score={winner.rating} gold />
               </div>
               <h3 className="m-0 font-serif text-[18px] font-semibold text-ink">
@@ -396,7 +376,7 @@ export default async function VersusPage({
             {/* Challenger card */}
             <div className="flex flex-col gap-5 rounded-xl border border-line bg-surface p-7 shadow-1">
               <div className="flex items-center gap-3">
-                <LogoOrPlaceholder
+                <CasinoLogo
                   logoUrl={challenger.logoUrl}
                   name={challenger.name}
                   width={100}

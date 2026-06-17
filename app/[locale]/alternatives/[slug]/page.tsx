@@ -6,7 +6,7 @@ import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { BonusBadge } from '@/components/ui/bonus-badge'
 import { CTAButton } from '@/components/ui/cta-button'
-import { LogoOrPlaceholder } from '@/components/ui/operator-card'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Locale } from '@/i18n/routing'
 import { operatorBySlug, operators } from '@/config/operators'
@@ -214,12 +214,7 @@ export default async function AlternativePage({
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <LogoOrPlaceholder
-                          logoUrl={alt.logoUrl}
-                          name={alt.name}
-                          width={60}
-                          height={22}
-                        />
+                        <CasinoLogo logoUrl={alt.logoUrl} name={alt.name} width={60} height={22} />
                         <div>
                           <div className="font-semibold text-ink">{alt.name}</div>
                           <div className="font-mono text-[10px] uppercase text-ink-3">
@@ -302,12 +297,7 @@ export default async function AlternativePage({
                 <div className="min-w-0">
                   {/* Header: logo + name + score */}
                   <div className="mb-4 flex items-center gap-3">
-                    <LogoOrPlaceholder
-                      logoUrl={alt.logoUrl}
-                      name={alt.name}
-                      width={100}
-                      height={36}
-                    />
+                    <CasinoLogo logoUrl={alt.logoUrl} name={alt.name} width={100} height={36} />
                     <div className="min-w-0 flex-1">
                       <div className="font-serif text-[18px] font-semibold text-ink">
                         {alt.name}

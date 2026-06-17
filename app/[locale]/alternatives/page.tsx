@@ -3,7 +3,7 @@ export const revalidate = 3600
 
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { LogoOrPlaceholder } from '@/components/ui/operator-card'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { ScorePill } from '@/components/ui/score-pill'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
@@ -101,7 +101,7 @@ export default async function AlternativesHubPage({
                 data-event="alternative_click"
                 data-operator={op.slug}
               >
-                <LogoOrPlaceholder logoUrl={op.logoUrl} name={op.name} width={72} height={28} />
+                <CasinoLogo logoUrl={op.logoUrl} name={op.name} width={72} height={28} />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-serif text-[16px] font-semibold text-ink">
                     {op.name}

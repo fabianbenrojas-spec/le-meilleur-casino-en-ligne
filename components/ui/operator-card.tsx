@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { Check, X } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { BonusBadge } from './bonus-badge'
+import { CasinoLogo } from './casino-logo'
 import { CTAButton } from './cta-button'
 import { ScorePill } from './score-pill'
 import type { GA4DataAttrs } from './cta-button'
@@ -25,48 +25,6 @@ export interface OperatorCardData {
   cons?: string[]
   verdict?: string
   affiliateUrl: string
-}
-
-// Logo placeholder (striped)
-function LogoPlaceholder({ name, width, height }: { name: string; width: number; height: number }) {
-  return (
-    <div
-      style={{
-        width,
-        height,
-        background:
-          'repeating-linear-gradient(135deg, var(--bg-sunken), var(--bg-sunken) 7px, transparent 7px, transparent 14px)',
-      }}
-      className="grid place-items-center rounded-lg border border-dashed border-line-2 font-mono text-[11px] text-ink-3"
-    >
-      {name}
-    </div>
-  )
-}
-
-export function LogoOrPlaceholder({
-  logoUrl,
-  name,
-  width,
-  height,
-}: {
-  logoUrl?: string
-  name: string
-  width: number
-  height: number
-}) {
-  if (logoUrl) {
-    return (
-      <Image
-        src={logoUrl}
-        alt={`Logo ${name}`}
-        width={width}
-        height={height}
-        className="object-contain"
-      />
-    )
-  }
-  return <LogoPlaceholder name={name} width={width} height={height} />
 }
 
 // ── 1. PodiumCard — homepage top-3 hero ────────────────────────────────────
@@ -99,12 +57,7 @@ export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
 
       {/* Logo + score */}
       <div className="flex items-center justify-between gap-3 pt-1.5">
-        <LogoOrPlaceholder
-          logoUrl={operator.logoUrl}
-          name={operator.name}
-          width={130}
-          height={46}
-        />
+        <CasinoLogo logoUrl={operator.logoUrl} name={operator.name} width={130} height={46} />
         <ScorePill score={operator.rating} gold={isFirst} />
       </div>
 
@@ -206,12 +159,7 @@ export function ListingCard({
     >
       {/* Logo column */}
       <div className="flex items-center justify-between gap-2 md:flex-col md:items-start md:justify-start">
-        <LogoOrPlaceholder
-          logoUrl={operator.logoUrl}
-          name={operator.name}
-          width={118}
-          height={44}
-        />
+        <CasinoLogo logoUrl={operator.logoUrl} name={operator.name} width={118} height={44} />
       </div>
 
       {/* Info column */}
@@ -322,12 +270,7 @@ export function RankCard({ operator, rank, medal, ctaBonus, locale = 'fr', ga4 }
       {/* Main content */}
       <div className="flex flex-col gap-[13px] p-[20px_24px]">
         <div className="flex flex-wrap items-center gap-[14px]">
-          <LogoOrPlaceholder
-            logoUrl={operator.logoUrl}
-            name={operator.name}
-            width={110}
-            height={40}
-          />
+          <CasinoLogo logoUrl={operator.logoUrl} name={operator.name} width={110} height={40} />
           <span className="font-serif text-[21px] font-semibold tracking-[-0.01em] text-ink">
             {operator.name}
           </span>
