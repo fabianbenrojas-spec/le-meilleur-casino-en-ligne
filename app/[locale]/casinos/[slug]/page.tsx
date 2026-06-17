@@ -9,6 +9,7 @@ export const revalidate = 86400
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { AuthorBio } from '@/components/ui/author-bio'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { ProsConsBox } from '@/components/ui/pros-cons-box'
@@ -239,23 +240,6 @@ const POPULAR_GAMES: { name: string; slug: string; provider: string; rtp: string
 ]
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-
-function LogoPlaceholder({ name, className }: { name: string; className?: string }) {
-  return (
-    <div
-      className={
-        className ??
-        'flex h-24 w-[150px] items-center justify-center rounded-lg border border-dashed border-line-2 font-mono text-[11px] text-ink-3'
-      }
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
-      }}
-      aria-label={`Logo ${name}`}
-      role="img"
-    />
-  )
-}
 
 // Mini score ring for the hero fork card (64px — ScoreRing component is fixed 118px)
 function MiniScoreRing({ score, label }: { score: number; label: string }) {
@@ -1032,9 +1016,12 @@ export default async function ReviewPage({
                 className="flex flex-col gap-[11px] rounded-lg border border-line bg-surface p-[18px] shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
               >
                 <div className="flex items-center gap-[10px]">
-                  <LogoPlaceholder
+                  <CasinoLogo
+                    slug={alt.slug}
+                    logoUrl={alt.logoUrl}
                     name={alt.shortName ?? alt.name}
-                    className="h-7 w-[74px] shrink-0 rounded border border-dashed border-line-2"
+                    width={74}
+                    height={28}
                   />
                   <ScorePill score={alt.rating} className="ml-auto text-[13px]" />
                 </div>
@@ -1139,9 +1126,12 @@ export default async function ReviewPage({
                   data-page-type="review"
                   data-locale={locale}
                 >
-                  <LogoPlaceholder
+                  <CasinoLogo
+                    slug={alt.slug}
+                    logoUrl={alt.logoUrl}
                     name={alt.shortName ?? alt.name}
-                    className="h-5 w-[30px] shrink-0 rounded border border-dashed border-line-2"
+                    width={30}
+                    height={20}
                   />
                   {alt.name}
                   <ScorePill score={alt.rating} className="ml-auto text-[12px]" />

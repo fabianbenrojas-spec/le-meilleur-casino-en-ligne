@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Operator } from '@/config/operators'
@@ -25,21 +26,6 @@ function getBonusTypes(op: Operator): BonusType[] {
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-
-function LogoPh({ name }: { name: string }) {
-  return (
-    <div
-      className="h-[50px] w-[134px] rounded-[8px] border border-dashed border-line-2 font-mono text-[8px] text-ink-3"
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
-      }}
-      aria-hidden
-    >
-      <span className="sr-only">{name}</span>
-    </div>
-  )
-}
 
 function SpecChip({ iconPath, label, warn }: { iconPath: string; label: string; warn?: boolean }) {
   return (
@@ -98,7 +84,7 @@ function BonusCard({ op, rank, locale }: { op: Operator; rank: number; locale: s
       <div className="grid grid-cols-1 gap-4 p-[20px_22px] md:grid-cols-[150px_1fr_250px] md:items-center md:gap-6">
         {/* Logo col */}
         <div className="flex flex-row items-center justify-between gap-[10px] md:flex-col md:items-start">
-          <LogoPh name={op.name} />
+          <CasinoLogo slug={op.slug} logoUrl={op.logoUrl} name={op.name} width={134} height={50} />
           <ScorePill score={op.rating} gold={isTop} className="text-[13px]" />
         </div>
 

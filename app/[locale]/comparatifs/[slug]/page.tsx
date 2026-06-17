@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 import { VersusCompareBar } from '@/components/versus/versus-compare-bar'
@@ -58,19 +59,6 @@ export async function generateMetadata({
       : `We compare ${opA.name} (${opA.rating}/10) and ${opB.name} (${opB.rating}/10): bonuses, RTP, payments and UX.`,
     alternates: { languages: buildHreflang(`/comparatifs/${slug}/`) },
   }
-}
-
-function LogoPh({ name: _name, className }: { name: string; className?: string }) {
-  return (
-    <div
-      className={`shrink-0 rounded border border-dashed border-line-2 font-mono text-[9px] text-ink-3 ${className ?? 'h-[52px] w-[150px]'}`}
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
-      }}
-      aria-hidden
-    />
-  )
 }
 
 function SectionLabel({ num, title, intro }: { num: string; title: string; intro?: string }) {
@@ -342,7 +330,13 @@ export default async function VersusPage({
                   Alternative
                 </p>
               )}
-              <LogoPh name={opA.name} />
+              <CasinoLogo
+                slug={opA.slug}
+                logoUrl={opA.logoUrl}
+                name={opA.name}
+                width={150}
+                height={52}
+              />
               <p className="m-0 font-serif text-[24px] font-semibold tracking-[-0.01em] text-ink">
                 {opA.name}
               </p>
@@ -427,7 +421,13 @@ export default async function VersusPage({
                   Alternative
                 </p>
               )}
-              <LogoPh name={opB.name} />
+              <CasinoLogo
+                slug={opB.slug}
+                logoUrl={opB.logoUrl}
+                name={opB.name}
+                width={150}
+                height={52}
+              />
               <p className="m-0 font-serif text-[24px] font-semibold tracking-[-0.01em] text-ink">
                 {opB.name}
               </p>
@@ -675,7 +675,13 @@ export default async function VersusPage({
                   className={`flex flex-col rounded-xl border bg-surface p-[26px] shadow-1 ${isWin ? 'border-[color-mix(in_srgb,var(--green)_40%,var(--line))] shadow-2' : 'border-line'}`}
                 >
                   <div className="mb-4 flex items-center gap-[12px]">
-                    <LogoPh name={op.name} className="h-[34px] w-[100px]" />
+                    <CasinoLogo
+                      slug={op.slug}
+                      logoUrl={op.logoUrl}
+                      name={op.name}
+                      width={100}
+                      height={34}
+                    />
                     <ScorePill score={op.rating} gold={isWin} />
                   </div>
                   <h3 className="m-0 mb-[14px] font-serif text-[20px] font-semibold text-ink">
@@ -753,7 +759,13 @@ export default async function VersusPage({
                     className="flex flex-col gap-[13px] rounded-xl border border-line bg-surface p-[20px] shadow-1 transition-[transform,box-shadow,border-color] duration-[180ms] hover:-translate-y-[3px] hover:border-line-2 hover:shadow-3"
                   >
                     <div className="flex items-center gap-[11px]">
-                      <LogoPh name={op.name} className="h-[30px] w-[78px]" />
+                      <CasinoLogo
+                        slug={op.slug}
+                        logoUrl={op.logoUrl}
+                        name={op.name}
+                        width={78}
+                        height={30}
+                      />
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-[15px] font-bold text-ink">{op.name}</div>
                         <div className="mt-[1px] font-mono text-[10.5px] text-ink-3">

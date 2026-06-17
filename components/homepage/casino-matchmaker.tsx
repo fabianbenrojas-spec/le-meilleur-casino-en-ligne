@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 import {
@@ -29,23 +30,6 @@ function QuizIcon({ ic, circle }: { ic: string; circle?: boolean }) {
       {circle && <circle cx="12" cy="12" r="9" />}
       <path d={ic} />
     </svg>
-  )
-}
-
-function LogoPlaceholder({ name, className }: { name: string; className?: string }) {
-  return (
-    <div
-      className={cn(
-        'shrink-0 rounded-lg border border-dashed border-line-2 font-mono text-[9px] text-ink-3',
-        className
-      )}
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 5px,transparent 5px,transparent 10px)',
-      }}
-      role="img"
-      aria-label={`Logo ${name}`}
-    />
   )
 }
 
@@ -252,7 +236,7 @@ export function CasinoMatchmaker({
 
             {/* Top row: logo | name + meta | match % */}
             <div className="mb-3 mt-1 flex items-center gap-[13px]">
-              <LogoPlaceholder name={winner.op.nm} className="h-10 w-[92px]" />
+              <CasinoLogo slug={winner.op.id} name={winner.op.nm} width={92} height={40} />
               <div className="min-w-0 flex-1">
                 <div className="font-serif text-[19px] font-semibold text-ink">{winner.op.nm}</div>
                 <div className="mt-[2px] flex flex-wrap items-center gap-2">
@@ -325,7 +309,7 @@ export function CasinoMatchmaker({
                 <span className="w-[18px] shrink-0 font-mono text-[12px] font-semibold text-ink-3">
                   {i + 2}
                 </span>
-                <LogoPlaceholder name={r.op.nm} className="h-[26px] w-[60px]" />
+                <CasinoLogo slug={r.op.id} name={r.op.nm} width={60} height={26} />
                 <div className="min-w-0 flex-1">
                   <div className="text-[13.5px] font-bold">{r.op.nm}</div>
                   <div className="text-[11.5px] text-ink-3">{r.op.bonus}</div>

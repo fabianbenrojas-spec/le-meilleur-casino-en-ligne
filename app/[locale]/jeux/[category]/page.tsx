@@ -3,6 +3,7 @@ export const revalidate = 3600
 import { notFound } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 import { GameGrid } from '@/components/games/game-grid'
@@ -39,19 +40,6 @@ export async function generateMetadata({
       languages: buildHreflang(`/jeux/${category}/`, `/${category}/`),
     },
   }
-}
-
-function LogoPh({ name: _name }: { name: string }) {
-  return (
-    <div
-      className="h-[40px] w-[92px] shrink-0 rounded border border-dashed border-line-2 font-mono text-[9px] text-ink-3"
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 5px,transparent 5px,transparent 10px)',
-      }}
-      aria-hidden
-    />
-  )
 }
 
 export default async function GameCategoryPage({
@@ -168,7 +156,13 @@ export default async function GameCategoryPage({
                 {/* Logo + name + score */}
                 <div className="px-[22px] pt-[18px]">
                   <div className="flex items-center gap-[12px]">
-                    <LogoPh name={spotOp.name} />
+                    <CasinoLogo
+                      slug={spotOp.slug}
+                      logoUrl={spotOp.logoUrl}
+                      name={spotOp.name}
+                      width={92}
+                      height={40}
+                    />
                     <div>
                       <div className="font-serif text-[18px] font-semibold text-ink">
                         {spotOp.name}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Operator } from '@/config/operators'
@@ -17,19 +18,6 @@ interface VersusCompareBarProps {
   opB: OpSlice
   winnerSlug: string
   locale: string
-}
-
-function LogoPh({ name: _name }: { name: string }) {
-  return (
-    <div
-      className="hidden h-[30px] w-[64px] shrink-0 rounded border border-dashed border-line-2 font-mono text-[8px] text-ink-3 sm:block"
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
-      }}
-      aria-hidden
-    />
-  )
 }
 
 export function VersusCompareBar({ opA, opB, winnerSlug, locale }: VersusCompareBarProps) {
@@ -79,7 +67,9 @@ export function VersusCompareBar({ opA, opB, winnerSlug, locale }: VersusCompare
             opA.slug === winnerSlug && 'order-first'
           )}
         >
-          <LogoPh name={opA.name} />
+          <div className="hidden shrink-0 sm:block">
+            <CasinoLogo slug={opA.slug} name={opA.name} width={64} height={30} />
+          </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-[13.5px] font-bold text-ink">
               <span className="truncate">{opA.name}</span>
@@ -149,7 +139,9 @@ export function VersusCompareBar({ opA, opB, winnerSlug, locale }: VersusCompare
           >
             {opB.name}
           </CTAButton>
-          <LogoPh name={opB.name} />
+          <div className="hidden shrink-0 sm:block">
+            <CasinoLogo slug={opB.slug} name={opB.name} width={64} height={30} />
+          </div>
         </div>
 
         {/* Close */}

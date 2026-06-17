@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { CasinoLogo } from '@/components/ui/casino-logo'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
 
@@ -19,21 +20,6 @@ interface ReviewStickyBarProps {
   pageType?: string
   placement?: string
   showAlt?: boolean
-}
-
-function LogoPh({ name }: { name: string }) {
-  return (
-    <div
-      className="hidden h-[30px] w-[60px] shrink-0 rounded border border-dashed border-line-2 font-mono text-[8px] text-ink-3 sm:block"
-      style={{
-        background:
-          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
-      }}
-      aria-hidden
-    >
-      <span className="sr-only">{name}</span>
-    </div>
-  )
 }
 
 export function ReviewStickyBar({
@@ -86,7 +72,9 @@ export function ReviewStickyBar({
       aria-hidden={!visible}
     >
       <div className="mx-auto flex max-w-site items-center gap-4 px-4 pb-[calc(10px+env(safe-area-inset-bottom))] pt-[10px] md:px-8">
-        <LogoPh name={operatorName} />
+        <div className="hidden shrink-0 sm:block">
+          <CasinoLogo slug={operatorSlug} name={operatorName} width={60} height={30} />
+        </div>
         <div className="min-w-0">
           <div className="flex items-center gap-2 text-[14px] font-bold text-ink">
             {operatorName}
