@@ -46,21 +46,21 @@ export const AFFILIATE_URLS: Record<string, string> = {
 }
 
 const LOGO_URLS: Record<string, string> = {
-  cresus: '/logos/cresus.svg',
-  lucky8: '/logos/lucky8.svg',
-  'wild-sultan': '/logos/wild-sultan.svg',
-  madnix: '/logos/madnix.svg',
-  'magical-spin': '/logos/magical-spin.svg',
-  casinozer: '/logos/casinozer.svg',
-  tortuga: '/logos/tortuga.svg',
+  cresus: '/logos/cresus.png',
+  lucky8: '/logos/lucky8.png',
+  'wild-sultan': '/logos/wild-sultan.png',
+  madnix: '/logos/madnix.png',
+  'magical-spin': '/logos/magical-spin.png',
+  casinozer: '/logos/casinozer.png',
+  tortuga: '/logos/tortuga.png',
   'banzai-slots': '/logos/banzai-slots.svg',
-  stake: '/logos/stake.svg',
-  'bitcoin-penguin': '/logos/bitcoin-penguin.svg',
-  dublinbet: '/logos/dublinbet.svg',
-  vegadream: '/logos/vegadream.svg',
-  'horus-casino': '/logos/horus-casino.svg',
-  'n1-casino': '/logos/n1-casino.svg',
-  'casino-extra': '/logos/casino-extra.svg',
+  stake: '/logos/stake.png',
+  'bitcoin-penguin': '/logos/bitcoin-penguin.png',
+  dublinbet: '/logos/dublinbet.png',
+  vegadream: '/logos/vegadream.png',
+  'horus-casino': '/logos/horus-casino.png',
+  'n1-casino': '/logos/n1-casino.png',
+  'casino-extra': '/logos/casino-extra.png',
 }
 
 function goUrl(slug: string) {
