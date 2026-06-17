@@ -5,24 +5,27 @@ import { notFound } from 'next/navigation'
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
-import { ProsConsBox } from '@/components/ui/pros-cons-box'
 import { ScorePill } from '@/components/ui/score-pill'
+import { VersusCompareBar } from '@/components/versus/versus-compare-bar'
+import { WagerSimulator } from '@/components/versus/wager-simulator'
+import { VersusCrits, type CritData } from '@/components/versus/versus-crits'
 import type { Locale } from '@/i18n/routing'
-import { operatorBySlug, operators } from '@/config/operators'
+import { operatorBySlug, operators, TOP_10 } from '@/config/operators'
+import { VERSUS_EXTRA_CRITS } from '@/config/versus-extra-crits'
 import { buildHreflang } from '@/lib/i18n/routes'
-
-// Handles both versus (/comparatifs/cresus-vs-lucky8/) and generic comparatif slugs
 
 function parseVersusSlug(slug: string): [string, string] | null {
   const parts = slug.split('-vs-')
-  if (parts.length === 2 && parts[0] && parts[1]) {
-    return [parts[0], parts[1]]
-  }
+  if (parts.length === 2 && parts[0] && parts[1]) return [parts[0], parts[1]]
   return null
 }
 
+function parseWager(conditions: string): number {
+  const m = conditions.match(/(\d+)\s*[xX]/)
+  return m ? parseInt(m[1]!, 10) : 35
+}
+
 export async function generateStaticParams() {
-  // Generate versus pages for top 5 operators (5×4/2 = 10 pairs)
   const top5 = operators.sort((a, b) => b.rating - a.rating).slice(0, 5)
   const pairs: { slug: string }[] = []
   for (let i = 0; i < top5.length; i++) {
@@ -41,48 +44,43 @@ export async function generateMetadata({
   const { slug, locale } = await params
   const versus = parseVersusSlug(slug)
   if (!versus) return {}
-
   const [slugA, slugB] = versus
   const opA = operatorBySlug.get(slugA!)
   const opB = operatorBySlug.get(slugB!)
   if (!opA || !opB) return {}
-
   const isFr = locale === 'fr'
   return {
     title: isFr
       ? `${opA.name} vs ${opB.name} — Comparatif 2026`
       : `${opA.name} vs ${opB.name} — Comparison 2026`,
     description: isFr
-      ? `On compare ${opA.name} (${opA.rating}/10) et ${opB.name} (${opB.rating}/10) : bonus, retraits, ludothèque et support. Quel casino choisir ?`
-      : `We compare ${opA.name} (${opA.rating}/10) and ${opB.name} (${opB.rating}/10): bonuses, withdrawals, game library and support.`,
-    alternates: {
-      languages: buildHreflang(`/comparatifs/${slug}/`),
-    },
+      ? `On compare ${opA.name} (${opA.rating}/10) et ${opB.name} (${opB.rating}/10) : bonus, RTP, paiements et expérience. Quel casino choisir ?`
+      : `We compare ${opA.name} (${opA.rating}/10) and ${opB.name} (${opB.rating}/10): bonuses, RTP, payments and UX.`,
+    alternates: { languages: buildHreflang(`/comparatifs/${slug}/`) },
   }
 }
 
-function CompareRow({ label, a, b }: { label: string; a: React.ReactNode; b: React.ReactNode }) {
-  return (
-    <tr className="border-b border-line last:border-b-0">
-      <td className="w-[30%] bg-surface-2 px-5 py-[13px] text-[13.5px] font-semibold text-ink">
-        {label}
-      </td>
-      <td className="px-5 py-[13px] text-[14px] text-ink-2">{a}</td>
-      <td className="px-5 py-[13px] text-[14px] text-ink-2">{b}</td>
-    </tr>
-  )
-}
-
-function LogoPlaceholder({ name }: { name: string }) {
+function LogoPh({ name: _name, className }: { name: string; className?: string }) {
   return (
     <div
-      className="flex h-10 w-[110px] items-center justify-center rounded border border-dashed border-line-2 font-mono text-[10px] text-ink-3"
+      className={`shrink-0 rounded border border-dashed border-line-2 font-mono text-[9px] text-ink-3 ${className ?? 'h-[52px] w-[150px]'}`}
       style={{
         background:
           'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 7px,transparent 7px,transparent 14px)',
       }}
-    >
-      {name}
+      aria-hidden
+    />
+  )
+}
+
+function SectionLabel({ num, title, intro }: { num: string; title: string; intro?: string }) {
+  return (
+    <div className="mb-6">
+      <h2 className="m-0 mb-[6px] font-serif text-[clamp(24px,3vw,33px)] font-medium leading-[1.1] tracking-[-0.015em] text-ink">
+        <span className="mr-[11px] font-mono text-[14px] font-medium text-green">{num}</span>
+        {title}
+      </h2>
+      {intro && <p className="m-0 max-w-[66ch] text-[15.5px] leading-[1.6] text-ink-2">{intro}</p>}
     </div>
   )
 }
@@ -103,6 +101,137 @@ export default async function VersusPage({
 
   const isFr = locale === 'fr'
   const winner = opA.rating >= opB.rating ? opA : opB
+  const winA = winner.slug === opA.slug
+  const winB = winner.slug === opB.slug
+
+  // Alternatives (not opA or opB)
+  const alts = TOP_10.filter((op) => op.id !== opA.id && op.id !== opB.id).slice(0, 3)
+
+  // Criterion data
+  const maxBonus = Math.max(opA.bonusAmountNumber, opB.bonusAmountNumber)
+
+  const crits: CritData[] = [
+    {
+      id: 'note',
+      label: 'Note globale',
+      num: '01',
+      iconPath: 'M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z',
+      barA: (opA.rating / 10) * 100,
+      barB: (opB.rating / 10) * 100,
+      labelA: `${opA.rating}/10`,
+      labelB: `${opB.rating}/10`,
+      proseA: opA.verdict,
+      proseB: opB.verdict,
+      winner: opA.rating > opB.rating ? 'a' : opB.rating > opA.rating ? 'b' : 'tie',
+      deepA: opA.pros.slice(0, 3),
+      deepB: opB.pros.slice(0, 3),
+    },
+    {
+      id: 'bonus',
+      label: 'Bonus de bienvenue',
+      num: '02',
+      iconPath:
+        'M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z',
+      barA: maxBonus > 0 ? (opA.bonusAmountNumber / maxBonus) * 100 : 50,
+      barB: maxBonus > 0 ? (opB.bonusAmountNumber / maxBonus) * 100 : 50,
+      labelA: `${opA.bonusAmount}${opA.bonusSuffix ? ` ${opA.bonusSuffix}` : ''}`,
+      labelB: `${opB.bonusAmount}${opB.bonusSuffix ? ` ${opB.bonusSuffix}` : ''}`,
+      proseA: `${opA.name} propose ${opA.bonusAmount}${opA.bonusSuffix ? ` ${opA.bonusSuffix}` : ''} avec des conditions de mise de ${opA.bonusConditions}.`,
+      proseB: `${opB.name} propose ${opB.bonusAmount}${opB.bonusSuffix ? ` ${opB.bonusSuffix}` : ''} avec des conditions de mise de ${opB.bonusConditions}.`,
+      winner:
+        opA.bonusAmountNumber > opB.bonusAmountNumber
+          ? 'a'
+          : opB.bonusAmountNumber > opA.bonusAmountNumber
+            ? 'b'
+            : 'tie',
+      deepA: opA.pros.filter((p) => /bonus|offre/i.test(p)).slice(0, 2),
+      deepB: opB.pros.filter((p) => /bonus|offre/i.test(p)).slice(0, 2),
+    },
+    {
+      id: 'rtp',
+      label: 'RTP moyen',
+      num: '03',
+      iconPath: 'M3 3v18h18M7 16l4-4 4 4 4-8',
+      barA: Math.min(100, Math.max(0, (opA.rtp - 95) * 25)),
+      barB: Math.min(100, Math.max(0, (opB.rtp - 95) * 25)),
+      labelA: `${opA.rtp.toFixed(1)}%`,
+      labelB: `${opB.rtp.toFixed(1)}%`,
+      proseA: `Le RTP moyen déclaré de ${opA.name} est de ${opA.rtp.toFixed(1)}% — en théorie, ${opA.rtp.toFixed(1)}% des mises sont redistribuées sur le long terme.`,
+      proseB: `Le RTP moyen déclaré de ${opB.name} est de ${opB.rtp.toFixed(1)}% — en théorie, ${opB.rtp.toFixed(1)}% des mises sont redistribuées sur le long terme.`,
+      winner: opA.rtp > opB.rtp ? 'a' : opB.rtp > opA.rtp ? 'b' : 'tie',
+      deepA: [],
+      deepB: [],
+    },
+    {
+      id: 'paiements',
+      label: 'Paiements',
+      num: '04',
+      iconPath:
+        'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3z',
+      barA: Math.min(100, (opA.paymentMethods.length / 8) * 100),
+      barB: Math.min(100, (opB.paymentMethods.length / 8) * 100),
+      labelA: `${opA.paymentMethods.length} méthodes`,
+      labelB: `${opB.paymentMethods.length} méthodes`,
+      proseA: `${opA.name} accepte : ${opA.paymentMethods.join(', ')}.`,
+      proseB: `${opB.name} accepte : ${opB.paymentMethods.join(', ')}.`,
+      winner:
+        opA.paymentMethods.length > opB.paymentMethods.length
+          ? 'a'
+          : opB.paymentMethods.length > opA.paymentMethods.length
+            ? 'b'
+            : 'tie',
+      deepA: opA.pros.filter((p) => /paiement|virement|retrait|dépôt/i.test(p)).slice(0, 2),
+      deepB: opB.pros.filter((p) => /paiement|virement|retrait|dépôt/i.test(p)).slice(0, 2),
+    },
+    {
+      id: 'experience',
+      label: 'Expérience',
+      num: '05',
+      iconPath:
+        'M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0h10m-10 0H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4M19 14h2a2 2 0 0 1 2 2v4a2 2 0 0 0-2 2h-4m0 0v-11',
+      barA: Math.min(100, (opA.features.length / 10) * 100),
+      barB: Math.min(100, (opB.features.length / 10) * 100),
+      labelA: `${opA.features.length} fonctionnalités`,
+      labelB: `${opB.features.length} fonctionnalités`,
+      proseA: `${opA.name} : ${opA.features.slice(0, 3).join(', ')}.`,
+      proseB: `${opB.name} : ${opB.features.slice(0, 3).join(', ')}.`,
+      winner:
+        opA.features.length > opB.features.length
+          ? 'a'
+          : opB.features.length > opA.features.length
+            ? 'b'
+            : 'tie',
+      deepA: opA.pros.filter((p) => !/bonus/i.test(p)).slice(0, 2),
+      deepB: opB.pros.filter((p) => !/bonus/i.test(p)).slice(0, 2),
+    },
+  ]
+
+  const extra = VERSUS_EXTRA_CRITS[slug]
+  if (extra) {
+    crits.push(
+      {
+        id: 'support',
+        label: 'Support client',
+        num: '06',
+        iconPath:
+          'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z',
+        displayMode: 'label',
+        barA: 0,
+        barB: 0,
+        ...extra.support,
+      },
+      {
+        id: 'mobile',
+        label: 'Expérience mobile',
+        num: '07',
+        iconPath: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM11 18h2',
+        displayMode: 'label',
+        barA: 0,
+        barB: 0,
+        ...extra.mobile,
+      }
+    )
+  }
 
   return (
     <>
@@ -114,161 +243,419 @@ export default async function VersusPage({
         ]}
       />
 
-      <section className="py-10" data-page-type="versus" data-locale={locale}>
+      {/* ── HEAD — centered intro ─────────────────────────────────────────── */}
+      <section className="pb-4 pt-[44px] text-center" data-page-type="versus" data-locale={locale}>
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+          {/* Eyebrow — gold lines on both sides */}
+          <div className="mb-[16px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green">
+            <span
+              className="inline-block h-px w-[22px] shrink-0"
+              style={{ background: 'var(--gold)' }}
+              aria-hidden
+            />
             Comparatif 2026
+            <span
+              className="inline-block h-px w-[22px] shrink-0"
+              style={{ background: 'var(--gold)' }}
+              aria-hidden
+            />
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(28px,4vw,46px)] font-medium leading-tight tracking-[-0.02em] text-ink">
-            {opA.name} <span className="text-ink-3">vs</span> {opB.name}
+
+          <h1 className="mx-auto mb-[18px] max-w-[19ch] font-serif text-[clamp(31px,4.7vw,52px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
+            {opA.name} <em className="italic text-green">vs</em> {opB.name}
           </h1>
-          <p className="m-0 max-w-[60ch] text-[17px] text-ink-2">
+
+          <p className="m-0 mx-auto max-w-[64ch] text-[17.5px] leading-[1.62] text-ink-2">
             {isFr
-              ? `Nous comparons deux casinos populaires sur 6 critères clés pour vous aider à choisir.`
-              : `We compare two popular casinos on 6 key criteria to help you choose.`}
+              ? `Analyse comparative sur ${crits.length} critères clés — note globale, bonus, RTP, paiements, expérience, support et mobile — pour vous aider à choisir entre ${opA.name} et ${opB.name}.`
+              : `A comparative analysis across ${crits.length} key criteria — overall score, bonuses, RTP, payments, UX, support and mobile — to help you choose between ${opA.name} and ${opB.name}.`}
           </p>
+
+          {/* Head meta */}
+          <div className="mt-[20px] inline-flex flex-wrap items-center justify-center gap-[8px_18px] text-[13px] text-ink-3">
+            <span className="inline-flex items-center gap-[7px]">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-[14px] w-[14px] text-green"
+                aria-hidden
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+              Mis à jour juin 2026
+            </span>
+            <span className="inline-flex items-center gap-[7px]">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-[14px] w-[14px] text-green"
+                aria-hidden
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+              5 min de lecture
+            </span>
+          </div>
+
+          {/* ── Dir-A hero face-off ───────────────────────────────────────── */}
+          <div
+            className="mt-[30px]"
+            style={{ display: 'grid', gridTemplateColumns: '1fr 70px 1fr' }}
+          >
+            {/* Panel A */}
+            <div
+              className="flex flex-col items-center gap-[13px] border border-line bg-surface p-[26px_24px] shadow-1"
+              style={{
+                borderRadius: 'var(--radius-xl) 0 0 var(--radius-xl)',
+                borderRight: 0,
+                ...(winA
+                  ? {
+                      borderTopWidth: '3px',
+                      borderTopColor: 'var(--green)',
+                      borderColor: 'color-mix(in srgb,var(--green) 40%,var(--line))',
+                    }
+                  : {}),
+              }}
+            >
+              {winA ? (
+                <p className="m-0 inline-flex items-center gap-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.09em] text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    className="h-[13px] w-[13px]"
+                    aria-hidden
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  Recommandé
+                </p>
+              ) : (
+                <p className="m-0 font-mono text-[10.5px] font-semibold uppercase tracking-[0.09em] text-ink-3">
+                  Alternative
+                </p>
+              )}
+              <LogoPh name={opA.name} />
+              <p className="m-0 font-serif text-[24px] font-semibold tracking-[-0.01em] text-ink">
+                {opA.name}
+              </p>
+              <p className="m-0 text-[13.5px] text-ink-2">
+                Bonus{' '}
+                <b className="font-serif text-[18px] font-semibold text-ink">
+                  <span className="text-green">{opA.bonusAmount}</span>
+                  {opA.bonusSuffix && ` ${opA.bonusSuffix}`}
+                </b>
+              </p>
+              <ScorePill score={opA.rating} gold={winA} />
+              <CTAButton
+                href={opA.affiliateUrl}
+                variant="primary"
+                arrow
+                block
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-event="affiliate_click"
+                data-operator={opA.slug}
+                data-placement="versus_hero"
+                data-bonus={opA.bonusSlug}
+                data-page-type="versus"
+                data-locale={locale}
+              >
+                {isFr ? 'Obtenir le bonus' : 'Claim bonus'}
+              </CTAButton>
+              <a
+                href={`/casinos/${opA.slug}/`}
+                className="font-mono text-[12px] text-ink-3 no-underline hover:text-green"
+                data-event="review_click"
+                data-operator={opA.slug}
+                data-page-type="versus"
+                data-locale={locale}
+              >
+                {isFr ? "Lire l'avis →" : 'Read review →'}
+              </a>
+            </div>
+
+            {/* VS badge column */}
+            <div className="grid place-items-center">
+              <div
+                className="grid h-[60px] w-[60px] place-items-center rounded-full border-4 font-serif text-[21px] font-semibold italic shadow-3"
+                style={{ background: 'var(--ink)', color: 'var(--bg)', borderColor: 'var(--bg)' }}
+                aria-hidden
+              >
+                vs
+              </div>
+            </div>
+
+            {/* Panel B */}
+            <div
+              className="flex flex-col items-center gap-[13px] border border-line bg-surface p-[26px_24px] shadow-1"
+              style={{
+                borderRadius: '0 var(--radius-xl) var(--radius-xl) 0',
+                borderLeft: 0,
+                ...(winB
+                  ? {
+                      borderTopWidth: '3px',
+                      borderTopColor: 'var(--green)',
+                      borderColor: 'color-mix(in srgb,var(--green) 40%,var(--line))',
+                    }
+                  : {}),
+              }}
+            >
+              {winB ? (
+                <p className="m-0 inline-flex items-center gap-[6px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.09em] text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    className="h-[13px] w-[13px]"
+                    aria-hidden
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  Recommandé
+                </p>
+              ) : (
+                <p className="m-0 font-mono text-[10.5px] font-semibold uppercase tracking-[0.09em] text-ink-3">
+                  Alternative
+                </p>
+              )}
+              <LogoPh name={opB.name} />
+              <p className="m-0 font-serif text-[24px] font-semibold tracking-[-0.01em] text-ink">
+                {opB.name}
+              </p>
+              <p className="m-0 text-[13.5px] text-ink-2">
+                Bonus{' '}
+                <b className="font-serif text-[18px] font-semibold text-ink">
+                  <span className="text-green">{opB.bonusAmount}</span>
+                  {opB.bonusSuffix && ` ${opB.bonusSuffix}`}
+                </b>
+              </p>
+              <ScorePill score={opB.rating} gold={winB} />
+              <CTAButton
+                href={opB.affiliateUrl}
+                variant="primary"
+                arrow
+                block
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                data-event="affiliate_click"
+                data-operator={opB.slug}
+                data-placement="versus_hero"
+                data-bonus={opB.bonusSlug}
+                data-page-type="versus"
+                data-locale={locale}
+              >
+                {isFr ? 'Obtenir le bonus' : 'Claim bonus'}
+              </CTAButton>
+              <a
+                href={`/casinos/${opB.slug}/`}
+                className="font-mono text-[12px] text-ink-3 no-underline hover:text-green"
+                data-event="review_click"
+                data-operator={opB.slug}
+                data-page-type="versus"
+                data-locale={locale}
+              >
+                {isFr ? "Lire l'avis →" : 'Read review →'}
+              </a>
+            </div>
+          </div>
+
+          {/* Sentinel for sticky compare bar */}
+          <div data-compare-sentinel aria-hidden />
         </div>
       </section>
 
       <AffiliateDisclosure variant="strip" />
 
-      {/* Head-to-head cards */}
-      <section className="py-10">
+      {/* ── AT-A-GLANCE TABLE ────────────────────────────────────────────── */}
+      <section className="py-12">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <h2 className="mb-6 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            Vue d&apos;ensemble
-          </h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {[opA, opB].map((op) => (
-              <div
-                key={op.id}
-                className={`rounded-xl border bg-surface p-6 shadow-1 ${op.slug === winner.slug ? 'border-[color-mix(in_srgb,var(--gold)_40%,var(--line))]' : 'border-line'}`}
-              >
-                {op.slug === winner.slug && (
-                  <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-gold-ink">
-                    ★ Recommandé
-                  </p>
-                )}
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <LogoPlaceholder name={op.shortName ?? op.name} />
-                  <ScorePill score={op.rating} gold={op.slug === winner.slug} />
-                </div>
-                <h3 className="mb-1 font-serif text-[22px] font-semibold text-ink">{op.name}</h3>
-                <p className="mb-4 text-sm text-ink-2">{op.tagline}</p>
-                <p className="mb-4 text-[15px] text-ink-2">
-                  <span className="font-serif text-[19px] font-semibold text-green">
-                    {op.bonusAmount}
-                  </span>
-                  {op.bonusSuffix && ` ${op.bonusSuffix}`}
-                  <span className="ml-2 text-xs text-ink-3">{op.bonusConditions}</span>
-                </p>
-                <div className="flex gap-2">
-                  <CTAButton
-                    href={op.affiliateUrl}
-                    variant="primary"
-                    size="sm"
-                    arrow
-                    block
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    data-event="affiliate_click"
-                    data-operator={op.slug}
-                    data-placement="versus_card"
-                    data-bonus={op.bonusSlug}
-                    data-page-type="versus"
-                    data-locale={locale}
-                  >
-                    Obtenir le bonus
-                  </CTAButton>
-                  <CTAButton
-                    href={`/casinos/${op.slug}/`}
-                    variant="secondary"
-                    size="sm"
-                    data-event="review_click"
-                    data-operator={op.slug}
-                  >
-                    Avis
-                  </CTAButton>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Comparison table */}
-          <h2 className="mb-4 mt-12 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            Comparatif détaillé
-          </h2>
-          <div className="overflow-x-auto rounded-lg border border-line shadow-1">
+          <SectionLabel
+            num="01"
+            title="Vue d'ensemble"
+            intro={`Résumé des points clés pour choisir entre ${opA.name} et ${opB.name}.`}
+          />
+          <div className="overflow-x-auto rounded-xl border border-line shadow-1">
             <table className="w-full border-collapse bg-surface">
               <thead>
                 <tr className="border-b border-line bg-surface-2">
-                  <th className="px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
+                  <th className="w-[27%] px-[18px] py-[13px] text-left font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
                     Critère
                   </th>
-                  <th className="px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
+                  <th className="px-[18px] py-[13px] text-center font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
                     {opA.name}
                   </th>
-                  <th className="px-5 py-[14px] text-left font-mono text-[11px] uppercase tracking-[0.05em] text-ink-3">
+                  <th className="px-[18px] py-[13px] text-center font-mono text-[11px] uppercase tracking-[0.06em] text-ink-3">
                     {opB.name}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <CompareRow
-                  label="Note globale"
-                  a={<ScorePill score={opA.rating} gold={opA.rating > opB.rating} />}
-                  b={<ScorePill score={opB.rating} gold={opB.rating > opA.rating} />}
-                />
-                <CompareRow
-                  label="Bonus de bienvenue"
-                  a={
-                    <>
-                      {opA.bonusAmount}
-                      {opA.bonusSuffix && ` ${opA.bonusSuffix}`}
-                    </>
-                  }
-                  b={
-                    <>
-                      {opB.bonusAmount}
-                      {opB.bonusSuffix && ` ${opB.bonusSuffix}`}
-                    </>
-                  }
-                />
-                <CompareRow
-                  label="Conditions de bonus"
-                  a={opA.bonusConditions}
-                  b={opB.bonusConditions}
-                />
-                <CompareRow
-                  label="RTP moyen"
-                  a={<span className="font-mono">{opA.rtp.toFixed(1)}%</span>}
-                  b={<span className="font-mono">{opB.rtp.toFixed(1)}%</span>}
-                />
-                <CompareRow label="Licence" a={opA.licence} b={opB.licence} />
-                <CompareRow
-                  label="Paiements"
-                  a={opA.paymentMethods.join(', ')}
-                  b={opB.paymentMethods.join(', ')}
-                />
+                {(
+                  [
+                    {
+                      label: 'Note globale',
+                      a: <ScorePill score={opA.rating} gold={opA.rating > opB.rating} />,
+                      b: <ScorePill score={opB.rating} gold={opB.rating > opA.rating} />,
+                      winA: opA.rating > opB.rating,
+                      winB: opB.rating > opA.rating,
+                    },
+                    {
+                      label: 'Bonus',
+                      a: (
+                        <>
+                          {opA.bonusAmount}
+                          {opA.bonusSuffix && ` ${opA.bonusSuffix}`}
+                        </>
+                      ),
+                      b: (
+                        <>
+                          {opB.bonusAmount}
+                          {opB.bonusSuffix && ` ${opB.bonusSuffix}`}
+                        </>
+                      ),
+                      winA: opA.bonusAmountNumber > opB.bonusAmountNumber,
+                      winB: opB.bonusAmountNumber > opA.bonusAmountNumber,
+                    },
+                    {
+                      label: 'Conditions',
+                      a: <span className="font-mono text-[13px]">{opA.bonusConditions}</span>,
+                      b: <span className="font-mono text-[13px]">{opB.bonusConditions}</span>,
+                      winA: false,
+                      winB: false,
+                    },
+                    {
+                      label: 'RTP moyen',
+                      a: <span className="font-mono">{opA.rtp.toFixed(1)}%</span>,
+                      b: <span className="font-mono">{opB.rtp.toFixed(1)}%</span>,
+                      winA: opA.rtp > opB.rtp,
+                      winB: opB.rtp > opA.rtp,
+                    },
+                    {
+                      label: 'Licence',
+                      a: opA.licence,
+                      b: opB.licence,
+                      winA: false,
+                      winB: false,
+                    },
+                    {
+                      label: 'Paiements',
+                      a: opA.paymentMethods.join(', '),
+                      b: opB.paymentMethods.join(', '),
+                      winA: opA.paymentMethods.length > opB.paymentMethods.length,
+                      winB: opB.paymentMethods.length > opA.paymentMethods.length,
+                    },
+                  ] as const
+                ).map((row, i) => (
+                  <tr key={i} className="border-b border-line last:border-b-0">
+                    <td className="bg-surface-2 px-[18px] py-[14px] font-mono text-[11.5px] uppercase tracking-[0.04em] text-ink-3">
+                      {row.label}
+                    </td>
+                    <td
+                      className={`px-[18px] py-[14px] text-center align-middle text-[14.5px] ${row.winA ? 'bg-green-50 font-bold text-ink' : 'text-ink-2'}`}
+                    >
+                      {row.a}
+                      {row.winA && (
+                        <span className="ml-[7px] font-extrabold text-green" aria-hidden>
+                          ✓
+                        </span>
+                      )}
+                    </td>
+                    <td
+                      className={`px-[18px] py-[14px] text-center align-middle text-[14.5px] ${row.winB ? 'bg-green-50 font-bold text-ink' : 'text-ink-2'}`}
+                    >
+                      {row.b}
+                      {row.winB && (
+                        <span className="ml-[7px] font-extrabold text-green" aria-hidden>
+                          ✓
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
 
-          {/* Pros/cons */}
-          <h2 className="mb-4 mt-12 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {opA.name}
-          </h2>
-          <ProsConsBox pros={opA.pros} cons={opA.cons} />
+      {/* ── CRITERION BLOCKS ─────────────────────────────────────────────── */}
+      <section className="border-t border-line bg-bg-sunken py-12">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <SectionLabel
+            num="02"
+            title="Analyse détaillée"
+            intro={`Comparaison critère par critère de ${opA.name} et ${opB.name}, avec des données mesurables.`}
+          />
+          <VersusCrits
+            crits={crits}
+            opA={{
+              name: opA.name,
+              slug: opA.slug,
+              affiliateUrl: opA.affiliateUrl,
+              bonusSlug: opA.bonusSlug,
+            }}
+            opB={{
+              name: opB.name,
+              slug: opB.slug,
+              affiliateUrl: opB.affiliateUrl,
+              bonusSlug: opB.bonusSlug,
+            }}
+            winnerSlug={winner.slug}
+            locale={locale}
+          />
+        </div>
+      </section>
 
-          <h2 className="mb-4 mt-8 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {opB.name}
-          </h2>
-          <ProsConsBox pros={opB.pros} cons={opB.cons} />
+      {/* ── WAGER SIMULATOR ──────────────────────────────────────────────── */}
+      <section className="py-12">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <SectionLabel
+            num="03"
+            title="Simulateur de mise"
+            intro="Comparez le coût réel de chaque bonus selon votre dépôt cible. La perte statistique estimée dépend du RTP déclaré."
+          />
+          <WagerSimulator
+            opA={{
+              name: opA.name,
+              slug: opA.slug,
+              rtp: opA.rtp,
+              wagerX: parseWager(opA.bonusConditions),
+              affiliateUrl: opA.affiliateUrl,
+              bonusSlug: opA.bonusSlug,
+              isWinner: winA,
+            }}
+            opB={{
+              name: opB.name,
+              slug: opB.slug,
+              rtp: opB.rtp,
+              wagerX: parseWager(opB.bonusConditions),
+              affiliateUrl: opB.affiliateUrl,
+              bonusSlug: opB.bonusSlug,
+              isWinner: winB,
+            }}
+            locale={locale}
+          />
+        </div>
+      </section>
 
-          {/* Verdict */}
-          <div className="mt-10 rounded-lg border border-l-4 border-line border-l-green bg-surface p-[24px_26px] shadow-1">
+      {/* ── VERDICT & FINAL RECS ─────────────────────────────────────────── */}
+      <section className="border-t border-line bg-bg-sunken py-12">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <SectionLabel num="04" title="Notre verdict" />
+
+          {/* Verdict card */}
+          <div className="mb-8 rounded-xl border-l-4 border-line border-l-green bg-surface p-[24px_26px] shadow-1">
             <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.1em] text-green">
-              Notre verdict
+              Conclusion
             </p>
             <p className="m-0 font-serif text-[17px] leading-[1.6] text-ink">
               {opA.rating >= opB.rating
@@ -276,8 +663,159 @@ export default async function VersusPage({
                 : `${opB.name} sort vainqueur avec une note de ${opB.rating}/10 contre ${opA.rating}/10 pour ${opA.name}. ${winner.tagline}`}
             </p>
           </div>
+
+          {/* Final rec cards */}
+          <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
+            {[winner, winner.slug === opA.slug ? opB : opA].map((op, i) => {
+              const isWin = i === 0
+              const pros = op.pros.slice(0, 3)
+              return (
+                <div
+                  key={op.id}
+                  className={`flex flex-col rounded-xl border bg-surface p-[26px] shadow-1 ${isWin ? 'border-[color-mix(in_srgb,var(--green)_40%,var(--line))] shadow-2' : 'border-line'}`}
+                >
+                  <div className="mb-4 flex items-center gap-[12px]">
+                    <LogoPh name={op.name} className="h-[34px] w-[100px]" />
+                    <ScorePill score={op.rating} gold={isWin} />
+                  </div>
+                  <h3 className="m-0 mb-[14px] font-serif text-[20px] font-semibold text-ink">
+                    {isWin ? `Choisissez ${op.name} si…` : `Choisissez ${op.name} si…`}
+                  </h3>
+                  <ul className="mb-[20px] flex flex-col gap-[11px]">
+                    {pros.map((pro) => (
+                      <li
+                        key={pro}
+                        className="flex items-start gap-[10px] text-[14px] leading-[1.5] text-ink-2"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          className={`mt-[2px] h-[16px] w-[16px] shrink-0 ${isWin ? 'text-green' : 'text-ink-3'}`}
+                          aria-hidden
+                        >
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        {pro}
+                      </li>
+                    ))}
+                  </ul>
+                  <CTAButton
+                    href={op.affiliateUrl}
+                    variant={isWin ? 'primary' : 'secondary'}
+                    arrow={isWin}
+                    block
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="mt-auto"
+                    data-event="affiliate_click"
+                    data-operator={op.slug}
+                    data-placement={isWin ? 'versus_final_winner' : 'versus_final_alt'}
+                    data-bonus={op.bonusSlug}
+                    data-page-type="versus"
+                    data-locale={locale}
+                  >
+                    {isWin ? `Obtenir le bonus ${op.name}` : `Voir ${op.name}`}
+                  </CTAButton>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
+
+      {/* ── NI L'UN NI L'AUTRE — alternatives ───────────────────────────── */}
+      {alts.length > 0 && (
+        <section className="py-12">
+          <div className="mx-auto max-w-site px-[18px] md:px-8">
+            <div
+              className="rounded-xl border border-line p-[32px]"
+              style={{ background: 'var(--bg-sunken)' }}
+            >
+              <div className="mx-auto mb-[24px] max-w-[60ch] text-center">
+                <span className="mb-[10px] block font-mono text-[11px] uppercase tracking-[0.12em] text-green">
+                  Ni l&apos;un ni l&apos;autre ?
+                </span>
+                <h3 className="m-0 mb-[10px] font-serif text-[clamp(22px,2.6vw,28px)] font-medium tracking-[-0.01em] text-ink">
+                  Explorez d&apos;autres casinos
+                </h3>
+                <p className="m-0 text-[14.5px] leading-[1.6] text-ink-2">
+                  {opA.name} et {opB.name} ne vous convainquent pas ? Voici nos meilleures
+                  alternatives testées en 2026.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-[16px] md:grid-cols-3">
+                {alts.map((op) => (
+                  <div
+                    key={op.id}
+                    className="flex flex-col gap-[13px] rounded-xl border border-line bg-surface p-[20px] shadow-1 transition-[transform,box-shadow,border-color] duration-[180ms] hover:-translate-y-[3px] hover:border-line-2 hover:shadow-3"
+                  >
+                    <div className="flex items-center gap-[11px]">
+                      <LogoPh name={op.name} className="h-[30px] w-[78px]" />
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-[15px] font-bold text-ink">{op.name}</div>
+                        <div className="mt-[1px] font-mono text-[10.5px] text-ink-3">
+                          {op.licence}
+                        </div>
+                      </div>
+                      <ScorePill score={op.rating} className="text-[14px]" />
+                    </div>
+                    <p className="m-0 text-[13px] leading-[1.55] text-ink-2">{op.tagline}</p>
+                    <div
+                      className="flex items-baseline gap-[7px] rounded border p-[11px_13px]"
+                      style={{
+                        background: 'var(--green-50)',
+                        borderColor: 'color-mix(in srgb,var(--green) 22%,var(--line))',
+                      }}
+                    >
+                      <span className="font-serif text-[19px] font-semibold text-ink">
+                        <span className="text-green">{op.bonusAmount}</span>
+                        {op.bonusSuffix && ` ${op.bonusSuffix}`}
+                      </span>
+                      <span className="ml-auto text-[11.5px] text-ink-3">
+                        {op.bonusConditions.split('·')[0]?.trim()}
+                      </span>
+                    </div>
+                    <div className="mt-auto flex flex-col gap-[8px]">
+                      <CTAButton
+                        href={op.affiliateUrl}
+                        variant="primary"
+                        arrow
+                        block
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        data-event="affiliate_click"
+                        data-operator={op.slug}
+                        data-placement="versus_alternatives"
+                        data-bonus={op.bonusSlug}
+                        data-page-type="versus"
+                        data-locale={locale}
+                      >
+                        Obtenir le bonus
+                      </CTAButton>
+                      <a
+                        href={`/casinos/${op.slug}/`}
+                        className="block text-center font-mono text-[12px] text-ink-3 no-underline hover:text-green"
+                        data-event="review_click"
+                        data-operator={op.slug}
+                        data-page-type="versus"
+                        data-locale={locale}
+                      >
+                        Lire l&apos;avis →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── STICKY COMPARE BAR ───────────────────────────────────────────── */}
+      <VersusCompareBar opA={opA} opB={opB} winnerSlug={winner.slug} locale={locale} />
     </>
   )
 }

@@ -10,13 +10,16 @@ import { CTAButton } from '@/components/ui/cta-button'
 import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { NewsletterCTA } from '@/components/ui/newsletter-cta'
 import { PodiumCard } from '@/components/ui/operator-card'
+import { ScorePill } from '@/components/ui/score-pill'
 import { StickyMobileCTA } from '@/components/ui/sticky-mobile-cta'
-import { HomepageQuiz } from '@/components/homepage/homepage-quiz'
+import { CasinoMatchmaker } from '@/components/homepage/casino-matchmaker'
 import { OperatorRotator } from '@/components/homepage/operator-rotator'
 import { Top10Table } from '@/components/homepage/top10-table'
 import type { Locale } from '@/i18n/routing'
+import { categories as gameCategories, type GameCategory } from '@/config/games'
 import { TOP_10, TOP_3 } from '@/config/operators'
 import { buildHreflang } from '@/lib/i18n/routes'
+import { cn } from '@/lib/utils'
 
 const BASE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-casino-en-ligne.fr'
 
@@ -70,7 +73,7 @@ const categories = [
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        className="h-[34px] w-[34px] text-green"
+        className="h-[16px] w-[16px] text-green"
         aria-hidden
       >
         <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -88,7 +91,7 @@ const categories = [
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        className="h-[34px] w-[34px] text-green"
+        className="h-[16px] w-[16px] text-green"
         aria-hidden
       >
         <circle cx="12" cy="12" r="9" />
@@ -107,7 +110,7 @@ const categories = [
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        className="h-[34px] w-[34px] text-green"
+        className="h-[16px] w-[16px] text-green"
         aria-hidden
       >
         <rect x="5" y="3" width="11" height="15" rx="2" />
@@ -125,7 +128,7 @@ const categories = [
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        className="h-[34px] w-[34px] text-green"
+        className="h-[16px] w-[16px] text-green"
         aria-hidden
       >
         <circle cx="12" cy="12" r="4" />
@@ -133,26 +136,59 @@ const categories = [
       </svg>
     ),
   },
-  {
-    slug: 'crash',
-    label: 'Crash games',
-    count: '62 jeux',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        className="h-[34px] w-[34px] text-green"
-        aria-hidden
-      >
-        <path d="M3 19l7-7 4 4 7-9" />
-        <path d="M21 7v5h-5" />
-      </svg>
-    ),
-  },
 ]
+
+// ── Category grid icons (cat-grid, B-S4) — keyed by config/games.ts slug ────
+
+const CAT_GRID_ICONS: Record<GameCategory, React.ReactNode> = {
+  'machines-a-sous': (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M8 4v16M16 4v16" />
+    </svg>
+  ),
+  roulette: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  ),
+  blackjack: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="5" y="3" width="11" height="15" rx="2" />
+      <path d="M8 21h11a2 2 0 0 0 2-2V8" />
+    </svg>
+  ),
+  live: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  ),
+  crash: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M3 19l7-7 4 4 7-9" />
+      <path d="M21 7v5h-5" />
+    </svg>
+  ),
+  'video-poker': (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3" y="6" width="18" height="12" rx="2" />
+      <path d="M3 10h18" />
+    </svg>
+  ),
+}
+
+// 5 catégories affichées en home, dans l'ordre éditorial de la maquette
+// (video-poker existe dans config/games.ts mais n'a pas de tuile dédiée)
+const CAT_GRID_SLUGS: GameCategory[] = ['machines-a-sous', 'roulette', 'blackjack', 'live', 'crash']
 
 // ── Guides ──────────────────────────────────────────────────────────────────
 
@@ -167,7 +203,7 @@ const guides = [
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        className="h-[21px] w-[21px]"
+        className="h-[16px] w-[16px]"
         aria-hidden
       >
         <path d="M3 7l9-4 9 4M5 7v10l7 4 7-4V7" />
@@ -184,7 +220,7 @@ const guides = [
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        className="h-[21px] w-[21px]"
+        className="h-[16px] w-[16px]"
         aria-hidden
       >
         <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" />
@@ -195,7 +231,7 @@ const guides = [
     slug: 'rtp',
     title: 'Comprendre le RTP',
     desc: 'Taux de redistribution, volatilité, avantage maison : décoder les chiffres qui comptent.',
-    icon: <TrendingUp size={21} aria-hidden />,
+    icon: <TrendingUp size={16} aria-hidden />,
   },
   {
     slug: 'paiements',
@@ -207,7 +243,7 @@ const guides = [
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        className="h-[21px] w-[21px]"
+        className="h-[16px] w-[16px]"
         aria-hidden
       >
         <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -278,29 +314,75 @@ const faqItems = [
   },
 ]
 
-// ── Blog articles ────────────────────────────────────────────────────────────
+// ── Guides permanents (teaser homepage) ─────────────────────────────────────
+// Sous-ensemble de `guides` (app/[locale]/guides/[slug]/page.tsx) choisi pour
+// matcher les 3 catégories de la maquette (Bonus / Jeux / Paiements).
 
-const blogPosts = [
+const homeGuides = [
   {
-    slug: 'anj-2026',
-    category: 'Législation',
-    date: '4 juin 2026',
-    title: "Casino en ligne en France : ce qui change avec l'ANJ en 2026",
-    excerpt: 'Le point complet sur le cadre légal et ce que ça implique pour les joueurs.',
-  },
-  {
-    slug: 'wager-pieges',
+    slug: 'bonus-casino',
     category: 'Bonus',
-    date: '1 juin 2026',
-    title: 'Conditions de wager : les 5 pièges qui annulent votre bonus',
-    excerpt: 'Comment lire les petites lignes avant de réclamer une offre de bienvenue.',
+    readTime: 10,
+    title: 'Choisir son bonus',
+    excerpt:
+      'Bonus de bienvenue, cashback, tours gratuits : lire les conditions avant de réclamer.',
   },
   {
-    slug: 'retraits-crypto',
+    slug: 'rtp',
+    category: 'Jeux',
+    readTime: 8,
+    title: 'Comprendre le RTP',
+    excerpt:
+      'Taux de redistribution, volatilité, avantage maison — décoder les chiffres qui comptent.',
+  },
+  {
+    slug: 'paiements',
     category: 'Paiements',
-    date: '28 mai 2026',
-    title: 'Retraits crypto : vraiment plus rapides ? Notre test chronométré',
-    excerpt: 'On a comparé 12 casinos sur leurs délais de retrait réels en Bitcoin.',
+    readTime: 6,
+    title: 'Méthodes de paiement',
+    excerpt: 'CB, e-wallets, crypto : délais de retrait réels, frais cachés et sécurité comparés.',
+  },
+]
+
+// ── SEO criteria ─────────────────────────────────────────────────────────────
+
+const seoCriteria = [
+  {
+    term: 'Licence et sécurité',
+    desc: "Tous nos opérateurs disposent d'une licence valide (MGA, Curaçao) et d'un chiffrement SSL. Nous vérifions chaque licence avant publication.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10C7.5 20.5 4 18 4 12V6z" />
+      </svg>
+    ),
+  },
+  {
+    term: 'Bonus honnêtes',
+    desc: 'Wager ≤ 40×, conditions lisibles, retrait du bonus possible dès le premier euro. Nous écartons les offres aux conditions inaccessibles.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7M2 7h20v5H2zM12 7V3M8 7c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2" />
+      </svg>
+    ),
+  },
+  {
+    term: 'Retraits rapides',
+    desc: 'Paiement en moins de 48 h par CB, virement SEPA ou crypto. Nous chronométrons les délais réels, pas les délais annoncés.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+    ),
+  },
+  {
+    term: 'Support FR réactif',
+    desc: "Chat en direct ou email, réponse en moins de 2 h en français. Nous posons de vraies questions pour tester la compétence et l'honnêteté du support.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
   },
 ]
 
@@ -327,6 +409,24 @@ function ItemListSchema({ locale }: { locale: Locale }) {
   )
 }
 
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function MeshLogoPlaceholder({ className }: { className?: string } = {}) {
+  return (
+    <div
+      className={cn(
+        'h-5 w-[30px] shrink-0 rounded-[4px] border border-dashed border-line-2',
+        className
+      )}
+      style={{
+        background:
+          'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 4px,transparent 4px,transparent 8px)',
+      }}
+      aria-hidden
+    />
+  )
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -339,46 +439,68 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
     <>
       <ItemListSchema locale={locale} />
 
-      {/* ── HERO ─────────────────────────────────────────────────── */}
-      <section className="pb-3 pt-14" data-page-type="homepage" data-locale={locale}>
+      {/* ══════════════════════════════════════════════════════════════
+          HERO — 2 colonnes : texte à gauche · simulateur à droite
+          Collapse en 1 colonne ≤ 1080px (xl breakpoint)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="pb-4 pt-12" data-page-type="homepage" data-locale={locale}>
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          {/* Eyebrow */}
-          <div className="mb-5 inline-flex items-center gap-[9px] font-mono text-xs uppercase tracking-[0.14em] text-green before:h-px before:w-[26px] before:bg-gold before:content-['']">
-            Comparatif indépendant · 2026
+          <div className="grid grid-cols-1 items-center gap-7 xl:grid-cols-[1fr_460px] xl:gap-11">
+            {/* ── Left column ── */}
+            <div>
+              <div className="mb-[18px] inline-flex items-center gap-[9px] font-mono text-xs uppercase tracking-[0.14em] text-green before:h-px before:w-[26px] before:bg-gold before:content-['']">
+                Comparatif indépendant · 2026
+              </div>
+
+              {/* H1 — "meilleur casino en ligne" toujours présent côté serveur */}
+              <h1 className="mb-4 max-w-[19ch] font-serif text-[clamp(30px,4.4vw,48px)] font-medium leading-[1.05] tracking-[-0.022em] text-ink xl:text-[clamp(30px,4.4vw,48px)]">
+                On a testé <OperatorRotator /> et 46 autres pour élire le{' '}
+                <em className="italic text-green">meilleur casino en ligne</em>.
+              </h1>
+
+              <p className="mb-0 max-w-[46ch] text-[17px] leading-[1.58] text-ink-2">
+                Nous analysons chaque opérateur sur 38 critères — bonus réels, vitesse de retrait,
+                sécurité, qualité du support — pour ne vous recommander que ceux qui tiennent leurs
+                promesses.
+              </p>
+
+              {/* Trust row */}
+              <div className="mt-5 flex flex-wrap items-center gap-x-[18px] gap-y-[10px]">
+                <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
+                  <Shield size={16} className="shrink-0 text-green" aria-hidden />
+                  47 opérateurs analysés
+                </span>
+                <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
+                  <Clock size={16} className="shrink-0 text-green" aria-hidden />
+                  Mis à jour le 6 juin 2026
+                </span>
+                <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
+                  <span className="rounded-[5px] bg-red px-[7px] py-[2px] font-mono text-[11px] font-semibold text-white">
+                    18+
+                  </span>
+                  Jeu responsable
+                </span>
+              </div>
+            </div>
+
+            {/* ── Right column : simulateur ── */}
+            <div>
+              <CasinoMatchmaker pageType="homepage" locale={locale} />
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* H1 — SEO-stable. "meilleur casino en ligne" always present server-side. */}
-          <h1 className="mb-5 max-w-[19ch] font-serif text-[clamp(34px,5.4vw,60px)] font-medium leading-[1.05] tracking-[-0.022em] text-ink">
-            On a testé <OperatorRotator /> et 46 autres pour élire le{' '}
-            <em className="italic text-green">meilleur casino en ligne</em>.
-          </h1>
+      {/* Affiliate disclosure — visible sans scroll, sous le hero */}
+      <AffiliateDisclosure variant="strip" />
 
-          <p className="mb-0 max-w-[56ch] text-[19px] leading-[1.55] text-ink-2">
-            Nous analysons chaque opérateur sur 38 critères — bonus réels, vitesse de retrait,
-            sécurité, qualité du support — pour ne vous recommander que ceux qui tiennent leurs
-            promesses.
-          </p>
-
-          {/* Trust row */}
-          <div className="mt-[26px] flex flex-wrap items-center gap-[22px]">
-            <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
-              <Shield size={16} className="shrink-0 text-green" aria-hidden />
-              47 opérateurs analysés
-            </span>
-            <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
-              <Clock size={16} className="shrink-0 text-green" aria-hidden />
-              Mis à jour le 6 juin 2026
-            </span>
-            <span className="inline-flex items-center gap-[9px] text-[13.5px] font-medium text-ink-2">
-              <span className="rounded-[5px] bg-red px-[7px] py-[2px] font-mono text-[11px] font-semibold text-white">
-                18+
-              </span>
-              Jeu responsable
-            </span>
-          </div>
-
-          {/* Podium */}
-          <div className="mt-[44px] flex items-baseline justify-between">
+      {/* ══════════════════════════════════════════════════════════════
+          PODIUM TOP-3 + TOP 10 TABLE
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="py-14" id="top10" data-page-type="homepage" data-locale={locale}>
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          {/* Podium header */}
+          <div className="mb-4 flex flex-wrap items-baseline justify-between gap-4">
             <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink-3">
               Notre podium — juin 2026
             </span>
@@ -387,12 +509,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             </CTAButton>
           </div>
 
-          {/* data-sticky-sentinel — StickyMobileCTA appears after this scrolls past */}
+          {/* data-sticky-sentinel — StickyMobileCTA appears when this scrolls past */}
           <div
             data-sticky-sentinel
-            className="mt-[40px] grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr]"
+            className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-[1.18fr_1fr_1fr]"
           >
-            {/* N°1 spans full width at 2-col (sm–lg), reverts to 1 col at 3-col (lg+) */}
+            {/* N°1 spans full width at 2-col (sm–lg), 1 col at 3-col (lg+) */}
             <div className="sm:col-span-2 lg:col-span-1">
               <PodiumCard
                 operator={{ ...topOp, affiliateUrl: topOp.affiliateUrl }}
@@ -411,138 +533,488 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
               ga4={{ 'data-page-type': 'homepage', 'data-locale': locale }}
             />
           </div>
+
+          {/* Top 10 table */}
+          <div className="mt-[52px]">
+            <div className="mb-[28px] flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <div className="mb-[12px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+                  Classement
+                </div>
+                <h2 className="m-0 font-serif text-[clamp(24px,3.2vw,36px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
+                  Top 10 des casinos en ligne en France
+                </h2>
+                <p className="mt-[12px] max-w-[64ch] text-[16px] text-ink-2">
+                  Triable par note, bonus ou RTP moyen. Chaque opérateur est re-testé tous les 90
+                  jours.
+                </p>
+              </div>
+              <CTAButton
+                href="/casinos/"
+                variant="secondary"
+                data-event="review_click"
+                data-placement="top10_header"
+              >
+                Voir tous les casinos
+              </CTAButton>
+            </div>
+
+            <Top10Table operators={TOP_10} />
+
+            <p className="mt-[14px] text-center text-[12.5px] text-ink-3">
+              Classement établi selon notre{' '}
+              <a href="/guides/methodologie/" className="text-green hover:underline">
+                méthodologie de notation
+              </a>
+              . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Affiliate disclosure — visible without scrolling, under hero */}
-      <AffiliateDisclosure variant="strip" />
-
-      {/* ── TOP 10 TABLE ─────────────────────────────────────────── */}
-      <section className="py-16" id="top10">
+      {/* ══════════════════════════════════════════════════════════════
+          HP-TOPLINKS — accès rapide aux casinos les mieux notés (B-S4)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="bg-bg-sunken py-12">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
+          <div className="mb-[20px] flex flex-wrap items-baseline justify-between gap-4">
             <div>
-              <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Classement
+              <div className="mb-[8px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+                Accès rapide
               </div>
-              <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-                Top 10 des casinos en ligne en France
+              <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,28px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
+                Les casinos les mieux notés
               </h2>
-              <p className="mt-[14px] max-w-[64ch] text-[16.5px] text-ink-2">
-                Triable par note, bonus ou RTP moyen. Chaque opérateur est re-testé tous les 90
-                jours.
-              </p>
             </div>
             <CTAButton
-              href="/casinos/"
+              href="/bonus/"
               variant="secondary"
-              data-event="review_click"
-              data-placement="top10_header"
+              data-event="internal_link"
+              data-target="bonus"
             >
-              Voir tous les casinos
+              Voir tous les bonus
             </CTAButton>
           </div>
 
-          <Top10Table operators={TOP_10} />
-
-          <p className="mt-[14px] text-center text-[12.5px] text-ink-3">
-            Classement établi selon notre{' '}
-            <a href="/guides/methodologie/" className="text-green hover:underline">
-              méthodologie de notation
-            </a>
-            . Nous percevons une commission sur les inscriptions — sans incidence sur les notes.
-          </p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {TOP_10.slice(0, 4).map((op) => (
+              <a
+                key={op.slug}
+                href={`/casinos/${op.slug}/`}
+                className="flex items-center gap-3 rounded-[10px] border border-line bg-surface px-[15px] py-[13px] no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-150 hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                data-event="review_click"
+                data-operator={op.slug}
+                data-placement="home_toplink"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                <MeshLogoPlaceholder className="h-[30px] w-[56px]" />
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-[7px] text-[14px] font-bold text-ink">
+                    {op.name}
+                    <ScorePill
+                      score={op.rating}
+                      gold={op.slug === topOp.slug}
+                      className="px-[6px] py-[1px] text-[11px]"
+                    />
+                  </span>
+                  <span className="text-[11.5px] text-ink-3">
+                    {op.bonusAmount}
+                    {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}
+                  </span>
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  className="shrink-0 text-ink-3 transition-colors group-hover:text-green"
+                  aria-hidden
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── GAME CATEGORIES ──────────────────────────────────────── */}
-      <section className="bg-bg-sunken py-16">
+      {/* ══════════════════════════════════════════════════════════════
+          CAT-GRID — explorer par catégorie de jeu (B-S4)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="py-12">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-[30px]">
-            <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+          <div className="mb-[20px]">
+            <div className="mb-[8px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
               Par type de jeu
             </div>
-            <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
+            <h2 className="m-0 font-serif text-[clamp(22px,2.8vw,28px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
               Explorez par catégorie
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
-            {categories.map((cat) => (
-              <a
-                key={cat.slug}
-                href={`/jeux/${cat.slug}/`}
-                className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[180ms] hover:-translate-y-[3px] hover:border-line-2 hover:shadow-3"
-                data-event="category_click"
-                data-category={cat.slug}
-              >
-                <div className="relative flex aspect-[4/3] items-center justify-center border-b border-line bg-surface-2">
-                  {cat.icon}
-                  <span className="absolute bottom-[7px] left-[7px] rounded-[3px] border border-line bg-surface px-[5px] py-[2px] font-mono text-[9px] text-ink-3">
-                    illus · {cat.slug}
-                  </span>
-                </div>
-                <div className="px-[15px] py-[13px]">
-                  <div className="text-[15px] font-bold">{cat.label}</div>
-                  <div className="mt-[2px] text-xs text-ink-3">{cat.count}</div>
-                </div>
-              </a>
-            ))}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {CAT_GRID_SLUGS.map((slug) => {
+              const cat = gameCategories.find((c) => c.slug === slug)
+              if (!cat) return null
+              return (
+                <a
+                  key={cat.slug}
+                  href={`/jeux/${cat.slug}/`}
+                  className="flex flex-col overflow-hidden rounded-[14px] border border-line bg-surface no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[180ms] hover:-translate-y-[3px] hover:border-line-2 hover:shadow-3"
+                  data-event="category_click"
+                  data-category={cat.slug}
+                  data-placement="home_category_tile"
+                  data-page-type="homepage"
+                  data-locale={locale}
+                >
+                  <div
+                    className="grid aspect-[4/3] place-items-center border-b border-line text-green [&_svg]:h-[34px] [&_svg]:w-[34px]"
+                    style={{
+                      background:
+                        'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 9px,var(--surface-2,var(--surface)) 9px,var(--surface-2,var(--surface)) 18px)',
+                    }}
+                  >
+                    {CAT_GRID_ICONS[cat.slug]}
+                  </div>
+                  <div className="px-[15px] py-[14px]">
+                    <div className="text-[15px] font-bold text-ink">{cat.label}</div>
+                  </div>
+                </a>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── QUIZ FINDER ──────────────────────────────────────────── */}
-      <section className="py-16">
+      {/* ══════════════════════════════════════════════════════════════
+          HP-MESH — maillage interne (4 colonnes thématiques)
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="bg-bg-sunken py-14">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-[30px]">
-            <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              En 30 secondes
+          <div className="mb-[26px]">
+            <div className="mb-[12px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
+              Explorer par thème
             </div>
-            <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Trouvez le casino fait pour vous
+            <h2 className="m-0 font-serif text-[clamp(24px,3.2vw,36px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
+              Tous nos comparatifs, bonus et guides
             </h2>
-            <p className="mt-[14px] max-w-[64ch] text-[16.5px] text-ink-2">
-              Trois questions, une recommandation personnalisée — sans inscription.
+          </div>
+
+          <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2 xl:grid-cols-4">
+            {/* ── Col 1 : Top casinos ── */}
+            <div className="flex flex-col rounded-[16px] border border-line bg-surface p-[18px_16px_14px] shadow-1 transition-[box-shadow,border-color] hover:shadow-3">
+              <h3 className="mb-[13px] flex items-center gap-[9px] border-b border-line pb-3 font-sans text-[14px] font-bold text-ink">
+                <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-[8px] bg-green-50 text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-4 w-4"
+                    aria-hidden
+                  >
+                    <path d="M8 21h8M12 17v4M17 5H7l-2 8h12zM5 5H3M21 5h-2" />
+                  </svg>
+                </span>
+                Top casinos
+              </h3>
+              <ul className="m-0 flex flex-1 flex-col gap-[3px] p-0" style={{ listStyle: 'none' }}>
+                {TOP_10.slice(0, 4).map((op) => (
+                  <li key={op.slug}>
+                    <a
+                      href={`/casinos/${op.slug}/`}
+                      className="flex items-center justify-between gap-2 rounded-[9px] px-[10px] py-[9px] text-[14px] font-semibold text-ink-2 no-underline transition-[background,color,transform] hover:translate-x-[2px] hover:bg-green-50 hover:text-green-ink"
+                      data-event="review_click"
+                      data-operator={op.slug}
+                      data-placement="hp_mesh_casinos"
+                      data-page-type="homepage"
+                      data-locale={locale}
+                    >
+                      <span className="flex min-w-0 items-center gap-[9px]">
+                        <MeshLogoPlaceholder />
+                        <span className="truncate">{op.name}</span>
+                      </span>
+                      <span className="shrink-0 rounded-[5px] bg-gold px-[7px] py-[2px] font-mono text-[11px] font-bold text-white">
+                        {op.rating.toFixed(1)}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/casinos/"
+                className="mt-2 flex justify-center rounded-[9px] bg-ink px-3 py-[11px] text-[13.5px] font-bold text-bg no-underline transition-colors hover:bg-green hover:text-white"
+                data-event="review_click"
+                data-placement="hp_mesh_casinos_seeall"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                Voir tous les casinos →
+              </a>
+            </div>
+
+            {/* ── Col 2 : Meilleurs bonus ── */}
+            <div className="flex flex-col rounded-[16px] border border-line bg-surface p-[18px_16px_14px] shadow-1 transition-[box-shadow,border-color] hover:shadow-3">
+              <h3 className="mb-[13px] flex items-center gap-[9px] border-b border-line pb-3 font-sans text-[14px] font-bold text-ink">
+                <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-[8px] bg-green-50 text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-4 w-4"
+                    aria-hidden
+                  >
+                    <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7M2 7h20v5H2zM12 7V3M8 7c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2" />
+                  </svg>
+                </span>
+                Meilleurs bonus
+              </h3>
+              <ul className="m-0 flex flex-1 flex-col gap-[3px] p-0" style={{ listStyle: 'none' }}>
+                {[
+                  { label: 'Tous les bonus casino', href: '/bonus/' },
+                  { label: 'Bonus sans dépôt', href: '/bonus/sans-depot/' },
+                  { label: 'Tours gratuits', href: '/bonus/tours-gratuits/' },
+                  { label: 'Comparatifs en tête-à-tête', href: '/comparatifs/' },
+                ].map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="flex items-center justify-between gap-2 rounded-[9px] px-[10px] py-[9px] text-[14px] font-semibold text-ink-2 no-underline transition-[background,color,transform] hover:translate-x-[2px] hover:bg-green-50 hover:text-green-ink"
+                      data-event="internal_link"
+                      data-placement="hp_mesh_bonus"
+                      data-page-type="homepage"
+                      data-locale={locale}
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-ink-3 transition-[color,transform] group-hover:text-green">
+                        ›
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/bonus/"
+                className="mt-2 flex justify-center rounded-[9px] bg-ink px-3 py-[11px] text-[13.5px] font-bold text-bg no-underline transition-colors hover:bg-green hover:text-white"
+                data-event="internal_link"
+                data-placement="hp_mesh_bonus_seeall"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                Voir tous les bonus →
+              </a>
+            </div>
+
+            {/* ── Col 3 : Types de jeux ── */}
+            <div className="flex flex-col rounded-[16px] border border-line bg-surface p-[18px_16px_14px] shadow-1 transition-[box-shadow,border-color] hover:shadow-3">
+              <h3 className="mb-[13px] flex items-center gap-[9px] border-b border-line pb-3 font-sans text-[14px] font-bold text-ink">
+                <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-[8px] bg-green-50 text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-4 w-4"
+                    aria-hidden
+                  >
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                  </svg>
+                </span>
+                Types de jeux
+              </h3>
+              <ul className="m-0 flex flex-1 flex-col gap-[3px] p-0" style={{ listStyle: 'none' }}>
+                {categories.map((cat) => (
+                  <li key={cat.slug}>
+                    <a
+                      href={`/jeux/${cat.slug}/`}
+                      className="flex items-center justify-between gap-2 rounded-[9px] px-[10px] py-[9px] text-[14px] font-semibold text-ink-2 no-underline transition-[background,color,transform] hover:translate-x-[2px] hover:bg-green-50 hover:text-green-ink"
+                      data-event="category_click"
+                      data-category={cat.slug}
+                      data-placement="hp_mesh_jeux"
+                      data-page-type="homepage"
+                      data-locale={locale}
+                    >
+                      <span className="flex items-center gap-[9px]">
+                        {cat.icon}
+                        <span>{cat.label}</span>
+                      </span>
+                      <span className="font-mono text-[11px] text-ink-3">{cat.count}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/jeux/"
+                className="mt-2 flex justify-center rounded-[9px] bg-ink px-3 py-[11px] text-[13.5px] font-bold text-bg no-underline transition-colors hover:bg-green hover:text-white"
+                data-event="category_click"
+                data-placement="hp_mesh_jeux_seeall"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                Voir tous les jeux →
+              </a>
+            </div>
+
+            {/* ── Col 4 : Guides ── */}
+            <div className="flex flex-col rounded-[16px] border border-line bg-surface p-[18px_16px_14px] shadow-1 transition-[box-shadow,border-color] hover:shadow-3">
+              <h3 className="mb-[13px] flex items-center gap-[9px] border-b border-line pb-3 font-sans text-[14px] font-bold text-ink">
+                <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-[8px] bg-green-50 text-green">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-4 w-4"
+                    aria-hidden
+                  >
+                    <path d="M4 19V6a2 2 0 0 1 2-2h13M4 19a2 2 0 0 0 2 2h13M4 19h13M18 2v19" />
+                  </svg>
+                </span>
+                Guides essentiels
+              </h3>
+              <ul className="m-0 flex flex-1 flex-col gap-[3px] p-0" style={{ listStyle: 'none' }}>
+                {guides.map((guide) => (
+                  <li key={guide.slug}>
+                    <a
+                      href={`/guides/${guide.slug}/`}
+                      className="flex items-center justify-between gap-2 rounded-[9px] px-[10px] py-[9px] text-[14px] font-semibold text-ink-2 no-underline transition-[background,color,transform] hover:translate-x-[2px] hover:bg-green-50 hover:text-green-ink"
+                      data-event="guide_click"
+                      data-guide={guide.slug}
+                      data-placement="hp_mesh_guides"
+                      data-page-type="homepage"
+                      data-locale={locale}
+                    >
+                      <span className="flex items-center gap-[9px]">
+                        {guide.icon}
+                        <span>{guide.title}</span>
+                      </span>
+                      <span className="text-ink-3">›</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/guides/"
+                className="mt-2 flex justify-center rounded-[9px] bg-ink px-3 py-[11px] text-[13.5px] font-bold text-bg no-underline transition-colors hover:bg-green hover:text-white"
+                data-event="guide_click"
+                data-placement="hp_mesh_guides_seeall"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                Voir tous les guides →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          HP-SEO — contenu long-form autour de « meilleur casino en ligne »
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="py-14">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <div className="max-w-[820px]">
+            <h2 className="mb-4 font-serif text-[clamp(26px,3.4vw,36px)] font-medium leading-[1.1] tracking-[-0.018em] text-ink">
+              Qu&apos;est-ce que le meilleur casino en ligne ?
+            </h2>
+            <p className="mb-4 text-[16.5px] leading-[1.75] text-ink-2">
+              Le <strong className="text-ink">meilleur casino en ligne</strong> ne se résume pas au
+              bonus d&apos;inscription le plus élevé. Notre comparatif indépendant évalue chaque
+              opérateur sur quatre piliers essentiels : la sécurité de la plateforme, la
+              transparence des conditions de bonus, la rapidité des retraits et la qualité du
+              support francophone.
+            </p>
+            <p className="mb-6 text-[16.5px] leading-[1.75] text-ink-2">
+              Après avoir testé{' '}
+              <a
+                href="/casinos/"
+                className="border-green/30 border-b font-semibold text-green no-underline hover:border-green"
+              >
+                47 opérateurs
+              </a>{' '}
+              avec de l&apos;argent réel depuis 2019, voici les critères qui distinguent
+              systématiquement les bons casinos des mauvais.
+            </p>
+
+            {/* Anchor links */}
+            <div
+              className="mb-7 flex flex-wrap gap-2 rounded-[16px] border border-line bg-surface p-[16px_18px]"
+              role="navigation"
+              aria-label="Sommaire"
+            >
+              {[
+                { label: '🔒 Sécurité & licence', href: '#criteres' },
+                { label: '🎁 Bonus', href: '#criteres' },
+                { label: '⚡ Retraits', href: '#criteres' },
+                { label: '💬 Support FR', href: '#criteres' },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="rounded-full bg-bg-sunken px-3 py-[6px] text-[13px] font-semibold text-ink-2 no-underline transition-[background,color] hover:bg-green-50 hover:text-green"
+                  data-event="toc_click"
+                  data-page-type="homepage"
+                  data-locale={locale}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <h3 id="criteres" className="mb-3 mt-[30px] text-[20px] font-bold text-ink">
+              4 critères qui font la différence
+            </h3>
+            <p className="mb-4 text-[16.5px] leading-[1.75] text-ink-2">
+              Ces quatre dimensions sont les plus prédictives de l&apos;expérience réelle — elles
+              sont pondérées à 70 % dans notre algorithme de notation.
+            </p>
+
+            {/* Criteria cards */}
+            <ul className="m-0 mb-5 flex flex-col gap-3 p-0" style={{ listStyle: 'none' }}>
+              {seoCriteria.map((item) => (
+                <li
+                  key={item.term}
+                  className="flex items-start gap-[13px] rounded-[10px] border border-line bg-surface px-[16px] py-[14px]"
+                >
+                  <span className="mt-[2px] flex h-[19px] w-[19px] shrink-0 items-center text-green [&>svg]:h-[19px] [&>svg]:w-[19px]">
+                    {item.icon}
+                  </span>
+                  <div className="flex min-w-0 flex-col gap-[3px]">
+                    <strong className="text-[15.5px] font-bold text-ink">{item.term}</strong>
+                    <span className="text-[14.5px] leading-[1.55] text-ink-2">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <p className="text-[16.5px] leading-[1.75] text-ink-2">
+              Notre{' '}
+              <a
+                href="/guides/methodologie/"
+                className="border-green/30 border-b font-semibold text-green no-underline hover:border-green"
+                data-event="methodology_click"
+                data-page-type="homepage"
+                data-locale={locale}
+              >
+                méthodologie complète
+              </a>{' '}
+              détaille les 34 autres critères, les conditions de test et la fréquence de mise à
+              jour. Chaque note est recalculée automatiquement lorsqu&apos;un paramètre change.
             </p>
           </div>
-          <HomepageQuiz topOperator={topOp} />
         </div>
       </section>
 
-      {/* ── GUIDES ───────────────────────────────────────────────── */}
-      <section className="bg-bg-sunken py-16">
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-[30px]">
-            <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-              Guides essentiels
-            </div>
-            <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-              Comprendre avant de jouer
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {guides.map((guide) => (
-              <a
-                key={guide.slug}
-                href={`/guides/${guide.slug}/`}
-                className="flex flex-col gap-2.5 rounded-lg border border-line bg-surface p-[22px] text-ink no-underline shadow-1 transition-[transform,box-shadow] duration-[180ms] hover:-translate-y-[3px] hover:shadow-3"
-                data-event="guide_click"
-                data-guide={guide.slug}
-              >
-                <span className="grid h-[42px] w-[42px] place-items-center rounded-[11px] bg-green-50 text-green">
-                  {guide.icon}
-                </span>
-                <h3 className="m-0 font-serif text-[19px] font-semibold text-ink">{guide.title}</h3>
-                <p className="m-0 flex-1 text-[13.5px] leading-[1.5] text-ink-2">{guide.desc}</p>
-                <span className="text-[13px] font-bold text-green">Lire le guide →</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── METHODOLOGY / EEAT ───────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════
+          METHODOLOGY / EEAT — CONSERVÉ INTÉGRALEMENT
+          ══════════════════════════════════════════════════════════════ */}
       <section className="py-16">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
@@ -611,36 +1083,37 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         </div>
       </section>
 
-      {/* ── BLOG ─────────────────────────────────────────────────── */}
+      {/* ── GUIDES (guides permanents — teaser homepage) ────────────── */}
       <section className="bg-bg-sunken py-16">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
           <div className="mb-[30px] flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="mb-[14px] inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-                Le journal
+                Guides essentiels
               </div>
               <h2 className="m-0 font-serif text-[clamp(27px,3.6vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-ink">
-                Derniers articles &amp; analyses
+                Comprendre avant de jouer
               </h2>
             </div>
             <CTAButton
-              href="/blog/"
+              href="/guides/"
               variant="secondary"
-              data-event="blog_click"
-              data-placement="section_header"
+              data-event="guide_click"
+              data-placement="home_guides_seeall"
             >
-              Tous les articles
+              Tous les guides
             </CTAButton>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-            {blogPosts.map((post) => (
+            {homeGuides.map((guide) => (
               <a
-                key={post.slug}
-                href={`/blog/${post.slug}/`}
+                key={guide.slug}
+                href={`/guides/${guide.slug}/`}
                 className="overflow-hidden rounded-lg border border-line bg-surface text-ink no-underline shadow-1 transition-[transform,box-shadow] duration-[180ms] hover:-translate-y-[3px] hover:shadow-3"
-                data-event="blog_click"
-                data-article={post.slug}
+                data-event="guide_click"
+                data-target={guide.slug}
+                data-placement="home_guides_card"
               >
                 {/* Thumbnail placeholder 16:9 */}
                 <div className="relative aspect-[16/9] border-b border-line bg-surface-2">
@@ -650,12 +1123,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                 </div>
                 <div className="px-5 py-[18px] pb-[22px]">
                   <div className="mb-[9px] font-mono text-[11px] uppercase tracking-[0.04em] text-ink-3">
-                    {post.category} · {post.date}
+                    {guide.category} · {guide.readTime} min
                   </div>
                   <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.25] text-ink">
-                    {post.title}
+                    {guide.title}
                   </h3>
-                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{post.excerpt}</p>
+                  <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{guide.excerpt}</p>
                 </div>
               </a>
             ))}

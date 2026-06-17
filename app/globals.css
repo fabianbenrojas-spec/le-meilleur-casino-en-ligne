@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================================
-   DESIGN TOKENS — transposés depuis design_handoff_casino/reference/assets/site.css
+   DESIGN TOKENS — transposés depuis design_handoff_casino_revamp/assets/site.css
    ============================================================ */
 
 :root {
@@ -131,6 +131,39 @@ img {
 }
 
 /* ============================================================
+   HEADER BACKGROUND — color-mix() with solid-color fallback
+   ============================================================ */
+
+.site-header-bg {
+  background: var(--bg); /* fallback: solid color on browsers without color-mix() */
+  background: color-mix(
+    in srgb,
+    var(--bg) 88%,
+    transparent
+  ); /* modern: translucent for backdrop-filter */
+}
+
+.sticky-bar-bg {
+  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+}
+
+.sticky-subnav-bg {
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+}
+
+.text-fade-50 {
+  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, #fff 50%, transparent);
+}
+
+.text-fade-60 {
+  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, #fff 60%, transparent);
+}
+
+/* ============================================================
    THEME TOGGLE — CSS-driven icon swap (no React state needed)
    ============================================================ */
 
@@ -160,5 +193,47 @@ img {
 @media (max-width: 760px) {
   .wrap {
     padding: 0 18px;
+  }
+}
+
+/* ============================================================
+   MATCHMAKER — animation d'entrée (transform-only, reduced-motion safe)
+   ============================================================ */
+
+@keyframes mmFade {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mm-step-enter {
+    animation: mmFade 0.28s ease;
+  }
+}
+
+/* ============================================================
+   JEUX — flash jeu aléatoire (transform-only, reduced-motion safe)
+   ============================================================ */
+
+@keyframes jxFlash {
+  0%,
+  100% {
+    box-shadow: var(--sh-1);
+  }
+  30% {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--green) 55%, transparent),
+      var(--sh-3);
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .jx-flash {
+    animation: jxFlash 1.1s ease;
   }
 }

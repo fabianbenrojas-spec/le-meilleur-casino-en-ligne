@@ -84,9 +84,9 @@ export default async function VersusPage({
       {/* ── VS hero panels ───────────────────────────────────────────────── */}
       <section className="pb-0 pt-4">
         <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="grid grid-cols-[1fr_64px_1fr] items-stretch gap-0 overflow-hidden rounded-xl border border-line bg-surface shadow-2 sm:grid-cols-1">
+          <div className="grid grid-cols-1 items-stretch gap-0 overflow-hidden rounded-xl border border-line bg-surface shadow-2 sm:grid-cols-[1fr_64px_1fr]">
             {/* Winner panel */}
-            <div className="relative flex flex-col items-center gap-4 p-8 text-center sm:pb-4">
+            <div className="relative flex flex-col items-center gap-4 p-8 text-center max-sm:pb-4">
               <div className="absolute left-3 top-3 inline-flex items-center gap-[6px] rounded-full border border-[color-mix(in_srgb,var(--green)_30%,var(--line))] bg-green-50 px-[10px] py-[4px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green">
                 <svg
                   viewBox="0 0 24 24"
@@ -119,14 +119,14 @@ export default async function VersusPage({
             </div>
 
             {/* VS divider */}
-            <div className="flex items-center justify-center border-x border-line bg-bg-sunken sm:border-x-0 sm:border-y">
+            <div className="flex items-center justify-center border-y border-line bg-bg-sunken sm:border-x sm:border-y-0">
               <div className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface font-mono text-[13px] font-bold text-ink-2">
                 VS
               </div>
             </div>
 
             {/* Challenger panel */}
-            <div className="relative flex flex-col items-center gap-4 p-8 text-center sm:pt-4">
+            <div className="relative flex flex-col items-center gap-4 p-8 text-center max-sm:pt-4">
               <div className="absolute left-3 top-3 inline-flex items-center gap-[6px] rounded-full border border-line bg-bg-sunken px-[10px] py-[4px] font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-ink-3">
                 {isFr ? 'Le challenger' : 'The challenger'}
               </div>
@@ -281,7 +281,7 @@ export default async function VersusPage({
                   </div>
 
                   {/* Split content */}
-                  <div className="grid grid-cols-[1fr_1px_1fr] sm:grid-cols-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-[1fr_1px_1fr]">
                     {/* Op A */}
                     <div
                       className={`p-6 ${aWins ? 'bg-[color-mix(in_srgb,var(--green)_4%,var(--surface))]' : ''}`}
@@ -299,7 +299,7 @@ export default async function VersusPage({
                     </div>
 
                     {/* Divider */}
-                    <div className="bg-line sm:h-px sm:w-full" aria-hidden />
+                    <div className="bg-line max-sm:h-px" aria-hidden />
 
                     {/* Op B */}
                     <div
@@ -335,7 +335,7 @@ export default async function VersusPage({
             {matchup.verdictIntro}
           </p>
 
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {/* Winner card */}
             <div className="flex flex-col gap-5 rounded-xl border border-[color-mix(in_srgb,var(--green)_30%,var(--line))] bg-surface p-7 shadow-2">
               <div className="flex items-center gap-3">

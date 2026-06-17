@@ -1,0 +1,812 @@
+/* ============================================================
+   Article / guide v2 — le-meilleur-casino-en-ligne.fr
+   Loaded AFTER site.css + article.css. Adds: TL;DR card, LLM
+   summarize buttons, clickable summary, trap cards, wager
+   calculator, internal-link band, conversion fork, sticky bar.
+   ============================================================ */
+
+/* reading-meta chips under byline */
+.art2-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+.art2-meta .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.art2-meta .chip svg {
+  width: 13px;
+  height: 13px;
+  color: var(--green);
+}
+
+/* ============================================================
+   TL;DR — "EN BREF" + LLM summarize buttons
+   ============================================================ */
+.tldr {
+  max-width: 860px;
+  margin: 26px auto 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-1);
+  padding: 22px 26px 20px;
+}
+.tldr-k {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-ink);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.tldr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tldr-list li {
+  display: flex;
+  gap: 13px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  align-items: flex-start;
+  text-wrap: pretty;
+}
+.tldr-list li > span.txt {
+  flex: 1;
+  min-width: 0;
+}
+.tldr-list li .ar {
+  color: var(--green);
+  font-weight: 800;
+  flex: none;
+  margin-top: 1px;
+}
+.tldr-list li b {
+  font-weight: 700;
+}
+.tldr-div {
+  height: 1px;
+  background: var(--line);
+  margin: 18px 0 16px;
+}
+.llm-row {
+  display: flex;
+  align-items: center;
+  gap: 14px 16px;
+  flex-wrap: wrap;
+}
+.llm-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.llm-label svg {
+  width: 15px;
+  height: 15px;
+  color: var(--green);
+}
+.llm-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.llm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line-2);
+  border-radius: 999px;
+  padding: 7px 14px 7px 9px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.12s;
+}
+.llm-btn:hover {
+  border-color: var(--ink-3);
+  box-shadow: var(--sh-1);
+  transform: translateY(-1px);
+}
+.llm-btn .ic {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--c, var(--green)) 14%, transparent);
+  flex: none;
+}
+.llm-btn .ic svg {
+  width: 13px;
+  height: 13px;
+  color: var(--c, var(--green));
+}
+
+/* ============================================================
+   CLICKABLE SUMMARY — "parcourir l'article"
+   ============================================================ */
+.art2-summary {
+  max-width: 860px;
+  margin: 18px auto 0;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px 22px;
+}
+.art2-summary .as-k {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+  margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.art2-summary .as-k svg {
+  width: 14px;
+  height: 14px;
+  color: var(--green);
+}
+.art2-summary ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px 18px;
+  counter-reset: as;
+}
+.art2-summary ol li {
+  counter-increment: as;
+  min-width: 0;
+}
+.art2-summary a {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding: 9px 11px;
+  border-radius: 9px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  text-wrap: pretty;
+}
+.art2-summary a > span.st {
+  flex: 1;
+  min-width: 0;
+  padding-top: 3px;
+}
+.art2-summary a::before {
+  content: counter(as, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-50);
+  border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line));
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.art2-summary a:hover {
+  background: var(--surface);
+  color: var(--green);
+}
+.art2-summary a.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--sh-1);
+}
+
+/* ============================================================
+   SIDEBAR conversion card
+   ============================================================ */
+.art-aside .aside-cta {
+  background: var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--green) 30%, var(--line));
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--sh-2);
+  text-align: center;
+  margin-top: 16px;
+}
+.art-aside .aside-cta .logo-ph {
+  width: 90px;
+  height: 32px;
+  margin: 0 auto 10px;
+}
+.art-aside .aside-cta .a-amt {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.08;
+}
+.art-aside .aside-cta .a-amt span {
+  color: var(--green);
+}
+.art-aside .aside-cta .a-cond {
+  font-size: 10.5px;
+  color: var(--ink-3);
+  margin: 3px 0 11px;
+}
+.art-aside .aside-cta .btn {
+  width: 100%;
+}
+
+/* ============================================================
+   TRAP CARDS (engaging numbered sections)
+   ============================================================ */
+.trap {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-1);
+  padding: 22px 24px;
+  margin: 18px 0;
+  position: relative;
+  overflow: hidden;
+}
+.trap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gold);
+}
+.trap .trap-h {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.trap .trap-n {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--gold);
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--gold-50);
+  display: grid;
+  place-items: center;
+}
+.trap .trap-t {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.trap .trap-sev {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 5px;
+  margin-left: auto;
+  flex: none;
+}
+.trap .trap-sev.high {
+  color: var(--red-ink);
+  background: var(--red-50);
+  border: 1px solid color-mix(in srgb, var(--red) 22%, var(--line));
+}
+.trap .trap-sev.mid {
+  color: var(--gold-ink);
+  background: var(--gold-50);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--line));
+}
+.trap p {
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--ink-2);
+  margin: 0 0 12px;
+}
+.trap p:last-child {
+  margin-bottom: 0;
+}
+.trap p strong {
+  color: var(--ink);
+}
+.trap .trap-fix {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  background: var(--green-50);
+  border: 1px solid color-mix(in srgb, var(--green) 22%, var(--line));
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 14.5px;
+  color: var(--green-ink);
+  line-height: 1.5;
+  margin-top: 14px;
+}
+.trap .trap-fix svg {
+  width: 17px;
+  height: 17px;
+  color: var(--green);
+  flex: none;
+  margin-top: 1px;
+}
+.trap .trap-fix b {
+  color: var(--ink);
+}
+.trap a.inl {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   WAGER CALCULATOR (interactive)
+   ============================================================ */
+.wcalc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-1);
+  overflow: hidden;
+  margin: 28px 0;
+}
+.wcalc .wc-h {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.wcalc .wc-h h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.wcalc .wc-h p {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  margin: 0;
+  line-height: 1.5;
+}
+.wcalc .wc-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.wcalc .wc-ctrl {
+  padding: 20px 22px;
+  border-right: 1px solid var(--line);
+}
+.wcalc .wc-lab {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 9px;
+}
+.wcalc .wc-lab .v {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--green);
+}
+.wcalc input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-sunken);
+  outline: none;
+  margin-bottom: 18px;
+}
+.wcalc input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--surface);
+  box-shadow: var(--sh-1);
+  cursor: pointer;
+}
+.wcalc input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--surface);
+  box-shadow: var(--sh-1);
+  cursor: pointer;
+}
+.wcalc .wc-seg {
+  display: flex;
+  gap: 6px;
+}
+.wcalc .wc-seg button {
+  flex: 1;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--bg);
+  border: 1.5px solid var(--line-2);
+  border-radius: 9px;
+  padding: 9px 0;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.wcalc .wc-seg button.on {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.wcalc .wc-out {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+}
+.wcalc .wc-metric .ml {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.wcalc .wc-metric .mv {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.wcalc .wc-metric .mv span {
+  color: var(--green);
+}
+.wcalc .wc-verdict {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+}
+.wcalc .wc-verdict.ok {
+  color: var(--green-ink);
+  background: var(--green-50);
+}
+.wcalc .wc-verdict.warn {
+  color: var(--red-ink);
+  background: var(--red-50);
+}
+
+/* ============================================================
+   INTERNAL-LINK BAND ("pour aller plus loin")
+   ============================================================ */
+.art2-band {
+  max-width: 720px;
+  margin: 34px 0;
+}
+.art2-band .bh {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.015em;
+  margin: 0 0 14px;
+}
+.art2-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.art2-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--sh-1);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+.art2-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-3);
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line));
+}
+.art2-link .li {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--green-50);
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.art2-link .li svg {
+  width: 19px;
+  height: 19px;
+}
+.art2-link .ln {
+  font-weight: 700;
+  font-size: 14px;
+}
+.art2-link .ld {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 1px;
+}
+.art2-link .ar {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+.art2-link:hover .ar {
+  color: var(--green);
+}
+
+/* ============================================================
+   CONVERSION FORK
+   ============================================================ */
+.art2-fork {
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 30px 0;
+}
+.art2-fork .fk {
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.art2-fork .fk.go {
+  background: var(--ink);
+  color: var(--bg);
+}
+.art2-fork .fk.alt {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+}
+.art2-fork .fk .fk-k {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+.art2-fork .fk.alt .fk-k {
+  color: var(--ink-3);
+  opacity: 1;
+}
+.art2-fork .fk h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+.art2-fork .fk p {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.art2-fork .fk.go p {
+  opacity: 0.82;
+}
+.art2-fork .fk.alt p {
+  color: var(--ink-2);
+}
+.art2-fork .fk .fk-amt {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.art2-fork .fk.go .fk-amt span {
+  color: var(--green);
+}
+[data-theme='dark'] .art2-fork .fk.go .fk-amt span {
+  color: var(--green-ink);
+}
+.art2-fork .fk .btn {
+  margin-top: auto;
+}
+
+/* ============================================================
+   STICKY BONUS BAR
+   ============================================================ */
+.art2-stickybar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 75;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  backdrop-filter: saturate(150%) blur(14px);
+  border-top: 1px solid var(--line-2);
+  box-shadow: var(--sh-3);
+  transform: translateY(115%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.art2-stickybar.show {
+  transform: translateY(0);
+}
+.art2-stickybar .in {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 10px 32px calc(10px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.art2-stickybar .logo-ph {
+  width: 56px;
+  height: 28px;
+  flex: none;
+}
+.art2-stickybar .sb-id {
+  min-width: 0;
+}
+.art2-stickybar .sb-id .nm {
+  font-weight: 700;
+  font-size: 13.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.art2-stickybar .sb-id .nm .score-pill {
+  font-size: 12px;
+  padding: 2px 7px;
+}
+.art2-stickybar .sb-id .bn {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.art2-stickybar .sb-id .bn b {
+  color: var(--green);
+  font-weight: 700;
+}
+.art2-stickybar .sb-spacer {
+  flex: 1;
+}
+.art2-stickybar .sb-msg {
+  font-size: 13px;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.art2-stickybar .closebar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--ink-3);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.art2-stickybar .closebar:hover {
+  color: var(--ink);
+}
+
+/* toast for copy-link */
+.art2-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 999px;
+  box-shadow: var(--sh-3);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  z-index: 90;
+}
+.art2-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 920px) {
+  .art2-summary ol {
+    grid-template-columns: 1fr;
+  }
+  .art2-links {
+    grid-template-columns: 1fr;
+  }
+  .art2-fork {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .wcalc .wc-body {
+    grid-template-columns: 1fr;
+  }
+  .wcalc .wc-ctrl {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .art2-stickybar .in {
+    padding: 9px 16px calc(9px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+  .art2-stickybar .logo-ph,
+  .art2-stickybar .sb-msg {
+    display: none;
+  }
+  .art2-stickybar .sb-id .bn {
+    display: none;
+  }
+  body {
+    padding-bottom: 72px;
+  }
+}

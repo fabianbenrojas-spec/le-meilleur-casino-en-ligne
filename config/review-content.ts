@@ -27,6 +27,11 @@ export interface ReviewData {
   }
   recapRows: { label: string; value: string }[]
   faq: { question: string; answer: string }[]
+  pourQui?: {
+    idealSi: string[]
+    bonChoixSi: string[]
+    aEviterSi: string[]
+  }
 }
 
 const reviews: ReviewData[] = [
@@ -137,6 +142,21 @@ const reviews: ReviewData[] = [
           "Pas d'application native disponible sur App Store ou Google Play. En revanche, le site mobile est une PWA bien optimisée que vous pouvez installer en raccourci sur votre écran d'accueil.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Vous retirez vos gains régulièrement : 3 tests de retrait crédités en moins de 24 h, carte bancaire incluse.',
+        'Vous contactez le support en français : chat 7j/7, délai de réponse moyen mesuré à 2 minutes.',
+        'Vous activez le bonus de bienvenue : 200 € + 100 tours dès 20 € déposés, wager 35×, sans code promo.',
+      ],
+      bonChoixSi: [
+        'Vous testez les jeux de studios pointus comme Nolimit City ou Hacksaw Gaming : catalogue de 2 100+ titres.',
+        'Vous jouez au live en soirée : 90 tables Evolution et Pragmatic Live, en français pour blackjack et roulette.',
+      ],
+      aEviterSi: [
+        "Vous retirez régulièrement plus de 5 000 € par semaine : c'est précisément le plafond hebdomadaire imposé.",
+        "Vous voulez la protection juridique d'une licence européenne (MGA Malte) en cas de litige : Crésus est sous Curaçao 8048.",
+      ],
+    },
   },
 
   // ── 2. Lucky8 ───────────────────────────────────────────────────────────────
@@ -239,6 +259,21 @@ const reviews: ReviewData[] = [
           'Oui, les tournois Lucky8 sont entièrement accessibles depuis le navigateur mobile. Inscriptions, classements et récompenses sont disponibles dans la section « Tournois » du menu mobile.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Vous misez régulièrement sur la durée : 10% de vos pertes nettes hebdomadaires sont versés chaque lundi en argent réel, sans wager.',
+        'Vous participez aux tournois de machines à sous hebdomadaires : cagnottes en espèces versées en moins de 24 h.',
+        'Vous activez le bonus de bienvenue : 100€ + 100 tours dès 20€ déposés, wager 35×, sans code promo.',
+      ],
+      bonChoixSi: [
+        'Vous jouez et participez aux tournois depuis votre mobile : ergonomie identique au bureau, LCP mesuré à 1,9 s en 4G.',
+        'Vous jouez principalement en journée et en soirée : chat en français disponible de 8h à minuit, délai de réponse moyen de 4 minutes.',
+      ],
+      aEviterSi: [
+        "Vous retirez régulièrement plus de 2 000 € en une seule fois : c'est précisément le plafond journalier imposé chez Lucky8.",
+        'Vous voulez pouvoir retirer dès vos premiers gains : la vérification KYC initiale prend de 24 à 72 h.',
+      ],
+    },
   },
 
   // ── 3. Wild Sultan ──────────────────────────────────────────────────────────
@@ -355,6 +390,21 @@ const reviews: ReviewData[] = [
           'Oui. À titre de comparaison : un wager de 30× sur 500 € signifie 15 000 € de mises à jouer. Un wager de 40× sur 100 € signifie 4 000 €. Wild Sultan est plus intéressant pour les joueurs qui déposent des montants significatifs.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Vous retirez en Bitcoin ou Ethereum : 4 retraits testés, le plus long traité en 47 minutes.',
+        "Vous jouez au blackjack live haute mise : tables VIP Evolution et Ezugi acceptant jusqu'à 10 000€ par main, testées sans latence.",
+        'Vous jouez et déposez en crypto sur mobile : LCP mesuré à 1,7s en 4G, dépôt BTC/ETH directement intégré.',
+      ],
+      bonChoixSi: [
+        "Vous activez le bonus de bienvenue : 500€ + 20 tours, wager 30×, l'un des plus bas du comparatif.",
+        'Vous jouez les machines à sous haute volatilité : Nolimit City, Hacksaw Gaming et Big Time Gaming au catalogue (1 500+ jeux).',
+      ],
+      aEviterSi: [
+        'Vous payez par e-wallet (Skrill, Neteller) ou autre carte que VISA : Wild Sultan propose surtout les paiements crypto.',
+        "Vous voulez un site et un support en français : l'interface est surtout anglophone, FR limité de 10h à 22h.",
+      ],
+    },
   },
 
   // ── 4. Madnix ───────────────────────────────────────────────────────────────
@@ -468,6 +518,21 @@ const reviews: ReviewData[] = [
           'Il est dans la fourchette haute que nous acceptons encore de recommander. Si vous êtes sensible aux conditions de bonus, Wild Sultan (30×) ou Tortuga (30×) sont plus avantageux. Madnix compense par son catalogue exceptionnel.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Explore de nouveaux jeux régulièrement : 3 047 titres avec filtres par volatilité et fournisseur.',
+        "Préfère les missions quotidiennes plutôt qu'une simple accumulation de points de fidélité.",
+      ],
+      bonChoixSi: [
+        'Joue sur Pragmatic Play, Yggdrasil et Nolimit City : tous trois présents dans le catalogue.',
+        'Accepte un wager de 40× en échange du plus grand catalogue du comparatif.',
+      ],
+      aEviterSi: [
+        'Cherche les conditions de bonus les plus basses : Wild Sultan ou Tortuga proposent 30×.',
+        "Joue principalement la nuit et a besoin d'aide : le support FR bascule en anglais après 18h.",
+        'Dépose via Paysafecard : non acceptée chez Madnix.',
+      ],
+    },
   },
 
   // ── 5. Magical Spin ─────────────────────────────────────────────────────────
@@ -569,6 +634,20 @@ const reviews: ReviewData[] = [
           "Oui. Nous avons testé le gestionnaire VIP (palier Or) : il répond en français, connaît l'historique du compte et peut négocier des bonus personnalisés. C'est un avantage différenciant par rapport à la plupart des concurrents.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Préfère un accompagnement VIP en français : gestionnaire dédié accessible dès le palier Or.',
+        'Dépose au moins 400 € au total pour maximiser les 1 000 € de bonus de bienvenue.',
+      ],
+      bonChoixSi: [
+        'Apprécie un support francophone 24h/24 qui maîtrise précisément les conditions du wager.',
+      ],
+      aEviterSi: [
+        'Compte récupérer son bonus en un seul dépôt : les 1 000 € sont répartis sur quatre dépôts distincts.',
+        "Utilise les cryptomonnaies : Magical Spin n'accepte ni Bitcoin ni Ethereum.",
+        "Priorise une interface moderne : le site n'a pas été redesigné depuis sa création en 2017.",
+      ],
+    },
   },
 
   // ── 6. Casinozer ────────────────────────────────────────────────────────────
@@ -667,6 +746,20 @@ const reviews: ReviewData[] = [
           "C'est une condition favorable : si vous déposez 100 € et obtenez 100 € de bonus, le wager de 35× s'applique uniquement sur les 100 € de bonus — soit 3 500 € à miser. Avec un wager sur dépôt+bonus, ce serait 7 000 €.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Veut maximiser les tours gratuits : 270 tours sur 3 dépôts, record absolu du comparatif.',
+        'Profite du cashback 10 % versé chaque lundi en argent réel, sans conditions de mise.',
+        "Préfère un wager calculé sur le bonus uniquement : condition plus favorable qu'un wager dépôt+bonus.",
+      ],
+      bonChoixSi: [
+        'Dépose en Bitcoin ou Ethereum : retraits crypto traités en 2 à 6 heures selon congestion réseau.',
+      ],
+      aEviterSi: [
+        'Anticipe un KYC rapide : vérification stricte avec selfie inclus, délai de 24 à 48h pour le premier retrait.',
+        'A besoin de contacter le support par e-mail ou téléphone : chat live exclusivement disponible.',
+      ],
+    },
   },
 
   // ── 7. Tortuga Casino ───────────────────────────────────────────────────────
@@ -763,6 +856,20 @@ const reviews: ReviewData[] = [
           "Oui, et d'autant plus qu'il s'applique uniquement sur le bonus. Pour un bonus de 200 € (dépôt de 200 €), vous devrez miser 6 000 € — réaliste en 30 jours pour un joueur actif.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Priorise les conditions de wager : 30× sur bonus uniquement, ex aequo avec Wild Sultan.',
+        'Joue principalement aux machines à sous et tolère un catalogue curé de 1 200 jeux.',
+      ],
+      bonChoixSi: [
+        "N'utilise que VISA ou Mastercard et n'a pas besoin de crypto ni d'e-wallet pour retirer.",
+      ],
+      aEviterSi: [
+        'Recherche un live casino riche : seulement 20 tables disponibles, aucun game show proposé.',
+        "A besoin d'une assistance rapide : le support est exclusivement par e-mail, délai 4 à 12h.",
+        'Retire souvent et vite : les retraits CB prennent 72 à 96h, les plus lents du comparatif.',
+      ],
+    },
   },
 
   // ── 8. Banzai Slots ─────────────────────────────────────────────────────────
@@ -861,6 +968,21 @@ const reviews: ReviewData[] = [
           'Dans la section « Exclusivités » de la lobby des jeux. Ces titres proviennent de studios indépendants partenaires et ne sont disponibles que sur Banzai Slots en Europe.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Joue quotidiennement aux slots et veut participer à des tournois avec cagnottes en espèces.',
+        'Cherche des titres exclusifs développés par studios indépendants, introuvables ailleurs en Europe.',
+        'Débute avec un petit budget : dépôt minimum de 15 €, le plus bas du comparatif.',
+      ],
+      bonChoixSi: [
+        "Utilise Skrill et cherche des tournois accessibles sans conditions d'entrée supplémentaires.",
+      ],
+      aEviterSi: [
+        'Joue principalement en live casino : seulement 15 tables disponibles, aucun game show.',
+        'Préfère payer en Bitcoin ou Ethereum : aucune cryptomonnaie acceptée chez Banzai Slots.',
+        'Cherche un bonus facile à convertir : le wager de 40× est dans la fourchette haute du marché.',
+      ],
+    },
   },
 
   // ── 9. Stake Casino ─────────────────────────────────────────────────────────
@@ -980,6 +1102,21 @@ const reviews: ReviewData[] = [
           'Oui. Les jeux Stake (Crash, Dice, Mines, Plinko, Limbo) utilisent un algorithme provably fair : le résultat est déterminé avant le jeu et vérifiable par le joueur après coup. Le RTP de chaque jeu est affiché (97 % à 99 %).',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Joue 100 % en crypto et veut des retraits traités en moins de 30 minutes, BTC à DOGE inclus.',
+        'Cherche des jeux maison à RTP vérifiable on-chain : Crash, Dice, Mines entre 97 % et 99 %.',
+        "Préfère une application native bien notée : app iOS et Android disponibles, 4,3/5 sur l'App Store.",
+      ],
+      bonChoixSi: [
+        'Suit les paris sportifs en parallèle du casino : Stake couvre les deux dans la même app.',
+      ],
+      aEviterSi: [
+        'Attend un bonus de bienvenue standard : Stake le réserve aux membres VIP sur invitation uniquement.',
+        'Paie exclusivement par carte bancaire : les retraits CB prennent 3 à 5 jours via prestataires tiers.',
+        "Débute sur les casinos en ligne : l'interface technique et le focus crypto peuvent désorienter.",
+      ],
+    },
   },
 
   // ── 10. BitcoinPenguin ──────────────────────────────────────────────────────
@@ -1087,6 +1224,21 @@ const reviews: ReviewData[] = [
           "Ce n'est pas possible directement. BitcoinPenguin est un casino exclusivement crypto. Vous devrez d'abord acquérir des BTC, ETH ou LTC via une plateforme d'échange (Binance, Coinbase) puis les transférer sur votre adresse de dépôt BitcoinPenguin.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        "Joue exclusivement en crypto et privilégie l'anonymat : retraits sous seuil sans KYC requis.",
+        'Exige des jeux provably fair avec algorithmes vérifiables publiquement, RTP de 97 à 98 %.',
+        'Fait confiance à la longévité : fondé en 2014, le plus ancien casino crypto du comparatif.',
+      ],
+      bonChoixSi: [
+        'Détient plusieurs altcoins : BTC, ETH, LTC et USDT sont tous acceptés en dépôt et retrait.',
+      ],
+      aEviterSi: [
+        'Cherche un bonus rentable : le wager de 50× est le plus élevé de tout le comparatif.',
+        'Préfère le support en français : aucun agent francophone disponible, anglais uniquement 24h/24.',
+        "Dépose en euros par carte bancaire : BitcoinPenguin n'accepte aucun paiement fiduciaire.",
+      ],
+    },
   },
 
   // ── 11. Dublinbet ────────────────────────────────────────────────────────────
@@ -1211,6 +1363,21 @@ const reviews: ReviewData[] = [
           'Non. Comme la plupart des opérateurs, Dublinbet exclut PaySafeCard du déclenchement du bonus (dépôt uniquement). Utilisez VISA, Mastercard, Skrill ou Neteller pour activer le bonus de bienvenue.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Exige la protection maximale : seul casino du comparatif avec fonds joueurs ségrégués sous licence MGA.',
+        'Joue principalement en live : 120+ tables avec croupiers francophones natifs de 16h à 2h.',
+        'Préfère le support téléphonique : Dublinbet est le seul opérateur du top 15 à en proposer un.',
+      ],
+      bonChoixSi: [
+        'Mise des montants importants : salons privés haute mise accessibles dès 1 000 € au blackjack.',
+        "Valorise l'ancienneté : actif depuis 2010, sous licence MGA délivrée dès 2007.",
+      ],
+      aEviterSi: [
+        "Utilise Bitcoin ou Ethereum : Dublinbet n'accepte aucune cryptomonnaie en 2026.",
+        'Cherche un catalogue de 3 000+ slots : 2 000 jeux disponibles, axé live et tables.',
+      ],
+    },
   },
 
   // ── 12. Vegadream ────────────────────────────────────────────────────────────
@@ -1308,6 +1475,20 @@ const reviews: ReviewData[] = [
           "Pour un dépôt de 100 €, vous recevez 200 € de bonus — soit un total de 300 € pour jouer. Le wager de 35× s'applique uniquement sur les 200 € de bonus (= 7 000 € à miser), pas sur le dépôt.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Cherche une assistance francophone garantie à toute heure : support testé en français à 2h du matin.',
+        'Préfère naviguer entièrement en français : interface, FAQ, blog et promotions en FR natif.',
+      ],
+      bonChoixSi: [
+        'Apprécie les promotions hebdomadaires conçues exclusivement pour le marché français.',
+        "Joue depuis mobile : LCP de 1,8 s, l'un des meilleurs temps de chargement du comparatif.",
+      ],
+      aEviterSi: [
+        'Prévoit des retraits réguliers supérieurs à 2 500 € par semaine : plafond le plus restrictif du classement.',
+        'Vise un catalogue de plus de 2 000 jeux : 1 800 titres disponibles, en dessous des leaders.',
+      ],
+    },
   },
 
   // ── 13. Horus Casino ─────────────────────────────────────────────────────────
@@ -1405,6 +1586,20 @@ const reviews: ReviewData[] = [
           "Oui, légèrement. Les machines à jackpot progressif ont généralement un RTP de 94–95 % car une portion de chaque mise contribue au pool. C'est un mécanisme standard — vous payez un 'ticket' pour la chance de gagner des millions.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Cible les jackpots progressifs : Mega Moolah, Mega Fortune et Major Millions disponibles en un seul casino.',
+        'Dépose en Bitcoin ou Ethereum et préfère éviter les cartes bancaires classiques.',
+      ],
+      bonChoixSi: [
+        "Apprécie un cashback mensuel de 8 % sans conditions de mise, dès le deuxième mois d'inscription.",
+      ],
+      aEviterSi: [
+        'A besoin du support en français la nuit : indisponible entre 23h et 9h, anglais uniquement.',
+        'Cherche le wager le plus bas possible : 40× est dans la fourchette haute du marché.',
+        'Dépose par carte bancaire uniquement : Horus Casino accepte seulement VISA, BTC et ETH.',
+      ],
+    },
   },
 
   // ── 14. N1 Casino ────────────────────────────────────────────────────────────
@@ -1501,6 +1696,21 @@ const reviews: ReviewData[] = [
           'Oui. Les gains des tours gratuits sont soumis au wager de 40× du bonus principal. Les tours sont distribués à raison de 50 par jour pendant 4 jours — ce calendrier est conçu pour étaler le jeu et réduire les risques de burn-out du bonus.',
       },
     ],
+    pourQui: {
+      idealSi: [
+        'Choisit en priorité la sécurité réglementaire : licence MGA active sans incident documenté depuis 2017.',
+        'Veut maximiser les tours gratuits : 200 tours inclus, distribués à 50 par jour pendant 4 jours.',
+        'Joue principalement aux jeux de table : blackjack, roulette, baccarat et vidéo poker bien représentés.',
+      ],
+      bonChoixSi: [
+        'Hésite avec Dublinbet (tous deux MGA) et préfère plus de tours gratuits à plus de tables live.',
+      ],
+      aEviterSi: [
+        "Valorise une interface moderne : N1 Casino n'a pas fait de refonte graphique depuis sa création en 2017.",
+        'Joue en crypto : ni Bitcoin ni Ethereum ne sont acceptés ici.',
+        'Compare les plafonds de retrait : 5 000 €/mois, modeste pour un casino sous licence MGA.',
+      ],
+    },
   },
 
   // ── 15. Casino Extra ─────────────────────────────────────────────────────────
@@ -1620,6 +1830,21 @@ const reviews: ReviewData[] = [
           "Non. Casino Extra ne propose pas de paiement en crypto — ni en dépôt ni en retrait. C'est cohérent avec son positionnement traditionnel. Si vous souhaitez des retraits crypto rapides, Wild Sultan, Cresus ou BitcoinPenguin sont plus adaptés.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        "Valorise la fidélité à long terme : points Extra Club qui n'expirent jamais, cashback jusqu'à 20 %.",
+        "Fait confiance à l'ancienneté : Casino Extra est actif depuis 2004, 21 ans sans incident documenté.",
+        'Cherche un wager bas sur catalogue Microgaming : 30× ex aequo Wild Sultan, avec exclusivités disponibles.',
+      ],
+      bonChoixSi: [
+        'Préfère le support téléphonique avec numéro français gratuit disponible de 9h à 19h.',
+      ],
+      aEviterSi: [
+        "Exige une interface moderne : Casino Extra n'a pas fait de refonte graphique depuis les années 2010.",
+        'Veut retirer rapidement : vérification manuelle systématique, délai de 72 à 96h par carte bancaire.',
+        'Utilise les cryptomonnaies : aucune crypto acceptée, ni en dépôt ni en retrait.',
+      ],
+    },
   },
 ]
 
