@@ -71,7 +71,17 @@ empêche les fiches d'être interchangeables.
 - ❌ Interdits ailleurs : missions quotidiennes (mécanique unique),
   3 047 jeux chiffré, wager 40× comme défaut
 
-### Magical Spin (rang 5) — à définir lors du prochain brief
+### Magical Spin (rang 5) — territoire éditorial
+
+- ✅ Réservés : package 1 000€ cumulé sur 4 dépôts (le plus généreux en
+  valeur absolue), gestionnaire VIP francophone réel (avec WhatsApp au
+  Platine), spécialisation slots françaises + Microgaming, support FR
+  maîtrisant CGU (compétence pas vitesse), ancienneté 2017 / 9 ans /
+  KYC rigoureuse, interface 2017 + LCP 2,4s en aEviterSi, absence de
+  crypto en aEviterSi
+- ❌ Interdits ailleurs : 1 000€ cumulé sur 4 dépôts, gestionnaire VIP
+  WhatsApp, slots françaises + Microgaming comme spécialisation, LCP 2,4s
+  comme défaut, absence totale crypto
 
 ## Erreurs fréquentes à éviter (mémoire des corrections)
 

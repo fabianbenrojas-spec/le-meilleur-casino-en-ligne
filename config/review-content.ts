@@ -636,16 +636,17 @@ const reviews: ReviewData[] = [
     ],
     pourQui: {
       idealSi: [
-        'Préfère un accompagnement VIP en français : gestionnaire dédié accessible dès le palier Or.',
-        'Dépose au moins 400 € au total pour maximiser les 1 000 € de bonus de bienvenue.',
+        'Vous activez le bonus de bienvenue sur 4 dépôts : 1 000€ cumulés + 100 tours, le plus généreux de notre comparatif en valeur absolue.',
+        'Vous misez régulièrement et voulez un contact VIP francophone réel : gestionnaire personnel dès le palier Or (programme 5 paliers), WhatsApp au Platine.',
+        'Vous jouez des titres Microgaming ou machines à sous françaises : sélection plus fournie que chez les concurrents, RTP mesuré à 95,6 %.',
       ],
       bonChoixSi: [
-        'Apprécie un support francophone 24h/24 qui maîtrise précisément les conditions du wager.',
+        'Vous voulez un support francophone qui maîtrise les conditions de bonus : chat 24h/24, réponses précises aux questions techniques testées.',
+        'Vous choisissez un opérateur établi de longue date : Magical Spin est actif depuis 2017, 9 ans de politique KYC rigoureuse.',
       ],
       aEviterSi: [
-        'Compte récupérer son bonus en un seul dépôt : les 1 000 € sont répartis sur quatre dépôts distincts.',
-        "Utilise les cryptomonnaies : Magical Spin n'accepte ni Bitcoin ni Ethereum.",
-        "Priorise une interface moderne : le site n'a pas été redesigné depuis sa création en 2017.",
+        "Vous jouez sur mobile et voulez une interface moderne : le design date de 2017 et n'a pas été refait (LCP 2,4 s).",
+        "Vous déposez ou retirez en cryptomonnaie : Magical Spin n'accepte aucune crypto, ni en dépôt ni en retrait.",
       ],
     },
   },
