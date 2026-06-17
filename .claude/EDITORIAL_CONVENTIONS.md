@@ -61,7 +61,15 @@ empêche les fiches d'être interchangeables.
 - ❌ Interdits ailleurs : crypto rapide (BTC/ETH < 1h), tables live VIP
   10 000€, BTG (Big Time Gaming), wager 30× comme plus bas
 
-### Madnix (rang 4) — à définir lors du prochain brief
+### Madnix (rang 4) — territoire éditorial
+
+- ✅ Réservés : catalogue n°1 absolu chiffré (3 047 jeux juin 2026),
+  missions quotidiennes (mécanique unique), 5 niveaux VIP progression,
+  mobile gamifié (missions en 1 clic), live mises variables 0,10€-5 000€,
+  wager 40× en aEviterSi (le plus élevé du top 5 traité), plafond hebdo
+  3 000€ en aEviterSi
+- ❌ Interdits ailleurs : missions quotidiennes (mécanique unique),
+  3 047 jeux chiffré, wager 40× comme défaut
 
 ### Magical Spin (rang 5) — à définir lors du prochain brief
 

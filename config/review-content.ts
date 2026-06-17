@@ -520,17 +520,17 @@ const reviews: ReviewData[] = [
     ],
     pourQui: {
       idealSi: [
-        'Explore de nouveaux jeux régulièrement : 3 047 titres avec filtres par volatilité et fournisseur.',
-        "Préfère les missions quotidiennes plutôt qu'une simple accumulation de points de fidélité.",
+        'Vous explorez régulièrement de nouveaux jeux : 3 047 titres au catalogue, avec filtres par volatilité et fournisseur.',
+        'Vous complétez des missions chaque jour : nouvelles missions à minuit, points échangeables contre des bonus, progression sur 5 niveaux.',
+        'Vous jouez sur mobile en accédant à vos missions en 1 clic : interface immersive, LCP mesuré à 2,1 s.',
       ],
       bonChoixSi: [
-        'Joue sur Pragmatic Play, Yggdrasil et Nolimit City : tous trois présents dans le catalogue.',
-        'Accepte un wager de 40× en échange du plus grand catalogue du comparatif.',
+        'Vous choisissez par fournisseur et volatilité : Pragmatic Play, NetEnt, Microgaming et Yggdrasil — RTP moyen mesuré 95,8 %.',
+        'Vous jouez au live avec un budget variable : une cinquantaine de tables actives, mises de 0,10 € à 5 000 €.',
       ],
       aEviterSi: [
-        'Cherche les conditions de bonus les plus basses : Wild Sultan ou Tortuga proposent 30×.',
-        "Joue principalement la nuit et a besoin d'aide : le support FR bascule en anglais après 18h.",
-        'Dépose via Paysafecard : non acceptée chez Madnix.',
+        'Vous êtes sensible aux conditions de bonus : wager de 40×, soit 4 000 € de mises pour 100 € de bonus.',
+        "Vous planifiez des retraits supérieurs à 3 000 € par semaine : ce plafond hebdomadaire est l'un des plus bas de notre top 10.",
       ],
     },
   },
