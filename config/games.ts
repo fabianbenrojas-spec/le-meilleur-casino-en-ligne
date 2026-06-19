@@ -23,6 +23,7 @@ export type GameCategory =
   | 'live'
   | 'crash'
   | 'video-poker'
+  | 'jackpot-progressif'
 
 export interface GameCategoryInfo {
   slug: GameCategory
@@ -86,6 +87,28 @@ export const categories: GameCategoryInfo[] = [
     count: '62',
     guideTitle: 'Crash games : comment fonctionnent-ils vraiment ?',
     guideSummary: 'Aviator, Mines, Plinko — mécaniques, RTP et gestion du risque.',
+  },
+  {
+    slug: 'video-poker',
+    label: 'Vidéo poker',
+    labelEn: 'Video Poker',
+    description:
+      "Jacks or Better, Deuces Wild, Double Bonus : le vidéo poker mêle stratégie et RTP élevés (jusqu'à 99,5 %). La discipline qui réduit le plus l'avantage maison après le blackjack.",
+    count: 'N/A',
+    guideTitle: 'Le vidéo poker : règles, RTP et stratégies',
+    guideSummary:
+      'Jacks or Better, variantes, tableaux de paie et stratégie optimale pour maximiser le RTP.',
+  },
+  {
+    slug: 'jackpot-progressif',
+    label: 'Jackpot progressif',
+    labelEn: 'Progressive Jackpot',
+    description:
+      "Mega Moolah, Major Millions : les jackpots progressifs accumulent une cagnotte partagée entre casinos. Des gains en millions d'euros, un RTP variable — ce qu'il faut savoir avant de jouer.",
+    count: 'N/A',
+    guideTitle: 'Comprendre les machines à sous à jackpot progressif',
+    guideSummary:
+      'Fonctionnement, RTP réel, quand jouer et quels titres offrent les meilleures cagnotes.',
   },
 ]
 

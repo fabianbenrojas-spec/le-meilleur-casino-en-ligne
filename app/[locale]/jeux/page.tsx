@@ -91,6 +91,32 @@ const catIcons: Record<string, React.ReactNode> = {
       <path d="M21 7v5h-5" />
     </svg>
   ),
+  'video-poker': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="2" y="5" width="8" height="11" rx="1.5" />
+      <rect x="14" y="5" width="8" height="11" rx="1.5" />
+      <path d="M10 10h4" />
+    </svg>
+  ),
+  'jackpot-progressif': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8l-6.1 2.6 1.4-6.8L2.2 9l6.9-.7z" />
+    </svg>
+  ),
 }
 
 export default async function JeuxHubPage({ params }: { params: Promise<{ locale: Locale }> }) {

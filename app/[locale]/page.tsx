@@ -184,6 +184,11 @@ const CAT_GRID_ICONS: Record<GameCategory, React.ReactNode> = {
       <path d="M3 10h18" />
     </svg>
   ),
+  'jackpot-progressif': (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8l-6.1 2.6 1.4-6.8L2.2 9l6.9-.7z" />
+    </svg>
+  ),
 }
 
 // 5 catégories affichées en home, dans l'ordre éditorial de la maquette

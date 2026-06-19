@@ -222,9 +222,9 @@ const GAME_TYPES = [
     circle: false,
   },
   {
-    label: 'Jackpots',
+    label: 'Jackpot progressif',
     count: '80+',
-    href: '/jeux/jackpots/',
+    href: '/jeux/jackpot-progressif/',
     icon: 'M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8l-6.1 2.6 1.4-6.8L2.2 9l6.9-.7z',
     circle: false,
   },
