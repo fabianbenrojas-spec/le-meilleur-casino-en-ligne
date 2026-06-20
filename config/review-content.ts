@@ -16,13 +16,13 @@ export interface ReviewData {
   stars: number // out of 5
   verdict: string
   sections: {
-    bonus: ReviewSection
-    jeux: ReviewSection
-    live: ReviewSection
+    bonus?: ReviewSection
+    jeux?: ReviewSection
+    live?: ReviewSection
     paiements: ReviewSection
     support: ReviewSection
     mobile: ReviewSection
-    vip: ReviewSection
+    vip?: ReviewSection
     securite: ReviewSection
   }
   recapRows: { label: string; value: string }[]

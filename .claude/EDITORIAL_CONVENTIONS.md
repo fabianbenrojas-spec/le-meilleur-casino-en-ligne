@@ -174,6 +174,32 @@ Ces valeurs ne seront jamais affichées (les guards `op.hasBonus` les masquent
 dans le template), mais doivent être présentes pour la compatibilité TypeScript
 avec l'interface `Operator`.
 
+## §15 — Sections ReviewData optionnelles par jurisdiction
+
+Établi 2026-06-21 lors de la préparation du modèle ReviewData pour Winamax.
+
+Les sections `bonus`, `jeux`, `live`, `vip` de `ReviewData.sections` sont
+optionnelles depuis le Commit 2 Phase 1 ANJ. Règles par profile :
+
+**Opérateurs offshore / MGA** (`jurisdiction: 'offshore' | 'mga-eu'`) :
+Toutes les sections fournies — compatibilité historique avec les 15 entrées
+existantes. Ne pas omettre de section.
+
+**Opérateurs ANJ** (`jurisdiction: 'anj'`) :
+
+- `bonus` : typiquement `undefined` (hasBonus: false pour les casinos ANJ)
+- `live` : typiquement `undefined` (pas de live casino autorisé en ANJ)
+- `vip` : typiquement `undefined` (programme fidélité ANJ ≠ programme VIP offshore)
+- `jeux` : FOURNI — réutilisé pour la prose poker / paris sportifs selon gameTypes
+  (le titre dynamique via `getSectionTitle()` s'adapte automatiquement)
+
+**Sections universellement requises** (applicables ANJ + offshore) :
+`paiements`, `support`, `mobile`, `securite`
+
+**Impact template** : le filtre `entry[1] !== undefined` sur `Object.entries(rd.sections)`
+dans la boucle de sections garantit qu'une section absente ou `undefined` n'est
+jamais rendue — sans guard supplémentaire à écrire par section.
+
 ## §13 — Statut juridique offshore vs ANJ
 
 Établi 2026-06-20 lors de l'injection des catégories loterie et jeux-à-gratter
