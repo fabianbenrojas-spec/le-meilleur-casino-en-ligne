@@ -30,6 +30,16 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
         { label: isFr ? 'Nouveaux Casinos' : 'New Casinos', href: l('/casinos/nouveaux/') },
         { label: isFr ? 'Casinos Live' : 'Live Casinos', href: l('/casinos/live/') },
         { label: isFr ? 'Casinos Fiables' : 'Trusted Casinos', href: l('/casinos/fiables/') },
+        { label: isFr ? 'Casinos Sans KYC' : 'No-KYC Casinos', href: l('/casinos/sans-kyc/') },
+        {
+          label: isFr ? 'Retrait Instantané' : 'Instant Withdrawal',
+          href: l('/casinos/retrait-instantane/'),
+        },
+        {
+          label: isFr ? 'Casinos en Français' : 'French-Language Casinos',
+          href: l('/casinos/francais/'),
+        },
+        { label: isFr ? 'RTP Élevé' : 'High RTP', href: l('/casinos/rtp-eleve/') },
       ],
     },
     {

@@ -198,6 +198,10 @@ export type PageConfigKey =
   | 'live_casino'
   | 'crypto'
   | 'alternatives'
+  | 'sans_kyc'
+  | 'retrait_instantane'
+  | 'francais'
+  | 'rtp_eleve'
 
 interface PageConfig {
   defaultSort: SortKey
@@ -229,6 +233,10 @@ function getPageConfigs(isFr: boolean): Record<PageConfigKey, PageConfig> {
     live_casino: { defaultSort: 'rating', filterGroups: [V, P, L] },
     crypto: { defaultSort: 'rating', filterGroups: [C, R, L] },
     alternatives: { defaultSort: 'rating', filterGroups: [B, R, P, L] },
+    sans_kyc: { defaultSort: 'rating', filterGroups: [C, R, L] },
+    retrait_instantane: { defaultSort: 'rating', filterGroups: [P, C, L] },
+    francais: { defaultSort: 'rating', filterGroups: [B, R, W] },
+    rtp_eleve: { defaultSort: 'rtp', filterGroups: [R, P, L] },
   }
 }
 
