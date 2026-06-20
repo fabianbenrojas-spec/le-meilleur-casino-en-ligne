@@ -7,6 +7,12 @@ export type Jurisdiction = 'offshore' | 'anj' | 'mga-eu'
 /** Types de jeux proposés par l'opérateur — discriminant pour hubs et navigation. */
 export type GameType = 'casino' | 'sport' | 'poker' | 'horse-racing' | 'esports'
 
+/** KYC policy — quand la vérification d'identité est requise. */
+export type KycPolicy = 'none' | 'light' | 'standard' | 'strict'
+
+/** Vitesse indicative du retrait le plus rapide disponible. */
+export type WithdrawalSpeed = 'instant' | 'fast' | 'standard' | 'slow'
+
 export interface Operator {
   id: string
   slug: string
@@ -50,6 +56,12 @@ export interface Operator {
    * Ex: ['casino'] pour un pur casino, ['casino', 'sport'] pour un opérateur multi-vertical.
    */
   gameTypes: GameType[]
+  /** KYC policy — quand la vérification d'identité est requise. */
+  kycPolicy: KycPolicy
+  /** Vitesse indicative du retrait le plus rapide disponible. */
+  withdrawalSpeed: WithdrawalSpeed
+  /** Interface ET support client disponibles en français. */
+  supportsFrench: boolean
 }
 
 // Real registration URLs per operator.
@@ -131,6 +143,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'fast',
+    supportsFrench: true,
   },
   {
     id: 'lucky8',
@@ -146,7 +161,7 @@ export const operators: Operator[] = [
     bonusSlug: '100_euros',
     rtp: 96.1,
     paymentMethods: ['VISA', 'MC', 'PAYS'],
-    features: ['Tournois slots', 'Cashback hebdo', '1 800+ jeux'],
+    features: ['Tournois slots', 'Cashback hebdo', 'Support FR', '1 800+ jeux'],
     pros: [
       'Tournois de machines à sous réguliers',
       'Cashback hebdomadaire 10%',
@@ -166,6 +181,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: true,
   },
   {
     id: 'wild-sultan',
@@ -201,6 +219,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'light',
+    withdrawalSpeed: 'instant',
+    supportsFrench: false,
   },
   {
     id: 'madnix',
@@ -236,6 +257,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: true,
   },
   {
     id: 'magical-spin',
@@ -267,6 +291,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: true,
   },
   {
     id: 'casinozer',
@@ -302,6 +329,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'standard',
+    supportsFrench: true,
   },
   {
     id: 'tortuga',
@@ -338,6 +368,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: false,
   },
   {
     id: 'banzai-slots',
@@ -369,6 +402,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: false,
   },
   {
     id: 'stake',
@@ -406,6 +442,9 @@ export const operators: Operator[] = [
     isAffiliated: true,
     legalDisclaimerVariant: 'crypto',
     gameTypes: ['casino'],
+    kycPolicy: 'none',
+    withdrawalSpeed: 'instant',
+    supportsFrench: false,
   },
   {
     id: 'bitcoin-penguin',
@@ -434,6 +473,9 @@ export const operators: Operator[] = [
     isAffiliated: true,
     legalDisclaimerVariant: 'crypto',
     gameTypes: ['casino'],
+    kycPolicy: 'none',
+    withdrawalSpeed: 'instant',
+    supportsFrench: false,
   },
   // ── Nouveaux opérateurs Phase 9 ─────────────────────────────────────────────
   {
@@ -471,6 +513,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'fast',
+    supportsFrench: false,
   },
   {
     id: 'vegadream',
@@ -506,6 +551,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'slow',
+    supportsFrench: true,
   },
   {
     id: 'horus-casino',
@@ -542,6 +590,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'light',
+    withdrawalSpeed: 'standard',
+    supportsFrench: true,
   },
   {
     id: 'n1-casino',
@@ -573,6 +624,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'standard',
+    supportsFrench: false,
   },
   {
     id: 'casino-extra',
@@ -605,6 +659,9 @@ export const operators: Operator[] = [
     hasBonus: true,
     isAffiliated: true,
     gameTypes: ['casino'],
+    kycPolicy: 'standard',
+    withdrawalSpeed: 'standard',
+    supportsFrench: false,
   },
 ]
 
@@ -636,3 +693,14 @@ export function jurisdictionLicenceLabel(jurisdiction: Jurisdiction): string {
   if (jurisdiction === 'mga-eu') return 'Licence MGA (Malte)'
   return 'Licence Curaçao'
 }
+
+// ── Hub selection helpers ────────────────────────────────────────────────────
+
+export const operatorsWithoutKyc = operators.filter(
+  (op) => op.kycPolicy === 'none' || op.kycPolicy === 'light'
+)
+export const operatorsWithInstantWithdrawal = operators.filter(
+  (op) => op.withdrawalSpeed === 'instant' || op.withdrawalSpeed === 'fast'
+)
+export const operatorsWithFrenchSupport = operators.filter((op) => op.supportsFrench === true)
+export const operatorsWithHighRtp = operators.filter((op) => op.rtp >= 96)
