@@ -9,7 +9,7 @@ import { ScorePill } from '@/components/ui/score-pill'
 import { GameGrid } from '@/components/games/game-grid'
 import { ReviewStickyBar } from '@/components/review/review-sticky-bar'
 import { categories, getGamesByCategory, type GameCategory } from '@/config/games'
-import { TOP_10 } from '@/config/operators'
+import { TOP_10, operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
 
@@ -55,7 +55,9 @@ export default async function GameCategoryPage({
   const label = isFr ? cat.label : cat.labelEn
   const games = getGamesByCategory(category as GameCategory)
   const casinos = TOP_10.slice(0, 3)
-  const spotOp = TOP_10[0]!
+  const spotOp =
+    (cat.bestOperatorSlug ? operators.find((o) => o.slug === cat.bestOperatorSlug) : undefined) ??
+    TOP_10[0]!
 
   // Unique providers for toolbar pills
   const providers = Array.from(new Set(games.map((g) => g.provider)))
@@ -107,33 +109,35 @@ export default async function GameCategoryPage({
                   {cat.description}
                 </p>
 
-                {/* Stats row */}
-                <div className="mt-[26px] flex flex-wrap items-center gap-[24px_40px]">
-                  <div className="flex items-baseline gap-[6px]">
-                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
-                      {cat.count}+
-                    </span>
-                    <span className="font-mono text-[12px] text-ink-3">
-                      {isFr ? 'jeux' : 'games'}
-                    </span>
+                {/* Stats row — only rendered when games are seeded for this category */}
+                {games.length > 0 && (
+                  <div className="mt-[26px] flex flex-wrap items-center gap-[24px_40px]">
+                    <div className="flex items-baseline gap-[6px]">
+                      <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                        {cat.count}+
+                      </span>
+                      <span className="font-mono text-[12px] text-ink-3">
+                        {isFr ? 'jeux' : 'games'}
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-[6px]">
+                      <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                        {avgRtp.toFixed(1)}%
+                      </span>
+                      <span className="font-mono text-[12px] text-ink-3">
+                        {isFr ? 'RTP moyen' : 'avg RTP'}
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-[6px]">
+                      <span className="font-serif text-[28px] font-semibold leading-none text-green">
+                        {providers.length}
+                      </span>
+                      <span className="font-mono text-[12px] text-ink-3">
+                        {isFr ? 'fournisseurs' : 'providers'}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-baseline gap-[6px]">
-                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
-                      {avgRtp.toFixed(1)}%
-                    </span>
-                    <span className="font-mono text-[12px] text-ink-3">
-                      {isFr ? 'RTP moyen' : 'avg RTP'}
-                    </span>
-                  </div>
-                  <div className="flex items-baseline gap-[6px]">
-                    <span className="font-serif text-[28px] font-semibold leading-none text-green">
-                      {providers.length}
-                    </span>
-                    <span className="font-mono text-[12px] text-ink-3">
-                      {isFr ? 'fournisseurs' : 'providers'}
-                    </span>
-                  </div>
-                </div>
+                )}
               </div>
 
               {/* Right: spotlight casino card */}
@@ -298,6 +302,11 @@ export default async function GameCategoryPage({
             {cat.guideTitle}
           </h2>
           <p className="mb-[14px] text-[16px] leading-[1.7] text-ink-2">{cat.guideSummary}</p>
+          {cat.guideBody?.map((para, i) => (
+            <p key={i} className="mt-[14px] text-[16px] leading-[1.7] text-ink-2">
+              {para}
+            </p>
+          ))}
           <p className="mt-[14px] text-[13px] leading-[1.6] text-ink-3">
             {isFr ? (
               <>

@@ -33,6 +33,8 @@ export interface GameCategoryInfo {
   count: string
   guideTitle: string
   guideSummary: string
+  bestOperatorSlug?: string
+  guideBody?: string[]
 }
 
 export const categories: GameCategoryInfo[] = [
@@ -46,6 +48,7 @@ export const categories: GameCategoryInfo[] = [
     guideTitle: 'Tout savoir sur les machines à sous en ligne',
     guideSummary:
       'RTP, volatilité, fonctionnalités bonus, cascades — les clés pour choisir les bons jeux.',
+    bestOperatorSlug: 'madnix',
   },
   {
     slug: 'roulette',
@@ -56,6 +59,7 @@ export const categories: GameCategoryInfo[] = [
     count: '120',
     guideTitle: 'Guide de la roulette en ligne',
     guideSummary: 'Roulette européenne vs américaine, martingale et autres stratégies — les faits.',
+    bestOperatorSlug: 'cresus',
   },
   {
     slug: 'blackjack',
@@ -67,6 +71,7 @@ export const categories: GameCategoryInfo[] = [
     guideTitle: 'Blackjack en ligne : stratégie de base et variantes',
     guideSummary:
       "Stratégie de base, counting et meilleures variantes pour réduire l'avantage maison.",
+    bestOperatorSlug: 'dublinbet',
   },
   {
     slug: 'live',
@@ -77,6 +82,7 @@ export const categories: GameCategoryInfo[] = [
     count: '340',
     guideTitle: 'Casino live en ligne : guide complet',
     guideSummary: 'Fournisseurs, tables francophones, game shows et limites de mise.',
+    bestOperatorSlug: 'wild-sultan',
   },
   {
     slug: 'crash',
@@ -87,6 +93,7 @@ export const categories: GameCategoryInfo[] = [
     count: '62',
     guideTitle: 'Crash games : comment fonctionnent-ils vraiment ?',
     guideSummary: 'Aviator, Mines, Plinko — mécaniques, RTP et gestion du risque.',
+    bestOperatorSlug: 'stake',
   },
   {
     slug: 'video-poker',
@@ -98,6 +105,7 @@ export const categories: GameCategoryInfo[] = [
     guideTitle: 'Le vidéo poker : règles, RTP et stratégies',
     guideSummary:
       'Jacks or Better, variantes, tableaux de paie et stratégie optimale pour maximiser le RTP.',
+    bestOperatorSlug: 'cresus',
   },
   {
     slug: 'jackpot-progressif',
@@ -109,6 +117,7 @@ export const categories: GameCategoryInfo[] = [
     guideTitle: 'Comprendre les machines à sous à jackpot progressif',
     guideSummary:
       'Fonctionnement, RTP réel, quand jouer et quels titres offrent les meilleures cagnotes.',
+    bestOperatorSlug: 'madnix',
   },
 ]
 
