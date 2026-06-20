@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -133,132 +130,102 @@ export default async function CryptoComparatifPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
-          { label: isFr ? 'Casino Crypto' : 'Crypto Casino' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="crypto_casino" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'BTC · ETH · USDT · SOL · Provably Fair · 2026'
-              : 'BTC · ETH · USDT · SOL · Provably Fair · 2026'}
+    <HubShell
+      pageType="crypto_casino"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
+        { label: isFr ? 'Casino Crypto' : 'Crypto Casino' },
+      ]}
+      eyebrow="BTC · ETH · USDT · SOL · Provably Fair · 2026"
+      heading={
+        isFr ? (
+          <>
+            Comparatif <em className="not-italic text-green">casino crypto</em> 2026
+          </>
+        ) : (
+          <>
+            Best <em className="not-italic text-green">crypto casino</em> 2026
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? 'Retrait instantané, provably fair et house edge transparent. Filtrez par cryptomonnaie, RTP et licence pour trouver le meilleur casino crypto selon vos critères.'
+          : 'Instant withdrawal, provably fair and transparent house edge. Filter by cryptocurrency, RTP and licence to find your ideal crypto casino.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={cryptoCasinos}
+      configKey="crypto"
+      editorialH2={
+        isFr
+          ? 'Les casinos crypto — avantages concrets en 2026'
+          : 'Crypto casinos — concrete advantages in 2026'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Les casinos crypto ont évolué bien au-delà du simple &quot;bitcoin casino&quot; des
+              années 2010. Les plateformes modernes comme Stake, BC.Game ou Rollbit offrent des
+              expériences de jeu sophistiquées avec des avantages structurels réels : frais de
+              traitement quasi nuls (permettant des RTP plus élevés), retraits en quelques minutes,
+              et une transparence algorithmique via le Provably Fair impossible avec les casinos
+              classiques.
+            </p>
+            <p>
+              Le choix de la cryptomonnaie est stratégique.{' '}
+              <strong className="text-ink">Bitcoin (BTC)</strong> est le plus universel mais les
+              frais de réseau peuvent dépasser 5-10€ pour les petits dépôts.{' '}
+              <strong className="text-ink">Litecoin (LTC)</strong> offre des confirmations rapides
+              (2,5 minutes) et des frais inférieurs à 0,01€.{' '}
+              <strong className="text-ink">USDT (TRC-20)</strong> sur réseau Tron est le roi de la
+              vitesse : transactions quasi instantanées pour moins de 0,001€ de frais, avec la
+              stabilité d&apos;un stablecoin indexé sur le dollar.
+            </p>
+            <p>
+              Le <strong className="text-ink">principal risque</strong> des casinos crypto est la
+              volatilité des cours. Une session de jeu en Bitcoin durant laquelle BTC chute de 10%
+              se traduit par une perte supplémentaire de 10% en valeur euros. Pour les joueurs qui
+              veulent les avantages crypto sans ce risque, l&apos;USDT est la solution : même
+              vitesse, mêmes économies de frais, stabilité garantie.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Comparatif <em className="not-italic text-green">casino crypto</em> 2026
-              </>
-            ) : (
-              <>
-                Best <em className="not-italic text-green">crypto casino</em> 2026
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? 'Retrait instantané, provably fair et house edge transparent. Filtrez par cryptomonnaie, RTP et licence pour trouver le meilleur casino crypto selon vos critères.'
-              : 'Instant withdrawal, provably fair and transparent house edge. Filter by cryptocurrency, RTP and licence to find your ideal crypto casino.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={cryptoCasinos}
-        configKey="crypto"
-        pageType="crypto_casino"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'Les casinos crypto — avantages concrets en 2026'
-              : 'Crypto casinos — concrete advantages in 2026'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Les casinos crypto ont évolué bien au-delà du simple &quot;bitcoin casino&quot; des
-                années 2010. Les plateformes modernes comme Stake, BC.Game ou Rollbit offrent des
-                expériences de jeu sophistiquées avec des avantages structurels réels : frais de
-                traitement quasi nuls (permettant des RTP plus élevés), retraits en quelques
-                minutes, et une transparence algorithmique via le Provably Fair impossible avec les
-                casinos classiques.
-              </p>
-              <p>
-                Le choix de la cryptomonnaie est stratégique.{' '}
-                <strong className="text-ink">Bitcoin (BTC)</strong> est le plus universel mais les
-                frais de réseau peuvent dépasser 5-10€ pour les petits dépôts.{' '}
-                <strong className="text-ink">Litecoin (LTC)</strong> offre des confirmations rapides
-                (2,5 minutes) et des frais inférieurs à 0,01€.{' '}
-                <strong className="text-ink">USDT (TRC-20)</strong> sur réseau Tron est le roi de la
-                vitesse : transactions quasi instantanées pour moins de 0,001€ de frais, avec la
-                stabilité d&apos;un stablecoin indexé sur le dollar.
-              </p>
-              <p>
-                Le <strong className="text-ink">principal risque</strong> des casinos crypto est la
-                volatilité des cours. Une session de jeu en Bitcoin durant laquelle BTC chute de 10%
-                se traduit par une perte supplémentaire de 10% en valeur euros. Pour les joueurs qui
-                veulent les avantages crypto sans ce risque, l&apos;USDT est la solution : même
-                vitesse, mêmes économies de frais, stabilité garantie.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Crypto casinos have evolved well beyond the simple &apos;bitcoin casino&apos; of the
-                2010s. Modern platforms like Stake, BC.Game or Rollbit offer sophisticated gaming
-                experiences with real structural advantages: near-zero processing fees (enabling
-                higher RTPs), withdrawals in minutes, and algorithmic transparency via Provably Fair
-                that is impossible with traditional casinos.
-              </p>
-              <p>
-                Cryptocurrency selection is strategic.{' '}
-                <strong className="text-ink">Bitcoin (BTC)</strong> is the most universal but
-                network fees can exceed €5–10 for small deposits.{' '}
-                <strong className="text-ink">Litecoin (LTC)</strong> offers fast confirmations (2.5
-                minutes) and fees below €0.01. <strong className="text-ink">USDT (TRC-20)</strong>{' '}
-                on the Tron network is the speed king: near-instant transactions for under €0.001 in
-                fees, with the stability of a dollar-pegged stablecoin.
-              </p>
-              <p>
-                The <strong className="text-ink">main risk</strong> with crypto casinos is price
-                volatility. A gaming session in Bitcoin during which BTC falls 10% translates into
-                an additional 10% loss in euro value. For players who want crypto advantages without
-                this risk, USDT is the solution: same speed, same fee savings, guaranteed stability.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr
-                ? 'Questions fréquentes — Comparatif Casino Crypto'
-                : 'FAQ — Crypto Casino Comparison'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Crypto casinos have evolved well beyond the simple &apos;bitcoin casino&apos; of the
+              2010s. Modern platforms like Stake, BC.Game or Rollbit offer sophisticated gaming
+              experiences with real structural advantages: near-zero processing fees (enabling
+              higher RTPs), withdrawals in minutes, and algorithmic transparency via Provably Fair
+              that is impossible with traditional casinos.
+            </p>
+            <p>
+              Cryptocurrency selection is strategic.{' '}
+              <strong className="text-ink">Bitcoin (BTC)</strong> is the most universal but network
+              fees can exceed €5–10 for small deposits.{' '}
+              <strong className="text-ink">Litecoin (LTC)</strong> offers fast confirmations (2.5
+              minutes) and fees below €0.01. <strong className="text-ink">USDT (TRC-20)</strong> on
+              the Tron network is the speed king: near-instant transactions for under €0.001 in
+              fees, with the stability of a dollar-pegged stablecoin.
+            </p>
+            <p>
+              The <strong className="text-ink">main risk</strong> with crypto casinos is price
+              volatility. A gaming session in Bitcoin during which BTC falls 10% translates into an
+              additional 10% loss in euro value. For players who want crypto advantages without this
+              risk, USDT is the solution: same speed, same fee savings, guaranteed stability.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={
+        isFr ? 'Questions fréquentes — Comparatif Casino Crypto' : 'FAQ — Crypto Casino Comparison'
+      }
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }

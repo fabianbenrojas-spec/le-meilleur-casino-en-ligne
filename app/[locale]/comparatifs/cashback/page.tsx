@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -125,122 +122,94 @@ export default async function CashbackPage({ params }: { params: Promise<{ local
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
-          { label: isFr ? 'Casino Cashback' : 'Cashback Casino' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="comparatif_cashback" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'Remboursement · Sans wager · 5–20% · 2026'
-              : 'Refund · No wagering · 5–20% · 2026'}
+    <HubShell
+      pageType="comparatif_cashback"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
+        { label: isFr ? 'Casino Cashback' : 'Cashback Casino' },
+      ]}
+      eyebrow={
+        isFr ? 'Remboursement · Sans wager · 5–20% · 2026' : 'Refund · No wagering · 5–20% · 2026'
+      }
+      heading={
+        isFr ? (
+          <>
+            Comparatif <em className="not-italic text-green">casino cashback</em> 2026
+          </>
+        ) : (
+          <>
+            Best <em className="not-italic text-green">cashback casino</em> 2026
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? "Le cashback réduit l'avantage de la maison de manière permanente. Filtrez par taux, fréquence et conditions pour identifier les meilleures offres cashback."
+          : 'Cashback permanently reduces the house edge. Filter by rate, frequency and conditions to identify the best cashback offers.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={cashbackFirst}
+      configKey="cashback"
+      editorialH2={
+        isFr
+          ? 'Le cashback casino — la promotion la plus sous-estimée'
+          : 'Casino cashback — the most underrated promotion'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Le cashback est systématiquement sous-évalué par les joueurs qui se concentrent sur
+              les gros bonus de bienvenue. Pourtant, un{' '}
+              <strong className="text-ink">cashback hebdomadaire de 10% sans wager</strong>{' '}
+              représente une valeur supérieure à la quasi-totalité des bonus de bienvenue une fois
+              que vous avez calculé la valeur réelle (bonus × probabilité de conversion).
+            </p>
+            <p>
+              La mécanique est simple : si vous perdez 300€ net sur la semaine et que votre cashback
+              est de 15%, vous récupérez 45€ directement jouables (sans wager ou wager 1×). Sur une
+              année de jeu régulier, ce cashback peut représenter plusieurs centaines d&apos;euros
+              de gains effectifs — de l&apos;argent que vous n&apos;auriez jamais revu avec un bonus
+              classique.
+            </p>
+            <p>
+              Notre recommandation pour les joueurs réguliers : une fois votre bonus de bienvenue
+              soldé, choisissez systématiquement un casino qui offre du cashback plutôt que des
+              rechargements avec wager élevé. La valeur cumulée sur 12 mois est invariablement
+              supérieure. Les programmes VIP avec cashback progressif sont particulièrement
+              attractifs.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Comparatif <em className="not-italic text-green">casino cashback</em> 2026
-              </>
-            ) : (
-              <>
-                Best <em className="not-italic text-green">cashback casino</em> 2026
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? "Le cashback réduit l'avantage de la maison de manière permanente. Filtrez par taux, fréquence et conditions pour identifier les meilleures offres cashback."
-              : 'Cashback permanently reduces the house edge. Filter by rate, frequency and conditions to identify the best cashback offers.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={cashbackFirst}
-        configKey="cashback"
-        pageType="comparatif_cashback"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'Le cashback casino — la promotion la plus sous-estimée'
-              : 'Casino cashback — the most underrated promotion'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Le cashback est systématiquement sous-évalué par les joueurs qui se concentrent sur
-                les gros bonus de bienvenue. Pourtant, un{' '}
-                <strong className="text-ink">cashback hebdomadaire de 10% sans wager</strong>{' '}
-                représente une valeur supérieure à la quasi-totalité des bonus de bienvenue une fois
-                que vous avez calculé la valeur réelle (bonus × probabilité de conversion).
-              </p>
-              <p>
-                La mécanique est simple : si vous perdez 300€ net sur la semaine et que votre
-                cashback est de 15%, vous récupérez 45€ directement jouables (sans wager ou wager
-                1×). Sur une année de jeu régulier, ce cashback peut représenter plusieurs centaines
-                d&apos;euros de gains effectifs — de l&apos;argent que vous n&apos;auriez jamais
-                revu avec un bonus classique.
-              </p>
-              <p>
-                Notre recommandation pour les joueurs réguliers : une fois votre bonus de bienvenue
-                soldé, choisissez systématiquement un casino qui offre du cashback plutôt que des
-                rechargements avec wager élevé. La valeur cumulée sur 12 mois est invariablement
-                supérieure. Les programmes VIP avec cashback progressif sont particulièrement
-                attractifs.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Cashback is systematically undervalued by players who focus on large welcome
-                bonuses. Yet a <strong className="text-ink">10% no-wager weekly cashback</strong>{' '}
-                represents more value than virtually any welcome bonus once you calculate the real
-                value (bonus × probability of conversion).
-              </p>
-              <p>
-                The mechanic is simple: if you lose €300 net over the week and your cashback is 15%,
-                you receive €45 back — immediately playable (no wagering, or 1× maximum). Over a
-                year of regular play, this cashback can represent several hundred euros in effective
-                gains, money you would never have seen again with a classic bonus.
-              </p>
-              <p>
-                Our recommendation for regular players: once your welcome bonus is cleared, always
-                choose a casino that offers cashback rather than reload bonuses with high wagering
-                requirements. The cumulative value over 12 months is invariably greater. VIP
-                programmes with progressive cashback are particularly attractive.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr ? 'Questions fréquentes — Casino Cashback' : 'FAQ — Cashback Casino'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Cashback is systematically undervalued by players who focus on large welcome bonuses.
+              Yet a <strong className="text-ink">10% no-wager weekly cashback</strong> represents
+              more value than virtually any welcome bonus once you calculate the real value (bonus ×
+              probability of conversion).
+            </p>
+            <p>
+              The mechanic is simple: if you lose €300 net over the week and your cashback is 15%,
+              you receive €45 back — immediately playable (no wagering, or 1× maximum). Over a year
+              of regular play, this cashback can represent several hundred euros in effective gains,
+              money you would never have seen again with a classic bonus.
+            </p>
+            <p>
+              Our recommendation for regular players: once your welcome bonus is cleared, always
+              choose a casino that offers cashback rather than reload bonuses with high wagering
+              requirements. The cumulative value over 12 months is invariably greater. VIP
+              programmes with progressive cashback are particularly attractive.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={isFr ? 'Questions fréquentes — Casino Cashback' : 'FAQ — Cashback Casino'}
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }
