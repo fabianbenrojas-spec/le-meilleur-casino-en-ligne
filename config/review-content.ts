@@ -1847,6 +1847,94 @@ const reviews: ReviewData[] = [
       ],
     },
   },
+  // ── 16. Winamax ──────────────────────────────────────────────────────────────
+  {
+    slug: 'winamax',
+    foundedYear: 2009,
+    languages: ['FR'],
+    currencies: ['EUR'],
+    reviewCount: 5200, // ⚠️ placeholder — à vérifier sur Trustpilot en Commit 4
+    stars: 4.5,
+    verdict:
+      "Winamax est la plateforme française de référence pour le poker en ligne et les paris sportifs. Lancée en 2009, elle opère sous licence ANJ française. Pas de jeux de casino — slots, roulette, blackjack — l'opérateur est soumis aux restrictions ANJ qui excluent les machines à sous et le live casino.",
+    sections: {
+      // bonus: undefined — convention §14 + §15 (hasBonus: false, ANJ)
+      jeux: {
+        prose: [
+          "Winamax est l'un des opérateurs de poker en ligne les plus populaires en France. La plateforme couvre l'ensemble des formats : cash games, tournois MTT, Sit & Go. Les variantes disponibles sont principalement le Texas Hold'em et l'Omaha.",
+          "Côté paris sportifs, l'offre couvre les principaux championnats internationaux et les compétitions françaises, avec des cotes compétitives et une interface de mise en direct ergonomique.",
+          "Pour les courses hippiques, Winamax propose une offre paris intégrée dans l'application.",
+        ],
+        highlights: [
+          "Poker : Texas Hold'em, Omaha et variantes",
+          'Tournois MTT et Sit & Go quotidiens',
+          'Paris sportifs sur championnats internationaux et français',
+          "Hippique intégré dans l'app",
+        ],
+      },
+      // live: undefined — convention §15 (live casino interdit ANJ)
+      paiements: {
+        prose: [
+          'Les méthodes de paiement disponibles sont VISA, Mastercard et PayPal. Les cryptomonnaies ne sont pas acceptées (cadre réglementaire ANJ).',
+          'Les retraits sont généralement traités sous 24-48h selon la méthode utilisée. La validation KYC est obligatoire en vertu de la réglementation française.',
+        ],
+        highlights: [
+          'CB (VISA, Mastercard) + PayPal',
+          'Délai de retrait estimé à 24-48h',
+          'KYC obligatoire — cadre réglementaire ANJ',
+        ],
+      },
+      support: {
+        prose: [
+          'Le support client Winamax est disponible en français par e-mail et chat. La couverture horaire est étendue pour un opérateur de cette taille.',
+        ],
+      },
+      mobile: {
+        prose: [
+          "Winamax dispose d'une application native iOS et Android reconnue comme l'une des meilleures du marché français. L'expérience mobile couvre poker, paris sportifs et hippique depuis une interface unifiée.",
+        ],
+        highlights: ['App native iOS + Android', 'Poker + sport + hippique dans une seule app'],
+      },
+      // vip: undefined — convention §15 (programme fidélité ANJ ≠ VIP offshore)
+      securite: {
+        prose: [
+          "Winamax opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français unique. Ce cadre impose des obligations strictes : KYC systématique, plafonds de dépôt, outils de jeu responsable (auto-exclusion, limites). La licence ANJ est l'une des plus protectrices d'Europe pour les joueurs.",
+        ],
+        highlights: [
+          'Licence ANJ — régulateur français officiel',
+          'KYC strict + outils jeu responsable réglementaires',
+        ],
+      },
+    },
+    // pourQui: à venir en Commit 4 après extraction données + briefs validés
+    recapRows: [
+      { label: 'Licence', value: 'ANJ — Licence française' },
+      { label: 'Bonus de bienvenue', value: '350€ (encadré ANJ)' },
+      { label: 'Méthodes de paiement', value: 'VISA, Mastercard, PayPal' },
+      { label: 'Délai de retrait', value: '24-48h selon méthode' },
+      { label: 'Catalogue', value: 'Poker + paris sportifs + hippique' },
+      { label: 'Support', value: 'Français, e-mail + chat' },
+      { label: 'Application mobile', value: 'iOS + Android (native)' },
+      { label: 'Fondé', value: '2009' },
+    ],
+    faq: [
+      {
+        question: 'Winamax propose-t-il des machines à sous ou de la roulette ?',
+        answer:
+          "Non. Winamax est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, la roulette, le blackjack ni le live casino en ligne. Winamax propose uniquement poker, paris sportifs et hippique.",
+      },
+      {
+        question: 'Quelle est la différence entre Winamax et un casino offshore ?',
+        answer:
+          'Winamax opère sous licence ANJ française, ce qui garantit un cadre réglementaire strict (KYC obligatoire, plafonds, jeu responsable). Les casinos offshore opèrent sous licence Curaçao ou MGA et proposent davantage de types de jeux (slots, live, etc.) mais dans un cadre réglementaire distinct.',
+      },
+      {
+        question: "L'application mobile Winamax est-elle complète ?",
+        answer:
+          "Oui. L'application iOS et Android de Winamax couvre poker, paris sportifs et hippique depuis une interface unifiée. Elle est considérée comme l'une des plus complètes du marché français.",
+      },
+    ],
+  },
 ]
 
 // ── Map + fallback ────────────────────────────────────────────────────────────

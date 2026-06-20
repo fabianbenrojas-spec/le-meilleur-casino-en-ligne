@@ -86,6 +86,8 @@ export const AFFILIATE_URLS: Record<string, string> = {
   'horus-casino': 'https://www.horuscasino.com/fr/register',
   'n1-casino': 'https://www.n1casino.com/fr/welcome-page',
   'casino-extra': 'https://casinoextra-fr.fr/fr-fr/register',
+  // TODO: remplacer par URL d'affiliation officielle Winamax une fois programme approuvé
+  winamax: 'https://www.winamax.fr/inscription',
 }
 
 const LOGO_URLS: Record<string, string> = {
@@ -666,6 +668,49 @@ export const operators: Operator[] = [
     kycPolicy: 'standard',
     withdrawalSpeed: 'standard',
     supportsFrench: false,
+  },
+  // ── 16. Winamax (premier opérateur ANJ) ────────────────────────────────────
+  {
+    id: 'winamax',
+    slug: 'winamax',
+    name: 'Winamax',
+    shortName: 'Winamax',
+    // logoUrl: à compléter en phase logos
+    licence: 'ANJ — Licence française',
+    // licenceNumber: TODO vérifier numéro exact sur registre ANJ
+    rating: 9.0, // ⚠️ placeholder éditorial — à valider en Commit 4
+    ratingLabel: 'Excellent',
+    // Convention §14 : valeurs placeholder pour hasBonus: false
+    bonusAmount: '—',
+    bonusSuffix: '',
+    bonusConditions: '',
+    bonusAmountNumber: 0,
+    bonusSlug: 'no-bonus',
+    rtp: 0, // placeholder — RTP non central pour poker, à préciser en Commit 4
+    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à vérifier en Commit 4
+    features: ['App native iOS/Android', 'Poker + sport + hippique', 'Licence ANJ'],
+    pros: [
+      'Notoriété maximale sur le marché français',
+      'Application native fluide et complète',
+      'Écosystème complet : poker, paris sportifs, hippique',
+    ],
+    cons: [
+      'Pas de jeux de casino — slots, roulette, blackjack (interdit ANJ)',
+      'Pas de crypto (cadre réglementaire ANJ)',
+    ],
+    verdict:
+      'Winamax est la référence mainstream du marché français pour le poker et les paris sportifs.',
+    tagline: 'Le n°1 français du poker et des paris sportifs — licence ANJ.',
+    affiliateUrl: goUrl('winamax'),
+    jurisdiction: 'anj',
+    hasBonus: false,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'anj',
+    gameTypes: ['poker', 'sport', 'horse-racing'],
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'fast', // ⚠️ à vérifier précisément en Commit 4
+    supportsFrench: true,
+    launchYearFrance: 2009,
   },
 ]
 
