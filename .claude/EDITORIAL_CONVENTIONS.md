@@ -83,6 +83,28 @@ empêche les fiches d'être interchangeables.
   WhatsApp, slots françaises + Microgaming comme spécialisation, LCP 2,4s
   comme défaut, absence totale crypto
 
+### Winamax (premier opérateur ANJ) — territoire éditorial
+
+Établi 2026-06-21 lors de l'injection du pourQui Commit 4.
+
+- ✅ Réservés :
+  - Légalité ANJ + 15 ans de présence sur le marché français régulé (2010)
+  - App native premium (4,6/5 App Store, poker + sport réunis)
+  - Bonus en cash réel — premier pari perdant remboursé jusqu'à 100 € vs freebets
+  - Écosystème 3 disciplines unifié (poker + sport + hippique, compte unique)
+  - Opérateur poker historique du marché français
+  - Pas de live chat ni téléphone en aEviterSi (support formulaire + e-mail uniquement)
+  - Slots / roulette / blackjack interdits ANJ en aEviterSi (3 catégories nommées)
+- ❌ Interdits ailleurs :
+  - Licence ANJ — cet angle est réservé aux opérateurs ANJ uniquement ; ne
+    jamais utiliser "ANJ" pour qualifier un avantage d'un opérateur offshore
+  - 15 ans de présence sur le marché français régulé (unique à Winamax dans
+    notre comparatif)
+  - Bonus en cash réel / premier pari perdant remboursé en argent réel (angle
+    sport Winamax, différenciant vs freebets — unique dans le repo)
+  - Communauté poker historique FR — ne pas réutiliser pour des opérateurs
+    offshore qui proposent aussi du poker
+
 ## Erreurs fréquentes à éviter (mémoire des corrections)
 
 1. **Vocabulaire juridique imprécis**

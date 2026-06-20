@@ -710,7 +710,7 @@ export const operators: Operator[] = [
     kycPolicy: 'strict',
     withdrawalSpeed: 'fast', // ⚠️ à vérifier précisément en Commit 4
     supportsFrench: true,
-    launchYearFrance: 2009,
+    launchYearFrance: 2010,
   },
 ]
 
