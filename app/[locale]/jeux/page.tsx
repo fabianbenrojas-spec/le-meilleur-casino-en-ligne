@@ -117,6 +117,22 @@ const catIcons: Record<string, React.ReactNode> = {
       <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8l-6.1 2.6 1.4-6.8L2.2 9l6.9-.7z" />
     </svg>
   ),
+  poker: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="3" y="5" width="9" height="13" rx="1.5" />
+      <rect x="12" y="6" width="9" height="13" rx="1.5" />
+      <path d="M6 9h3M6 12h2" />
+    </svg>
+  ),
 }
 
 export default async function JeuxHubPage({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -180,7 +196,7 @@ export default async function JeuxHubPage({ params }: { params: Promise<{ locale
                     </p>
                   </div>
                   <p className="flex-1 text-[13.5px] leading-[1.5] text-ink-2">
-                    {cat.guideSummary}
+                    {isFr ? cat.guideSummary : (cat.guideSummaryEn ?? cat.guideSummary)}
                   </p>
                   <span className="font-bold text-green">
                     {isFr

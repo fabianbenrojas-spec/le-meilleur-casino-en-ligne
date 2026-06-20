@@ -66,6 +66,7 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
           label: isFr ? 'Jackpot progressif' : 'Progressive Jackpot',
           href: l('/jeux/jackpot-progressif/'),
         },
+        { label: isFr ? 'Poker en ligne' : 'Online Poker', href: l('/jeux/poker/') },
       ],
     },
     {

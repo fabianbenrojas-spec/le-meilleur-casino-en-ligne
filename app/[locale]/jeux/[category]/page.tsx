@@ -35,7 +35,7 @@ export async function generateMetadata({
       : `Online ${label} — Best Games & Casinos (2026)`,
     description: isFr
       ? `${cat.description} ${cat.count} jeux disponibles. Testés à l'argent réel. 18+ Jeu responsable.`
-      : `${cat.description} ${cat.count} games available. Tested with real money. 18+ Gamble responsibly.`,
+      : `${cat.descriptionEn ?? cat.description} ${cat.count} games available. Tested with real money. 18+ Gamble responsibly.`,
     alternates: {
       languages: buildHreflang(`/jeux/${category}/`, `/${category}/`),
     },
@@ -106,7 +106,7 @@ export default async function GameCategoryPage({
                   )}
                 </h1>
                 <p className="m-0 max-w-[60ch] text-[17px] leading-[1.6] text-ink-2">
-                  {cat.description}
+                  {isFr ? cat.description : (cat.descriptionEn ?? cat.description)}
                 </p>
 
                 {/* Stats row — only rendered when games are seeded for this category */}
@@ -299,10 +299,12 @@ export default async function GameCategoryPage({
       <section className="py-12">
         <div className="mx-auto max-w-[760px] px-[18px] md:px-8">
           <h2 className="mb-4 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {cat.guideTitle}
+            {isFr ? cat.guideTitle : (cat.guideTitleEn ?? cat.guideTitle)}
           </h2>
-          <p className="mb-[14px] text-[16px] leading-[1.7] text-ink-2">{cat.guideSummary}</p>
-          {cat.guideBody?.map((para, i) => (
+          <p className="mb-[14px] text-[16px] leading-[1.7] text-ink-2">
+            {isFr ? cat.guideSummary : (cat.guideSummaryEn ?? cat.guideSummary)}
+          </p>
+          {(isFr ? cat.guideBody : (cat.guideBodyEn ?? cat.guideBody))?.map((para, i) => (
             <p key={i} className="mt-[14px] text-[16px] leading-[1.7] text-ink-2">
               {para}
             </p>
