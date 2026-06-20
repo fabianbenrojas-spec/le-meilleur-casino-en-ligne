@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -131,128 +128,101 @@ export default async function RetraitsRapidesPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
-          { label: isFr ? 'Retraits Rapides' : 'Fast Withdrawals' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="retraits_rapides" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'Crypto instantané · E-wallet 1h · CB 24h · 2026'
-              : 'Instant crypto · E-wallet 1h · Card 24h · 2026'}
+    <HubShell
+      pageType="retraits_rapides"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
+        { label: isFr ? 'Retraits Rapides' : 'Fast Withdrawals' },
+      ]}
+      eyebrow={
+        isFr
+          ? 'Crypto instantané · E-wallet 1h · CB 24h · 2026'
+          : 'Instant crypto · E-wallet 1h · Card 24h · 2026'
+      }
+      heading={
+        isFr ? (
+          <>
+            Casinos avec <em className="not-italic text-green">retraits rapides</em>
+          </>
+        ) : (
+          <>
+            Casinos with <em className="not-italic text-green">fast withdrawals</em>
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? "Délais testés à l'argent réel par notre équipe. Filtrez par méthode de paiement pour trouver les casinos les plus rapides selon votre mode de retrait préféré."
+          : 'Withdrawal times tested with real money by our team. Filter by payment method to find the fastest casinos for your preferred withdrawal method.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={bySpeed}
+      configKey="retraits_rapides"
+      editorialH2={
+        isFr
+          ? 'Pourquoi les délais de retrait varient-ils autant ?'
+          : 'Why do withdrawal times vary so much?'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              La vitesse d&apos;un retrait de casino dépend de trois facteurs indépendants : le{' '}
+              <strong className="text-ink">délai de traitement du casino</strong> (de quelques
+              heures à 72 heures), le{' '}
+              <strong className="text-ink">délai de la méthode de paiement</strong> (instantané pour
+              la crypto, 3-5 jours pour les cartes), et les éventuels{' '}
+              <strong className="text-ink">délais de sécurité</strong> imposés par certains casinos
+              (period de &quot;refroidissement&quot; de 24-48 heures sur les gros retraits).
+            </p>
+            <p>
+              Les casinos qui affichent &quot;retraits en 24h&quot; comptent généralement le délai
+              de traitement interne — ils ne peuvent pas contrôler le temps que met votre banque à
+              créditer votre compte. Pour contourner ce problème, utilisez des e-wallets (Skrill,
+              Neteller) comme intermédiaires : le casino traite le retrait vers votre e-wallet en
+              24h, et vous virez ensuite vers votre banque quand vous voulez.
+            </p>
+            <p>
+              Notre équipe teste les délais réels en effectuant des retraits de montants modestes
+              (50-200€) via différentes méthodes. Les résultats varient parfois significativement
+              des délais annoncés — un casino qui annonce &quot;retraits instantanés&quot; peut
+              prendre 48h sur les cartes bancaires. Nos tests à l&apos;argent réel sont la seule
+              mesure fiable.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Casinos avec <em className="not-italic text-green">retraits rapides</em>
-              </>
-            ) : (
-              <>
-                Casinos with <em className="not-italic text-green">fast withdrawals</em>
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? "Délais testés à l'argent réel par notre équipe. Filtrez par méthode de paiement pour trouver les casinos les plus rapides selon votre mode de retrait préféré."
-              : 'Withdrawal times tested with real money by our team. Filter by payment method to find the fastest casinos for your preferred withdrawal method.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={bySpeed}
-        configKey="retraits_rapides"
-        pageType="retraits_rapides"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'Pourquoi les délais de retrait varient-ils autant ?'
-              : 'Why do withdrawal times vary so much?'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                La vitesse d&apos;un retrait de casino dépend de trois facteurs indépendants : le{' '}
-                <strong className="text-ink">délai de traitement du casino</strong> (de quelques
-                heures à 72 heures), le{' '}
-                <strong className="text-ink">délai de la méthode de paiement</strong> (instantané
-                pour la crypto, 3-5 jours pour les cartes), et les éventuels{' '}
-                <strong className="text-ink">délais de sécurité</strong> imposés par certains
-                casinos (period de &quot;refroidissement&quot; de 24-48 heures sur les gros
-                retraits).
-              </p>
-              <p>
-                Les casinos qui affichent &quot;retraits en 24h&quot; comptent généralement le délai
-                de traitement interne — ils ne peuvent pas contrôler le temps que met votre banque à
-                créditer votre compte. Pour contourner ce problème, utilisez des e-wallets (Skrill,
-                Neteller) comme intermédiaires : le casino traite le retrait vers votre e-wallet en
-                24h, et vous virez ensuite vers votre banque quand vous voulez.
-              </p>
-              <p>
-                Notre équipe teste les délais réels en effectuant des retraits de montants modestes
-                (50-200€) via différentes méthodes. Les résultats varient parfois significativement
-                des délais annoncés — un casino qui annonce &quot;retraits instantanés&quot; peut
-                prendre 48h sur les cartes bancaires. Nos tests à l&apos;argent réel sont la seule
-                mesure fiable.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                The speed of a casino withdrawal depends on three independent factors: the{' '}
-                <strong className="text-ink">casino processing delay</strong> (from a few hours to
-                72 hours), the <strong className="text-ink">payment method delay</strong> (instant
-                for crypto, 3–5 days for cards), and any{' '}
-                <strong className="text-ink">security delays</strong> imposed by some casinos (a
-                &apos;cooling-off&apos; period of 24–48 hours on large withdrawals).
-              </p>
-              <p>
-                Casinos that advertise &apos;24h withdrawals&apos; generally count the internal
-                processing delay — they cannot control the time your bank takes to credit your
-                account. To work around this, use e-wallets (Skrill, Neteller) as intermediaries:
-                the casino processes the withdrawal to your e-wallet in 24h, and you then transfer
-                to your bank whenever you choose.
-              </p>
-              <p>
-                Our team tests real delays by making withdrawals of modest amounts (€50–200) via
-                different methods. Results sometimes vary significantly from advertised delays — a
-                casino claiming &apos;instant withdrawals&apos; may take 48 hours for bank cards.
-                Our real-money tests are the only reliable measure.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr ? 'Questions fréquentes — Retraits rapides' : 'FAQ — Fast withdrawals'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              The speed of a casino withdrawal depends on three independent factors: the{' '}
+              <strong className="text-ink">casino processing delay</strong> (from a few hours to 72
+              hours), the <strong className="text-ink">payment method delay</strong> (instant for
+              crypto, 3–5 days for cards), and any{' '}
+              <strong className="text-ink">security delays</strong> imposed by some casinos (a
+              &apos;cooling-off&apos; period of 24–48 hours on large withdrawals).
+            </p>
+            <p>
+              Casinos that advertise &apos;24h withdrawals&apos; generally count the internal
+              processing delay — they cannot control the time your bank takes to credit your
+              account. To work around this, use e-wallets (Skrill, Neteller) as intermediaries: the
+              casino processes the withdrawal to your e-wallet in 24h, and you then transfer to your
+              bank whenever you choose.
+            </p>
+            <p>
+              Our team tests real delays by making withdrawals of modest amounts (€50–200) via
+              different methods. Results sometimes vary significantly from advertised delays — a
+              casino claiming &apos;instant withdrawals&apos; may take 48 hours for bank cards. Our
+              real-money tests are the only reliable measure.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={isFr ? 'Questions fréquentes — Retraits rapides' : 'FAQ — Fast withdrawals'}
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }

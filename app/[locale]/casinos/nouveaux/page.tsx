@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -125,122 +122,96 @@ export default async function CasinosNouveauxPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
-          { label: isFr ? 'Nouveaux Casinos' : 'New Casinos' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="casino_nouveaux" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'Bonus · Tours gratuits · Conditions vérifiées · 2026'
-              : 'Bonus · Free spins · Verified conditions · 2026'}
+    <HubShell
+      pageType="casino_nouveaux"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
+        { label: isFr ? 'Nouveaux Casinos' : 'New Casinos' },
+      ]}
+      eyebrow={
+        isFr
+          ? 'Bonus · Tours gratuits · Conditions vérifiées · 2026'
+          : 'Bonus · Free spins · Verified conditions · 2026'
+      }
+      heading={
+        isFr ? (
+          <>
+            Nouveaux <em className="not-italic text-green">casinos en ligne</em> 2026
+          </>
+        ) : (
+          <>
+            New <em className="not-italic text-green">online casinos</em> 2026
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? 'Les offres de bienvenue les plus généreuses du marché, triées par montant de bonus. Wager, validité et conditions détaillées — sans mauvaises surprises.'
+          : 'Most generous welcome offers on the market, sorted by bonus amount. Wagering, validity and detailed conditions.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={sorted}
+      configKey="nouveaux"
+      editorialH2={
+        isFr
+          ? 'Comment comparer les bonus casino en 2026 ?'
+          : 'How to compare casino bonuses in 2026?'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Un bonus de 5000€ avec un wager de 60× est bien moins intéressant qu&apos;un bonus de
+              500€ avec un wager de 20×. La valeur réelle d&apos;un bonus dépend de trois facteurs
+              liés : le montant, le wager et le RTP des jeux autorisés. Pour un RTP moyen de 96% sur
+              les slots, l&apos;avantage casino est de 4%. Chaque tour du wager érode mécaniquement
+              la valeur du bonus.
+            </p>
+            <p>
+              La véritable valeur des bonus est l&apos;
+              <strong className="text-ink">entertainment value</strong> : ils vous donnent plus de
+              temps de jeu pour le même dépôt. Utilisés intelligemment (machines à sous à haut RTP,
+              mises raisonnables), ils peuvent se convertir en gains réels — mais c&apos;est
+              l&apos;exception, pas la règle.
+            </p>
+            <p>
+              Les <strong className="text-ink">tours gratuits</strong> sont souvent plus
+              intéressants car ils permettent de gagner de l&apos;argent réel sans risquer votre
+              dépôt, même si les montants maximums de gains sont limités. Les tours sans wager (de
+              plus en plus rares) sont les plus précieux car chaque gain est directement
+              encaissable.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Nouveaux <em className="not-italic text-green">casinos en ligne</em> 2026
-              </>
-            ) : (
-              <>
-                New <em className="not-italic text-green">online casinos</em> 2026
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? 'Les offres de bienvenue les plus généreuses du marché, triées par montant de bonus. Wager, validité et conditions détaillées — sans mauvaises surprises.'
-              : 'Most generous welcome offers on the market, sorted by bonus amount. Wagering, validity and detailed conditions.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={sorted}
-        configKey="nouveaux"
-        pageType="casino_nouveaux"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'Comment comparer les bonus casino en 2026 ?'
-              : 'How to compare casino bonuses in 2026?'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Un bonus de 5000€ avec un wager de 60× est bien moins intéressant qu&apos;un bonus
-                de 500€ avec un wager de 20×. La valeur réelle d&apos;un bonus dépend de trois
-                facteurs liés : le montant, le wager et le RTP des jeux autorisés. Pour un RTP moyen
-                de 96% sur les slots, l&apos;avantage casino est de 4%. Chaque tour du wager érode
-                mécaniquement la valeur du bonus.
-              </p>
-              <p>
-                La véritable valeur des bonus est l&apos;
-                <strong className="text-ink">entertainment value</strong> : ils vous donnent plus de
-                temps de jeu pour le même dépôt. Utilisés intelligemment (machines à sous à haut
-                RTP, mises raisonnables), ils peuvent se convertir en gains réels — mais c&apos;est
-                l&apos;exception, pas la règle.
-              </p>
-              <p>
-                Les <strong className="text-ink">tours gratuits</strong> sont souvent plus
-                intéressants car ils permettent de gagner de l&apos;argent réel sans risquer votre
-                dépôt, même si les montants maximums de gains sont limités. Les tours sans wager (de
-                plus en plus rares) sont les plus précieux car chaque gain est directement
-                encaissable.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                A €5,000 bonus with 60× wagering is far less interesting than a €500 bonus at 20×.
-                The real value of a bonus depends on three linked factors: the amount, the wagering
-                requirement, and the RTP of eligible games. With an average RTP of 96% on slots, the
-                house edge is 4%. Each wagering round mechanically erodes the bonus value.
-              </p>
-              <p>
-                The true value of bonuses is the{' '}
-                <strong className="text-ink">entertainment value</strong>: they give you more
-                playing time for the same deposit. Used wisely (high-RTP slots, sensible stakes),
-                they can convert into real winnings — but that is the exception, not the rule.
-              </p>
-              <p>
-                <strong className="text-ink">Free spins</strong> are often more interesting because
-                they let you win real money without risking your deposit, even if maximum win
-                amounts are capped. No-wager spins (increasingly rare) are the most valuable because
-                every win is immediately cashable.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr ? 'Questions fréquentes — Bonus Casino' : 'FAQ — Casino Bonuses'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              A €5,000 bonus with 60× wagering is far less interesting than a €500 bonus at 20×. The
+              real value of a bonus depends on three linked factors: the amount, the wagering
+              requirement, and the RTP of eligible games. With an average RTP of 96% on slots, the
+              house edge is 4%. Each wagering round mechanically erodes the bonus value.
+            </p>
+            <p>
+              The true value of bonuses is the{' '}
+              <strong className="text-ink">entertainment value</strong>: they give you more playing
+              time for the same deposit. Used wisely (high-RTP slots, sensible stakes), they can
+              convert into real winnings — but that is the exception, not the rule.
+            </p>
+            <p>
+              <strong className="text-ink">Free spins</strong> are often more interesting because
+              they let you win real money without risking your deposit, even if maximum win amounts
+              are capped. No-wager spins (increasingly rare) are the most valuable because every win
+              is immediately cashable.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={isFr ? 'Questions fréquentes — Bonus Casino' : 'FAQ — Casino Bonuses'}
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }

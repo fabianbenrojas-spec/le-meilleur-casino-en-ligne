@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -127,127 +124,96 @@ export default async function MeilleurBonusPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
-          { label: isFr ? 'Meilleur Bonus' : 'Best Bonus' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="meilleur_bonus" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'Montant · Wager · Tours gratuits · 2026'
-              : 'Amount · Wagering · Free spins · 2026'}
+    <HubShell
+      pageType="meilleur_bonus"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Comparatifs' : 'Comparisons', href: '/comparatifs/' },
+        { label: isFr ? 'Meilleur Bonus' : 'Best Bonus' },
+      ]}
+      eyebrow={
+        isFr ? 'Montant · Wager · Tours gratuits · 2026' : 'Amount · Wagering · Free spins · 2026'
+      }
+      heading={
+        isFr ? (
+          <>
+            Comparatif <em className="not-italic text-green">meilleur bonus</em> casino
+          </>
+        ) : (
+          <>
+            Best casino <em className="not-italic text-green">bonus</em> comparison
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? "Un gros bonus avec un wager de 60× vaut moins qu'un petit bonus avec wager de 20×. Filtrez par montant et wager maximum pour trouver la vraie valeur."
+          : 'A big bonus with 60× wagering is worth less than a small bonus at 20×. Filter by amount and max wagering to find real value.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={byBonus}
+      configKey="meilleur_bonus"
+      editorialH2={
+        isFr ? 'La vérité sur les bonus casino en 2026' : 'The truth about casino bonuses in 2026'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Les bonus casino sont conçus pour attirer les joueurs, pas pour les enrichir. Derrière
+              les chiffres attractifs (500€, 1000€, 5000€), la réalité mathématique est implacable :
+              la valeur espérée d&apos;un bonus est toujours négative pour le joueur. Cela ne veut
+              pas dire qu&apos;ils n&apos;ont aucune valeur — ils prolongent votre session de jeu et
+              vous donnent plus de chances de gagner — mais il ne faut pas les surestimer.
+            </p>
+            <p>
+              Le critère le plus important pour évaluer un bonus n&apos;est pas son montant mais son{' '}
+              <strong className="text-ink">wager</strong>. Un wager de 20× signifie que pour un
+              bonus de 100€, vous devez miser 2000€. Avec un RTP moyen de 96% sur les slots, vous
+              perdrez statistiquement 80€ (4% × 2000€) avant de pouvoir retirer. Votre gain net est
+              donc de 20€ si vous réussissez à solder le wager — ce qui n&apos;arrive pas toujours
+              dans la période de validité.
+            </p>
+            <p>
+              Notre recommandation : privilégiez les bonus avec wager inférieur ou égal à 30×, une
+              durée de validité d&apos;au moins 14 jours, et des jeux à haut RTP éligibles. Les
+              tours gratuits sans wager sont les plus précieux même pour des petits montants — un
+              gain de 30€ directement encaissable vaut plus qu&apos;un bonus de 200€ wager 40× que
+              vous ne convertirez jamais.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Comparatif <em className="not-italic text-green">meilleur bonus</em> casino
-              </>
-            ) : (
-              <>
-                Best casino <em className="not-italic text-green">bonus</em> comparison
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? "Un gros bonus avec un wager de 60× vaut moins qu'un petit bonus avec wager de 20×. Filtrez par montant et wager maximum pour trouver la vraie valeur."
-              : 'A big bonus with 60× wagering is worth less than a small bonus at 20×. Filter by amount and max wagering to find real value.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={byBonus}
-        configKey="meilleur_bonus"
-        pageType="meilleur_bonus"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'La vérité sur les bonus casino en 2026'
-              : 'The truth about casino bonuses in 2026'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Les bonus casino sont conçus pour attirer les joueurs, pas pour les enrichir.
-                Derrière les chiffres attractifs (500€, 1000€, 5000€), la réalité mathématique est
-                implacable : la valeur espérée d&apos;un bonus est toujours négative pour le joueur.
-                Cela ne veut pas dire qu&apos;ils n&apos;ont aucune valeur — ils prolongent votre
-                session de jeu et vous donnent plus de chances de gagner — mais il ne faut pas les
-                surestimer.
-              </p>
-              <p>
-                Le critère le plus important pour évaluer un bonus n&apos;est pas son montant mais
-                son <strong className="text-ink">wager</strong>. Un wager de 20× signifie que pour
-                un bonus de 100€, vous devez miser 2000€. Avec un RTP moyen de 96% sur les slots,
-                vous perdrez statistiquement 80€ (4% × 2000€) avant de pouvoir retirer. Votre gain
-                net est donc de 20€ si vous réussissez à solder le wager — ce qui n&apos;arrive pas
-                toujours dans la période de validité.
-              </p>
-              <p>
-                Notre recommandation : privilégiez les bonus avec wager inférieur ou égal à 30×, une
-                durée de validité d&apos;au moins 14 jours, et des jeux à haut RTP éligibles. Les
-                tours gratuits sans wager sont les plus précieux même pour des petits montants — un
-                gain de 30€ directement encaissable vaut plus qu&apos;un bonus de 200€ wager 40× que
-                vous ne convertirez jamais.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                Casino bonuses are designed to attract players, not to enrich them. Behind the
-                attractive figures (€500, €1,000, €5,000), the mathematical reality is unforgiving:
-                the expected value of a bonus is always negative for the player. This does not mean
-                they have no value — they extend your gaming session and give you more chances to
-                win — but they should not be overestimated.
-              </p>
-              <p>
-                The most important criterion for evaluating a bonus is not its amount but its{' '}
-                <strong className="text-ink">wagering requirement</strong>. A 20× wager means that
-                for a €100 bonus, you must bet €2,000. With an average RTP of 96% on slots, you will
-                statistically lose €80 (4% × €2,000) before being able to withdraw. Your net gain is
-                therefore €20 if you manage to clear the wager — which does not always happen within
-                the validity period.
-              </p>
-              <p>
-                Our recommendation: favour bonuses with wagering of 30× or less, a validity period
-                of at least 14 days, and high-RTP eligible games. No-wager free spins are the most
-                valuable even for small amounts — a directly cashable €30 win is worth more than a
-                €200 bonus at 40× wagering that you may never convert.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr ? 'Questions fréquentes — Meilleur bonus casino' : 'FAQ — Best casino bonus'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              Casino bonuses are designed to attract players, not to enrich them. Behind the
+              attractive figures (€500, €1,000, €5,000), the mathematical reality is unforgiving:
+              the expected value of a bonus is always negative for the player. This does not mean
+              they have no value — they extend your gaming session and give you more chances to win
+              — but they should not be overestimated.
+            </p>
+            <p>
+              The most important criterion for evaluating a bonus is not its amount but its{' '}
+              <strong className="text-ink">wagering requirement</strong>. A 20× wager means that for
+              a €100 bonus, you must bet €2,000. With an average RTP of 96% on slots, you will
+              statistically lose €80 (4% × €2,000) before being able to withdraw. Your net gain is
+              therefore €20 if you manage to clear the wager — which does not always happen within
+              the validity period.
+            </p>
+            <p>
+              Our recommendation: favour bonuses with wagering of 30× or less, a validity period of
+              at least 14 days, and high-RTP eligible games. No-wager free spins are the most
+              valuable even for small amounts — a directly cashable €30 win is worth more than a
+              €200 bonus at 40× wagering that you may never convert.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={isFr ? 'Questions fréquentes — Meilleur bonus casino' : 'FAQ — Best casino bonus'}
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }

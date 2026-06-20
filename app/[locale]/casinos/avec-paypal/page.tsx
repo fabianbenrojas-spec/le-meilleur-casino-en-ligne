@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -18,78 +15,78 @@ export async function generateMetadata({
   const isFr = locale === 'fr'
   return {
     title: isFr
-      ? 'Casino en ligne PayPal France 2026 — Dépôt & Retrait Rapide'
-      : 'PayPal Online Casino France 2026 — Fast Deposit & Withdrawal',
+      ? 'Casino en ligne PayPal France 2026 — Retrait rapide en 24h'
+      : 'PayPal Online Casino France 2026 — Fast 24h Withdrawal',
     description: isFr
-      ? 'Liste des casinos en ligne qui acceptent PayPal en France 2026 : dépôts et retraits rapides, sécurisés, sans frais. Comparatif complet. 18+'
-      : 'List of online casinos accepting PayPal in France 2026: fast, secure, fee-free deposits and withdrawals. Full comparison. 18+',
+      ? 'Les meilleurs casinos en ligne acceptant PayPal en France 2026 : dépôt et retrait rapides, sécurité maximale. Également Skrill et Neteller disponibles. 18+'
+      : 'Best online casinos accepting PayPal in France 2026: fast deposits and withdrawals, maximum security. Also Skrill and Neteller available. 18+',
     alternates: { languages: buildHreflang('/casinos/avec-paypal/') },
   }
 }
 
 const FAQ_FR = [
   {
-    question: 'Tous les casinos en ligne acceptent-ils PayPal ?',
+    question: 'PayPal est-il disponible dans tous les casinos en ligne ?',
     answer:
-      "Non, PayPal est sélectif avec les opérateurs de jeux d'argent. PayPal travaille uniquement avec des casinos disposant de licences reconnues (MGA, UKGC, Gibraltar) et respectant ses conditions strictes. Les casinos avec licence Curaçao ou sans licence sérieuse ne peuvent généralement pas accepter PayPal. Cette sélectivité est un indicateur de qualité.",
+      "Non. PayPal applique une politique stricte de sélection des casinos partenaires. Seuls les opérateurs disposant d'une licence MGA, UKGC ou Gibraltar peuvent proposer PayPal. Cette restriction fait de la disponibilité PayPal un indicateur indirect de la fiabilité d'un casino — si PayPal vous fait confiance, c'est bon signe.",
   },
   {
-    question: 'Y a-t-il des frais PayPal pour les dépôts et retraits de casino ?',
+    question: 'Y a-t-il des frais pour utiliser PayPal dans un casino ?',
     answer:
-      "Du côté du casino, les dépôts et retraits via PayPal sont généralement sans frais. Côté PayPal, si votre compte est en euros et que vous déposez dans un casino en euros, aucun frais de conversion. Des frais de change (3-4%) s'appliquent si les devises diffèrent.",
+      'PayPal ne facture généralement pas de frais pour les dépôts en casino. Pour les retraits, les frais dépendent du type de compte PayPal et de votre pays. En France, les retraits PayPal vers un compte bancaire sont généralement gratuits. Certains casinos peuvent appliquer leurs propres frais — vérifiez la page Paiements du casino avant de commencer.',
   },
   {
-    question: 'Combien de temps prennent les retraits PayPal dans un casino ?',
+    question: 'Combien de temps prend un retrait en PayPal depuis un casino ?',
     answer:
-      "Les retraits vers PayPal sont généralement traités en 24-48 heures par le casino (après vérification KYC). Une fois approuvé, l'argent apparaît instantanément sur votre compte PayPal. Le délai initial peut être plus long lors de votre premier retrait (24 à 72 heures) car le casino doit vérifier votre identité.",
+      "Une fois votre KYC validé et votre retrait approuvé par le casino (délai interne : 1 à 48h selon l'opérateur), le virement sur votre compte PayPal est généralement instantané à quelques heures. PayPal est parmi les méthodes de retrait les plus rapides après les cryptomonnaies. Comparez avec les 3 à 5 jours pour un virement bancaire classique.",
   },
   {
-    question: 'PayPal est-il sécurisé pour jouer en casino en ligne ?',
+    question: 'Mon compte PayPal peut-il être limité si je joue en casino ?',
     answer:
-      "PayPal offre une protection acheteur mais les jeux d'argent en font généralement partie des exceptions. La vraie sécurité de PayPal est la séparation : votre numéro de carte bancaire n'est jamais partagé avec le casino. Le chiffrement 2048 bits et l'authentification à deux facteurs offrent une protection technique solide.",
+      "Techniquement oui. PayPal peut surveiller et limiter les comptes affichant des transactions liées au jeu. Pour minimiser ce risque, utilisez PayPal uniquement pour des casinos officiellement agréés par PayPal (ce sont ceux listés sur cette page), évitez des transactions atypiquement importantes, et gardez votre compte PayPal actif avec d'autres usages.",
   },
   {
-    question: 'Puis-je utiliser un compte PayPal professionnel pour jouer ?',
+    question: 'Puis-je utiliser un compte PayPal professionnel pour jouer en casino ?',
     answer:
-      "Techniquement possible mais déconseillé. Utiliser un compte professionnel pour des transactions de jeux d'argent peut poser des problèmes avec PayPal (risque de suspension) et des complications fiscales. Utilisez toujours un compte PayPal personnel. Assurez-vous que les noms correspondent entre votre compte casino et votre compte PayPal.",
+      "Non. PayPal interdit explicitement l'utilisation des comptes professionnels pour les transactions de jeux d'argent. Vous devez utiliser un compte personnel. L'utilisation d'un compte professionnel pour des transactions casino peut entraîner une suspension permanente du compte PayPal.",
   },
   {
-    question: 'Skrill ou PayPal — lequel est le mieux pour les casinos ?',
+    question: 'Skrill est-il aussi bien que PayPal pour les casinos ?',
     answer:
-      "Skrill est spécialement conçu pour les jeux en ligne et accepté par plus de casinos. Ses avantages : retraits plus rapides, largement disponible même dans les casinos sans licence premium. PayPal a l'avantage de la notoriété et de la protection consommateur. Pour les débutants : PayPal. Pour les joueurs réguliers : Skrill pour sa disponibilité.",
+      "Skrill (groupe Paysafe) offre des fonctionnalités similaires à PayPal pour les casinos, avec souvent plus de casinos partenaires. L'avantage de Skrill est son programme VIP qui réduit les frais. L'inconvénient : une fois de l'argent envoyé sur Skrill, il est difficile de le retransférer vers votre banque sans frais. Skrill est excellent pour les joueurs réguliers, PayPal pour les utilisateurs occasionnels.",
   },
 ]
 
 const FAQ_EN = [
   {
-    question: 'Do all online casinos accept PayPal?',
+    question: 'Is PayPal available at all online casinos?',
     answer:
-      'No, PayPal is selective with gambling operators. PayPal only works with casinos holding recognised licences (MGA, UKGC, Gibraltar) and complying with its strict conditions. Casinos with a Curaçao licence or no serious licence generally cannot accept PayPal. This selectivity is an indicator of quality.',
+      'No. PayPal applies a strict partner casino selection policy. Only operators with an MGA, UKGC or Gibraltar licence can offer PayPal. This restriction makes PayPal availability an indirect indicator of casino trustworthiness — if PayPal trusts them, that is a good sign.',
   },
   {
-    question: 'Are there PayPal fees for casino deposits and withdrawals?',
+    question: 'Are there fees for using PayPal at a casino?',
     answer:
-      'On the casino side, deposits and withdrawals via PayPal are generally fee-free. On the PayPal side, if your account is in euros and you deposit at a casino in euros, no conversion fees apply. Exchange fees (3–4%) apply if the currencies differ.',
+      'PayPal generally does not charge fees for casino deposits. For withdrawals, fees depend on your PayPal account type and country. In most markets, PayPal withdrawals to a bank account are free. Some casinos may apply their own fees — check the casino Payments page before you start.',
   },
   {
-    question: 'How long do PayPal withdrawals take at a casino?',
+    question: 'How long does a PayPal withdrawal from a casino take?',
     answer:
-      'PayPal withdrawals are generally processed within 24–48 hours by the casino (after KYC verification). Once approved, the money appears instantly in your PayPal account. The initial delay may be longer on your first withdrawal (24 to 72 hours) as the casino must verify your identity.',
+      'Once your KYC is validated and your withdrawal is approved by the casino (internal processing: 1 to 48h depending on the operator), the transfer to your PayPal account is generally instant to a few hours. PayPal is among the fastest withdrawal methods after cryptocurrencies.',
   },
   {
-    question: 'Is PayPal safe for playing at an online casino?',
+    question: 'Can my PayPal account be limited if I play at casinos?',
     answer:
-      'PayPal offers buyer protection but gambling generally falls under its exceptions. The real security of PayPal is separation: your card number is never shared with the casino. 2048-bit encryption and two-factor authentication provide solid technical protection.',
+      'Technically yes. PayPal may monitor and limit accounts showing gambling-related transactions. To minimise this risk, only use PayPal at casinos officially approved by PayPal (those listed on this page), avoid unusually large transactions, and keep your PayPal account active with other uses.',
   },
   {
-    question: 'Can I use a business PayPal account to play?',
+    question: 'Can I use a PayPal business account to play at a casino?',
     answer:
-      'Technically possible but not recommended. Using a business account for gambling transactions can cause issues with PayPal (risk of suspension) and tax complications. Always use a personal PayPal account. Make sure the names match between your casino account and your PayPal account.',
+      'No. PayPal explicitly prohibits the use of business accounts for gambling transactions. You must use a personal account. Using a business account for casino transactions can result in permanent suspension of the PayPal account.',
   },
   {
-    question: 'Skrill or PayPal — which is better for casinos?',
+    question: 'Is Skrill as good as PayPal for casinos?',
     answer:
-      'Skrill is purpose-built for online gaming and accepted by more casinos. Its advantages: faster withdrawals, widely available even at non-premium casinos. PayPal has the advantage of brand recognition and consumer protection. For beginners: PayPal. For regular players: Skrill for its availability.',
+      'Skrill (Paysafe Group) offers similar features to PayPal for casinos, with often more casino partners. The advantage of Skrill is its VIP programme that reduces fees. The downside: once money is sent to Skrill, it is difficult to transfer back to your bank without fees. Skrill is excellent for regular players, PayPal for occasional users.',
   },
 ]
 
@@ -133,140 +130,113 @@ export default async function CasinosAvecPaypalPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
-          { label: isFr ? 'Casino PayPal' : 'PayPal Casino' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="casino_paypal" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? 'PayPal · Skrill · Neteller · Retrait 24h · 2026'
-              : 'PayPal · Skrill · Neteller · 24h withdrawal · 2026'}
+    <HubShell
+      pageType="casino_paypal"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
+        { label: isFr ? 'Casino PayPal' : 'PayPal Casino' },
+      ]}
+      eyebrow={
+        isFr
+          ? 'PayPal · Skrill · Neteller · Retrait 24h · 2026'
+          : 'PayPal · Skrill · Neteller · 24h withdrawal · 2026'
+      }
+      heading={
+        isFr ? (
+          <>
+            Casinos en ligne <em className="not-italic text-green">avec PayPal</em>
+          </>
+        ) : (
+          <>
+            Online casinos <em className="not-italic text-green">with PayPal</em>
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? 'Seuls les casinos avec licences sérieuses sont acceptés par PayPal. Filtrez par e-wallet, bonus et licence pour trouver votre casino avec paiement rapide.'
+          : 'Only casinos with serious licences are accepted by PayPal. Filter by e-wallet, bonus and licence.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={paypalFirst}
+      configKey="avec_paypal"
+      editorialH2={
+        isFr
+          ? 'PayPal dans les casinos en ligne — ce que vous devez savoir'
+          : 'PayPal at online casinos — what you need to know'
+      }
+      editorialContent={
+        isFr ? (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              PayPal est le e-wallet le plus reconnu au monde avec plus de 400 millions
+              d&apos;utilisateurs actifs. Dans l&apos;univers du casino en ligne, sa présence est un
+              indicateur de qualité : PayPal applique une politique stricte de sélection de ses
+              partenaires marchands dans le secteur du jeu, acceptant uniquement les opérateurs avec
+              des licences sérieuses.
+            </p>
+            <p>
+              La principale valeur de PayPal est la{' '}
+              <strong className="text-ink">séparation totale</strong> de vos données bancaires.
+              Votre numéro de carte, vos coordonnées bancaires et votre RIB ne sont jamais transmis
+              au casino. C&apos;est particulièrement apprécié des joueurs qui ne souhaitent pas voir
+              des transactions de casino apparaître directement sur leurs relevés bancaires.
+            </p>
+            <p>
+              Pour les retraits, PayPal est parmi les plus rapides après les cryptomonnaies. Une
+              fois votre KYC validé, les virements arrivent généralement en 24-48 heures. Comparez
+              avec les 3-5 jours des virements bancaires classiques — l&apos;avantage est réel et
+              mesurable.
+            </p>
+            <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
+              Les alternatives à PayPal
+            </h3>
+            <p>
+              Skrill et Neteller (groupe Paysafe) offrent des fonctionnalités similaires et sont
+              acceptés par un plus grand nombre de casinos. Skrill a l&apos;avantage d&apos;un
+              programme VIP avec réductions sur les frais. Si PayPal n&apos;est pas disponible dans
+              votre casino préféré, Skrill est généralement la meilleure alternative.
+            </p>
           </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Casinos en ligne <em className="not-italic text-green">avec PayPal</em>
-              </>
-            ) : (
-              <>
-                Online casinos <em className="not-italic text-green">with PayPal</em>
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? 'Seuls les casinos avec licences sérieuses sont acceptés par PayPal. Filtrez par e-wallet, bonus et licence pour trouver votre casino avec paiement rapide.'
-              : 'Only casinos with serious licences are accepted by PayPal. Filter by e-wallet, bonus and licence.'}
-          </p>
-        </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={paypalFirst}
-        configKey="avec_paypal"
-        pageType="casino_paypal"
-        locale={locale}
-      />
-
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'PayPal dans les casinos en ligne — ce que vous devez savoir'
-              : 'PayPal at online casinos — what you need to know'}
-          </h2>
-          {isFr ? (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                PayPal est le e-wallet le plus reconnu au monde avec plus de 400 millions
-                d&apos;utilisateurs actifs. Dans l&apos;univers du casino en ligne, sa présence est
-                un indicateur de qualité : PayPal applique une politique stricte de sélection de ses
-                partenaires marchands dans le secteur du jeu, acceptant uniquement les opérateurs
-                avec des licences sérieuses.
-              </p>
-              <p>
-                La principale valeur de PayPal est la{' '}
-                <strong className="text-ink">séparation totale</strong> de vos données bancaires.
-                Votre numéro de carte, vos coordonnées bancaires et votre RIB ne sont jamais
-                transmis au casino. C&apos;est particulièrement apprécié des joueurs qui ne
-                souhaitent pas voir des transactions de casino apparaître directement sur leurs
-                relevés bancaires.
-              </p>
-              <p>
-                Pour les retraits, PayPal est parmi les plus rapides après les cryptomonnaies. Une
-                fois votre KYC validé, les virements arrivent généralement en 24-48 heures. Comparez
-                avec les 3-5 jours des virements bancaires classiques — l&apos;avantage est réel et
-                mesurable.
-              </p>
-              <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
-                Les alternatives à PayPal
-              </h3>
-              <p>
-                Skrill et Neteller (groupe Paysafe) offrent des fonctionnalités similaires et sont
-                acceptés par un plus grand nombre de casinos. Skrill a l&apos;avantage d&apos;un
-                programme VIP avec réductions sur les frais. Si PayPal n&apos;est pas disponible
-                dans votre casino préféré, Skrill est généralement la meilleure alternative.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-              <p>
-                PayPal is the world&apos;s most recognised e-wallet with over 400 million active
-                users. In the online casino world, its presence is a quality indicator: PayPal
-                applies a strict partner selection policy in the gambling sector, accepting only
-                operators with serious licences.
-              </p>
-              <p>
-                PayPal&apos;s primary value is the{' '}
-                <strong className="text-ink">complete separation</strong> of your banking data. Your
-                card number, banking details and IBAN are never transmitted to the casino. This is
-                particularly appreciated by players who do not want casino transactions appearing
-                directly on their bank statements.
-              </p>
-              <p>
-                For withdrawals, PayPal is among the fastest after cryptocurrencies. Once your KYC
-                is validated, transfers generally arrive in 24–48 hours. Compare that with the 3–5
-                days of standard bank transfers — the advantage is real and measurable.
-              </p>
-              <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
-                PayPal alternatives
-              </h3>
-              <p>
-                Skrill and Neteller (Paysafe Group) offer similar features and are accepted by a
-                larger number of casinos. Skrill has the advantage of a VIP programme with fee
-                discounts. If PayPal is not available at your preferred casino, Skrill is generally
-                the best alternative.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr ? 'Questions fréquentes — Casino PayPal' : 'FAQ — PayPal Casino'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
+        ) : (
+          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+            <p>
+              PayPal is the world&apos;s most recognised e-wallet with over 400 million active
+              users. In the online casino world, its presence is a quality indicator: PayPal applies
+              a strict partner selection policy in the gambling sector, accepting only operators
+              with serious licences.
+            </p>
+            <p>
+              PayPal&apos;s primary value is the{' '}
+              <strong className="text-ink">complete separation</strong> of your banking data. Your
+              card number, banking details and IBAN are never transmitted to the casino. This is
+              particularly appreciated by players who do not want casino transactions appearing
+              directly on their bank statements.
+            </p>
+            <p>
+              For withdrawals, PayPal is among the fastest after cryptocurrencies. Once your KYC is
+              validated, transfers generally arrive in 24–48 hours. Compare that with the 3–5 days
+              of standard bank transfers — the advantage is real and measurable.
+            </p>
+            <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
+              PayPal alternatives
+            </h3>
+            <p>
+              Skrill and Neteller (Paysafe Group) offer similar features and are accepted by a
+              larger number of casinos. Skrill has the advantage of a VIP programme with fee
+              discounts. If PayPal is not available at your preferred casino, Skrill is generally
+              the best alternative.
+            </p>
           </div>
-        </div>
-      </section>
-    </>
+        )
+      }
+      faqH2={isFr ? 'Questions fréquentes — Casino PayPal' : 'FAQ — PayPal Casino'}
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }

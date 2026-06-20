@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 
-import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ListingPageClient } from '@/components/listing/listing-page-client'
+import { HubShell } from '@/components/hub/hub-shell'
 import { operators } from '@/config/operators'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -131,150 +128,124 @@ export default async function CasinosBitcoinPage({
       acceptedAnswer: { '@type': 'Answer', text: q.answer },
     })),
   }
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
-      />
-      <Breadcrumbs
-        items={[
-          { label: isFr ? 'Accueil' : 'Home', href: '/' },
-          { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
-          { label: isFr ? 'Casinos Bitcoin' : 'Bitcoin Casinos' },
-        ]}
-        locale={locale}
-      />
-
-      <section className="pb-2 pt-10" data-page-type="casino_bitcoin" data-locale={locale}>
-        <div className="mx-auto max-w-site px-[18px] md:px-8">
-          <div className="mb-4 inline-flex items-center gap-[9px] font-mono text-[11.5px] uppercase tracking-[0.14em] text-green before:h-px before:w-[22px] before:bg-gold before:content-['']">
-            {isFr
-              ? `${cryptoCasinos.length} casinos testés · BTC · ETH · USDT · 2026`
-              : `${cryptoCasinos.length} tested casinos · BTC · ETH · USDT · 2026`}
-          </div>
-          <h1 className="mb-[18px] font-serif text-[clamp(30px,4.2vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-            {isFr ? (
-              <>
-                Meilleurs <em className="not-italic text-green">casinos Bitcoin</em> en ligne
-              </>
-            ) : (
-              <>
-                Best <em className="not-italic text-green">Bitcoin casinos</em> online
-              </>
-            )}
-          </h1>
-          <p className="m-0 max-w-[62ch] text-[17px] leading-[1.55] text-ink-2">
-            {isFr
-              ? 'Retraits instantanés en BTC, ETH, LTC et USDT. Filtrez par cryptomonnaie, RTP et licence pour trouver le casino crypto qui correspond à votre profil.'
-              : 'Instant withdrawals in BTC, ETH, LTC and USDT. Filter by cryptocurrency, RTP and licence to find the right crypto casino for you.'}
-          </p>
+    <HubShell
+      pageType="casino_bitcoin"
+      locale={locale}
+      breadcrumbItems={[
+        { label: isFr ? 'Accueil' : 'Home', href: '/' },
+        { label: isFr ? 'Casinos en ligne' : 'Online Casinos', href: '/casinos/' },
+        { label: isFr ? 'Casinos Bitcoin' : 'Bitcoin Casinos' },
+      ]}
+      eyebrow={
+        isFr
+          ? `${cryptoCasinos.length} casinos testés · BTC · ETH · USDT · 2026`
+          : `${cryptoCasinos.length} tested casinos · BTC · ETH · USDT · 2026`
+      }
+      heading={
+        isFr ? (
+          <>
+            Meilleurs <em className="not-italic text-green">casinos Bitcoin</em> en ligne
+          </>
+        ) : (
+          <>
+            Best <em className="not-italic text-green">Bitcoin casinos</em> online
+          </>
+        )
+      }
+      intro={
+        isFr
+          ? 'Retraits instantanés en BTC, ETH, LTC et USDT. Filtrez par cryptomonnaie, RTP et licence pour trouver le casino crypto qui correspond à votre profil.'
+          : 'Instant withdrawals in BTC, ETH, LTC and USDT. Filter by cryptocurrency, RTP and licence to find the right crypto casino for you.'
+      }
+      schemaItemList={schemaItemList}
+      schemaFAQ={schemaFAQ}
+      operators={cryptoCasinos}
+      configKey="bitcoin"
+      editorialH2={
+        isFr
+          ? 'Pourquoi jouer dans un casino Bitcoin en 2026 ?'
+          : 'Why play at a Bitcoin casino in 2026?'
+      }
+      editorialContent={
+        <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
+          {isFr ? (
+            <>
+              <p>
+                Les casinos Bitcoin représentent une évolution majeure du secteur. Leur avantage
+                premier est la <strong className="text-ink">rapidité des retraits</strong> : là où
+                une carte bancaire prend 1 à 3 jours ouvrés, une transaction Bitcoin est confirmée
+                en moins d&apos;une heure, et l&apos;USDT sur réseau Tron en quelques secondes. Pour
+                les joueurs réguliers, c&apos;est un avantage concret et mesurable.
+              </p>
+              <p>
+                Du point de vue du RTP, plusieurs opérateurs crypto publient leurs résultats de
+                manière transparente sur la blockchain. Des plateformes comme{' '}
+                <strong className="text-ink">Stake, Rollbit ou BC.Game</strong> proposent des jeux
+                provably fair dont l&apos;équité mathématique peut être vérifiée par n&apos;importe
+                qui. C&apos;est un niveau de transparence impossible avec les casinos traditionnels.
+              </p>
+              <p>
+                La diversité des cryptomonnaies acceptées a considérablement évolué. Bitcoin reste
+                le standard, mais Ethereum, Litecoin, Solana et les stablecoins USDT permettent de
+                choisir le bon outil selon vos besoins : vitesse (LTC, SOL), stabilité (USDT, USDC),
+                ou valeur long terme (BTC, ETH). La plupart des casinos crypto acceptent désormais
+                plus de 10 cryptomonnaies différentes.
+              </p>
+              <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
+                Notre méthode de sélection
+              </h3>
+              <p>
+                Chaque casino de ce classement a été testé par notre équipe avec de l&apos;argent
+                réel. Nous évaluons : la vitesse réelle des retraits (pas les délais annoncés), la
+                disponibilité des supports en français, la richesse du catalogue de jeux, la qualité
+                du service client, et la solidité de la licence. Les casinos dont les retraits
+                dépassent 48h sont automatiquement exclus du classement.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                Bitcoin casinos represent a major evolution in the sector. Their primary advantage
+                is <strong className="text-ink">withdrawal speed</strong>: where a bank card takes 1
+                to 3 business days, a Bitcoin transaction is confirmed in under an hour, and USDT on
+                the Tron network in seconds. For regular players, this is a concrete and measurable
+                advantage.
+              </p>
+              <p>
+                From an RTP standpoint, several crypto operators publish their results transparently
+                on the blockchain. Platforms like{' '}
+                <strong className="text-ink">Stake, Rollbit or BC.Game</strong> offer provably fair
+                games whose mathematical fairness can be verified by anyone. This is a level of
+                transparency impossible with traditional casinos.
+              </p>
+              <p>
+                The variety of accepted cryptocurrencies has expanded considerably. Bitcoin remains
+                the standard, but Ethereum, Litecoin, Solana and stablecoins like USDT let you
+                choose the right tool for your needs: speed (LTC, SOL), stability (USDT, USDC), or
+                long-term value (BTC, ETH). Most crypto casinos now accept over 10 different
+                cryptocurrencies.
+              </p>
+              <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
+                Our selection method
+              </h3>
+              <p>
+                Each casino in this ranking has been tested by our team with real money. We
+                evaluate: actual withdrawal speeds (not advertised delays), game catalogue quality,
+                customer service quality, and the strength of the licence. Casinos whose withdrawals
+                exceed 48 hours are automatically excluded from the ranking.
+              </p>
+            </>
+          )}
         </div>
-      </section>
-
-      <AffiliateDisclosure variant="strip" locale={locale} />
-
-      <ListingPageClient
-        operators={cryptoCasinos}
-        configKey="bitcoin"
-        pageType="casino_bitcoin"
-        locale={locale}
-      />
-
-      {/* SEO editorial section */}
-      <section className="border-t border-line bg-bg-sunken py-14">
-        <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
-          <h2 className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] font-medium tracking-[-0.015em] text-ink">
-            {isFr
-              ? 'Pourquoi jouer dans un casino Bitcoin en 2026 ?'
-              : 'Why play at a Bitcoin casino in 2026?'}
-          </h2>
-          <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
-            {isFr ? (
-              <>
-                <p>
-                  Les casinos Bitcoin représentent une évolution majeure du secteur. Leur avantage
-                  premier est la <strong className="text-ink">rapidité des retraits</strong> : là où
-                  une carte bancaire prend 1 à 3 jours ouvrés, une transaction Bitcoin est confirmée
-                  en moins d&apos;une heure, et l&apos;USDT sur réseau Tron en quelques secondes.
-                  Pour les joueurs réguliers, c&apos;est un avantage concret et mesurable.
-                </p>
-                <p>
-                  Du point de vue du RTP, plusieurs opérateurs crypto publient leurs résultats de
-                  manière transparente sur la blockchain. Des plateformes comme{' '}
-                  <strong className="text-ink">Stake, Rollbit ou BC.Game</strong> proposent des jeux
-                  provably fair dont l&apos;équité mathématique peut être vérifiée par
-                  n&apos;importe qui. C&apos;est un niveau de transparence impossible avec les
-                  casinos traditionnels.
-                </p>
-                <p>
-                  La diversité des cryptomonnaies acceptées a considérablement évolué. Bitcoin reste
-                  le standard, mais Ethereum, Litecoin, Solana et les stablecoins USDT permettent de
-                  choisir le bon outil selon vos besoins : vitesse (LTC, SOL), stabilité (USDT,
-                  USDC), ou valeur long terme (BTC, ETH). La plupart des casinos crypto acceptent
-                  désormais plus de 10 cryptomonnaies différentes.
-                </p>
-                <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
-                  Notre méthode de sélection
-                </h3>
-                <p>
-                  Chaque casino de ce classement a été testé par notre équipe avec de l&apos;argent
-                  réel. Nous évaluons : la vitesse réelle des retraits (pas les délais annoncés), la
-                  disponibilité des supports en français, la richesse du catalogue de jeux, la
-                  qualité du service client, et la solidité de la licence. Les casinos dont les
-                  retraits dépassent 48h sont automatiquement exclus du classement.
-                </p>
-              </>
-            ) : (
-              <>
-                <p>
-                  Bitcoin casinos represent a major evolution in the sector. Their primary advantage
-                  is <strong className="text-ink">withdrawal speed</strong>: where a bank card takes
-                  1 to 3 business days, a Bitcoin transaction is confirmed in under an hour, and
-                  USDT on the Tron network in seconds. For regular players, this is a concrete and
-                  measurable advantage.
-                </p>
-                <p>
-                  From an RTP standpoint, several crypto operators publish their results
-                  transparently on the blockchain. Platforms like{' '}
-                  <strong className="text-ink">Stake, Rollbit or BC.Game</strong> offer provably
-                  fair games whose mathematical fairness can be verified by anyone. This is a level
-                  of transparency impossible with traditional casinos.
-                </p>
-                <p>
-                  The variety of accepted cryptocurrencies has expanded considerably. Bitcoin
-                  remains the standard, but Ethereum, Litecoin, Solana and stablecoins like USDT let
-                  you choose the right tool for your needs: speed (LTC, SOL), stability (USDT,
-                  USDC), or long-term value (BTC, ETH). Most crypto casinos now accept over 10
-                  different cryptocurrencies.
-                </p>
-                <h3 className="pt-2 font-serif text-[20px] font-semibold text-ink">
-                  Our selection method
-                </h3>
-                <p>
-                  Each casino in this ranking has been tested by our team with real money. We
-                  evaluate: actual withdrawal speeds (not advertised delays), game catalogue
-                  quality, customer service quality, and the strength of the licence. Casinos whose
-                  withdrawals exceed 48 hours are automatically excluded from the ranking.
-                </p>
-              </>
-            )}
-          </div>
-
-          <div className="mt-12">
-            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
-              {isFr
-                ? 'Questions fréquentes — Casino Bitcoin'
-                : 'Frequently asked questions — Bitcoin Casino'}
-            </h2>
-            <FAQAccordion items={isFr ? FAQ_FR : FAQ_EN} />
-          </div>
-        </div>
-      </section>
-    </>
+      }
+      faqH2={
+        isFr
+          ? 'Questions fréquentes — Casino Bitcoin'
+          : 'Frequently asked questions — Bitcoin Casino'
+      }
+      faqItems={isFr ? FAQ_FR : FAQ_EN}
+    />
   )
 }
