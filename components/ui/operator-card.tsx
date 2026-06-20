@@ -25,6 +25,8 @@ export interface OperatorCardData {
   cons?: string[]
   verdict?: string
   affiliateUrl: string
+  /** Guard: si false, le BonusBadge n'est pas rendu. Défaut true. */
+  hasBonus?: boolean
 }
 
 // ── 1. PodiumCard — homepage top-3 hero ────────────────────────────────────
@@ -95,14 +97,16 @@ export function PodiumCard({ operator, rank, ga4 }: PodiumCardProps) {
         </div>
       )}
 
-      <BonusBadge
-        amount={operator.bonusAmount}
-        amountSuffix={operator.bonusSuffix}
-        conditions={operator.bonusConditions}
-        gold={isFirst}
-        label={isFirst ? 'Bonus exclusif' : undefined}
-        className="mt-auto w-full"
-      />
+      {(operator.hasBonus ?? true) && (
+        <BonusBadge
+          amount={operator.bonusAmount}
+          amountSuffix={operator.bonusSuffix}
+          conditions={operator.bonusConditions}
+          gold={isFirst}
+          label={isFirst ? 'Bonus exclusif' : undefined}
+          className="mt-auto w-full"
+        />
+      )}
 
       <CTAButton
         href={operator.affiliateUrl}
@@ -308,13 +312,15 @@ export function RankCard({ operator, rank, medal, ctaBonus, locale = 'fr', ga4 }
 
       {/* Side CTA — wraps below on tablet */}
       <div className="col-span-full flex flex-wrap items-center gap-[11px] border-t border-line bg-surface-2 p-[20px_22px] lg:col-auto lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
-        <BonusBadge
-          amount={operator.bonusAmount}
-          amountSuffix={operator.bonusSuffix}
-          conditions={operator.bonusConditions}
-          gold={medal === 1}
-          className="min-w-[160px] flex-1"
-        />
+        {(operator.hasBonus ?? true) && (
+          <BonusBadge
+            amount={operator.bonusAmount}
+            amountSuffix={operator.bonusSuffix}
+            conditions={operator.bonusConditions}
+            gold={medal === 1}
+            className="min-w-[160px] flex-1"
+          />
+        )}
         <CTAButton
           href={operator.affiliateUrl}
           variant="primary"

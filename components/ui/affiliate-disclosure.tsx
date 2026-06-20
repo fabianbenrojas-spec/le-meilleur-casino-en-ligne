@@ -6,13 +6,18 @@ interface AffiliateDisclosureProps {
   variant?: Variant
   className?: string
   locale?: string
+  /** Masquer le disclosure quand tous les opérateurs affichés sont non-affiliés. */
+  forceHide?: boolean
 }
 
 export function AffiliateDisclosure({
   variant = 'strip',
   className,
   locale: _locale,
+  forceHide = false,
 }: AffiliateDisclosureProps) {
+  if (forceHide) return null
+
   if (variant === 'strip') {
     // aff-strip: visible sans scroll sur les reviews
     return (

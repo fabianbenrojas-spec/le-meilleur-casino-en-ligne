@@ -17,7 +17,7 @@ import { ScorePill } from '@/components/ui/score-pill'
 import { StarRating } from '@/components/ui/star-rating'
 import { ReviewSubNav } from '@/components/review/review-subnav'
 import { ReviewStickyBar } from '@/components/review/review-sticky-bar'
-import { operators, operatorBySlug } from '@/config/operators'
+import { operators, operatorBySlug, jurisdictionLicenceLabel } from '@/config/operators'
 import { getReviewData } from '@/config/review-content'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -514,7 +514,7 @@ export default async function ReviewPage({
 
                 <div className="flex flex-wrap gap-2">
                   {[
-                    op.licence,
+                    jurisdictionLicenceLabel(op.jurisdiction),
                     `Fondé en ${rd.foundedYear}`,
                     rd.currencies.join(' · '),
                     rd.languages.join(' · '),
@@ -620,235 +620,90 @@ export default async function ReviewPage({
         </section>
 
         {/* Dynamic sections + maillage bands */}
-        {(Object.entries(rd.sections) as [string, typeof rd.sections.bonus][]).map(([key, sec]) => (
-          <div key={key}>
-            <ReviewSection
-              id={key}
-              number={SECTION_NUMBERS[key] ?? ''}
-              title={sectionTitles[key] ?? key}
-            >
-              {sec.prose.map((p, i) => (
-                <p key={i} className="mb-[14px] max-w-[68ch] text-[16px] leading-[1.68] text-ink-2">
-                  {p}
-                </p>
-              ))}
-              {sec.highlights && (
-                <ul className="mb-4 flex list-none flex-col gap-[9px] p-0">
-                  {sec.highlights.map((h) => (
-                    <li
-                      key={h}
-                      className="flex items-start gap-[11px] text-[15px] leading-[1.6] text-ink-2"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="mt-0.5 h-[17px] w-[17px] shrink-0 text-green"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        aria-hidden
+        {(Object.entries(rd.sections) as [string, typeof rd.sections.bonus][]).map(([key, sec]) => {
+          if (!op.hasBonus && (key === 'bonus' || key === 'vip')) return null
+          return (
+            <div key={key}>
+              <ReviewSection
+                id={key}
+                number={SECTION_NUMBERS[key] ?? ''}
+                title={sectionTitles[key] ?? key}
+              >
+                {sec.prose.map((p, i) => (
+                  <p
+                    key={i}
+                    className="mb-[14px] max-w-[68ch] text-[16px] leading-[1.68] text-ink-2"
+                  >
+                    {p}
+                  </p>
+                ))}
+                {sec.highlights && (
+                  <ul className="mb-4 flex list-none flex-col gap-[9px] p-0">
+                    {sec.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-[11px] text-[15px] leading-[1.6] text-ink-2"
                       >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {sec.minicta && (
-                <MiniCTA
-                  label={sec.minicta.label}
-                  buttonText={sec.minicta.buttonText}
-                  op={op}
-                  placement={key}
-                  locale={locale}
-                />
-              )}
-            </ReviewSection>
-
-            {/* Maillage: all 3 bands after securite */}
-            {key === 'securite' && (
-              <>
-                {/* Band 1 — Types de jeux */}
-                <div className="my-[30px]">
-                  <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                    {GAME_TYPES.map((gt) => (
-                      <a
-                        key={gt.label}
-                        href={gt.href}
-                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                        data-event="internal_link"
-                        data-target={gt.href}
-                        data-placement="review_band_game_types"
-                        data-page-type="review"
-                        data-locale={locale}
-                      >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
-                          <svg
-                            viewBox="0 0 24 24"
-                            className="h-5 w-5"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            aria-hidden
-                          >
-                            {gt.circle && <circle cx="12" cy="12" r="10" />}
-                            <path d={gt.icon} />
-                          </svg>
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[14.5px] font-bold">{gt.label}</div>
-                          <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
-                        </div>
                         <svg
                           viewBox="0 0 24 24"
-                          className="h-4 w-4 shrink-0 text-ink-3"
+                          className="mt-0.5 h-[17px] w-[17px] shrink-0 text-green"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2.5"
+                          strokeWidth="3"
                           aria-hidden
                         >
-                          <path d="M9 18l6-6-6-6" />
+                          <path d="M20 6L9 17l-5-5" />
                         </svg>
-                      </a>
+                        {h}
+                      </li>
                     ))}
-                  </div>
-                </div>
+                  </ul>
+                )}
+                {sec.minicta && (
+                  <MiniCTA
+                    label={sec.minicta.label}
+                    buttonText={sec.minicta.buttonText}
+                    op={op}
+                    placement={key}
+                    locale={locale}
+                  />
+                )}
+              </ReviewSection>
 
-                {/* Band 2 — Jeux populaires */}
-                <div className="my-[30px]">
-                  <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
-                  <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
-                    {POPULAR_GAMES.map((game) => (
-                      <div
-                        key={game.name}
-                        className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
-                      >
-                        <div
-                          className="relative grid aspect-[16/10] place-items-center border-b border-line"
-                          style={{
-                            background:
-                              'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
-                          }}
-                        >
-                          <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
-                          <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
-                            {game.rtp}%
-                          </span>
-                        </div>
-                        <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
-                          <div className="text-[15px] font-bold text-ink">{game.name}</div>
-                          <div className="font-mono text-[11.5px] text-ink-3">{game.provider}</div>
-                          <div className="mt-[11px] flex gap-2">
-                            <CTAButton
-                              href={`/jeux/${game.slug}/`}
-                              variant="secondary"
-                              size="sm"
-                              className="flex-1"
-                              data-event="internal_link"
-                              data-placement="review_band_jeux_pop"
-                              data-page-type="review"
-                              data-locale={locale}
-                            >
-                              Fiche
-                            </CTAButton>
-                            <CTAButton
-                              href={op.affiliateUrl}
-                              variant="primary"
-                              size="sm"
-                              className="flex-1"
-                              target="_blank"
-                              rel="noopener noreferrer nofollow"
-                              data-event="affiliate_click"
-                              data-operator={op.slug}
-                              data-placement={`review_jeux_pop_${game.slug}`}
-                              data-bonus={op.bonusSlug}
-                              data-page-type="review"
-                              data-locale={locale}
-                            >
-                              Jouer
-                            </CTAButton>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Band 3 — Comparatifs (4 links) */}
-                <div className="my-[30px]">
-                  <BandHeader title={`${op.name} dans nos comparatifs`} />
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    {/* Link 1 — position dans le top 15 */}
-                    <a
-                      href="/casinos/"
-                      className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                      data-event="internal_link"
-                      data-placement="review_band_comparatifs_top15"
-                      data-page-type="review"
-                      data-locale={locale}
-                    >
-                      <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-green-50 text-green">
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="h-[19px] w-[19px]"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          aria-hidden
-                        >
-                          <path d="M18 20V10M12 20V4M6 20v-6" />
-                        </svg>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[14.5px] font-bold">Top 15 des casinos en ligne</div>
-                        <div className="mt-[1px] text-[12.5px] text-ink-3">
-                          {op.name} classé N°{rank} dans notre sélection
-                        </div>
-                      </div>
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="h-4 w-4 shrink-0 text-ink-3"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        aria-hidden
-                      >
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </a>
-                    {/* Links 2 & 3 — versus */}
-                    {altOps.slice(0, 2).map((alt) => {
-                      const [slugA, slugB] = [op.slug, alt.slug].sort()
-                      return (
+              {/* Maillage: all 3 bands after securite */}
+              {key === 'securite' && (
+                <>
+                  {/* Band 1 — Types de jeux */}
+                  <div className="my-[30px]">
+                    <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                      {GAME_TYPES.map((gt) => (
                         <a
-                          key={alt.slug}
-                          href={`/comparatifs/${slugA}-vs-${slugB}/`}
-                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                          key={gt.label}
+                          href={gt.href}
+                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
                           data-event="internal_link"
-                          data-placement="review_band_comparatifs_versus"
+                          data-target={gt.href}
+                          data-placement="review_band_game_types"
                           data-page-type="review"
                           data-locale={locale}
                         >
-                          <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
                             <svg
                               viewBox="0 0 24 24"
-                              className="h-[19px] w-[19px]"
+                              className="h-5 w-5"
                               fill="none"
                               stroke="currentColor"
                               strokeWidth="2"
                               aria-hidden
                             >
-                              <path d="M18 20V10M12 20V4M6 20v-6" />
+                              {gt.circle && <circle cx="12" cy="12" r="10" />}
+                              <path d={gt.icon} />
                             </svg>
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[14.5px] font-bold">
-                              {op.name} vs {alt.name}
-                            </div>
-                            <div className="mt-[1px] text-[12.5px] text-ink-3">
-                              Notre analyse comparative
-                            </div>
+                            <div className="text-[14.5px] font-bold">{gt.label}</div>
+                            <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
                           </div>
                           <svg
                             viewBox="0 0 24 24"
@@ -861,52 +716,205 @@ export default async function ReviewPage({
                             <path d="M9 18l6-6-6-6" />
                           </svg>
                         </a>
-                      )
-                    })}
-                    {/* Link 4 — page alternatives */}
-                    <a
-                      href="/casinos/alternatives/"
-                      className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                      data-event="internal_link"
-                      data-placement="review_band_comparatifs_alternatives"
-                      data-page-type="review"
-                      data-locale={locale}
-                    >
-                      <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Band 2 — Jeux populaires */}
+                  <div className="my-[30px]">
+                    <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
+                    <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
+                      {POPULAR_GAMES.map((game) => (
+                        <div
+                          key={game.name}
+                          className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
+                        >
+                          <div
+                            className="relative grid aspect-[16/10] place-items-center border-b border-line"
+                            style={{
+                              background:
+                                'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
+                            }}
+                          >
+                            <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
+                            <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
+                              {game.rtp}%
+                            </span>
+                          </div>
+                          <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
+                            <div className="text-[15px] font-bold text-ink">{game.name}</div>
+                            <div className="font-mono text-[11.5px] text-ink-3">
+                              {game.provider}
+                            </div>
+                            <div className="mt-[11px] flex gap-2">
+                              <CTAButton
+                                href={`/jeux/${game.slug}/`}
+                                variant="secondary"
+                                size="sm"
+                                className="flex-1"
+                                data-event="internal_link"
+                                data-placement="review_band_jeux_pop"
+                                data-page-type="review"
+                                data-locale={locale}
+                              >
+                                Fiche
+                              </CTAButton>
+                              <CTAButton
+                                href={op.affiliateUrl}
+                                variant="primary"
+                                size="sm"
+                                className="flex-1"
+                                target="_blank"
+                                rel="noopener noreferrer nofollow"
+                                data-event="affiliate_click"
+                                data-operator={op.slug}
+                                data-placement={`review_jeux_pop_${game.slug}`}
+                                data-bonus={op.bonusSlug}
+                                data-page-type="review"
+                                data-locale={locale}
+                              >
+                                Jouer
+                              </CTAButton>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Band 3 — Comparatifs (4 links) */}
+                  <div className="my-[30px]">
+                    <BandHeader title={`${op.name} dans nos comparatifs`} />
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      {/* Link 1 — position dans le top 15 */}
+                      <a
+                        href="/casinos/"
+                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                        data-event="internal_link"
+                        data-placement="review_band_comparatifs_top15"
+                        data-page-type="review"
+                        data-locale={locale}
+                      >
+                        <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-green-50 text-green">
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-[19px] w-[19px]"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            aria-hidden
+                          >
+                            <path d="M18 20V10M12 20V4M6 20v-6" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[14.5px] font-bold">Top 15 des casinos en ligne</div>
+                          <div className="mt-[1px] text-[12.5px] text-ink-3">
+                            {op.name} classé N°{rank} dans notre sélection
+                          </div>
+                        </div>
                         <svg
                           viewBox="0 0 24 24"
-                          className="h-[19px] w-[19px]"
+                          className="h-4 w-4 shrink-0 text-ink-3"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
+                          strokeWidth="2.5"
                           aria-hidden
                         >
-                          <path d="M4 6h16M4 12h10M4 18h7" />
+                          <path d="M9 18l6-6-6-6" />
                         </svg>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[14.5px] font-bold">Alternatives à {op.name}</div>
-                        <div className="mt-[1px] text-[12.5px] text-ink-3">
-                          Tous les casinos similaires
-                        </div>
-                      </div>
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="h-4 w-4 shrink-0 text-ink-3"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        aria-hidden
+                      </a>
+                      {/* Links 2 & 3 — versus */}
+                      {altOps.slice(0, 2).map((alt) => {
+                        const [slugA, slugB] = [op.slug, alt.slug].sort()
+                        return (
+                          <a
+                            key={alt.slug}
+                            href={`/comparatifs/${slugA}-vs-${slugB}/`}
+                            className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                            data-event="internal_link"
+                            data-placement="review_band_comparatifs_versus"
+                            data-page-type="review"
+                            data-locale={locale}
+                          >
+                            <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="h-[19px] w-[19px]"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                aria-hidden
+                              >
+                                <path d="M18 20V10M12 20V4M6 20v-6" />
+                              </svg>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-[14.5px] font-bold">
+                                {op.name} vs {alt.name}
+                              </div>
+                              <div className="mt-[1px] text-[12.5px] text-ink-3">
+                                Notre analyse comparative
+                              </div>
+                            </div>
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-4 w-4 shrink-0 text-ink-3"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              aria-hidden
+                            >
+                              <path d="M9 18l6-6-6-6" />
+                            </svg>
+                          </a>
+                        )
+                      })}
+                      {/* Link 4 — page alternatives */}
+                      <a
+                        href="/casinos/alternatives/"
+                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                        data-event="internal_link"
+                        data-placement="review_band_comparatifs_alternatives"
+                        data-page-type="review"
+                        data-locale={locale}
                       >
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </a>
+                        <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-[19px] w-[19px]"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            aria-hidden
+                          >
+                            <path d="M4 6h16M4 12h10M4 18h7" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[14.5px] font-bold">Alternatives à {op.name}</div>
+                          <div className="mt-[1px] text-[12.5px] text-ink-3">
+                            Tous les casinos similaires
+                          </div>
+                        </div>
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 shrink-0 text-ink-3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          aria-hidden
+                        >
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+                </>
+              )}
+            </div>
+          )
+        })}
 
         {/* Recap table */}
         <section id="recap" className="py-[14px] [scroll-margin-top:calc(var(--header-h)+56px)]">
@@ -1165,6 +1173,8 @@ export default async function ReviewPage({
         bonusSlug={op.bonusSlug}
         affiliateUrl={op.affiliateUrl}
         locale={locale}
+        hasBonus={op.hasBonus}
+        isAffiliated={op.isAffiliated}
       />
     </>
   )

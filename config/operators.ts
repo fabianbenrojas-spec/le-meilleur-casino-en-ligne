@@ -1,12 +1,18 @@
 // Operator seed data — source of truth for all pages.
 // affiliateUrl goes through /go/[slug]/ which fires GA4 before redirecting.
 
+/** Juridiction réglementaire de l'opérateur. */
+export type Jurisdiction = 'offshore' | 'anj' | 'mga-eu'
+
+/** Types de jeux proposés par l'opérateur — discriminant pour hubs et navigation. */
+export type GameType = 'casino' | 'sport' | 'poker' | 'horse-racing' | 'esports'
+
 export interface Operator {
   id: string
   slug: string
   name: string
   shortName?: string
-  logoUrl?: string // Set when real SVG assets are available
+  logoUrl?: string // Set when real PNG/SVG assets are available
   licence: string
   rating: number // out of 10, one decimal
   ratingLabel: 'Excellent' | 'Très bien' | 'Bien' | 'Correct'
@@ -23,6 +29,27 @@ export interface Operator {
   verdict: string
   tagline: string // one-liner for podium card
   affiliateUrl: string // real external URL (placeholder for dev)
+  /**
+   * Juridiction réglementaire de l'opérateur.
+   * - 'offshore' : Curaçao, Anjouan, etc. (acceptant les FR sans licence FR)
+   * - 'anj' : Licence française ANJ (Winamax, Betclic, etc.)
+   * - 'mga-eu' : MGA Malte ou autre licence UE (Dublinbet, N1)
+   */
+  jurisdiction: Jurisdiction
+  /** L'opérateur propose un bonus de bienvenue actif. */
+  hasBonus: boolean
+  /** L'opérateur a un programme d'affiliation avec commission. */
+  isAffiliated: boolean
+  /**
+   * Variante du disclaimer légal affiché sur les pages de cet opérateur.
+   * undefined utilise le fallback 'offshore-default'.
+   */
+  legalDisclaimerVariant?: 'offshore-default' | 'anj' | 'crypto' | 'esports'
+  /**
+   * Types de jeux proposés — obligatoire, discriminant pour hubs et navigation future.
+   * Ex: ['casino'] pour un pur casino, ['casino', 'sport'] pour un opérateur multi-vertical.
+   */
+  gameTypes: GameType[]
 }
 
 // Real registration URLs per operator.
@@ -100,6 +127,10 @@ export const operators: Operator[] = [
     tagline: 'Le meilleur équilibre ludothèque / retraits rapides pour le marché français.',
     logoUrl: LOGO_URLS['cresus'],
     affiliateUrl: goUrl('cresus'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'lucky8',
@@ -131,6 +162,10 @@ export const operators: Operator[] = [
     tagline: 'Tournois de machines à sous et cashback hebdomadaire généreux.',
     logoUrl: LOGO_URLS['lucky8'],
     affiliateUrl: goUrl('lucky8'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'wild-sultan',
@@ -162,6 +197,10 @@ export const operators: Operator[] = [
     tagline: 'Le spécialiste des retraits crypto instantanés et du live game premium.',
     logoUrl: LOGO_URLS['wild-sultan'],
     affiliateUrl: goUrl('wild-sultan'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'madnix',
@@ -193,6 +232,10 @@ export const operators: Operator[] = [
     tagline: 'La plus grande ludothèque et des missions de fidélité qui récompensent vraiment.',
     logoUrl: LOGO_URLS['madnix'],
     affiliateUrl: goUrl('madnix'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'magical-spin',
@@ -220,6 +263,10 @@ export const operators: Operator[] = [
     tagline: 'Le plus gros bonus de bienvenue du marché et un suivi VIP personnalisé.',
     logoUrl: LOGO_URLS['magical-spin'],
     affiliateUrl: goUrl('magical-spin'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'casinozer',
@@ -251,6 +298,10 @@ export const operators: Operator[] = [
     tagline: '270 tours gratuits et cashback hebdomadaire — le meilleur rapport tours/bonus.',
     logoUrl: LOGO_URLS['casinozer'],
     affiliateUrl: goUrl('casinozer'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'tortuga',
@@ -283,6 +334,10 @@ export const operators: Operator[] = [
     tagline: 'Le wager le plus bas du top 10 — les conditions les plus honnêtes du marché.',
     logoUrl: LOGO_URLS['tortuga'],
     affiliateUrl: goUrl('tortuga'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'banzai-slots',
@@ -310,6 +365,10 @@ export const operators: Operator[] = [
     tagline: 'Tournois slots quotidiens et jeux exclusifs pour les amateurs de machines à sous.',
     logoUrl: LOGO_URLS['banzai-slots'],
     affiliateUrl: goUrl('banzai-slots'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'stake',
@@ -342,6 +401,11 @@ export const operators: Operator[] = [
     tagline: 'Le leader mondial du casino crypto avec des RTP imbattables.',
     logoUrl: LOGO_URLS['stake'],
     affiliateUrl: goUrl('stake'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'crypto',
+    gameTypes: ['casino'],
   },
   {
     id: 'bitcoin-penguin',
@@ -365,6 +429,11 @@ export const operators: Operator[] = [
     tagline: "Anonymat crypto garanti et large sélection d'altcoins pour les puristes.",
     logoUrl: LOGO_URLS['bitcoin-penguin'],
     affiliateUrl: goUrl('bitcoin-penguin'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'crypto',
+    gameTypes: ['casino'],
   },
   // ── Nouveaux opérateurs Phase 9 ─────────────────────────────────────────────
   {
@@ -398,6 +467,10 @@ export const operators: Operator[] = [
     tagline: 'Licence MGA et live casino premium — le choix sécurité pour les joueurs exigeants.',
     logoUrl: LOGO_URLS['dublinbet'],
     affiliateUrl: goUrl('dublinbet'),
+    jurisdiction: 'mga-eu',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'vegadream',
@@ -429,6 +502,10 @@ export const operators: Operator[] = [
     tagline: 'Le casino le plus francophone du marché — support et interface 100 % FR.',
     logoUrl: LOGO_URLS['vegadream'],
     affiliateUrl: goUrl('vegadream'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'horus-casino',
@@ -461,6 +538,10 @@ export const operators: Operator[] = [
     tagline: 'Jackpots progressifs record et thème égyptien immersif pour les chasseurs de gains.',
     logoUrl: LOGO_URLS['horus-casino'],
     affiliateUrl: goUrl('horus-casino'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'n1-casino',
@@ -488,6 +569,10 @@ export const operators: Operator[] = [
     tagline: "8 ans d'activité sous licence MGA — la confiance éprouvée dans le temps.",
     logoUrl: LOGO_URLS['n1-casino'],
     affiliateUrl: goUrl('n1-casino'),
+    jurisdiction: 'mga-eu',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
   {
     id: 'casino-extra',
@@ -516,12 +601,38 @@ export const operators: Operator[] = [
     tagline: "20 ans d'expérience et le programme Extra Club le plus fidèle du marché.",
     logoUrl: LOGO_URLS['casino-extra'],
     affiliateUrl: goUrl('casino-extra'),
+    jurisdiction: 'offshore',
+    hasBonus: true,
+    isAffiliated: true,
+    gameTypes: ['casino'],
   },
 ]
 
-// Sorted by rating descending — default view for all pages
+// ── Sorted collections ───────────────────────────────────────────────────────
+
 export const TOP_10 = [...operators].sort((a, b) => b.rating - a.rating).slice(0, 10)
 export const TOP_3 = TOP_10.slice(0, 3)
 
 // Lookup by slug (O(1) via Map)
 export const operatorBySlug = new Map(operators.map((op) => [op.slug, op]))
+
+// ── Jurisdiction helpers ─────────────────────────────────────────────────────
+
+export const operatorsByJurisdiction: Record<Jurisdiction, Operator[]> = {
+  offshore: operators.filter((op) => op.jurisdiction === 'offshore'),
+  anj: operators.filter((op) => op.jurisdiction === 'anj'),
+  'mga-eu': operators.filter((op) => op.jurisdiction === 'mga-eu'),
+}
+
+export const ANJ_OPERATORS = operators.filter((op) => op.jurisdiction === 'anj')
+export const OFFSHORE_OPERATORS = operators.filter((op) => op.jurisdiction === 'offshore')
+
+export const isAnjOperator = (op: Operator): boolean => op.jurisdiction === 'anj'
+export const hasAffiliateProgram = (op: Operator): boolean => op.isAffiliated
+
+/** Human-readable licence label derived from jurisdiction — used in review templates. */
+export function jurisdictionLicenceLabel(jurisdiction: Jurisdiction): string {
+  if (jurisdiction === 'anj') return 'Licence ANJ (France)'
+  if (jurisdiction === 'mga-eu') return 'Licence MGA (Malte)'
+  return 'Licence Curaçao'
+}

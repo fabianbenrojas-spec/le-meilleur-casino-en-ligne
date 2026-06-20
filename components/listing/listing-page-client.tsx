@@ -6,7 +6,7 @@ import { CTAButton } from '@/components/ui/cta-button'
 import { ListingCard } from '@/components/ui/operator-card'
 import { FilterBottomSheet, FilterSidebar } from '@/components/ui/filter-sidebar'
 import type { FilterGroup, ActiveFilters } from '@/components/ui/filter-sidebar'
-import type { Operator } from '@/config/operators'
+import type { Jurisdiction, Operator } from '@/config/operators'
 
 type SortKey = 'rating' | 'bonusAmountNumber' | 'rtp' | 'name'
 
@@ -83,22 +83,18 @@ const LICENCE_GROUP_FR: FilterGroup = {
   key: 'licence',
   label: 'Licence / Régulation',
   options: [
-    { value: 'mga', label: 'MGA (Malte)' },
-    { value: 'gb', label: 'Gibraltar' },
-    { value: 'uk', label: 'UKGC (Royaume-Uni)' },
-    { value: 'curacao', label: 'Curaçao' },
-    { value: 'kahnawake', label: 'Kahnawake' },
+    { value: 'mga-eu', label: 'MGA (Malte)' },
+    { value: 'offshore', label: 'Curaçao / Offshore' },
+    { value: 'anj', label: 'ANJ (France)' },
   ],
 }
 const LICENCE_GROUP_EN: FilterGroup = {
   key: 'licence',
   label: 'Licence / Regulation',
   options: [
-    { value: 'mga', label: 'MGA (Malta)' },
-    { value: 'gb', label: 'Gibraltar' },
-    { value: 'uk', label: 'UKGC (United Kingdom)' },
-    { value: 'curacao', label: 'Curaçao' },
-    { value: 'kahnawake', label: 'Kahnawake' },
+    { value: 'mga-eu', label: 'MGA (Malta)' },
+    { value: 'offshore', label: 'Curaçao / Offshore' },
+    { value: 'anj', label: 'ANJ (France)' },
   ],
 }
 
@@ -269,12 +265,10 @@ const cryptoTypeMap: Record<string, string[]> = {
   sol: ['SOL'],
 }
 
-const licenceMap: Record<string, string> = {
-  mga: 'mga',
-  gb: 'gibraltar',
-  uk: 'ukgc',
-  curacao: 'cura',
-  kahnawake: 'kahnawake',
+const jurisdictionFilterMap: Record<string, Jurisdiction> = {
+  'mga-eu': 'mga-eu',
+  offshore: 'offshore',
+  anj: 'anj',
 }
 
 const wagerMax: Record<string, number> = {
@@ -316,7 +310,10 @@ function applyFilters(ops: Operator[], active: ActiveFilters): Operator[] {
   const licFilters = active['licence'] ?? []
   if (licFilters.length > 0) {
     result = result.filter((op) =>
-      licFilters.some((k) => op.licence.toLowerCase().includes(licenceMap[k] ?? ''))
+      licFilters.some((k) => {
+        const j = jurisdictionFilterMap[k]
+        return j !== undefined && op.jurisdiction === j
+      })
     )
   }
 

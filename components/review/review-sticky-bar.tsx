@@ -20,6 +20,10 @@ interface ReviewStickyBarProps {
   pageType?: string
   placement?: string
   showAlt?: boolean
+  /** Si false, masque le montant du bonus et affiche "Voir le site". Défaut true. */
+  hasBonus?: boolean
+  /** Si false, le CTA pointe vers affiliateUrl sans passer par /go/. Défaut true. */
+  isAffiliated?: boolean
 }
 
 export function ReviewStickyBar({
@@ -35,6 +39,8 @@ export function ReviewStickyBar({
   pageType = 'review',
   placement = 'review_sticky_bar',
   showAlt = true,
+  hasBonus = true,
+  isAffiliated = true,
 }: ReviewStickyBarProps) {
   const [visible, setVisible] = useState(false)
   const ioRef = useRef<IntersectionObserver | null>(null)
@@ -57,7 +63,9 @@ export function ReviewStickyBar({
     return () => ioRef.current?.disconnect()
   }, [])
 
-  const bonusLabel = `${bonusAmount}${bonusSuffix ? ` ${bonusSuffix}` : ''}`
+  const bonusLabel = hasBonus ? `${bonusAmount}${bonusSuffix ? ` ${bonusSuffix}` : ''}` : null
+  const ctaHref = isAffiliated ? affiliateUrl : affiliateUrl
+  const ctaLabel = hasBonus ? 'Obtenir le bonus' : 'Voir le site'
 
   return (
     <div
@@ -80,11 +88,13 @@ export function ReviewStickyBar({
             {operatorName}
             <ScorePill score={rating} className="px-[7px] py-[2px] text-[12px]" />
           </div>
-          <p className="hidden text-[12.5px] text-ink-2 sm:block">
-            <b className="font-semibold text-green">{bonusLabel}</b>
-            {' · '}
-            {bonusConditions}
-          </p>
+          {bonusLabel && (
+            <p className="hidden text-[12.5px] text-ink-2 sm:block">
+              <b className="font-semibold text-green">{bonusLabel}</b>
+              {' · '}
+              {bonusConditions}
+            </p>
+          )}
         </div>
         <div className="flex-1" />
         {showAlt && (
@@ -100,9 +110,9 @@ export function ReviewStickyBar({
           </a>
         )}
         <CTAButton
-          href={affiliateUrl}
+          href={ctaHref}
           variant="primary"
-          arrow
+          arrow={hasBonus}
           target="_blank"
           rel="noopener noreferrer nofollow"
           data-event="affiliate_click"
@@ -112,7 +122,7 @@ export function ReviewStickyBar({
           data-page-type={pageType}
           data-locale={locale}
         >
-          Obtenir le bonus
+          {ctaLabel}
         </CTAButton>
       </div>
     </div>
