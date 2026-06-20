@@ -17,7 +17,12 @@ import { ScorePill } from '@/components/ui/score-pill'
 import { StarRating } from '@/components/ui/star-rating'
 import { ReviewSubNav } from '@/components/review/review-subnav'
 import { ReviewStickyBar } from '@/components/review/review-sticky-bar'
-import { operators, operatorBySlug, jurisdictionLicenceLabel } from '@/config/operators'
+import {
+  operators,
+  operatorBySlug,
+  jurisdictionLicenceLabel,
+  type GameType,
+} from '@/config/operators'
 import { getReviewData } from '@/config/review-content'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
@@ -38,8 +43,12 @@ export async function generateMetadata({
   const rd = getReviewData(slug)
 
   return {
-    title: `Avis ${op.name} 2026 : test complet, bonus & retraits`,
-    description: `Notre avis complet sur ${op.name} : ${op.rating}/10. Bonus ${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}, RTP ${op.rtp.toFixed(1)}%. Testé à l'argent réel. 18+`,
+    title: op.hasBonus
+      ? `Avis ${op.name} 2026 : test complet, bonus & retraits`
+      : `Avis ${op.name} 2026 : test complet & retraits`,
+    description: op.hasBonus
+      ? `Notre avis complet sur ${op.name} : ${op.rating}/10. Bonus ${op.bonusAmount}${op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}, RTP ${op.rtp.toFixed(1)}%. Testé à l'argent réel. 18+`
+      : `Notre avis complet sur ${op.name} : ${op.rating}/10. RTP ${op.rtp.toFixed(1)}%. Testé à l'argent réel. 18+`,
     alternates: {
       languages: buildHreflang(
         `/casinos/${slug}/`,
@@ -181,6 +190,28 @@ const SECTION_NUMBERS: Record<string, string> = {
   mobile: '06',
   vip: '07',
   securite: '08',
+}
+
+function getSectionTitle(key: string, gameTypes: GameType[]): string {
+  if (key === 'jeux') {
+    if (gameTypes.includes('casino')) return 'Ludothèque & machines à sous'
+    if (gameTypes.includes('poker')) return 'Poker en ligne'
+    if (gameTypes.includes('sport')) return 'Paris sportifs'
+    return 'Jeux disponibles'
+  }
+  if (key === 'live') {
+    if (gameTypes.includes('casino')) return 'Jeux en live'
+    return 'Suivi en direct'
+  }
+  const STATIC_TITLES: Record<string, string> = {
+    bonus: 'Bonus de bienvenue',
+    paiements: 'Paiements & retraits',
+    support: 'Support client',
+    mobile: 'Application & expérience mobile',
+    vip: 'Programme VIP',
+    securite: 'Sécurité & licence',
+  }
+  return STATIC_TITLES[key] ?? key
 }
 
 // ── Maillage band data ────────────────────────────────────────────────────────
@@ -417,9 +448,19 @@ export default async function ReviewPage({
     .filter((o) => o.slug !== slug)
     .slice(0, 3)
 
+  // Same-jurisdiction operators for versus links
+  const sameJurisdictionOps = Array.from(operatorBySlug.values())
+    .filter((o) => o.slug !== slug && o.jurisdiction === op.jurisdiction)
+    .slice(0, 2)
+
   const rank = operators.findIndex((o) => o.slug === slug) + 1
+  const tocFiltered = TOC_BASE.filter((item) => {
+    if (!op.hasBonus && (item.id === 'bonus' || item.id === 'vip')) return false
+    if (!op.gameTypes.includes('casino') && item.id === 'live') return false
+    return true
+  })
   const tocItems = [
-    ...TOC_BASE,
+    ...tocFiltered,
     ...(rd.pourQui ? [{ id: 'pour-qui', label: 'Pour qui ?' }] : []),
     ...TOC_END,
   ]
@@ -441,19 +482,10 @@ export default async function ReviewPage({
     itemReviewed: { '@type': 'LocalBusiness', name: op.name },
   }
 
-  const wagerStat = op.bonusConditions.split('·')[0]?.trim() ?? op.bonusConditions
+  const wagerStat = op.hasBonus
+    ? (op.bonusConditions.split('·')[0]?.trim() ?? op.bonusConditions)
+    : null
   const paymentStat = op.paymentMethods.slice(0, 2).join(' / ')
-
-  const sectionTitles: Record<string, string> = {
-    bonus: 'Bonus de bienvenue',
-    jeux: 'Ludothèque & machines à sous',
-    live: 'Jeux en live',
-    paiements: 'Paiements & retraits',
-    support: 'Support client',
-    mobile: 'Application & expérience mobile',
-    vip: 'Programme VIP',
-    securite: 'Sécurité & licence',
-  }
 
   return (
     <>
@@ -535,10 +567,12 @@ export default async function ReviewPage({
                   <MiniScoreRing score={op.rating} label={op.ratingLabel} />
                   <div className="min-w-0">
                     <div className="font-serif text-[19px] font-semibold text-ink">{op.name}</div>
-                    <div className="mt-[2px] text-[12.5px] text-ink-2">
-                      <b className="font-semibold text-green">{op.bonusAmount}</b>
-                      {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''} · {op.bonusConditions}
-                    </div>
+                    {op.hasBonus && (
+                      <div className="mt-[2px] text-[12.5px] text-ink-2">
+                        <b className="font-semibold text-green">{op.bonusAmount}</b>
+                        {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''} · {op.bonusConditions}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -561,7 +595,7 @@ export default async function ReviewPage({
                   data-page-type="review"
                   data-locale={locale}
                 >
-                  Obtenir le bonus
+                  {op.hasBonus ? 'Obtenir le bonus' : 'Voir le site'}
                 </CTAButton>
 
                 <p className="my-[7px] text-center text-[11px] text-ink-3">ou</p>
@@ -583,7 +617,7 @@ export default async function ReviewPage({
                 <div className="mt-[14px] flex gap-[6px] border-t border-line pt-[14px]">
                   {[
                     { v: `${op.rtp.toFixed(1)}%`, l: 'RTP moy.' },
-                    { v: wagerStat, l: 'Wager' },
+                    ...(wagerStat ? [{ v: wagerStat, l: 'Wager' }] : []),
                     { v: paymentStat || 'CB / Virement', l: 'Paiements' },
                   ].map(({ v, l }) => (
                     <div key={l} className="flex-1 text-center">
@@ -627,7 +661,7 @@ export default async function ReviewPage({
               <ReviewSection
                 id={key}
                 number={SECTION_NUMBERS[key] ?? ''}
-                title={sectionTitles[key] ?? key}
+                title={getSectionTitle(key, op.gameTypes)}
               >
                 {sec.prose.map((p, i) => (
                   <p
@@ -674,188 +708,37 @@ export default async function ReviewPage({
               {key === 'securite' && (
                 <>
                   {/* Band 1 — Types de jeux */}
-                  <div className="my-[30px]">
-                    <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                      {GAME_TYPES.map((gt) => (
-                        <a
-                          key={gt.label}
-                          href={gt.href}
-                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                          data-event="internal_link"
-                          data-target={gt.href}
-                          data-placement="review_band_game_types"
-                          data-page-type="review"
-                          data-locale={locale}
-                        >
-                          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
-                            <svg
-                              viewBox="0 0 24 24"
-                              className="h-5 w-5"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              aria-hidden
-                            >
-                              {gt.circle && <circle cx="12" cy="12" r="10" />}
-                              <path d={gt.icon} />
-                            </svg>
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-[14.5px] font-bold">{gt.label}</div>
-                            <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
-                          </div>
-                          <svg
-                            viewBox="0 0 24 24"
-                            className="h-4 w-4 shrink-0 text-ink-3"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            aria-hidden
-                          >
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Band 2 — Jeux populaires */}
-                  <div className="my-[30px]">
-                    <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
-                    <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
-                      {POPULAR_GAMES.map((game) => (
-                        <div
-                          key={game.name}
-                          className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
-                        >
-                          <div
-                            className="relative grid aspect-[16/10] place-items-center border-b border-line"
-                            style={{
-                              background:
-                                'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
-                            }}
-                          >
-                            <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
-                            <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
-                              {game.rtp}%
-                            </span>
-                          </div>
-                          <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
-                            <div className="text-[15px] font-bold text-ink">{game.name}</div>
-                            <div className="font-mono text-[11.5px] text-ink-3">
-                              {game.provider}
-                            </div>
-                            <div className="mt-[11px] flex gap-2">
-                              <CTAButton
-                                href={`/jeux/${game.slug}/`}
-                                variant="secondary"
-                                size="sm"
-                                className="flex-1"
-                                data-event="internal_link"
-                                data-placement="review_band_jeux_pop"
-                                data-page-type="review"
-                                data-locale={locale}
-                              >
-                                Fiche
-                              </CTAButton>
-                              <CTAButton
-                                href={op.affiliateUrl}
-                                variant="primary"
-                                size="sm"
-                                className="flex-1"
-                                target="_blank"
-                                rel="noopener noreferrer nofollow"
-                                data-event="affiliate_click"
-                                data-operator={op.slug}
-                                data-placement={`review_jeux_pop_${game.slug}`}
-                                data-bonus={op.bonusSlug}
-                                data-page-type="review"
-                                data-locale={locale}
-                              >
-                                Jouer
-                              </CTAButton>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Band 3 — Comparatifs (4 links) */}
-                  <div className="my-[30px]">
-                    <BandHeader title={`${op.name} dans nos comparatifs`} />
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {/* Link 1 — position dans le top 15 */}
-                      <a
-                        href="/casinos/"
-                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                        data-event="internal_link"
-                        data-placement="review_band_comparatifs_top15"
-                        data-page-type="review"
-                        data-locale={locale}
-                      >
-                        <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-green-50 text-green">
-                          <svg
-                            viewBox="0 0 24 24"
-                            className="h-[19px] w-[19px]"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            aria-hidden
-                          >
-                            <path d="M18 20V10M12 20V4M6 20v-6" />
-                          </svg>
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[14.5px] font-bold">Top 15 des casinos en ligne</div>
-                          <div className="mt-[1px] text-[12.5px] text-ink-3">
-                            {op.name} classé N°{rank} dans notre sélection
-                          </div>
-                        </div>
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="h-4 w-4 shrink-0 text-ink-3"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          aria-hidden
-                        >
-                          <path d="M9 18l6-6-6-6" />
-                        </svg>
-                      </a>
-                      {/* Links 2 & 3 — versus */}
-                      {altOps.slice(0, 2).map((alt) => {
-                        const [slugA, slugB] = [op.slug, alt.slug].sort()
-                        return (
+                  {op.gameTypes.includes('casino') && (
+                    <div className="my-[30px]">
+                      <BandHeader title="Types de jeux disponibles" seeAllHref="/jeux/" />
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        {GAME_TYPES.map((gt) => (
                           <a
-                            key={alt.slug}
-                            href={`/comparatifs/${slugA}-vs-${slugB}/`}
-                            className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                            key={gt.label}
+                            href={gt.href}
+                            className="flex items-center gap-[13px] rounded border border-line bg-surface px-4 py-[14px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
                             data-event="internal_link"
-                            data-placement="review_band_comparatifs_versus"
+                            data-target={gt.href}
+                            data-placement="review_band_game_types"
                             data-page-type="review"
                             data-locale={locale}
                           >
-                            <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-green-50 text-green">
                               <svg
                                 viewBox="0 0 24 24"
-                                className="h-[19px] w-[19px]"
+                                className="h-5 w-5"
                                 fill="none"
                                 stroke="currentColor"
                                 strokeWidth="2"
                                 aria-hidden
                               >
-                                <path d="M18 20V10M12 20V4M6 20v-6" />
+                                {gt.circle && <circle cx="12" cy="12" r="10" />}
+                                <path d={gt.icon} />
                               </svg>
                             </div>
                             <div className="min-w-0 flex-1">
-                              <div className="text-[14.5px] font-bold">
-                                {op.name} vs {alt.name}
-                              </div>
-                              <div className="mt-[1px] text-[12.5px] text-ink-3">
-                                Notre analyse comparative
-                              </div>
+                              <div className="text-[14.5px] font-bold">{gt.label}</div>
+                              <div className="font-mono text-[12px] text-ink-3">{gt.count}</div>
                             </div>
                             <svg
                               viewBox="0 0 24 24"
@@ -868,48 +751,207 @@ export default async function ReviewPage({
                               <path d="M9 18l6-6-6-6" />
                             </svg>
                           </a>
-                        )
-                      })}
-                      {/* Link 4 — page alternatives */}
-                      <a
-                        href="/casinos/alternatives/"
-                        className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
-                        data-event="internal_link"
-                        data-placement="review_band_comparatifs_alternatives"
-                        data-page-type="review"
-                        data-locale={locale}
-                      >
-                        <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Band 2 — Jeux populaires */}
+                  {op.gameTypes.includes('casino') && (
+                    <div className="my-[30px]">
+                      <BandHeader title={`Jeux populaires sur ${op.name}`} seeAllHref="/jeux/" />
+                      <div className="grid grid-cols-2 gap-[14px] sm:grid-cols-3">
+                        {POPULAR_GAMES.map((game) => (
+                          <div
+                            key={game.name}
+                            className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-1 transition-[transform,box-shadow] duration-[150ms] hover:-translate-y-[3px] hover:shadow-3"
+                          >
+                            <div
+                              className="relative grid aspect-[16/10] place-items-center border-b border-line"
+                              style={{
+                                background:
+                                  'repeating-linear-gradient(135deg,var(--bg-sunken),var(--bg-sunken) 8px,var(--surface-2) 8px,var(--surface-2) 16px)',
+                              }}
+                            >
+                              <span className="font-mono text-[10px] text-ink-3">{game.name}</span>
+                              <span className="absolute right-2 top-2 rounded-[5px] border border-[color-mix(in_srgb,var(--green)_22%,var(--line))] bg-green-50 px-[6px] py-[2px] font-mono text-[10px] font-semibold text-green-ink">
+                                {game.rtp}%
+                              </span>
+                            </div>
+                            <div className="flex flex-1 flex-col gap-1 p-[13px_15px_15px]">
+                              <div className="text-[15px] font-bold text-ink">{game.name}</div>
+                              <div className="font-mono text-[11.5px] text-ink-3">
+                                {game.provider}
+                              </div>
+                              <div className="mt-[11px] flex gap-2">
+                                <CTAButton
+                                  href={`/jeux/${game.slug}/`}
+                                  variant="secondary"
+                                  size="sm"
+                                  className="flex-1"
+                                  data-event="internal_link"
+                                  data-placement="review_band_jeux_pop"
+                                  data-page-type="review"
+                                  data-locale={locale}
+                                >
+                                  Fiche
+                                </CTAButton>
+                                <CTAButton
+                                  href={op.affiliateUrl}
+                                  variant="primary"
+                                  size="sm"
+                                  className="flex-1"
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow"
+                                  data-event="affiliate_click"
+                                  data-operator={op.slug}
+                                  data-placement={`review_jeux_pop_${game.slug}`}
+                                  data-bonus={op.bonusSlug}
+                                  data-page-type="review"
+                                  data-locale={locale}
+                                >
+                                  Jouer
+                                </CTAButton>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Band 3 — Comparatifs (4 links) */}
+                  {sameJurisdictionOps.length >= 2 && (
+                    <div className="my-[30px]">
+                      <BandHeader title={`${op.name} dans nos comparatifs`} />
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {/* Link 1 — position dans le top 15 */}
+                        <a
+                          href="/casinos/"
+                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                          data-event="internal_link"
+                          data-placement="review_band_comparatifs_top15"
+                          data-page-type="review"
+                          data-locale={locale}
+                        >
+                          <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-green-50 text-green">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-[19px] w-[19px]"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              aria-hidden
+                            >
+                              <path d="M18 20V10M12 20V4M6 20v-6" />
+                            </svg>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[14.5px] font-bold">
+                              Top 15 des casinos en ligne
+                            </div>
+                            <div className="mt-[1px] text-[12.5px] text-ink-3">
+                              {op.name} classé N°{rank} dans notre sélection
+                            </div>
+                          </div>
                           <svg
                             viewBox="0 0 24 24"
-                            className="h-[19px] w-[19px]"
+                            className="h-4 w-4 shrink-0 text-ink-3"
                             fill="none"
                             stroke="currentColor"
-                            strokeWidth="2"
+                            strokeWidth="2.5"
                             aria-hidden
                           >
-                            <path d="M4 6h16M4 12h10M4 18h7" />
+                            <path d="M9 18l6-6-6-6" />
                           </svg>
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[14.5px] font-bold">Alternatives à {op.name}</div>
-                          <div className="mt-[1px] text-[12.5px] text-ink-3">
-                            Tous les casinos similaires
-                          </div>
-                        </div>
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="h-4 w-4 shrink-0 text-ink-3"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          aria-hidden
+                        </a>
+                        {/* Links 2 & 3 — versus */}
+                        {sameJurisdictionOps.map((alt) => {
+                          const [slugA, slugB] = [op.slug, alt.slug].sort()
+                          return (
+                            <a
+                              key={alt.slug}
+                              href={`/comparatifs/${slugA}-vs-${slugB}/`}
+                              className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                              data-event="internal_link"
+                              data-placement="review_band_comparatifs_versus"
+                              data-page-type="review"
+                              data-locale={locale}
+                            >
+                              <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  className="h-[19px] w-[19px]"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  aria-hidden
+                                >
+                                  <path d="M18 20V10M12 20V4M6 20v-6" />
+                                </svg>
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="text-[14.5px] font-bold">
+                                  {op.name} vs {alt.name}
+                                </div>
+                                <div className="mt-[1px] text-[12.5px] text-ink-3">
+                                  Notre analyse comparative
+                                </div>
+                              </div>
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="h-4 w-4 shrink-0 text-ink-3"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                aria-hidden
+                              >
+                                <path d="M9 18l6-6-6-6" />
+                              </svg>
+                            </a>
+                          )
+                        })}
+                        {/* Link 4 — page alternatives */}
+                        <a
+                          href="/casinos/alternatives/"
+                          className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                          data-event="internal_link"
+                          data-placement="review_band_comparatifs_alternatives"
+                          data-page-type="review"
+                          data-locale={locale}
                         >
-                          <path d="M9 18l6-6-6-6" />
-                        </svg>
-                      </a>
+                          <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-[19px] w-[19px]"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              aria-hidden
+                            >
+                              <path d="M4 6h16M4 12h10M4 18h7" />
+                            </svg>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[14.5px] font-bold">Alternatives à {op.name}</div>
+                            <div className="mt-[1px] text-[12.5px] text-ink-3">
+                              Tous les casinos similaires
+                            </div>
+                          </div>
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-4 w-4 shrink-0 text-ink-3"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            aria-hidden
+                          >
+                            <path d="M9 18l6-6-6-6" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </>
               )}
             </div>
@@ -1085,13 +1127,21 @@ export default async function ReviewPage({
             <h3 className="mt-[2px] font-serif text-[24px] font-medium leading-[1.15] tracking-[-0.01em] text-white">
               Rejoindre {op.name}
             </h3>
-            <p className="mb-[14px] text-[14px] leading-[1.55] text-white opacity-[0.82]">
-              Accédez au bonus · {op.bonusConditions}
-            </p>
-            <div className="mb-3 font-serif text-[22px] font-semibold text-white">
-              <span style={{ color: 'var(--green-ink,var(--green))' }}>{op.bonusAmount}</span>
-              {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}
-            </div>
+            {op.hasBonus ? (
+              <>
+                <p className="mb-[14px] text-[14px] leading-[1.55] text-white opacity-[0.82]">
+                  Accédez au bonus · {op.bonusConditions}
+                </p>
+                <div className="mb-3 font-serif text-[22px] font-semibold text-white">
+                  <span style={{ color: 'var(--green-ink,var(--green))' }}>{op.bonusAmount}</span>
+                  {op.bonusSuffix ? ` ${op.bonusSuffix}` : ''}
+                </div>
+              </>
+            ) : (
+              <p className="mb-[14px] text-[14px] leading-[1.55] text-white opacity-[0.82]">
+                Inscrivez-vous et commencez à jouer sur {op.name}.
+              </p>
+            )}
             <CTAButton
               href={op.affiliateUrl}
               variant="primary"
@@ -1107,7 +1157,7 @@ export default async function ReviewPage({
               data-page-type="review"
               data-locale={locale}
             >
-              Obtenir le bonus
+              {op.hasBonus ? 'Obtenir le bonus' : 'Voir le site'}
             </CTAButton>
             <p className="mt-2 text-[11px] text-white opacity-60">18+ · Jeu responsable</p>
           </div>

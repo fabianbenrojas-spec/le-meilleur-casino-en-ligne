@@ -62,6 +62,10 @@ export interface Operator {
   withdrawalSpeed: WithdrawalSpeed
   /** Interface ET support client disponibles en français. */
   supportsFrench: boolean
+  /** Année de lancement sur le marché français (si connue). */
+  launchYearFrance?: number
+  /** Numéro de licence officielle (ex: ANJ FR-ANJ-2016-0017). */
+  licenceNumber?: string
 }
 
 // Real registration URLs per operator.

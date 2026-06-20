@@ -154,6 +154,26 @@ L'expérience sur Crésus (4 corrections) et Lucky8 (5 corrections) montre
 que la couche relecture humaine attrape systématiquement des nuances
 critiques que l'auto-validation ne détecte pas.
 
+## §14 — Valeurs placeholder pour opérateurs sans bonus (hasBonus: false)
+
+Établi 2026-06-20 lors de la préparation du template review pour Winamax.
+
+Quand `hasBonus: false`, les champs bonus gardent des valeurs syntaxiquement
+valides mais sémantiquement neutres, pour éviter des erreurs TypeScript tout
+en signalant clairement l'absence de bonus.
+
+| Champ               | Valeur placeholder          |
+| ------------------- | --------------------------- |
+| `bonusAmount`       | `'—'`                       |
+| `bonusSuffix`       | _(absent, ne pas définir)_  |
+| `bonusConditions`   | `'Sans bonus de bienvenue'` |
+| `bonusAmountNumber` | `0`                         |
+| `bonusSlug`         | `'no-bonus'`                |
+
+Ces valeurs ne seront jamais affichées (les guards `op.hasBonus` les masquent
+dans le template), mais doivent être présentes pour la compatibilité TypeScript
+avec l'interface `Operator`.
+
 ## §13 — Statut juridique offshore vs ANJ
 
 Établi 2026-06-20 lors de l'injection des catégories loterie et jeux-à-gratter
