@@ -204,6 +204,60 @@ const CAT_GRID_ICONS: Record<GameCategory, React.ReactNode> = {
       <path d="M6 9h3M6 12h2" />
     </svg>
   ),
+  baccarat: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <rect x="3" y="7" width="10" height="13" rx="1.5" />
+      <rect x="11" y="4" width="10" height="13" rx="1.5" />
+    </svg>
+  ),
+  'game-shows': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 3v9M12 12l7.8 4.5M12 12l-7.8 4.5" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
+  ),
+  megaways: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M4 18V10M8 18V6M12 18V4M16 18V8M20 18V13" />
+      <path d="M2 18h20" />
+    </svg>
+  ),
+  bingo: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+    </svg>
+  ),
 }
 
 // 5 catégories affichées en home, dans l'ordre éditorial de la maquette

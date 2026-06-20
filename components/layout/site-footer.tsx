@@ -67,6 +67,10 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
           href: l('/jeux/jackpot-progressif/'),
         },
         { label: isFr ? 'Poker en ligne' : 'Online Poker', href: l('/jeux/poker/') },
+        { label: isFr ? 'Baccarat' : 'Baccarat', href: l('/jeux/baccarat/') },
+        { label: isFr ? 'Game shows live' : 'Live Game Shows', href: l('/jeux/game-shows/') },
+        { label: isFr ? 'Megaways' : 'Megaways', href: l('/jeux/megaways/') },
+        { label: isFr ? 'Bingo en ligne' : 'Online Bingo', href: l('/jeux/bingo/') },
       ],
     },
     {

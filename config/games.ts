@@ -25,6 +25,10 @@ export type GameCategory =
   | 'video-poker'
   | 'jackpot-progressif'
   | 'poker'
+  | 'baccarat'
+  | 'game-shows'
+  | 'megaways'
+  | 'bingo'
 
 export interface GameCategoryInfo {
   slug: GameCategory
@@ -149,6 +153,117 @@ export const categories: GameCategoryInfo[] = [
       "Texas Hold'em is the mainstream variant — the one seen on television and at major world events (WSOP, EPT). Each player receives 2 hole cards and uses 5 community cards. Omaha deals 4 hole cards, of which exactly 2 must be used — creating more action and higher pots. Stud (7 Card Stud) is a community-card-free variant favoured by experienced players. Offshore casinos generally offer all three families; ANJ-licensed operators focus on Hold'em.",
       "Poker is the only casino category legally open under ANJ licensing (France's National Gaming Authority). Winamax, PokerStars France and PMU Poker operate legally with a French licence. Operators currently in our comparison hold offshore licences (Curaçao or MGA) — they offer poker but within a different regulatory framework. ANJ-licensed specialists (Winamax, PokerStars) will be added in a future update.",
       'Unlike slots or roulette, poker does not pit the player against the casino — players compete against each other, with the casino taking a rake (commission) on each pot. This means a skilled player can be sustainably profitable long-term, which is impossible in other casino categories. For beginners, start at micro-stakes tables (€0.01/€0.02) to learn without significant financial risk.',
+    ],
+  },
+  {
+    slug: 'baccarat',
+    label: 'Baccarat',
+    labelEn: 'Baccarat',
+    description:
+      "Le baccarat est l'un des jeux de table les plus populaires dans les casinos haut de gamme. La variante Punto Banco est aujourd'hui la référence mondiale : aucune décision stratégique, un RTP de 98,94 % sur la mise Banque, des règles fixes.",
+    descriptionEn:
+      'Baccarat is one of the most popular table games in high-end casinos. The Punto Banco variant is now the global standard: no strategic decisions, a 98.94% RTP on the Banker bet, fixed rules.',
+    count: 'N/A',
+    guideTitle: 'Baccarat en ligne : Punto Banco, Chemin de Fer et stratégies de mise',
+    guideTitleEn: 'Online baccarat: Punto Banco, Chemin de Fer and betting strategies',
+    guideSummary: 'Comprendre les variantes du baccarat et choisir sa mise selon les probabilités.',
+    guideSummaryEn:
+      'Understand baccarat variants and choose your bet according to the probabilities.',
+    bestOperatorSlug: 'dublinbet',
+    guideBody: [
+      'Le baccarat se décline principalement en trois variantes. Le Punto Banco est la variante standard en ligne : aucune décision au-delà du choix de la mise (Joueur, Banque ou Égalité). Le Chemin de Fer et le Baccarat Banque permettent aux joueurs de décider de tirer ou non selon leur main — rares en ligne, disponibles dans quelques casinos live haut de gamme.',
+      "L'avantage maison varie selon la mise. La mise Banque affiche le RTP le plus élevé (98,94 %, house edge 1,06 %), suivie de la mise Joueur (98,76 %, house edge 1,24 %). La mise Égalité est à éviter : house edge de 14,36 % malgré un paiement de 8:1 ou 9:1. La commission standard sur la mise Banque gagnante est de 5 % — vérifiez ce taux avant de jouer.",
+      "Le baccarat RNG est rapide et accessible à faibles mises. Le baccarat live Evolution Gaming (Lightning Baccarat, No Commission Baccarat) reproduit l'atmosphère des salles physiques avec statistiques de tirage en temps réel et limites jusqu'à 50 000€ sur les tables Salon Privé.",
+      "Le baccarat convient aux joueurs qui souhaitent un jeu de table à faible avantage maison sans la courbe d'apprentissage du blackjack ou du poker. Son image VIP ne reflète pas sa complexité : c'est l'un des jeux de casino les plus simples en termes de règles. Les tables en ligne démarrent dès 1–5 €.",
+    ],
+    guideBodyEn: [
+      'Baccarat has three main variants. Punto Banco is the standard in online casinos: the player makes no decision beyond choosing their bet (Player, Banker or Tie). Chemin de Fer and Baccarat Banque allow players to decide whether to draw — these are rare online but available at some high-end live casinos.',
+      'House edge varies by bet. The Banker bet offers the highest RTP (98.94%, house edge 1.06%), followed by the Player bet (98.76%, house edge 1.24%). The Tie bet should be avoided: a 14.36% house edge despite its 8:1 or 9:1 payout. The standard commission on a winning Banker bet is 5% — check this rate before playing.',
+      'RNG baccarat is fast and accessible at low stakes. Live baccarat from Evolution Gaming (Lightning Baccarat, No Commission Baccarat) recreates the feel of a physical casino with real-time draw statistics and limits up to €50,000 on Salon Privé tables.',
+      'Baccarat suits players who want a low-house-edge table game without the learning curve of blackjack or poker. Its VIP image does not reflect its complexity — it is one of the simplest casino games in terms of rules. Low-minimum tables make it accessible from €1–€5 online.',
+    ],
+  },
+  {
+    slug: 'game-shows',
+    label: 'Game shows live',
+    labelEn: 'Live Game Shows',
+    description:
+      'Les game shows live combinent mécanique casino et format télévisuel : présentateurs en studio, décors spectaculaires, roues et bonus interactifs. Une catégorie portée presque exclusivement par Evolution Gaming depuis 2018.',
+    descriptionEn:
+      'Live game shows combine casino mechanics with a TV entertainment format: studio hosts, spectacular sets, wheels and interactive bonuses. A category driven almost exclusively by Evolution Gaming since 2018.',
+    count: 'N/A',
+    guideTitle: 'Game shows live : Crazy Time, Monopoly Live et les autres',
+    guideTitleEn: 'Live game shows: Crazy Time, Monopoly Live and the rest',
+    guideSummary: "Les titres phares d'Evolution Gaming expliqués : mécaniques, RTP et volatilité.",
+    guideSummaryEn: "Evolution Gaming's flagship titles explained: mechanics, RTP and volatility.",
+    bestOperatorSlug: 'wild-sultan',
+    guideBody: [
+      'Les game shows live sont animés par un présentateur humain en studio, diffusés en streaming HD. Contrairement aux tables classiques, ils intègrent des éléments télévisuels : roue de la fortune (Dream Catcher, Crazy Time), plateau de jeu de société (Monopoly Live), machines à boules (Lightning Ball). La catégorie est quasi entièrement dominée par Evolution Gaming, qui a développé la majorité de ces formats.',
+      "Crazy Time est le game show le plus joué en 2026 : une roue à 54 segments, 4 bonus games (Cash Hunt, Pachinko, Coin Flip, Crazy Time) et des multiplicateurs jusqu'à 20 000×. Monopoly Live intègre un Mr. Monopoly en 3D qui se déplace selon des dés virtuels. Dream Catcher est le format d'entrée — roue simple à 8 valeurs (1, 2, 5, 10, 20, 40). Lightning Roulette (multiplicateurs aléatoires 50×–500×) est classée dans cette famille par Evolution.",
+      "Les RTP des game shows varient selon la mise : Crazy Time oscille entre 94,41 % (segments courants) et 96,08 % (mise optimisée). La volatilité est structurellement haute — les bonus games concentrent l'essentiel des gains sur un nombre restreint de tours. Prévoyez un bankroll permettant plusieurs dizaines de tours sans déclencher de bonus.",
+      "Les game shows conviennent aux joueurs qui cherchent une expérience immersive plutôt qu'un jeu à stratégie. La dimension divertissement est réelle : sessions rythmées, studios spectaculaires. En contrepartie, le RTP varie davantage selon la mise que pour une roulette ou un blackjack classique.",
+    ],
+    guideBodyEn: [
+      'Live game shows are hosted by a human presenter in a studio, streamed in HD. Unlike classic tables, they incorporate television-style elements: wheels of fortune (Dream Catcher, Crazy Time), board game layouts (Monopoly Live), ball machines (Lightning Ball). The category is almost entirely dominated by Evolution Gaming, which developed the majority of these formats.',
+      "Crazy Time is the world's most-played game show in 2026: a 54-segment wheel, 4 bonus games (Cash Hunt, Pachinko, Coin Flip, Crazy Time) and multipliers up to 20,000×. Monopoly Live incorporates a 3D virtual Mr. Monopoly that moves based on dice rolls. Dream Catcher is the entry-level format — a simple wheel with 8 values (1, 2, 5, 10, 20, 40). Lightning Roulette (random multipliers 50×–500×) is classified in this family by Evolution.",
+      'Game show RTPs vary by bet: Crazy Time ranges from 94.41% (standard segments) to 96.08% (optimised bets). Volatility is structurally high — bonus games concentrate most of the winnings in a small number of rounds. Allow a bankroll covering several dozen rounds without triggering a bonus.',
+      'Game shows suit players looking for an immersive experience rather than a strategy game. The entertainment dimension is genuine: sessions are fast-paced, studios are impressive. In return, RTP varies more depending on the bet chosen than with a standard roulette or blackjack table.',
+    ],
+  },
+  {
+    slug: 'megaways',
+    label: 'Megaways',
+    labelEn: 'Megaways',
+    description:
+      "Megaways est une mécanique brevetée par Big Time Gaming (BTG) en 2016, intégrée par licence dans plus de 500 titres. Chaque tour change aléatoirement le nombre de symboles sur chaque reel, créant jusqu'à 117 649 combinaisons gagnantes.",
+    descriptionEn:
+      'Megaways is a game mechanic patented by Big Time Gaming (BTG) in 2016, licensed into over 500 titles. Each spin randomly changes the number of symbols on each reel, creating up to 117,649 winning combinations.',
+    count: 'N/A',
+    guideTitle: 'Mécanique Megaways : fonctionnement, titres de référence et RTP',
+    guideTitleEn: 'Megaways mechanic: how it works, reference titles and RTP',
+    guideSummary: 'Comprendre la mécanique Megaways et choisir parmi les 500+ titres disponibles.',
+    guideSummaryEn: 'Understand the Megaways mechanic and choose among 500+ available titles.',
+    bestOperatorSlug: 'wild-sultan',
+    guideBody: [
+      "Megaways n'est pas un jeu, c'est une mécanique brevetée par Big Time Gaming en 2016. Elle modifie le nombre de symboles visibles sur chaque reel à chaque tour : sur une grille 6 reels, chaque colonne peut afficher 2 à 7 symboles, soit un potentiel de 7⁶ = 117 649 façons de gagner. Ce nombre variable est au cœur du mécanisme — contrairement aux lignes de paiement fixes, chaque tour présente un état unique de la grille.",
+      "BTG concède la licence à d'autres éditeurs. Bonanza (BTG, 2016) est le titre originel — RTP 96 %, volatilité très haute, multiplicateurs en cascade — et reste la référence absolue. Extra Chilli (BTG) étend la formule. Madame Destiny Megaways (Pragmatic Play) illustre la diversité des thèmes disponibles sous licence. Plus de 500 titres Megaways ont été développés par NetEnt, Pragmatic, Red Tiger, iSoftBet et d'autres.",
+      'Les slots Megaways sont structurellement à haute ou très haute volatilité : sécheresses longues, gains potentiels élevés (max win souvent entre 10 000× et 50 000×). Le RTP moyen se situe entre 96 % et 97 %, mais certains opérateurs activent une variante à RTP inférieur — vérifiez la configuration avant de jouer.',
+      'Sur une grille Megaways, les combinaisons gagnantes se forment sur des symboles adjacents de gauche à droite, indépendamment de leur position verticale. La mécanique en cascade (symboles gagnants supprimés, nouveaux symboles qui tombent) est souvent associée aux Megaways, permettant des chaînes de gains sur un seul tour.',
+    ],
+    guideBodyEn: [
+      'Megaways is not a game — it is a mechanic patented by Big Time Gaming in 2016. It changes the number of visible symbols on each reel every spin: on a 6-reel grid, each column can display 2 to 7 symbols, for a maximum potential of 7⁶ = 117,649 ways to win. This variable number is the heart of the mechanic — unlike fixed paylines, each spin presents a unique grid state.',
+      'BTG licences the Megaways mechanic to other publishers. Bonanza (BTG, 2016) is the original title — 96% RTP, very high volatility, cascading multipliers — and remains the definitive reference. Extra Chilli (BTG) extends the formula. Madame Destiny Megaways (Pragmatic Play) illustrates the variety of themes available under licence. Over 500 Megaways titles have been developed by NetEnt, Pragmatic, Red Tiger, iSoftBet and others.',
+      'Megaways slots are structurally high or very high volatility: long dry spells, high potential wins (max win often between 10,000× and 50,000×). Average RTP sits between 96% and 97%, but some operators activate a lower-RTP variant — check the configuration before playing.',
+      'On a Megaways grid, winning combinations form on adjacent symbols from left to right, regardless of vertical position. The cascade mechanic (winning symbols removed, new symbols dropping in) is often paired with Megaways, enabling chain wins in a single spin.',
+    ],
+  },
+  {
+    slug: 'bingo',
+    label: 'Bingo en ligne',
+    labelEn: 'Online Bingo',
+    description:
+      'Le bingo en ligne existe en trois variantes principales : 75-ball (format américain), 80-ball et 90-ball (format britannique et européen classique). Moins répandu que les slots dans les casinos généralistes, il conserve une communauté de joueurs fidèles.',
+    descriptionEn:
+      'Online bingo exists in three main variants: 75-ball (American format), 80-ball and 90-ball (classic British and European format). Less common than slots in generalist casinos, it retains a loyal player community.',
+    count: 'N/A',
+    guideTitle: 'Bingo en ligne : variantes 75-ball, 80-ball et 90-ball',
+    guideTitleEn: 'Online bingo: 75-ball, 80-ball and 90-ball variants',
+    guideSummary:
+      'Choisir sa variante de bingo et comprendre les probabilités de gain selon le nombre de cartes achetées.',
+    guideSummaryEn:
+      'Choose your bingo variant and understand win probability based on the number of cards purchased.',
+    bestOperatorSlug: 'cresus',
+    guideBody: [
+      'Le bingo en ligne existe principalement en trois variantes. Le 90-ball est le format dominant en Europe : carte à 3 rangées de 9 colonnes, 15 numéros, 3 paliers de gain (1 ligne, 2 lignes, carton plein). Le 75-ball est le standard américain : grille 5×5 avec case centrale FREE, les patterns gagnants varient selon la salle. Le 80-ball est un format intermédiaire sur grille 4×4, moins courant.',
+      'Le bingo en ligne reproduit la salle physique avec un chat communautaire en temps réel. Les parties multi-joueurs créent un jackpot proportionnel au nombre de cartes vendues. Les salles sans chat sont généralement moins appréciées : la dimension sociale est constitutive du format, pas un ajout optionnel.',
+      "Le bingo est moins disponible que les slots dans les casinos généralistes — les salles spécialisées offrent une meilleure sélection. Acheter plusieurs cartes sur une même partie vous donne une probabilité proportionnelle de remporter le carton plein : plus vous avez de cartes parmi toutes celles vendues, plus vos chances augmentent, jusqu'au seuil où le coût supplémentaire dépasse l'espérance de gain.",
+      "Le bingo s'adresse à un public qui valorise le rythme détendu et l'aspect communautaire plutôt que la tension d'un slot à haute volatilité. Ce n'est pas la catégorie au RTP le plus élevé, mais c'est l'une des plus transparentes : les règles sont fixes et la dimension sociale est un avantage réel pour certains profils de joueurs.",
+    ],
+    guideBodyEn: [
+      '90-ball is the dominant format in Europe: a card with 3 rows of 9 columns containing 15 numbers, with 3 prize tiers (1 line, 2 lines, full house). 75-ball is the American standard: a 5×5 grid with a free centre square, winning patterns defined by the room. 80-ball is an intermediate format on a 4×4 grid, less common.',
+      'Online bingo replicates the physical bingo hall with a real-time community chat. Multi-player games create a jackpot proportional to the number of cards sold. Rooms without chat are generally less well-regarded — the social dimension is integral to the format, not an optional add-on.',
+      'Bingo is less available than slots in generalist casinos — specialist rooms offer a better selection. Buying several cards in the same game gives you a proportional probability of winning the full house: the more cards you hold among all those sold, the higher your chances — up to the threshold where the additional cost exceeds the expected return.',
+      'Online bingo suits players who value the relaxed pace and community aspect rather than the tension of a high-volatility slot. It does not offer the highest RTP of any category, but it is one of the most transparent: the rules are fixed and the social dimension is a genuine advantage for certain player profiles.',
     ],
   },
 ]
