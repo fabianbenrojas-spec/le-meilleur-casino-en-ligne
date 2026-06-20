@@ -29,6 +29,11 @@ export type GameCategory =
   | 'game-shows'
   | 'megaways'
   | 'bingo'
+  | 'craps-sic-bo'
+  | 'keno'
+  | 'loterie'
+  | 'jeux-a-gratter'
+  | 'provably-fair'
 
 export interface GameCategoryInfo {
   slug: GameCategory
@@ -264,6 +269,153 @@ export const categories: GameCategoryInfo[] = [
       'Online bingo replicates the physical bingo hall with a real-time community chat. Multi-player games create a jackpot proportional to the number of cards sold. Rooms without chat are generally less well-regarded — the social dimension is integral to the format, not an optional add-on.',
       'Bingo is less available than slots in generalist casinos — specialist rooms offer a better selection. Buying several cards in the same game gives you a proportional probability of winning the full house: the more cards you hold among all those sold, the higher your chances — up to the threshold where the additional cost exceeds the expected return.',
       'Online bingo suits players who value the relaxed pace and community aspect rather than the tension of a high-volatility slot. It does not offer the highest RTP of any category, but it is one of the most transparent: the rules are fixed and the social dimension is a genuine advantage for certain player profiles.',
+    ],
+  },
+  {
+    slug: 'craps-sic-bo',
+    label: 'Craps et Sic Bo',
+    labelEn: 'Craps & Sic Bo',
+    description:
+      "Craps et Sic Bo sont deux jeux de dés aux histoires et mécaniques distinctes, regroupés ici pour leur complémentarité SEO. Le Craps est le jeu de dés dominant dans les casinos américains, avec plus de 40 types de paris et des RTP très variables selon la mise choisie. Le Sic Bo est d'origine asiatique : trois dés, des combinaisons fixes, des règles plus accessibles.",
+    descriptionEn:
+      'Craps and Sic Bo are two dice games with distinct histories and mechanics, grouped here for SEO consolidation. Craps is the dominant dice game in American casinos, with over 40 bet types and widely varying RTPs depending on the chosen bet. Sic Bo is of Asian origin: three dice, fixed combinations, more accessible rules.',
+    count: 'N/A',
+    guideTitle: 'Craps et Sic Bo en ligne : mécaniques, types de paris et RTP comparés',
+    guideTitleEn: 'Craps and Sic Bo online: mechanics, bet types and RTP compared',
+    guideSummary:
+      'Comprendre les règles du Craps et du Sic Bo, différencier les deux jeux de dés et identifier les paris les plus avantageux.',
+    guideSummaryEn:
+      'Understand Craps and Sic Bo rules, distinguish the two dice games, and identify the most favourable bets.',
+    bestOperatorSlug: 'dublinbet',
+    guideBody: [
+      "Le Craps repose sur une mise initiale (Pass Line ou Don't Pass Line) suivie d'un Point si le premier jet n'est pas naturel. Plus de 40 types de paris coexistent, avec des RTP très variables : la mise Pass Line affiche 98,59 % (house edge 1,41 %), tandis que les mises Proposition peuvent descendre à 84 %. La règle pratique : concentrez-vous sur les paris Come/Pass et les Odds (sans avantage maison intégré). Le Craps en ligne existe en version RNG — rapide, faibles mises — et en live chez Evolution Gaming (table multi-joueurs, vrai lanceur de dés).",
+      "Le Sic Bo utilise trois dés secoués dans une cage. Vous misez sur des combinaisons : valeur totale des trois dés (4 à 17), une valeur spécifique sur 1, 2 ou 3 dés, doublet ou triplet. Le RTP varie selon la mise : les paris Petit (total 4-10) et Grand (total 11-17) affichent 97,22 %, mais les paris Triplet spécifique descendent à 83,33 %. La structure des paiements est fixe — il n'y a pas de décision stratégique comparable à celle du Craps.",
+      'Le Craps en ligne RNG est moins courant que la roulette ou le blackjack ; DublinBet et quelques casinos live haute limite proposent des tables. Le Sic Bo est disponible chez la majorité des fournisseurs live (Evolution Gaming, Playtech). Si vous cherchez un jeu de dés avec des décisions stratégiques, le Craps est plus riche ; si vous préférez des règles simples et des résultats rapides, le Sic Bo est plus accessible.',
+      "Dans les deux jeux, évitez les paris à hauts multiplicateurs : Triplets spécifiques au Sic Bo, Propositions au Craps. Leurs RTP sont structurellement inférieurs à 90 %. Les tables live ajoutent une dimension immersive mais les mises minimales sont souvent plus élevées qu'en RNG. Vérifiez les limites de table avant de commencer.",
+    ],
+    guideBodyEn: [
+      "Craps is built on an initial bet (Pass Line or Don't Pass Line) followed by a Point if the first roll is not a natural. Over 40 bet types coexist, with widely varying RTPs: the Pass Line bet returns 98.59% (house edge 1.41%), while Proposition bets can fall to 84%. The practical rule: stick to Come/Pass bets and the Odds bet, which carries no built-in house edge. Online Craps exists as RNG — fast, low stakes — and as a live version from Evolution Gaming (multiplayer table, real dice shooter).",
+      'Sic Bo uses three dice shaken in a cage. You bet on combinations: total value of all three dice (4 to 17), a specific value on 1, 2 or 3 dice, doubles or triples. RTP varies by bet: Small (total 4-10) and Big (total 11-17) bets return 97.22%, but specific Triple bets fall to 83.33%. The payout structure is fixed — there is no strategic depth comparable to Craps.',
+      'Online RNG Craps is less common than roulette or blackjack; DublinBet and some high-limit live casinos offer tables. Sic Bo is available at most live providers (Evolution Gaming, Playtech). If you want a dice game with strategic decisions, Craps is richer; if you prefer simple rules and fast results, Sic Bo is more accessible.',
+      'In both games, avoid high-multiplier bets: specific Triples in Sic Bo, Propositions in Craps. Their RTPs are structurally below 90%. Live tables add immersion but minimum bets are often higher than RNG equivalents. Check table limits before you start.',
+    ],
+  },
+  {
+    slug: 'keno',
+    label: 'Keno',
+    labelEn: 'Keno',
+    description:
+      "Le keno est un jeu de tirage sur 80 numéros où le joueur sélectionne de 1 à 20 numéros selon les variantes. Proche du bingo et de la loterie dans son principe, il s'en distingue par des tirages quasi-instantanés disponibles en continu. Son RTP est structurellement plus bas que les autres jeux de casino en ligne — généralement entre 75 % et 90 %.",
+    descriptionEn:
+      'Keno is a draw game on 80 numbers where the player selects 1 to 20 numbers depending on the variant. Similar in principle to bingo and lottery, it is distinguished by near-instant draws available continuously. Its RTP is structurally lower than other online casino games — typically between 75% and 90%.',
+    count: 'N/A',
+    guideTitle: "Keno en ligne : règles, probabilités et RTP — ce qu'il faut savoir avant de jouer",
+    guideTitleEn: 'Online keno: rules, probabilities and RTP — what to know before playing',
+    guideSummary:
+      'Comprendre le fonctionnement du keno, ses probabilités de gain et pourquoi son RTP inférieur le distingue des autres jeux de casino.',
+    guideSummaryEn:
+      'Understand how keno works, its win probabilities, and why its lower RTP sets it apart from other casino games.',
+    bestOperatorSlug: 'cresus',
+    guideBody: [
+      "Le keno se joue sur une grille de 80 numéros (1 à 80). Vous choisissez un nombre de spots (numéros sélectionnés), puis 20 numéros sont tirés aléatoirement par le système. Les gains dépendent du nombre de correspondances entre vos numéros et le tirage. Le tableau des paiements varie selon le nombre de spots joués et l'opérateur : jouer 10 spots et en avoir 7 corrects peut rapporter davantage que jouer 3 spots et les avoir tous corrects, selon la configuration.",
+      "Le RTP du keno en ligne se situe généralement entre 75 % et 90 %, selon le titre et la variante. C'est structurellement inférieur aux machines à sous (≥ 94 %), à la roulette européenne (97,3 %) ou au blackjack (99 %+). Ce point est à connaître avant de jouer : le keno n'est pas un jeu à stratégie, et la fréquence des gains est plus faible que dans la majorité des autres catégories casino. En contrepartie, les mises sont souvent très faibles (dès 0,10 €) et les tirages rapides.",
+      "Le keno diffère du bingo par l'absence de carte prédéfinie et de dimension communautaire — chaque joueur joue seul contre le tirage. Il diffère de la loterie par sa disponibilité instantanée (pas d'attente de tirage à date fixe) et par ses tableaux de paiement publics et vérifiables. À titre de référence, la FDJ propose son propre Keno (tirage quotidien sur grille de 70 numéros) avec un taux de retour officiel de 73,4 %.",
+      "Le keno convient à des sessions courtes à faibles mises, sans décision stratégique à prendre. Ce n'est pas la catégorie recommandée pour maximiser la durée de jeu ou le rendement mathématique — d'autres jeux de casino offrent de meilleures conditions. Si c'est sa simplicité et son immédiateté qui vous intéressent, le keno remplit cette fonction efficacement.",
+    ],
+    guideBodyEn: [
+      'Keno is played on a grid of 80 numbers (1 to 80). You choose a number of spots (selected numbers), then 20 numbers are drawn at random by the system. Winnings depend on how many of your numbers match the draw. The paytable varies by the number of spots played and the operator: picking 10 spots and hitting 7 can pay more than picking 3 and hitting all of them, depending on the configuration.',
+      'Online keno RTP typically falls between 75% and 90%, depending on the title and variant. This is structurally lower than slots (≥ 94%), European roulette (97.3%) or blackjack (99%+). This is worth knowing before playing: keno is not a strategy game, and win frequency is lower than in most other casino categories. On the other hand, stakes are often very low (from €0.10) and draws are fast.',
+      'Keno differs from bingo in that there is no pre-defined card and no community dimension — each player plays alone against the draw. It differs from the lottery in that it is available instantly (no waiting for a scheduled draw date) and its paytables are public and verifiable. For reference, the FDJ operates its own Keno (daily draw on a 70-number grid) with an official return rate of 73.4%.',
+      'Keno suits short sessions at low stakes, with no strategic decisions required. It is not the recommended category for maximising session length or mathematical return — other casino games offer better conditions. If what attracts you is its simplicity and immediacy, keno fulfils that function effectively.',
+    ],
+  },
+  {
+    slug: 'loterie',
+    label: 'Loterie en ligne',
+    labelEn: 'Online Lottery',
+    description:
+      "La loterie en ligne regroupe les tirages à numéros à dates fixes — EuroMillions, Loto — accessibles en ligne, à distinguer du keno (tirage instantané) et du bingo (carte prédéfinie). En France, seule la FDJ est autorisée à commercialiser des jeux de loterie. Les RTP des loteries d'État sont parmi les plus bas du secteur : environ 55 % pour le Loto et l'EuroMillions.",
+    descriptionEn:
+      'Online lottery covers scheduled number draws — EuroMillions, Loto — accessible online, distinct from keno (instant draws) and bingo (pre-defined card). In France, only the FDJ is authorised to sell lottery games. State lottery RTPs are among the lowest in the sector: approximately 55% for Loto and EuroMillions.',
+    count: 'N/A',
+    guideTitle:
+      'Loterie en ligne : tirages officiels, plateformes offshore et différences avec le keno',
+    guideTitleEn: 'Online lottery: official draws, offshore platforms and differences from keno',
+    guideSummary:
+      "Comprendre la différence entre loterie et keno, évaluer le RTP réel des loteries d'État et identifier les options disponibles en France.",
+    guideSummaryEn:
+      'Understand the difference between lottery and keno, assess the real RTP of state lotteries, and identify the options available in France.',
+    bestOperatorSlug: 'cresus',
+    guideBody: [
+      "La loterie en ligne recouvre deux réalités distinctes. D'un côté, les loteries d'État accessibles en ligne : en France, FDJ.fr propose le Loto, l'EuroMillions et le Keno (voir notre page dédiée). Ces jeux sont légaux, réglementés par l'ANJ, avec des odds et taux de retour officiellement publiés. De l'autre, des plateformes offshore permettent de parier sur des tirages internationaux (Powerball US, UK Lotto) ou de participer à des loteries propriétaires avec des jackpots variables.",
+      "Loterie et keno reposent tous deux sur un tirage de numéros, mais leur fonctionnement diffère sur un point clé : le timing. Le keno propose des tirages quasi-instantanés disponibles en continu — vous jouez, le résultat est immédiat. La loterie implique un tirage à une date et une heure fixes : vous achetez votre ticket à l'avance et attendez le résultat. Les jackpots peuvent atteindre des montants considérables (EuroMillions : jusqu'à 240 M€), mais la probabilité de remporter le jackpot principal reste extrêmement faible — 1 chance sur environ 140 millions pour l'EuroMillions.",
+      "Le RTP des loteries d'État est parmi les plus bas des jeux de hasard. La FDJ publie un taux de retour global d'environ 55 % pour le Loto et l'EuroMillions (incluant l'ensemble des prix et les abondements de cagnotte). À titre de comparaison, un slot classique affiche 94-96 %, une roulette européenne 97,3 %. Les plateformes offshore de type « lottery betting » proposent parfois des structures de paiement légèrement différentes — vérifiez toujours les odds publiés avant de jouer.",
+      "En France, seule la FDJ est autorisée par l'ANJ à commercialiser des jeux de loterie. Les plateformes offshore qui proposent des paris sur des tirages étrangers ne disposent d'aucune autorisation française et opèrent en dehors du cadre légal national. Le joueur qui y accède le fait sous sa propre responsabilité. Pour les tirages FDJ, FDJ.fr est la seule plateforme légale en France métropolitaine.",
+    ],
+    guideBodyEn: [
+      'Online lottery covers two distinct realities. On one side, state lotteries accessible online: in France, FDJ.fr offers Loto, EuroMillions and Keno (see our dedicated page). These games are legal, regulated by the ANJ, with officially published odds and return rates. On the other, offshore platforms allow betting on international draws (US Powerball, UK Lotto) or participating in proprietary lotteries with variable jackpots.',
+      'Lottery and keno both rely on number draws, but their mechanics differ on one key point: timing. Keno offers near-instant draws available continuously — you play, the result is immediate. The lottery involves a draw at a fixed date and time: you buy your ticket in advance and wait for the result. Jackpots can reach substantial amounts (EuroMillions: up to €240M), but the probability of winning the main jackpot remains extremely low — approximately 1 in 140 million for EuroMillions.',
+      "State lottery RTPs are among the lowest of any gambling product. The FDJ publishes an overall return rate of approximately 55% for Loto and EuroMillions (including all prizes and jackpot contributions). By comparison, a standard slot returns 94-96%, European roulette 97.3%. Offshore 'lottery betting' platforms sometimes offer slightly different payout structures — always check the published odds before playing.",
+      'In France, only the FDJ is authorised by the ANJ to sell lottery games. Offshore platforms offering bets on foreign draws hold no French authorisation and operate outside the national legal framework. Players who access them do so at their own responsibility. For FDJ draws, FDJ.fr is the only legal platform in metropolitan France.',
+    ],
+  },
+  {
+    slug: 'jeux-a-gratter',
+    label: 'Jeux à gratter',
+    labelEn: 'Scratch Cards',
+    description:
+      "Les jeux à gratter en ligne reproduisent la mécanique des cartes à gratter physiques : gains instantanés, tableau des prix affiché, RTP publié par l'éditeur. Moins présents en ligne qu'en tabac-presse (où les Banco FDJ dominent), ils restent disponibles dans la majorité des casinos généralistes, avec des RTP supérieurs aux versions physiques.",
+    descriptionEn:
+      'Online scratch cards reproduce the mechanics of physical scratch cards: instant wins, displayed prize table, RTP published by the provider. Less prominent online than in physical retail (where FDJ Banco dominates), they remain available in most generalist casinos, with RTPs higher than their physical counterparts.',
+    count: 'N/A',
+    guideTitle:
+      'Jeux à gratter en ligne : fonctionnement, RTP et différences avec les versions physiques',
+    guideTitleEn: 'Online scratch cards: how they work, RTP and differences from physical versions',
+    guideSummary:
+      'Comprendre la mécanique des jeux à gratter en ligne, lire un tableau de gains et comparer les titres selon leur RTP.',
+    guideSummaryEn:
+      'Understand how online scratch cards work, read a prize table, and compare titles by RTP.',
+    bestOperatorSlug: 'madnix',
+    guideBody: [
+      "Les jeux à gratter en ligne reproduisent le principe des cartes physiques : des zones cachées à révéler, une combinaison gagnante déterminée à l'avance par un générateur de nombres aléatoires certifié. Le résultat est fixé dès l'achat du ticket — l'animation de grattage est purement visuelle. Les éditeurs publient systématiquement le RTP et le tableau des prix, ce qui fait de ces jeux l'une des catégories les plus transparentes du casino en ligne.",
+      "Le RTP des jeux à gratter en ligne se situe généralement entre 92 % et 97 %, selon le titre et l'éditeur — comparable à un slot classique. La volatilité est généralement faible à moyenne : gains fréquents mais modestes, avec quelques paliers supérieurs dans la table des prix. Des titres comme Piggy Riches Scratch (NetEnt, 95 %) ou Wish Upon a Jackpot (Blueprint, 95,33 %) illustrent la gamme disponible. Les prix maximaux varient de quelques centaines d'euros à plusieurs millions sur les scratch à jackpot progressif.",
+      "Sur le seul critère du RTP, les scratch en ligne (≥ 92 %) affichent des taux supérieurs aux scratch FDJ (~64-65 %). À noter cependant que les scratch FDJ sont distribués légalement en France, ce qui n'est pas le cas des plateformes offshore.",
+      "Les jeux à gratter conviennent aux joueurs qui recherchent un résultat immédiat sans courbe d'apprentissage. Ce n'est pas la catégorie avec la plus grande diversité de mécaniques, mais c'est l'une des plus simples et des plus transparentes : le tableau de gains est toujours affiché et le RTP est publié par l'éditeur, vérifiable avant d'acheter.",
+    ],
+    guideBodyEn: [
+      'Online scratch cards reproduce the physical card principle: hidden areas to reveal, a winning combination pre-determined by a certified random number generator. The result is fixed from the moment the ticket is purchased — the scratching animation is purely visual. Publishers systematically publish the RTP and prize table, making these among the most transparent games at online casinos.',
+      'Online scratch card RTP typically ranges from 92% to 97%, depending on the title and publisher — comparable to a standard slot. Volatility is generally low to medium: frequent but modest wins, with a few higher tiers in the prize table. Titles such as Piggy Riches Scratch (NetEnt, 95%) or Wish Upon a Jackpot (Blueprint, 95.33%) illustrate the range available. Maximum prizes range from a few hundred euros to several million on progressive jackpot scratch cards.',
+      'On the RTP criterion alone, online scratch cards (≥ 92%) show higher rates than FDJ scratch cards (~64-65%). It should be noted, however, that FDJ scratch cards are sold legally in France, whereas offshore platforms are not.',
+      'Scratch cards suit players who want an instant result with no learning curve. It is not the category with the widest variety of mechanics, but it is one of the simplest and most transparent: the prize table is always shown and the RTP is published by the provider, verifiable before purchase.',
+    ],
+  },
+  {
+    slug: 'provably-fair',
+    label: 'Provably Fair',
+    labelEn: 'Provably Fair',
+    description:
+      "Provably Fair n'est pas un type de jeu — c'est un mécanisme cryptographique qui permet à chaque joueur de vérifier mathématiquement l'équité d'un résultat après chaque tour. Développé à partir de 2012 et adopté par les casinos crypto depuis 2017, il repose sur un système de seeds client/serveur et un hash SHA-256 que tout joueur peut recalculer.",
+    descriptionEn:
+      'Provably Fair is not a game type — it is a cryptographic mechanism that allows each player to mathematically verify the fairness of a result after every round. Developed from 2012 and adopted by crypto casinos since 2017, it relies on a client/server seed system and a SHA-256 hash that any player can recalculate.',
+    count: 'N/A',
+    guideTitle: "Provably Fair : comment vérifier l'équité d'un casino crypto par vous-même",
+    guideTitleEn: "Provably Fair: how to verify a crypto casino's fairness yourself",
+    guideSummary:
+      'Comprendre le mécanisme cryptographique Provably Fair, son fonctionnement par seeds et hash SHA-256, et comment le distinguer des audits tiers traditionnels.',
+    guideSummaryEn:
+      'Understand the Provably Fair cryptographic mechanism, how it works via seeds and SHA-256 hashing, and how to distinguish it from traditional third-party audits.',
+    bestOperatorSlug: 'stake',
+    guideBody: [
+      "Le Provably Fair est un mécanisme cryptographique qui rend vérifiable l'équité de chaque résultat, indépendamment du casino. Avant chaque tour, le serveur génère un seed chiffré (server seed) et vous pouvez fournir votre propre seed (client seed). Le résultat du tour est une fonction déterministe de ces deux seeds. Après le tour, le serveur révèle le server seed original : vous pouvez alors recalculer le résultat et vérifier qu'il n'a pas été modifié. Aucune confiance aveugle n'est nécessaire — la vérification est mathématique et accessible à tout joueur.",
+      "Le mécanisme repose sur une fonction de hachage cryptographique, SHA-256 pour la grande majorité des implémentations. Avant le tour, le casino publie le hash du server seed — une empreinte numérique irréversible qui prouve que le seed est fixé. Après le tour, le casino révèle le server seed en clair. Vous calculez hash(server seed) et vérifiez que le résultat correspond à l'empreinte publiée avant le tour. Si les deux correspondent, le server seed ne peut pas avoir été modifié. Les jeux conçus nativement pour ce mécanisme sont les jeux originaux des casinos crypto : Dice (dé paramétrable), Mines (grille de mines), Plinko, Limbo, Crash. Ces titres ont été développés spécifiquement pour le Provably Fair.",
+      "Les casinos traditionnels font certifier leur RNG par des organismes tiers indépendants : eCOGRA, iTechLabs, GLI. Ces audits vérifient la conformité statistique d'un RNG sur un échantillon de tirages — mais chaque joueur individuel ne peut pas contrôler chaque résultat lui-même. Le Provably Fair déplace cette logique : la vérification est individuelle, instantanée, et ne nécessite aucun intermédiaire. C'est un passage de confiance envers un auditeur institutionnel à confiance envers un algorithme public et vérifiable. Ces deux approches coexistent : des casinos comme Stake et BC.Game cumulent le Provably Fair sur leurs jeux originaux et une certification eCOGRA sur leurs slots tiers.",
+      "Pour vérifier un résultat, vous avez besoin du server seed révélé, du client seed, du nonce (compteur de tours) et d'un outil de vérification. La majorité des casinos crypto en proposent un intégré ; vous pouvez également utiliser un calculateur externe open source. Sur Stake ou BC.Game, chaque tour affiche un onglet « Verify » accessible depuis l'historique de jeu. La vérification prend moins d'une minute. Vous n'avez pas besoin de maîtriser la cryptographie pour utiliser ces outils — ils effectuent le calcul à votre place et affichent le résultat attendu.",
+    ],
+    guideBodyEn: [
+      'Provably Fair is a cryptographic mechanism that makes the fairness of each game result verifiable, independently of the casino. Before each round, the server generates an encrypted seed (server seed) and you can provide your own seed (client seed). The round result is a deterministic function of these two seeds. After the round, the server reveals the original server seed — you can then recalculate the result and verify it was not altered. No blind trust is required: verification is mathematical and accessible to any player.',
+      'The mechanism relies on a cryptographic hash function, SHA-256 for the vast majority of implementations. Before the round, the casino publishes the hash of the server seed — an irreversible digital fingerprint that proves the seed is fixed. After the round, the casino reveals the server seed in plain text. You compute hash(server seed) and verify that the result matches the fingerprint published before the round. If the two match, the server seed could not have been modified. The games natively designed for this mechanism are the original crypto casino games: Dice (configurable dice roll), Mines (mine grid), Plinko, Limbo, Crash. These titles were built specifically for Provably Fair.',
+      "Traditional casinos have their RNG certified by independent third-party bodies: eCOGRA, iTechLabs, GLI. These audits verify a RNG's statistical compliance across a sample of draws — but individual players cannot check each result themselves. Provably Fair shifts this logic: verification is individual, instantaneous, and requires no intermediary. It moves trust from an institutional auditor to a public, verifiable algorithm. Both approaches coexist: casinos such as Stake and BC.Game combine Provably Fair on original games with eCOGRA certification on third-party slots.",
+      'To verify a result, you need the revealed server seed, the client seed, the nonce (round counter) and a verification tool. Most crypto casinos provide one built-in; you can also use an open-source external calculator. On Stake or BC.Game, each round displays a "Verify" tab accessible from the game history. Verification takes under a minute. You do not need to master cryptography to use these tools — they perform the calculation and display the expected result for you.',
     ],
   },
 ]

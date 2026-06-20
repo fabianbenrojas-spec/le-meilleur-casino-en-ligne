@@ -191,6 +191,87 @@ const catIcons: Record<string, React.ReactNode> = {
       <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
     </svg>
   ),
+  'craps-sic-bo': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="2" y="8" width="10" height="10" rx="2" />
+      <rect x="12" y="4" width="10" height="10" rx="2" />
+      <circle cx="7" cy="13" r="1" fill="currentColor" />
+      <circle cx="17" cy="9" r="1" fill="currentColor" />
+      <circle cx="14.5" cy="11.5" r="1" fill="currentColor" />
+      <circle cx="19.5" cy="11.5" r="1" fill="currentColor" />
+    </svg>
+  ),
+  keno: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M3 8.5h18M3 13h18M3 17.5h18M8 3v18M12 3v18M16 3v18" />
+    </svg>
+  ),
+  loterie: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M7 9h10M7 13h6" />
+      <path d="M17 13l1.5 2.5" strokeWidth="1.5" />
+    </svg>
+  ),
+  'jeux-a-gratter': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <path d="M4 20L20 4" strokeWidth="1.5" strokeDasharray="2 2" />
+      <rect x="2" y="6" width="16" height="12" rx="2" />
+      <path d="M6 12h8M6 15h5" />
+    </svg>
+  ),
+  'provably-fair': (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-9 w-9 text-green"
+      aria-hidden
+    >
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+      <path d="M12 15v2" />
+    </svg>
+  ),
 }
 
 export default async function JeuxHubPage({ params }: { params: Promise<{ locale: Locale }> }) {

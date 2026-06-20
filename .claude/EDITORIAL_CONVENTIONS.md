@@ -153,3 +153,31 @@ NE PAS injecter directement la sortie Claude Code sans phase 4.
 L'expérience sur Crésus (4 corrections) et Lucky8 (5 corrections) montre
 que la couche relecture humaine attrape systématiquement des nuances
 critiques que l'auto-validation ne détecte pas.
+
+## §13 — Statut juridique offshore vs ANJ
+
+Établi 2026-06-20 lors de l'injection des catégories loterie et jeux-à-gratter
+(R2 Vague 3/3). Deviendra critique à Phase 1 (ajout Winamax et autres opérateurs ANJ).
+
+Quand le contenu mentionne des plateformes offshore aux côtés des opérateurs
+ANJ (FDJ, PMU, Winamax, etc.) :
+
+1. Signaler que les plateformes offshore n'ont pas d'autorisation française.
+2. Préciser que les opérateurs ANJ sont les seules options légales en France métropolitaine.
+3. Indiquer que l'usage d'une plateforme offshore relève de la responsabilité du joueur.
+
+**Formulation de référence validée :**
+
+> "Les plateformes offshore qui proposent des paris sur des tirages étrangers ne disposent
+> d'aucune autorisation française et opèrent en dehors du cadre légal national. Le joueur
+> qui y accède le fait sous sa propre responsabilité."
+
+**Ne jamais** formuler une comparaison RTP / conditions / bonus qui suggère que l'offshore
+est « mieux » sans rappeler le contexte légal. Présenter le différentiel factuel + le
+contexte légal de manière équilibrée.
+
+**Formulation RTP équilibrée de référence (jeux-à-gratter §3) :**
+
+> "Sur le seul critère du RTP, les scratch en ligne (≥ 92 %) affichent des taux supérieurs
+> aux scratch FDJ (~64-65 %). À noter cependant que les scratch FDJ sont distribués
+> légalement en France, ce qui n'est pas le cas des plateformes offshore."

@@ -71,6 +71,11 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
         { label: isFr ? 'Game shows live' : 'Live Game Shows', href: l('/jeux/game-shows/') },
         { label: isFr ? 'Megaways' : 'Megaways', href: l('/jeux/megaways/') },
         { label: isFr ? 'Bingo en ligne' : 'Online Bingo', href: l('/jeux/bingo/') },
+        { label: isFr ? 'Craps et Sic Bo' : 'Craps & Sic Bo', href: l('/jeux/craps-sic-bo/') },
+        { label: isFr ? 'Keno' : 'Keno', href: l('/jeux/keno/') },
+        { label: isFr ? 'Loterie en ligne' : 'Online Lottery', href: l('/jeux/loterie/') },
+        { label: isFr ? 'Jeux à gratter' : 'Scratch Cards', href: l('/jeux/jeux-a-gratter/') },
+        { label: isFr ? 'Provably Fair' : 'Provably Fair', href: l('/jeux/provably-fair/') },
       ],
     },
     {
