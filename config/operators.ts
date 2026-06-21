@@ -721,7 +721,7 @@ export const operators: Operator[] = [
     launchYearFrance: 2010,
   },
 
-  // ── 17. Betclic (ANJ squelette — pending enrichissement éditorial) ──────────
+  // ── 17. Betclic (ANJ — enrichi juin 2026) ───────────────────────────────────
   {
     id: 'betclic',
     slug: 'betclic',
@@ -729,41 +729,42 @@ export const operators: Operator[] = [
     shortName: 'Betclic',
     // logoUrl: à compléter en phase logos
     licence: 'ANJ — Licence française',
-    // licenceNumber: TODO valider sur registre ANJ
-    rating: 8.8, // ⚠️ placeholder — à valider après enrichissement éditorial
-    ratingLabel: 'Très bien',
+    // licenceNumber: TODO valider sur registre ANJ (betclic.fr/legal)
+    rating: 8.2, // MediaPronos juin 2026
+    ratingLabel: 'Bien',
     // Convention §14 : valeurs placeholder pour hasBonus: false
     bonusAmount: '—',
     bonusSuffix: '',
     bonusConditions: '',
     bonusAmountNumber: 0,
     bonusSlug: 'no-bonus',
-    rtp: 0, // placeholder — non central pour sport/poker
-    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur betclic.fr
-    features: ['App native', 'Sport-first', 'Licence ANJ'],
+    rtp: 0, // non central pour sport/poker/hippique
+    paymentMethods: ['VISA', 'MC', 'PPAL', 'VIRT'], // VIRT = virement SEPA Instant
+    features: ['App native 4,7/5 iOS', 'SEPA Instant < 15 min', 'Live chat 7j/7', 'Licence ANJ'],
     pros: [
-      'Notoriété forte sur le marché français',
-      'Design moderne',
-      // TODO enrichir après vérification betclic.fr
+      'Retraits SEPA Instant testés en moins de 15 minutes (MediaPronos)',
+      'App native notée 4,7/5 sur iOS et 4,5/5 sur Google Play',
+      'Live chat disponible 7 jours sur 7',
+      'Partenaire officiel Équipe de France, Top 14 et Betclic Elite',
     ],
     cons: [
-      'Pas de jeux de casino (interdit ANJ)',
+      'Pas de jeux de casino ni de live casino (licence ANJ)',
+      'Pas de support téléphonique',
       'Pas de crypto',
-      // TODO enrichir après vérification betclic.fr
     ],
     verdict:
-      'Betclic est un opérateur ANJ majeur du marché français, reconnu pour son UX moderne et son support client. TODO enrichir après vérification.',
-    tagline: 'Référence française du pari sportif moderne.', // TODO valider angle distinctif
+      'Betclic est la référence française du pari sportif réglementé. Noté 8,2/10 par MediaPronos, il se distingue par une app mobile primée (4,7/5 iOS), des retraits SEPA Instant testés en moins de 15 minutes et un live chat 7j/7. Opère sous licence ANJ depuis 2010 au sein du groupe Flutter Entertainment.',
+    tagline: 'Le pari sportif français — app 4,7/5, retraits < 15 min.',
     affiliateUrl: goUrl('betclic'),
     jurisdiction: 'anj',
     hasBonus: false,
     isAffiliated: true,
     legalDisclaimerVariant: 'anj',
-    gameTypes: ['sport', 'poker'], // TODO confirmer si hippique aussi
+    gameTypes: ['sport', 'poker', 'horse-racing'],
     kycPolicy: 'strict',
-    withdrawalSpeed: 'standard', // TODO valider — marketing "15 min" non vérifié
+    withdrawalSpeed: 'fast', // SEPA Instant testé < 15 min (MediaPronos mai 2026)
     supportsFrench: true,
-    // launchYearFrance: TODO valider année exacte licence ANJ
+    launchYearFrance: 2010,
   },
 
   // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ────────────

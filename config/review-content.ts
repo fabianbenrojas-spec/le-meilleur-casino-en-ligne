@@ -1957,64 +1957,129 @@ const reviews: ReviewData[] = [
     ],
   },
 
-  // ── 17. Betclic (ANJ squelette — pending enrichissement éditorial) ──────────
+  // ── 17. Betclic (ANJ — enrichi juin 2026) ──────────────────────────────────
   {
     slug: 'betclic',
-    foundedYear: 2005, // ⚠️ placeholder — date de fondation mondiale ; année licence ANJ à valider
-    languages: ['FR', 'EN'], // TODO valider
-    currencies: ['EUR'], // TODO valider
+    foundedYear: 2005,
+    languages: ['FR', 'EN'],
+    currencies: ['EUR'],
     reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
     stars: 0, // ⚠️ placeholder — à valider
     verdict:
-      'Betclic est un opérateur ANJ majeur du marché français. Profil sport + poker sous licence française. Données éditoriales à compléter après vérification betclic.fr.',
+      "Betclic est la référence du pari sportif réglementé en France. Filiale de Flutter Entertainment (groupe irlandais coté en bourse, LSE : FLTR), il opère sous licence ANJ depuis 2010. En juin 2026, l'app a été refondue : elle affiche 4,7/5 sur l'App Store iOS et 4,5/5 sur Google Play. Les retraits SEPA Instant ont été testés à moins de 15 minutes (MediaPronos mai 2026). Le support propose un live chat 7 jours sur 7. Betclic est partenaire officiel de l'Équipe de France de football, du Top 14 rugby et de la Betclic Elite basket. La plateforme couvre trois disciplines : paris sportifs, poker (réseau iPoker) et hippique (Betclic Turf). La licence ANJ n'autorise pas les jeux de casino classiques (machines à sous, roulette, blackjack, live casino). Note éditeurs MediaPronos : 8,2/10.",
     sections: {
       // bonus: undefined — convention §15 (ANJ sans bonus casino)
       jeux: {
         prose: [
-          'TODO — Section à enrichir après vérification betclic.fr (offre poker, paris sportifs, hippique éventuelle).',
+          "Betclic couvre trois disciplines sous une même licence ANJ. Le cœur de l'offre est le pari sportif : plus de 30 sports disponibles avec une couverture extensive du football (tous les championnats majeurs + Équipe de France), du rugby Top 14, du basket Betclic Elite et des arts martiaux (UFC). L'opérateur est reconnu pour la compétitivité de ses cotes sur le football.",
+          "Betclic Poker constitue le deuxième pilier : cash games Texas Hold'em et Omaha, tournois MTT quotidiens, sit & go. La salle est intégrée au réseau iPoker, le plus grand réseau de poker en ligne d'Europe, garantissant une liquidité suffisante à toutes heures.",
+          "Betclic Turf complète l'offre avec les paris hippiques : courses françaises (PMH, Vincennes) et internationales, paris simples et combinés. Les trois disciplines sont accessibles depuis un compte unique avec une bankroll partagée.",
+        ],
+        highlights: [
+          '30+ sports disponibles',
+          'Réseau iPoker (liquidité européenne)',
+          'Hippique : courses françaises + internationales',
+          'Partenaire officiel Top 14, Betclic Elite, Équipe de France',
         ],
       },
       // live: undefined — convention §15
       paiements: {
         prose: [
-          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification betclic.fr.',
+          'Betclic accepte les paiements par carte bancaire (Visa, Mastercard), PayPal et virement bancaire SEPA. Le virement SEPA Instant est la méthode phare : selon un test réel de MediaPronos en mai 2026, les fonds ont été crédités en moins de 15 minutes. Pour les retraits supérieurs à 2 000 €, une vérification KYC complémentaire est requise avant traitement.',
+          'Pas de crypto, pas de Skrill ni Neteller (contrainte de conformité ANJ). Le dépôt minimum est de 10 €. Les virements SEPA standard sont traités en 24h maximum ; le SEPA Instant réduit ce délai à quelques minutes en pratique.',
+        ],
+        highlights: [
+          'SEPA Instant testé < 15 min (MediaPronos mai 2026)',
+          'Visa, Mastercard, PayPal, virement SEPA',
+          'Dépôt minimum 10 €',
+          'KYC requis > 2 000 € en retrait',
         ],
       },
       support: {
         prose: [
-          'TODO — Canaux de support et disponibilité à confirmer après vérification betclic.fr.',
+          "Le support Betclic est accessible via live chat et e-mail. Le live chat est disponible 7 jours sur 7 et constitue le canal le plus réactif. Aucune ligne téléphonique n'est proposée. Le support est exclusivement en français, avec des agents formés sur les règles du pari sportif ANJ.",
+          "Le centre d'aide (FAQ) couvre les procédures KYC, les règles des paris et les délais de paiement. Pour les litiges complexes, l'escalade vers l'ANJ est possible via le médiateur indépendant.",
+        ],
+        highlights: [
+          'Live chat 7 jours sur 7',
+          'E-mail disponible',
+          'Pas de support téléphonique',
+          'Support exclusivement en français',
         ],
       },
       mobile: {
         prose: [
-          "TODO — Détails de l'app native (notes App Store, Play Store, fonctionnalités) à confirmer.",
+          "L'application Betclic a fait l'objet d'une refonte complète en juin 2026. Elle est notée 4,7/5 sur l'App Store iOS et 4,5/5 sur Google Play. L'app couvre les trois disciplines (sport, poker, hippique) depuis une interface unifiée. Les outils de gestion des paris sont intégrés : Cash Out, annulation de pari (dans les 2 minutes suivant la mise, jusqu'à 5 fois par jour) et MyCombi (combinaison personnalisée de paris).",
+          "La navigation par sport est fluide avec accès rapide aux événements en cours. Les notifications push sont configurables par discipline. L'identification biométrique (Face ID, empreinte) est supportée sur iOS et Android.",
+        ],
+        highlights: [
+          'App Store iOS : 4,7/5 (refonte juin 2026)',
+          'Google Play : 4,5/5',
+          'Cash Out + annulation pari (5×/jour, 2 min) + MyCombi',
+          "Sport + Poker + Hippique dans l'app",
         ],
       },
       // vip: undefined — convention §15
       securite: {
         prose: [
-          "Betclic opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. C'est un cadre réglementaire strict avec obligations KYC et outils de jeu responsable.",
+          "Betclic opère sous licence ANJ depuis 2010 — l'Autorité Nationale des Jeux est le régulateur français du jeu en ligne. La plateforme appartient au groupe Flutter Entertainment, l'un des plus grands opérateurs de jeux cotés au monde (LSE : FLTR).",
+          "Les obligations ANJ incluent : vérification d'identité obligatoire (KYC), plafonds de dépôt paramétrables, accès à l'auto-exclusion nationale (Fichier des Interdits de Jeu ANJ) et liens vers Joueurs Info Service (09 74 75 13 13). Les données sont hébergées en Europe conformément au RGPD.",
         ],
-        highlights: ['Licence ANJ — régulation française'],
+        highlights: [
+          'Licence ANJ depuis 2010',
+          'Groupe Flutter Entertainment (LSE : FLTR)',
+          'KYC strict + auto-exclusion nationale ANJ',
+          'RGPD — hébergement Europe',
+        ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'ANJ — Licence française' },
-      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
-      { label: 'Méthodes de paiement', value: 'TODO à valider' },
-      { label: 'Délai de retrait', value: 'TODO à valider' },
-      { label: 'Catalogue', value: 'TODO à valider (sport + poker + hippique ?)' },
-      { label: 'Support', value: 'TODO à valider' },
-      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
-      { label: 'Fondé', value: 'TODO à valider' },
+      { label: 'Licence', value: 'ANJ — Licence française (depuis 2010)' },
+      { label: 'Bonus de bienvenue', value: 'Sans bonus de bienvenue (ANJ)' },
+      { label: 'Méthodes de paiement', value: 'VISA, Mastercard, PayPal, virement SEPA Instant' },
+      { label: 'Délai de retrait', value: '< 15 min testé SEPA Instant (MediaPronos mai 2026)' },
+      { label: 'Catalogue', value: 'Paris sportifs + Poker (iPoker) + Hippique (Betclic Turf)' },
+      { label: 'Support', value: 'Live chat 7j/7, e-mail — pas de téléphone' },
+      { label: 'Application mobile', value: 'iOS 4,7/5 · Google Play 4,5/5 (refonte juin 2026)' },
+      { label: 'Groupe', value: 'Flutter Entertainment (LSE : FLTR)' },
     ],
     faq: [
       {
-        question: 'Betclic propose-t-il des jeux de casino classiques ?',
+        question: 'Le bonus Betclic est-il en cash ou en freebets ?',
         answer:
-          "Non. Betclic est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, roulette, blackjack ou live casino en ligne. Betclic propose uniquement paris sportifs, poker et éventuellement hippique.",
+          "Betclic est un opérateur ANJ. La réglementation française limite strictement les promotions pour les paris sportifs. Betclic a proposé depuis mars 2026 un premier pari perdant remboursé jusqu'à 100 € en argent réel (pas de freebets). Les conditions et le montant exacts peuvent évoluer : consultez betclic.fr pour les offres en cours.",
+      },
+      {
+        question: 'Quel est le délai réel de retrait sur Betclic ?',
+        answer:
+          "Par virement SEPA Instant, les retraits Betclic ont été testés à moins de 15 minutes (test réel MediaPronos, mai 2026). Pour les virements SEPA standard, comptez jusqu'à 24 heures. Un délai KYC supplémentaire peut s'appliquer pour les retraits supérieurs à 2 000 € ou lors de la première demande.",
+      },
+      {
+        question: 'Betclic propose-t-il des machines à sous, roulette ou blackjack ?',
+        answer:
+          "Non. La licence ANJ française n'autorise pas les jeux de casino classiques en ligne : machines à sous, roulette, blackjack et live casino avec croupier sont interdits. Betclic propose uniquement paris sportifs, poker (réseau iPoker) et paris hippiques (Betclic Turf). Si vous cherchez des jeux de casino, les opérateurs offshore du comparatif proposent ces jeux, mais sans la protection de la réglementation française.",
+      },
+      {
+        question: "Quelles sont les fonctionnalités distinctives de l'app Betclic ?",
+        answer:
+          "L'app Betclic (refondue juin 2026, 4,7/5 iOS) intègre trois outils de gestion des paris : le Cash Out pour clôturer un pari en cours, l'annulation de pari dans les 2 minutes suivant la mise (jusqu'à 5 fois par jour) et MyCombi pour créer des combinaisons personnalisées. Les trois disciplines (sport, poker, hippique) sont accessibles depuis un compte unique.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        "Vous misez depuis votre smartphone : l'app native Betclic est notée 4,7/5 sur l'App Store iOS et 4,5/5 sur Google Play.",
+        'Vous retirez fréquemment vos gains : le virement SEPA Instant Betclic a été testé en moins de 15 minutes.',
+        'Vous cherchez une assistance pendant vos sessions : Betclic propose un live chat disponible 7 jours sur 7.',
+      ],
+      bonChoixSi: [
+        'Vous gérez vos paris en cours : Cash Out, annulation de pari (5×/jour, 2 min) et MyCombi sont disponibles sur Betclic.',
+        "Vous pariez sur le sport français : Betclic parraine l'Équipe de France de football, le Top 14 rugby et la Betclic Elite basket.",
+      ],
+      aEviterSi: [
+        "Vous avez besoin d'une assistance téléphonique : Betclic propose le live chat 7/7 et l'e-mail, sans numéro de téléphone disponible.",
+        "Vous voulez du casino en direct avec croupier : la licence ANJ n'autorise pas le live casino chez Betclic.",
+      ],
+    },
   },
 
   // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ─────────────

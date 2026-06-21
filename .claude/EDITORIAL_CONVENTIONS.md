@@ -83,6 +83,29 @@ empêche les fiches d'être interchangeables.
   WhatsApp, slots françaises + Microgaming comme spécialisation, LCP 2,4s
   comme défaut, absence totale crypto
 
+### Betclic (ANJ — rang 2 ANJ, derrière Winamax) — territoire éditorial
+
+Établi 2026-06-21 lors de l'enrichissement complet Commit Y.
+
+- ✅ Réservés :
+  - App native 4,7/5 iOS + 4,5/5 Google Play (chiffres bruts — pas de claim "meilleur")
+  - Retraits SEPA Instant testés en moins de 15 minutes (source : MediaPronos mai 2026)
+  - Live chat 7j/7 (différenciant ANJ — Winamax n'a pas de live chat)
+  - Outils de gestion de mise : Cash Out + annulation pari (5×/jour, 2 min) + MyCombi
+  - Partenariats sport français institutionnels : Équipe de France football, Top 14 rugby, Betclic Elite basket
+  - Pas de support téléphonique en aEviterSi (live chat + e-mail disponibles, zéro téléphone)
+  - Pas de live casino en aEviterSi (pivot choisi vs "pas de slots/roulette/blackjack" pour différencier de Winamax)
+- ❌ Interdits ailleurs :
+  - App 4,7/5 iOS comme chiffre brut (unique à Betclic dans notre comparatif)
+  - SEPA Instant < 15 min testé
+  - Live chat 7/7 comme différenciant ANJ
+  - Partenariats institutionnels sport français (Équipe de France, Top 14, Betclic Elite)
+- ⚠️ Note :
+  - Groupe Flutter Entertainment (LSE : FLTR) — peut être mentionné en section securite, pas en pourQui
+  - licenceNumber ANJ exact à valider sur registre ANJ avant injection
+
+---
+
 ### Winamax (premier opérateur ANJ) — territoire éditorial
 
 Établi 2026-06-21 lors de l'injection du pourQui Commit 4.
@@ -275,11 +298,11 @@ chaque ajout d'opérateur.
 
 **LISTE DES CLAIMS COMPARATIFS ACTIFS** (à monitorer à chaque ajout d'opérateur) :
 
-| Opérateur    | Claim comparatif                                    | Validé le  |
-| ------------ | --------------------------------------------------- | ---------- |
-| Crésus       | Retrait CB < 24h testé (offshore top)               | 2026-06-16 |
-| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore   | 2026-06-16 |
-| Madnix       | Catalogue n°1 absolu 3 047 jeux (juin 2026)         | 2026-06-16 |
-| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux | 2026-06-16 |
-| Winamax      | Cotes les plus compétitives du marché ANJ (sport)   | 2026-06-21 |
-| Betclic      | À venir (app 4,7/5 iOS, retraits < 15 min testés ?) | —          |
+| Opérateur    | Claim comparatif                                                                        | Validé le  |
+| ------------ | --------------------------------------------------------------------------------------- | ---------- |
+| Crésus       | Retrait CB < 24h testé (offshore top)                                                   | 2026-06-16 |
+| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                       | 2026-06-16 |
+| Madnix       | Catalogue n°1 absolu 3 047 jeux (juin 2026)                                             | 2026-06-16 |
+| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                     | 2026-06-16 |
+| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                       | 2026-06-21 |
+| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé | 2026-06-21 |
