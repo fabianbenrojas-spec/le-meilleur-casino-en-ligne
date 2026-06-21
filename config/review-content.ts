@@ -1916,8 +1916,8 @@ const reviews: ReviewData[] = [
     pourQui: {
       idealSi: [
         'Vous privilégiez un opérateur légalement autorisé en France : Winamax opère sous licence ANJ avec 15 ans de présence réglementée.',
-        "Vous misez et jouez principalement depuis votre smartphone : l'app native Winamax réunit poker et sport, notée 4,6/5 sur l'App Store.",
-        "Vous activez un bonus qui rembourse votre premier pari perdant jusqu'à 100 € en argent réel, plutôt qu'en freebets.",
+        "Vous misez et jouez principalement depuis votre smartphone : l'app native Winamax (4,6/5 App Store) couvre poker et paris sportifs depuis 2010.",
+        'Vous cherchez les cotes les plus élevées : Winamax affiche régulièrement les cotes les plus compétitives du marché ANJ sur le sport.',
       ],
       bonChoixSi: [
         'Vous alternez poker et paris sportifs : Winamax réunit les 3 disciplines — poker, sport et hippique — dans un compte unique.',

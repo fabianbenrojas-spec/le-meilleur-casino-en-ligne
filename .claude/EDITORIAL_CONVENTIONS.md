@@ -89,8 +89,8 @@ empêche les fiches d'être interchangeables.
 
 - ✅ Réservés :
   - Légalité ANJ + 15 ans de présence sur le marché français régulé (2010)
-  - App native premium (4,6/5 App Store, poker + sport réunis)
-  - Bonus en cash réel — premier pari perdant remboursé jusqu'à 100 € vs freebets
+  - App unifiée poker+sport depuis 2010, 4,6/5 App Store (pivot §16 : Betclic 4,7/5 iOS — ancienneté de l'unification comme angle différenciant)
+  - Cotes les plus compétitives du marché ANJ sur le sport (pivot §16 : bonus cash devenu partagé Betclic + PMU mars 2026 — sourcé BasketUSA juin 2026)
   - Écosystème 3 disciplines unifié (poker + sport + hippique, compte unique)
   - Opérateur poker historique du marché français
   - Pas de live chat ni téléphone en aEviterSi (support formulaire + e-mail uniquement)
@@ -100,8 +100,6 @@ empêche les fiches d'être interchangeables.
     jamais utiliser "ANJ" pour qualifier un avantage d'un opérateur offshore
   - 15 ans de présence sur le marché français régulé (unique à Winamax dans
     notre comparatif)
-  - Bonus en cash réel / premier pari perdant remboursé en argent réel (angle
-    sport Winamax, différenciant vs freebets — unique dans le repo)
   - Communauté poker historique FR — ne pas réutiliser pour des opérateurs
     offshore qui proposent aussi du poker
 
@@ -249,3 +247,39 @@ contexte légal de manière équilibrée.
 > "Sur le seul critère du RTP, les scratch en ligne (≥ 92 %) affichent des taux supérieurs
 > aux scratch FDJ (~64-65 %). À noter cependant que les scratch FDJ sont distribués
 > légalement en France, ce qui n'est pas le cas des plateformes offshore."
+
+## §16 — Péremption des territoires éditoriaux comparatifs
+
+Établi 2026-06-21 lors de l'ajustement Winamax pourQui suite recherche Betclic juin 2026.
+
+Quand un territoire contient un claim comparatif (« le plus X du repo »,
+« le meilleur de »), ce claim doit être réévalué SYSTÉMATIQUEMENT à
+chaque ajout d'opérateur.
+
+**PROCÉDURE OBLIGATOIRE :**
+
+1. Avant d'écrire le pourQui d'un nouvel opérateur, audit des claims comparatifs des
+   opérateurs précédents
+2. Si une donnée vérifiée invalide un claim existant :
+   - Soit ajuster le claim existant (chiffre plus prudent, angle pivoté)
+   - Soit déplacer le claim sur un autre angle vraiment unique
+   - Décision AVANT d'écrire le nouveau pourQui
+3. Documenter la mise à jour dans AUDIT_RETRO.md
+
+**CAS HISTORIQUE — Winamax/Betclic juin 2026 :**
+
+- App Store : 4,6/5 Winamax était présenté comme premier ; Betclic 4,7/5 iOS découvert
+  (BasketUSA juin 2026). Winamax repositionné sur ancienneté app unifiée depuis 2010.
+- Bonus cash : Winamax revendiquait « vs freebets » ; Betclic depuis le 16 mars 2026 +
+  PMU font aussi du cash. Winamax repositionné sur cotes compétitives ANJ.
+
+**LISTE DES CLAIMS COMPARATIFS ACTIFS** (à monitorer à chaque ajout d'opérateur) :
+
+| Opérateur    | Claim comparatif                                    | Validé le  |
+| ------------ | --------------------------------------------------- | ---------- |
+| Crésus       | Retrait CB < 24h testé (offshore top)               | 2026-06-16 |
+| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore   | 2026-06-16 |
+| Madnix       | Catalogue n°1 absolu 3 047 jeux (juin 2026)         | 2026-06-16 |
+| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux | 2026-06-16 |
+| Winamax      | Cotes les plus compétitives du marché ANJ (sport)   | 2026-06-21 |
+| Betclic      | À venir (app 4,7/5 iOS, retraits < 15 min testés ?) | —          |
