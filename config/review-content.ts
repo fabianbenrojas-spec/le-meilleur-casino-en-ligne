@@ -1956,6 +1956,66 @@ const reviews: ReviewData[] = [
       },
     ],
   },
+
+  // ── 17. Betclic (ANJ squelette — pending enrichissement éditorial) ──────────
+  {
+    slug: 'betclic',
+    foundedYear: 2005, // ⚠️ placeholder — date de fondation mondiale ; année licence ANJ à valider
+    languages: ['FR', 'EN'], // TODO valider
+    currencies: ['EUR'], // TODO valider
+    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
+    stars: 0, // ⚠️ placeholder — à valider
+    verdict:
+      'Betclic est un opérateur ANJ majeur du marché français. Profil sport + poker sous licence française. Données éditoriales à compléter après vérification betclic.fr.',
+    sections: {
+      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      jeux: {
+        prose: [
+          'TODO — Section à enrichir après vérification betclic.fr (offre poker, paris sportifs, hippique éventuelle).',
+        ],
+      },
+      // live: undefined — convention §15
+      paiements: {
+        prose: [
+          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification betclic.fr.',
+        ],
+      },
+      support: {
+        prose: [
+          'TODO — Canaux de support et disponibilité à confirmer après vérification betclic.fr.',
+        ],
+      },
+      mobile: {
+        prose: [
+          "TODO — Détails de l'app native (notes App Store, Play Store, fonctionnalités) à confirmer.",
+        ],
+      },
+      // vip: undefined — convention §15
+      securite: {
+        prose: [
+          "Betclic opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. C'est un cadre réglementaire strict avec obligations KYC et outils de jeu responsable.",
+        ],
+        highlights: ['Licence ANJ — régulation française'],
+      },
+    },
+    recapRows: [
+      { label: 'Licence', value: 'ANJ — Licence française' },
+      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
+      { label: 'Méthodes de paiement', value: 'TODO à valider' },
+      { label: 'Délai de retrait', value: 'TODO à valider' },
+      { label: 'Catalogue', value: 'TODO à valider (sport + poker + hippique ?)' },
+      { label: 'Support', value: 'TODO à valider' },
+      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
+      { label: 'Fondé', value: 'TODO à valider' },
+    ],
+    faq: [
+      {
+        question: 'Betclic propose-t-il des jeux de casino classiques ?',
+        answer:
+          "Non. Betclic est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, roulette, blackjack ou live casino en ligne. Betclic propose uniquement paris sportifs, poker et éventuellement hippique.",
+      },
+    ],
+  },
 ]
 
 // ── Map + fallback ────────────────────────────────────────────────────────────

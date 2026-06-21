@@ -88,6 +88,8 @@ export const AFFILIATE_URLS: Record<string, string> = {
   'casino-extra': 'https://casinoextra-fr.fr/fr-fr/register',
   // TODO: remplacer par URL d'affiliation officielle Winamax une fois programme approuvé
   winamax: 'https://www.winamax.fr/inscription',
+  // TODO: remplacer par URL d'affiliation officielle Betclic une fois programme approuvé
+  betclic: 'https://www.betclic.fr/inscription',
 }
 
 const LOGO_URLS: Record<string, string> = {
@@ -711,6 +713,51 @@ export const operators: Operator[] = [
     withdrawalSpeed: 'fast', // ⚠️ à vérifier précisément en Commit 4
     supportsFrench: true,
     launchYearFrance: 2010,
+  },
+
+  // ── 17. Betclic (ANJ squelette — pending enrichissement éditorial) ──────────
+  {
+    id: 'betclic',
+    slug: 'betclic',
+    name: 'Betclic',
+    shortName: 'Betclic',
+    // logoUrl: à compléter en phase logos
+    licence: 'ANJ — Licence française',
+    // licenceNumber: TODO valider sur registre ANJ
+    rating: 8.8, // ⚠️ placeholder — à valider après enrichissement éditorial
+    ratingLabel: 'Très bien',
+    // Convention §14 : valeurs placeholder pour hasBonus: false
+    bonusAmount: '—',
+    bonusSuffix: '',
+    bonusConditions: '',
+    bonusAmountNumber: 0,
+    bonusSlug: 'no-bonus',
+    rtp: 0, // placeholder — non central pour sport/poker
+    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur betclic.fr
+    features: ['App native', 'Sport-first', 'Licence ANJ'],
+    pros: [
+      'Notoriété forte sur le marché français',
+      'Design moderne',
+      // TODO enrichir après vérification betclic.fr
+    ],
+    cons: [
+      'Pas de jeux de casino (interdit ANJ)',
+      'Pas de crypto',
+      // TODO enrichir après vérification betclic.fr
+    ],
+    verdict:
+      'Betclic est un opérateur ANJ majeur du marché français, reconnu pour son UX moderne et son support client. TODO enrichir après vérification.',
+    tagline: 'Référence française du pari sportif moderne.', // TODO valider angle distinctif
+    affiliateUrl: goUrl('betclic'),
+    jurisdiction: 'anj',
+    hasBonus: false,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'anj',
+    gameTypes: ['sport', 'poker'], // TODO confirmer si hippique aussi
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'standard', // TODO valider — marketing "15 min" non vérifié
+    supportsFrench: true,
+    // launchYearFrance: TODO valider année exacte licence ANJ
   },
 ]
 
