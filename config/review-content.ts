@@ -2016,6 +2016,192 @@ const reviews: ReviewData[] = [
       },
     ],
   },
+
+  // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ─────────────
+  {
+    slug: 'unibet',
+    foundedYear: 1997, // ⚠️ placeholder — Unibet fondé 1997 (global) ; année licence ANJ France à valider
+    languages: ['FR', 'EN'], // TODO valider
+    currencies: ['EUR'], // TODO valider
+    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
+    stars: 0, // ⚠️ placeholder — à valider
+    verdict:
+      'Unibet est un opérateur ANJ majeur, partie du groupe Kindred. Reconnu pour ses retraits rapides et son expérience utilisateur. Données éditoriales à compléter après vérification unibet.fr.',
+    sections: {
+      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      jeux: {
+        prose: [
+          'TODO — Section à enrichir après vérification unibet.fr (offre poker, paris sportifs, hippique éventuelle).',
+        ],
+      },
+      // live: undefined — convention §15
+      paiements: {
+        prose: [
+          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification unibet.fr. Note : Unibet est reconnu pour des délais de retrait rapides — à documenter précisément.',
+        ],
+      },
+      support: {
+        prose: [
+          'TODO — Canaux de support et disponibilité à confirmer après vérification unibet.fr.',
+        ],
+      },
+      mobile: {
+        prose: [
+          "TODO — Détails de l'app native (notes App Store, Play Store, fonctionnalités) à confirmer.",
+        ],
+      },
+      // vip: undefined — convention §15
+      securite: {
+        prose: [
+          "Unibet opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. Unibet fait partie du groupe Kindred, l'un des leaders européens du jeu en ligne.",
+        ],
+        highlights: [
+          'Licence ANJ — régulation française',
+          'Groupe Kindred — acteur européen établi',
+        ],
+      },
+    },
+    recapRows: [
+      { label: 'Licence', value: 'ANJ — Licence française' },
+      { label: 'Groupe', value: 'Kindred Group' },
+      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
+      { label: 'Méthodes de paiement', value: 'TODO à valider' },
+      { label: 'Délai de retrait', value: 'TODO à valider (réputation : retraits rapides)' },
+      { label: 'Catalogue', value: 'TODO à valider (sport + poker + hippique ?)' },
+      { label: 'Support', value: 'TODO à valider' },
+      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
+      { label: 'Fondé', value: '1997 (groupe) / TODO ligne ANJ à valider' },
+    ],
+    faq: [
+      {
+        question: 'Unibet propose-t-il des jeux de casino classiques ?',
+        answer:
+          "Non. Unibet est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, roulette, blackjack ou live casino en ligne. Unibet propose uniquement paris sportifs, poker et éventuellement hippique.",
+      },
+    ],
+  },
+
+  // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────
+  {
+    slug: 'pmu',
+    foundedYear: 1930, // PMU fondé en 1930 (Pari Mutuel Urbain historique)
+    languages: ['FR'], // TODO valider si EN aussi
+    currencies: ['EUR'],
+    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
+    stars: 0, // ⚠️ placeholder — à valider
+    verdict:
+      'PMU est un opérateur centenaire emblématique, leader historique du pari hippique en France. Présent en ligne sous licence ANJ depuis 2010. Données éditoriales à compléter après vérification pmu.fr.',
+    sections: {
+      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      jeux: {
+        prose: [
+          'TODO — Section à enrichir après vérification pmu.fr (offre hippique, paris sportifs, poker).',
+        ],
+      },
+      // live: undefined — convention §15
+      paiements: {
+        prose: [
+          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification pmu.fr.',
+        ],
+      },
+      support: {
+        prose: ['TODO — Canaux de support et disponibilité à confirmer après vérification pmu.fr.'],
+      },
+      mobile: {
+        prose: [
+          "TODO — Détails de l'app PMU (notes App Store, Play Store, fonctionnalités) à confirmer.",
+        ],
+      },
+      // vip: undefined — convention §15
+      securite: {
+        prose: [
+          "PMU (Pari Mutuel Urbain) opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. Opérateur historique fondé en 1930, PMU est un groupement d'intérêt économique dont les membres sont des sociétés de courses françaises.",
+        ],
+        highlights: ['Licence ANJ — régulation française', 'Opérateur historique fondé en 1930'],
+      },
+    },
+    recapRows: [
+      { label: 'Licence', value: 'ANJ — Licence française' },
+      { label: 'Fondé', value: '1930 (PMU historique) / 2010 (online ANJ)' },
+      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
+      { label: 'Méthodes de paiement', value: 'TODO à valider' },
+      { label: 'Délai de retrait', value: 'TODO à valider' },
+      { label: 'Catalogue', value: 'Hippique + sport + poker (TODO détailler)' },
+      { label: 'Support', value: 'TODO à valider' },
+      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
+    ],
+    faq: [
+      {
+        question: 'PMU propose-t-il des jeux de casino classiques ?',
+        answer:
+          "Non. PMU est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, roulette, blackjack ou live casino en ligne. PMU propose uniquement paris hippiques, paris sportifs et poker.",
+      },
+    ],
+  },
+
+  // ── 20. PokerStars (ANJ squelette — pending enrichissement éditorial) ──────────
+  {
+    slug: 'pokerstars',
+    foundedYear: 2001, // ⚠️ placeholder — PokerStars fondé 2001 (global) ; France ANJ à valider
+    languages: ['FR', 'EN'], // TODO valider
+    currencies: ['EUR'], // TODO valider
+    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
+    stars: 0, // ⚠️ placeholder — à valider
+    verdict:
+      'PokerStars est un opérateur ANJ pure-poker, branche française de la plateforme poker mondiale. Tournois internationaux et cash games. Données éditoriales à compléter après vérification pokerstars.fr.',
+    sections: {
+      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      jeux: {
+        prose: [
+          'TODO — Section à enrichir après vérification pokerstars.fr (offre poker : MTT, cash games, tournois internationaux).',
+        ],
+      },
+      // live: undefined — convention §15 (pure-poker, pas de live casino)
+      paiements: {
+        prose: [
+          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification pokerstars.fr.',
+        ],
+      },
+      support: {
+        prose: [
+          'TODO — Canaux de support et disponibilité à confirmer après vérification pokerstars.fr.',
+        ],
+      },
+      mobile: {
+        prose: [
+          "TODO — Détails de l'app native PokerStars (notes App Store, Play Store, fonctionnalités) à confirmer.",
+        ],
+      },
+      // vip: undefined — convention §15
+      securite: {
+        prose: [
+          'PokerStars.fr opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. PokerStars est la plateforme de poker en ligne la plus utilisée au monde, filiale de Flutter Entertainment.',
+        ],
+        highlights: [
+          'Licence ANJ — régulation française',
+          'Flutter Entertainment — groupe coté en bourse',
+        ],
+      },
+    },
+    recapRows: [
+      { label: 'Licence', value: 'ANJ — Licence française' },
+      { label: 'Groupe', value: 'Flutter Entertainment' },
+      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
+      { label: 'Méthodes de paiement', value: 'TODO à valider' },
+      { label: 'Délai de retrait', value: 'TODO à valider' },
+      { label: 'Catalogue', value: 'Poker uniquement (MTT, cash games, tournois)' },
+      { label: 'Support', value: 'TODO à valider' },
+      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
+      { label: 'Fondé', value: '2001 (global) / TODO ligne ANJ FR à valider' },
+    ],
+    faq: [
+      {
+        question: 'PokerStars propose-t-il des jeux de casino classiques ou des paris sportifs ?',
+        answer:
+          "Non. PokerStars.fr est un opérateur ANJ pure-poker. La réglementation française n'autorise pas les machines à sous, roulette, blackjack, live casino ni les paris sportifs dans le cadre de cette licence. PokerStars.fr propose uniquement des jeux de poker (MTT, cash games, sit & go).",
+      },
+    ],
+  },
 ]
 
 // ── Map + fallback ────────────────────────────────────────────────────────────

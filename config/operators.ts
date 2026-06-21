@@ -90,6 +90,12 @@ export const AFFILIATE_URLS: Record<string, string> = {
   winamax: 'https://www.winamax.fr/inscription',
   // TODO: remplacer par URL d'affiliation officielle Betclic une fois programme approuvé
   betclic: 'https://www.betclic.fr/inscription',
+  // TODO: remplacer par URL d'affiliation officielle Unibet une fois programme approuvé
+  unibet: 'https://www.unibet.fr/inscription',
+  // TODO: remplacer par URL d'affiliation officielle PMU une fois programme approuvé
+  pmu: 'https://www.pmu.fr/inscription',
+  // TODO: remplacer par URL d'affiliation officielle PokerStars une fois programme approuvé
+  pokerstars: 'https://www.pokerstars.fr/inscription',
 }
 
 const LOGO_URLS: Record<string, string> = {
@@ -756,6 +762,143 @@ export const operators: Operator[] = [
     gameTypes: ['sport', 'poker'], // TODO confirmer si hippique aussi
     kycPolicy: 'strict',
     withdrawalSpeed: 'standard', // TODO valider — marketing "15 min" non vérifié
+    supportsFrench: true,
+    // launchYearFrance: TODO valider année exacte licence ANJ
+  },
+
+  // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ────────────
+  {
+    id: 'unibet',
+    slug: 'unibet',
+    name: 'Unibet',
+    shortName: 'Unibet',
+    // logoUrl: à compléter en phase logos
+    licence: 'ANJ — Licence française',
+    // licenceNumber: TODO valider sur registre ANJ
+    rating: 8.7, // ⚠️ placeholder — à valider après enrichissement éditorial
+    ratingLabel: 'Très bien',
+    // Convention §14 : valeurs placeholder pour hasBonus: false
+    bonusAmount: '—',
+    bonusSuffix: '',
+    bonusConditions: '',
+    bonusAmountNumber: 0,
+    bonusSlug: 'no-bonus',
+    rtp: 0, // placeholder — non central pour sport/poker
+    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur unibet.fr
+    features: ['App native', 'Retraits rapides réputés', 'Licence ANJ'],
+    pros: [
+      'Groupe Kindred (international)',
+      'Retraits réputés rapides',
+      // TODO enrichir après vérification unibet.fr
+    ],
+    cons: [
+      'Pas de jeux de casino (interdit ANJ)',
+      'Pas de crypto',
+      // TODO enrichir après vérification unibet.fr
+    ],
+    verdict:
+      'Unibet est un opérateur ANJ majeur, partie du groupe Kindred. Reconnu pour ses retraits rapides et son expérience utilisateur. Données éditoriales à compléter après vérification unibet.fr.',
+    tagline: 'Référence européenne du pari sportif et du poker en ligne.',
+    affiliateUrl: goUrl('unibet'),
+    jurisdiction: 'anj',
+    hasBonus: false,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'anj',
+    gameTypes: ['sport', 'poker'], // TODO confirmer si hippique aussi
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'fast', // TODO valider exactement — marketing "instantané" à confirmer
+    supportsFrench: true,
+    // launchYearFrance: TODO valider année exacte licence ANJ
+  },
+
+  // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────
+  {
+    id: 'pmu',
+    slug: 'pmu',
+    name: 'PMU',
+    shortName: 'PMU',
+    // logoUrl: à compléter en phase logos
+    licence: 'ANJ — Licence française',
+    // licenceNumber: TODO valider sur registre ANJ
+    rating: 8.3, // ⚠️ placeholder — à valider après enrichissement éditorial
+    ratingLabel: 'Très bien',
+    // Convention §14 : valeurs placeholder pour hasBonus: false
+    bonusAmount: '—',
+    bonusSuffix: '',
+    bonusConditions: '',
+    bonusAmountNumber: 0,
+    bonusSlug: 'no-bonus',
+    rtp: 0, // placeholder — non central pour hippique/sport/poker
+    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur pmu.fr
+    features: ['Hippique n°1 français', 'Héritage 1930', 'Licence ANJ'],
+    pros: [
+      'Référence historique du pari hippique français',
+      'Présence physique (PMU dans les bars/tabacs)',
+      // TODO enrichir après vérification pmu.fr
+    ],
+    cons: [
+      'Pas de jeux de casino (interdit ANJ)',
+      'Pas de crypto',
+      'Interface possiblement moins moderne que les pure-players',
+      // TODO enrichir après vérification pmu.fr
+    ],
+    verdict:
+      'PMU est un opérateur centenaire emblématique, leader historique du pari hippique en France. Présent en ligne sous licence ANJ depuis 2010. Données éditoriales à compléter après vérification pmu.fr.',
+    tagline: 'Le n°1 français du pari hippique depuis 1930.',
+    affiliateUrl: goUrl('pmu'),
+    jurisdiction: 'anj',
+    hasBonus: false,
+    isAffiliated: true, // TODO vérifier si programme affilié actif pour les blogs FR
+    legalDisclaimerVariant: 'anj',
+    gameTypes: ['horse-racing', 'sport', 'poker'], // hippique D'ABORD
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'standard', // ⚠️ placeholder — à valider
+    supportsFrench: true,
+    launchYearFrance: 2010, // online ANJ
+  },
+
+  // ── 20. PokerStars (ANJ squelette — pending enrichissement éditorial) ─────────
+  {
+    id: 'pokerstars',
+    slug: 'pokerstars',
+    name: 'PokerStars',
+    shortName: 'PokerStars',
+    // logoUrl: à compléter en phase logos
+    licence: 'ANJ — Licence française',
+    // licenceNumber: TODO valider sur registre ANJ
+    rating: 8.8, // ⚠️ placeholder — à valider après enrichissement éditorial
+    ratingLabel: 'Excellent',
+    // Convention §14 : valeurs placeholder pour hasBonus: false
+    bonusAmount: '—',
+    bonusSuffix: '',
+    bonusConditions: '',
+    bonusAmountNumber: 0,
+    bonusSlug: 'no-bonus',
+    rtp: 0, // placeholder — non central pour poker
+    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur pokerstars.fr
+    features: ['Poker mondial', 'Tournois internationaux', 'Licence ANJ'],
+    pros: [
+      'Référence mondiale du poker (WSOP, EPT)',
+      'Communauté internationale',
+      // TODO enrichir après vérification pokerstars.fr
+    ],
+    cons: [
+      'Pas de jeux de casino (interdit ANJ)',
+      'Pas de paris sportifs ni hippique',
+      'Pas de crypto',
+      // TODO enrichir après vérification pokerstars.fr
+    ],
+    verdict:
+      'PokerStars est un opérateur ANJ pure-poker, branche française de la plateforme poker mondiale. Tournois internationaux et cash games. Données éditoriales à compléter après vérification pokerstars.fr.',
+    tagline: 'La référence mondiale du poker en ligne.',
+    affiliateUrl: goUrl('pokerstars'),
+    jurisdiction: 'anj',
+    hasBonus: false,
+    isAffiliated: true,
+    legalDisclaimerVariant: 'anj',
+    gameTypes: ['poker'], // pure-poker uniquement
+    kycPolicy: 'strict',
+    withdrawalSpeed: 'standard', // ⚠️ placeholder — à valider
     supportsFrench: true,
     // launchYearFrance: TODO valider année exacte licence ANJ
   },
