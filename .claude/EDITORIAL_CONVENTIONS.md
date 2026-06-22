@@ -133,6 +133,35 @@ empêche les fiches d'être interchangeables.
 
 ---
 
+### PMU (ANJ — 4e opérateur ANJ enrichi) — territoire éditorial
+
+Établi 2026-06-22 lors de l'enrichissement complet Commit AA.
+
+- ✅ Réservés :
+  - Formats hippiques exclusifs : Quinté+ (e-cagnotte), Jackpot, Champ Libre, Super 4, Pick 5
+  - Streaming Equidia intégré (partenariat exclusif filière hippique)
+  - GIE depuis 1930 + mission collective filière hippique (France Galop, Le Trot)
+  - Bonus sport 100 € en argent réel sans wager, retirable dès 1 €
+  - Seuil de retrait 1 € — le plus bas du marché (à monitorer §16)
+  - 3 applications spécialisées en bonChoixSi (spécialisation par verticale)
+  - Sourdline service téléphonique parieurs malentendants (rare en ANJ FR — à monitorer §16)
+  - 3 apps séparées en aEviterSi (pas d'app unifiée)
+  - Retrait virement bancaire uniquement, délai 3-5 jours (limitation factuelle)
+- ❌ Interdits ailleurs :
+  - Quinté+ et formats hippiques exclusifs propriétaires
+  - Streaming Equidia intégré
+  - GIE 1930 mission collective hippique
+  - Seuil de retrait 1 € comme différenciant
+  - Sourdline service parieurs malentendants
+  - Retrait virement uniquement comme limitation spécifique PMU
+- ⚠️ Note :
+  - PMU = GIE filière hippique ≠ FDJ/Unibet (État actionnaire) — distinction juridique obligatoire
+  - "mission collective" ≠ "entreprise publique" (le GIE est privé, membres = sociétés de courses)
+  - Bonus PMU non cumulables : 1 code par compte, choisir entre sport/hippique/poker
+  - Notes App Store/Play Store non sourcées juin 2026 — à ne pas inventer, mention TODO inline
+
+---
+
 ### Winamax (premier opérateur ANJ) — territoire éditorial
 
 Établi 2026-06-21 lors de l'injection du pourQui Commit 4.
@@ -334,3 +363,5 @@ chaque ajout d'opérateur.
 | Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                       | 2026-06-21 |
 | Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé | 2026-06-21 |
 | Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)               | 2026-06-22 |
+| PMU          | Seuil de retrait 1 € le plus bas du marché                                              | 2026-06-22 |
+| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)            | 2026-06-22 |

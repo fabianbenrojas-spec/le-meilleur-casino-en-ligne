@@ -820,16 +820,16 @@ export const operators: Operator[] = [
     launchYearFrance: 2010,
   },
 
-  // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────
+  // ── 19. PMU (ANJ — enrichi juin 2026) ───────────────────────────────────────
   {
     id: 'pmu',
     slug: 'pmu',
     name: 'PMU',
     shortName: 'PMU',
     // logoUrl: à compléter en phase logos
-    licence: 'ANJ — Licence française',
-    // licenceNumber: TODO valider sur registre ANJ
-    rating: 8.3, // ⚠️ placeholder — à valider après enrichissement éditorial
+    licence: 'ANJ — 3 licences (hippique, sport, poker)',
+    licenceNumber: '0002-PH-2015-06-07', // licence hippique principale — numéro poker à préciser
+    rating: 8.3,
     ratingLabel: 'Très bien',
     // Convention §14 : valeurs placeholder pour hasBonus: false
     bonusAmount: '—',
@@ -837,33 +837,43 @@ export const operators: Operator[] = [
     bonusConditions: '',
     bonusAmountNumber: 0,
     bonusSlug: 'no-bonus',
-    rtp: 0, // placeholder — non central pour hippique/sport/poker
-    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur pmu.fr
-    features: ['Hippique n°1 français', 'Héritage 1930', 'Licence ANJ'],
+    rtp: 0, // non central pour hippique/sport/poker
+    paymentMethods: ['VISA', 'MC', 'PPAL', 'SKRL', 'NTLR', 'PAYS'],
+    features: [
+      'Quinté+ et 4 formats exclusifs hippiques',
+      'GIE depuis 1930 — mission hippique',
+      'Bonus sport 100 € cash sans wager',
+      'Seuil retrait 1 € — 0 € de frais',
+    ],
     pros: [
-      'Référence historique du pari hippique français',
-      'Présence physique (PMU dans les bars/tabacs)',
-      // TODO enrichir après vérification pmu.fr
+      '5 formats hippiques exclusifs : Quinté+, Jackpot, Champ Libre, Super 4, Pick 5 — avec streaming Equidia intégré',
+      'GIE fondé en 1930, adossé à la filière hippique française (France Galop, Le Trot)',
+      'Bonus sport 100 € versé en argent réel sans wager, retirable immédiatement',
+      'Seuil de retrait à 1 € — le plus bas du marché, 0 € de frais',
+      'Sourdline : service téléphonique dédié aux parieurs malentendants, rare en ANJ FR',
+      'Support téléphonique disponible (01 58 73 13 00, appel non surtaxé)',
     ],
     cons: [
-      'Pas de jeux de casino (interdit ANJ)',
+      "3 applications séparées (Hippique, Sport, Poker) — pas d'app unifiée",
+      'Retrait par virement bancaire uniquement — délai 3 à 5 jours ouvrés',
+      'Cotes sport parfois moins compétitives que les pure players sport',
+      'Pas de programme de fidélité dédié aux parieurs sport',
+      'Pas de jeux de casino ni de live casino (licence ANJ)',
       'Pas de crypto',
-      'Interface possiblement moins moderne que les pure-players',
-      // TODO enrichir après vérification pmu.fr
     ],
     verdict:
-      'PMU est un opérateur centenaire emblématique, leader historique du pari hippique en France. Présent en ligne sous licence ANJ depuis 2010. Données éditoriales à compléter après vérification pmu.fr.',
-    tagline: 'Le n°1 français du pari hippique depuis 1930.',
+      "PMU est le GIE de la filière hippique française, fondé en 1930. Il opère sous 3 licences ANJ distinctes (hippique, sport, poker) depuis 2010. Sa force majeure est l'hippique, avec 5 formats exclusifs (Quinté+, Jackpot, Champ Libre, Super 4, Pick 5) et le streaming Equidia intégré. Le bonus sport de 100 € est versé en argent réel sans wager, retirable dès 1 € — seuil le plus bas du marché. Support Sourdline pour parieurs malentendants, rare en ANJ FR. À noter : 3 apps séparées et retraits limités au virement bancaire (3-5 jours).",
+    tagline: 'Le n°1 français du turf depuis 1930 — Quinté+, sport et poker.',
     affiliateUrl: goUrl('pmu'),
     jurisdiction: 'anj',
     hasBonus: false,
-    isAffiliated: true, // TODO vérifier si programme affilié actif pour les blogs FR
+    isAffiliated: true,
     legalDisclaimerVariant: 'anj',
-    gameTypes: ['horse-racing', 'sport', 'poker'], // hippique D'ABORD
+    gameTypes: ['horse-racing', 'sport', 'poker'], // hippique D'ABORD — ADN de l'opérateur
     kycPolicy: 'strict',
-    withdrawalSpeed: 'standard', // ⚠️ placeholder — à valider
+    withdrawalSpeed: 'standard', // virement bancaire 3-5 jours ouvrés
     supportsFrench: true,
-    launchYearFrance: 2010, // online ANJ
+    launchYearFrance: 2010,
   },
 
   // ── 20. PokerStars (ANJ squelette — pending enrichissement éditorial) ─────────

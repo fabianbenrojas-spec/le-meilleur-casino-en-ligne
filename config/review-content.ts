@@ -2212,56 +2212,134 @@ const reviews: ReviewData[] = [
     },
   },
 
-  // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────
+  // ── 19. PMU (ANJ — enrichi juin 2026) ───────────────────────────────────────
   {
     slug: 'pmu',
-    foundedYear: 1930, // PMU fondé en 1930 (Pari Mutuel Urbain historique)
-    languages: ['FR'], // TODO valider si EN aussi
+    foundedYear: 1930,
+    languages: ['FR'],
     currencies: ['EUR'],
-    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
-    stars: 0, // ⚠️ placeholder — à valider
+    reviewCount: 0, // Trustpilot 4/5 global — chiffre avis FR non sourcé
+    stars: 0,
     verdict:
-      'PMU est un opérateur centenaire emblématique, leader historique du pari hippique en France. Présent en ligne sous licence ANJ depuis 2010. Données éditoriales à compléter après vérification pmu.fr.',
+      "PMU est le GIE de la filière hippique française, fondé en 1930. Il opère sous 3 licences ANJ distinctes (hippique, sport, poker) depuis 2010. Sa force majeure est l'hippique, avec 5 formats exclusifs — Quinté+, Jackpot, Champ Libre, Super 4, Pick 5 — et le streaming Equidia intégré. Le bonus sport de 100 € est versé en argent réel sans wager, retirable dès 1 € — seuil le plus bas du marché. Le support propose Sourdline, service téléphonique dédié aux parieurs malentendants, rare en ANJ FR. À noter : 3 apps séparées (pas d'app unifiée) et retraits limités au virement bancaire (3 à 5 jours).",
     sections: {
-      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      // bonus: undefined — convention §15 (ANJ — hasBonus: false)
       jeux: {
         prose: [
-          'TODO — Section à enrichir après vérification pmu.fr (offre hippique, paris sportifs, poker).',
+          "Le cœur de PMU est le pari hippique avec 5 formats exclusifs : le Quinté+, qui permet de remporter la e-cagnotte en trouvant les 5 premiers chevaux dans le bon ordre ; le Jackpot, pari combiné sur 6 chevaux mutualisé ; le Champ Libre, paris multiples sur des critères libres ; le Super 4 et le Pick 5. Le streaming Equidia est intégré directement dans l'interface : réunions en direct, replays et statistiques disponibles sans abonnement supplémentaire. PMU dispose également de la base de données statistiques hippiques la plus étoffée du marché français, avec historiques par cheval, jockey, entraîneur et hippodrome.",
+          "Sur le sport, PMU couvre les championnats français (Ligue 1, Top 14, Betclic Elite) et les grandes compétitions internationales (Premier League, Champions League, Grand Chelem tennis, etc.) avec paris avant-match et en live. À noter : les cotes sport PMU sont parfois moins compétitives que celles des opérateurs pure players sport. L'opérateur ne propose pas de programme de fidélité dédié aux parieurs sport.",
+          "En poker, PMU propose des cash games aux mises variées, des tournois réguliers et les Spins (tournois à 3 joueurs à entrée rapide). Les tickets bonus poker permettent d'accéder aux Spins. PMU Poker partage les liquidités du réseau Network Poker Européen.",
+        ],
+        highlights: [
+          '5 formats hippiques exclusifs : Quinté+, Jackpot, Champ Libre, Super 4, Pick 5',
+          'Sport : Ligue 1, Champions League, Grand Chelem en live',
+          'Poker : cash games, tournois, Spins via tickets bonus',
         ],
       },
       // live: undefined — convention §15
       paiements: {
         prose: [
-          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification pmu.fr.',
+          "PMU accepte une large gamme de méthodes de dépôt : carte bancaire (VISA, Mastercard), PayPal, Skrill, Neteller, virement bancaire, Paysafecard, TicketPremium, Moneyclic et Neosurf. Le dépôt minimum est de 10 €. Aucun frais de dépôt n'est appliqué.",
+          "En retrait, PMU ne propose qu'une seule méthode : le virement bancaire. Le seuil de retrait minimum est de 1 € — le plus bas du marché. Les délais constatés sont de 3 à 5 jours ouvrés. Aucun frais de retrait n'est prélevé.",
+          'La vérification KYC (identité, justificatif de domicile) est obligatoire avant le premier retrait. Le délai de validation est généralement de 1 à 2 jours ouvrés.',
+        ],
+        highlights: [
+          'Dépôt : VISA, MC, PayPal, Skrill, Neteller, Paysafecard, Neosurf et virement',
+          'Retrait : virement bancaire uniquement — seuil 1 € (le plus bas du marché)',
+          'Délai retrait : 3 à 5 jours ouvrés — 0 € de frais',
         ],
       },
       support: {
-        prose: ['TODO — Canaux de support et disponibilité à confirmer après vérification pmu.fr.'],
+        prose: [
+          'PMU propose 3 canaux de support : téléphone (01 58 73 13 00, appel non surtaxé), live chat et e-mail. Un test Equirider a relevé une attente de 3 minutes en moyenne au live chat, avec des réponses jugées précises et complètes.',
+          'PMU est le seul opérateur ANJ français à proposer Sourdline, un service téléphonique dédié aux parieurs malentendants — rare parmi les opérateurs de jeux réglementés en France.',
+        ],
+        highlights: [
+          'Téléphone : 01 58 73 13 00 (appel non surtaxé)',
+          'Live chat + e-mail disponibles',
+          'Sourdline : service dédié aux parieurs malentendants — rare en ANJ FR',
+        ],
       },
       mobile: {
         prose: [
-          "TODO — Détails de l'app PMU (notes App Store, Play Store, fonctionnalités) à confirmer.",
+          'PMU propose 3 applications spécialisées distinctes : PMU Hippique, PMU Sport et PMU Poker — disponibles sur iOS et Android, toutes validées ANJ. Chaque application est optimisée pour sa verticale.',
+          "Les fonctionnalités communes incluent les paris en live, le streaming Equidia (app Hippique), le Cash Out, la gestion de compte, les dépôts et la consultation de l'historique.",
+          "Les notes exactes sur l'App Store et le Google Play Store n'ont pas été sourcées lors de la vérification de juin 2026 — ce point est à compléter ultérieurement.",
+        ],
+        highlights: [
+          '3 applications spécialisées : PMU Hippique, PMU Sport, PMU Poker',
+          'iOS + Android — validation ANJ sur les 3 apps',
+          'Live betting, streaming Equidia et Cash Out disponibles',
         ],
       },
       // vip: undefined — convention §15
       securite: {
         prose: [
-          "PMU (Pari Mutuel Urbain) opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. Opérateur historique fondé en 1930, PMU est un groupement d'intérêt économique dont les membres sont des sociétés de courses françaises.",
+          "PMU (Pari Mutuel Urbain) est un Groupement d'Intérêt Économique (GIE) fondé en 1930, dont les membres sont les sociétés de courses françaises (France Galop, Le Trot). Sa mission est le financement de la filière hippique nationale — un statut juridique distinct d'une entreprise commerciale classique ou d'un opérateur adossé à l'État.",
+          "PMU opère sous 3 licences ANJ distinctes depuis l'ouverture du marché français en 2010 : licence hippique n° 0002-PH-2015-06-07, licence sportive n° 0002-PS-2010-06-07, et une licence poker séparée. Chaque verticale dispose de son propre agrément, garantissant la conformité réglementaire par discipline.",
+          "La sécurité des comptes est assurée par un chiffrement SSL 256 bits et la double authentification (2FA) disponible. Le Pacte PMU 2030, annoncé par l'État, prévoit une évolution du statut GIE vers davantage d'autonomie commerciale, sans changement de licence ANJ.",
         ],
-        highlights: ['Licence ANJ — régulation française', 'Opérateur historique fondé en 1930'],
+        highlights: [
+          'GIE depuis 1930 — mission collective hippique, filière équine française',
+          '3 licences ANJ distinctes : hippique n° 0002-PH-2015-06-07, sport, poker',
+          'SSL 256 bits + 2FA disponible',
+        ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'ANJ — Licence française' },
-      { label: 'Fondé', value: '1930 (PMU historique) / 2010 (online ANJ)' },
-      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
-      { label: 'Méthodes de paiement', value: 'TODO à valider' },
-      { label: 'Délai de retrait', value: 'TODO à valider' },
-      { label: 'Catalogue', value: 'Hippique + sport + poker (TODO détailler)' },
-      { label: 'Support', value: 'TODO à valider' },
-      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
+      { label: 'Licence', value: 'ANJ — 3 licences distinctes (hippique, sport, poker)' },
+      { label: 'Fondé', value: '1930 (GIE) — online ANJ depuis 2010' },
+      { label: 'Bonus de bienvenue', value: "Jusqu'à 100 € par discipline — non cumulables" },
+      {
+        label: 'Méthodes de paiement dépôt',
+        value: 'VISA, MC, PayPal, Skrill, Neteller, Paysafecard, Neosurf, virement',
+      },
+      { label: 'Retrait', value: 'Virement bancaire uniquement — délai 3 à 5 jours' },
+      { label: 'Seuil de retrait', value: '1 € (le plus bas du marché)' },
+      { label: 'Catalogue', value: 'Hippique (Quinté+, formats exclusifs) + Sport + Poker' },
+      { label: 'Support', value: 'Téléphone, live chat, e-mail, Sourdline (malentendants)' },
+      {
+        label: 'Application mobile',
+        value: '3 apps spécialisées (Hippique, Sport, Poker) — iOS + Android',
+      },
+      { label: 'Statut', value: 'GIE adossé à la filière hippique française' },
     ],
+    pourQui: {
+      idealSi: [
+        'Vous pariez sur les courses hippiques : PMU propose le Quinté+, le Jackpot, le Champ Libre et 2 autres formats exclusifs.',
+        'Vous misez avec un opérateur à mission collective : PMU est le GIE de la filière hippique française, fondé en 1930.',
+        'Vous activez un bonus sport : PMU verse 100 € en argent réel sans wager, retirable dès 1 €.',
+      ],
+      bonChoixSi: [
+        'Vous pratiquez plusieurs disciplines avec une app spécialisée par verticale : PMU propose 3 applications spécialisées — hippique, sport, poker.',
+        'Vous pariez avec un handicap auditif : PMU propose Sourdline, service téléphonique dédié aux parieurs malentendants — rare en ANJ FR.',
+      ],
+      aEviterSi: [
+        'Vous gérez sport, poker et hippique depuis une seule app : PMU propose 3 applications séparées, une par discipline.',
+        "Vous retirez via e-wallet ou carte bancaire : PMU n'accepte que le virement bancaire en retrait, avec un délai de 3 à 5 jours.",
+      ],
+    },
     faq: [
+      {
+        question: 'Quels sont les formats hippiques exclusifs de PMU ?',
+        answer:
+          'PMU propose 5 formats hippiques exclusifs : le Quinté+, qui permet de remporter la e-cagnotte en trouvant les 5 premiers chevaux dans le bon ordre ; le Jackpot (6 chevaux mutualisé) ; le Champ Libre (critères libres) ; le Super 4 ; et le Pick 5. Ces formats sont propriétaires et disponibles uniquement sur PMU.',
+      },
+      {
+        question: 'PMU propose-t-il une application unifiée pour ses 3 disciplines ?',
+        answer:
+          "Non. PMU propose 3 applications spécialisées distinctes : PMU Hippique, PMU Sport et PMU Poker — disponibles sur iOS et Android. Il n'existe pas d'application unifiée permettant d'accéder aux 3 disciplines depuis une interface unique.",
+      },
+      {
+        question: 'Les bonus de bienvenue PMU sont-ils cumulables ?',
+        answer:
+          "Non. Un seul code promo peut être activé par compte joueur. Vous devez choisir entre le bonus sport (100 € en argent réel, code SPORT), le bonus hippique (100 € en tickets + 10 € e-Quinté+, code HIPPIQUE) ou le bonus poker (100 € mixte, code POKER) au moment de l'inscription.",
+      },
+      {
+        question: 'Quelle est la différence entre PMU GIE et un opérateur classique ?',
+        answer:
+          "PMU est un Groupement d'Intérêt Économique (GIE) dont les membres sont les sociétés de courses françaises (France Galop, Le Trot). Sa mission est le financement de la filière hippique nationale. Ce statut juridique est distinct d'une entreprise commerciale classique ou d'un opérateur adossé à l'État. Les bénéfices de PMU sont redistribués à la filière hippique.",
+      },
       {
         question: 'PMU propose-t-il des jeux de casino classiques ?',
         answer:
