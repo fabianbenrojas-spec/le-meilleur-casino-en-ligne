@@ -106,6 +106,33 @@ empêche les fiches d'être interchangeables.
 
 ---
 
+### Unibet (ANJ — rang 3 ANJ) — territoire éditorial
+
+Établi 2026-06-22 lors de l'enrichissement complet Commit Z.
+
+- ✅ Réservés :
+  - Adossement groupe FDJ United depuis octobre 2024 (État français co-actionnaire)
+  - Fusion Parions Sport en Ligne le 24 mars 2026 (angle SEO "Parions Sport")
+  - Jusqu'à 450 € cumulables sur 3 verticales ANJ (sport + poker + turf)
+  - Triple agrément ANJ post-fusion (différencié de Winamax "depuis 2010 à l'origine")
+  - Live chat répondant en moins d'une minute (test Eurosport) + téléphone disponible
+  - Skrill accepté en retrait (rare parmi les opérateurs ANJ français)
+  - NBA partenaire officiel plurisaisons + Olympique de Marseille
+  - Bonus en freebets (pas en argent réel) en aEviterSi
+  - Live chat 8h-minuit en aEviterSi (pas de couverture nocturne)
+- ❌ Interdits ailleurs :
+  - Adossement FDJ United depuis octobre 2024
+  - Fusion Parions Sport en Ligne mars 2026
+  - 450 € cumulables sur 3 verticales ANJ
+  - Skrill en retrait comme rare ANJ
+  - Chat répondant < 1 minute (Eurosport)
+- ⚠️ Note :
+  - App iOS 4,6/5 = Winamax 4,6/5 → NE PAS en faire angle distinctif Unibet
+  - Retrait instantané annoncé (mars 2024) — non chiffré précisément → NE PAS en faire angle principal
+  - licenceNumber ANJ exact à valider
+
+---
+
 ### Winamax (premier opérateur ANJ) — territoire éditorial
 
 Établi 2026-06-21 lors de l'injection du pourQui Commit 4.
@@ -306,3 +333,4 @@ chaque ajout d'opérateur.
 | Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                     | 2026-06-16 |
 | Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                       | 2026-06-21 |
 | Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé | 2026-06-21 |
+| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)               | 2026-06-22 |

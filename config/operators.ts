@@ -767,7 +767,7 @@ export const operators: Operator[] = [
     launchYearFrance: 2010,
   },
 
-  // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ────────────
+  // ── 18. Unibet (ANJ — enrichi juin 2026) ───────────────────────────────────
   {
     id: 'unibet',
     slug: 'unibet',
@@ -776,7 +776,7 @@ export const operators: Operator[] = [
     // logoUrl: à compléter en phase logos
     licence: 'ANJ — Licence française',
     // licenceNumber: TODO valider sur registre ANJ
-    rating: 8.7, // ⚠️ placeholder — à valider après enrichissement éditorial
+    rating: 8.5,
     ratingLabel: 'Très bien',
     // Convention §14 : valeurs placeholder pour hasBonus: false
     bonusAmount: '—',
@@ -784,32 +784,40 @@ export const operators: Operator[] = [
     bonusConditions: '',
     bonusAmountNumber: 0,
     bonusSlug: 'no-bonus',
-    rtp: 0, // placeholder — non central pour sport/poker
-    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur unibet.fr
-    features: ['App native', 'Retraits rapides réputés', 'Licence ANJ'],
+    rtp: 0, // non central pour sport/poker/hippique
+    paymentMethods: ['VISA', 'MC', 'PPAL', 'VIRT', 'SKRL'],
+    features: [
+      'Triple agrément ANJ',
+      'Adossement FDJ United depuis 2024',
+      'Skrill accepté en retrait',
+      'App native 4,6/5 iOS',
+    ],
     pros: [
-      'Groupe Kindred (international)',
-      'Retraits réputés rapides',
-      // TODO enrichir après vérification unibet.fr
+      'Adossé au groupe FDJ United depuis octobre 2024 (État français co-actionnaire)',
+      "Jusqu'à 450 € cumulables sur 3 verticales (sport, poker, hippique)",
+      'Skrill accepté en retrait — rare parmi les opérateurs ANJ',
+      "Live chat testé à moins d'une minute de réponse (Eurosport)",
+      'Support téléphonique disponible',
     ],
     cons: [
-      'Pas de jeux de casino (interdit ANJ)',
+      'Bonus crédités en freebets (pas en argent réel)',
+      'Live chat limité de 8h à minuit, pas de couverture nocturne',
+      'Pas de jeux de casino ni de live casino (licence ANJ)',
       'Pas de crypto',
-      // TODO enrichir après vérification unibet.fr
     ],
     verdict:
-      'Unibet est un opérateur ANJ majeur, partie du groupe Kindred. Reconnu pour ses retraits rapides et son expérience utilisateur. Données éditoriales à compléter après vérification unibet.fr.',
-    tagline: 'Référence européenne du pari sportif et du poker en ligne.',
+      "Unibet est un opérateur ANJ adossé au groupe FDJ United depuis octobre 2024 (État français co-actionnaire). La fusion avec Parions Sport en Ligne (24 mars 2026) et l'intégration de Zeturf (juillet 2025) consolident une offre 3 verticales — sport, poker et hippique — depuis un compte unique. L'app est notée 4,6/5 sur 90 000 avis iOS. Le live chat répond en moins d'une minute (Eurosport). Skrill disponible en retrait. Limite : bonus en freebets, pas en argent réel.",
+    tagline: 'Triple agrément ANJ adossé à FDJ — sport, poker et turf unifiés.',
     affiliateUrl: goUrl('unibet'),
     jurisdiction: 'anj',
     hasBonus: false,
     isAffiliated: true,
     legalDisclaimerVariant: 'anj',
-    gameTypes: ['sport', 'poker'], // TODO confirmer si hippique aussi
+    gameTypes: ['sport', 'poker', 'horse-racing'],
     kycPolicy: 'strict',
-    withdrawalSpeed: 'fast', // TODO valider exactement — marketing "instantané" à confirmer
+    withdrawalSpeed: 'fast', // retrait instantané annoncé mars 2024 — non testé indépendamment
     supportsFrench: true,
-    // launchYearFrance: TODO valider année exacte licence ANJ
+    launchYearFrance: 2010,
   },
 
   // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────

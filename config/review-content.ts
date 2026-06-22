@@ -2082,68 +2082,134 @@ const reviews: ReviewData[] = [
     },
   },
 
-  // ── 18. Unibet (ANJ squelette — pending enrichissement éditorial) ─────────────
+  // ── 18. Unibet (ANJ — enrichi juin 2026) ──────────────────────────────────
   {
     slug: 'unibet',
-    foundedYear: 1997, // ⚠️ placeholder — Unibet fondé 1997 (global) ; année licence ANJ France à valider
-    languages: ['FR', 'EN'], // TODO valider
-    currencies: ['EUR'], // TODO valider
+    foundedYear: 1997, // fondation mondiale Unibet ; ANJ France depuis 2010
+    languages: ['FR', 'EN'],
+    currencies: ['EUR'],
     reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
-    stars: 0, // ⚠️ placeholder — à valider
+    stars: 0, // ⚠️ placeholder
     verdict:
-      'Unibet est un opérateur ANJ majeur, partie du groupe Kindred. Reconnu pour ses retraits rapides et son expérience utilisateur. Données éditoriales à compléter après vérification unibet.fr.',
+      "Unibet est un opérateur ANJ adossé au groupe FDJ United depuis octobre 2024, lui conférant une légitimité institutionnelle unique sur le marché français réglementé. La fusion avec Parions Sport en Ligne le 24 mars 2026 et l'intégration de Zeturf en juillet 2025 ont consolidé une offre 3 verticales — sport, poker et hippique — depuis un compte unique. L'app native est notée 4,6/5 sur 90 000 avis App Store iOS et 4,3/5 sur Google Play. Le live chat répond en moins d'une minute (test Eurosport). Skrill est disponible en retrait, une rareté parmi les opérateurs ANJ français. Limitation : les bonus d'accueil sont crédités en freebets, pas en argent réel.",
     sections: {
       // bonus: undefined — convention §15 (ANJ sans bonus casino)
       jeux: {
         prose: [
-          'TODO — Section à enrichir après vérification unibet.fr (offre poker, paris sportifs, hippique éventuelle).',
+          "L'offre Unibet couvre 3 disciplines sous licence ANJ. Les paris sportifs constituent le cœur de la plateforme, avec plus de 30 sports disponibles. Depuis la fusion avec Parions Sport en Ligne le 24 mars 2026, Unibet hérite de l'ensemble de l'audience et des comptes Parions Sport. L'opérateur est partenaire officiel de la NBA (contrat plurisaisons renouvelé) et de l'Olympique de Marseille, avec des supercotes boostées sur les événements UFC et NBA.",
+          "Unibet Poker constitue le deuxième pilier : premier dépôt doublé jusqu'à 250 €, cash games Texas Hold'em et Omaha, tournois MTT quotidiens. La salle s'appuie sur le réseau Kindred Poker (désormais FDJ United), assurant une liquidité stable à toutes heures.",
+          "Unibet Turf (anciennement Zeturf, intégré en juillet 2025) complète l'offre hippique : courses françaises et internationales, paris simples et combinés, rapports PMU disponibles. Un bonus de 100 € est disponible à l'inscription sur la verticale turf. Les 3 verticales partagent un compte unique.",
+        ],
+        highlights: [
+          '30+ sports, partenaire officiel NBA et Olympique de Marseille',
+          'Zeturf intégré juillet 2025 (hippique)',
+          'Sport + Poker + Turf depuis un compte unique',
         ],
       },
       // live: undefined — convention §15
       paiements: {
         prose: [
-          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification unibet.fr. Note : Unibet est reconnu pour des délais de retrait rapides — à documenter précisément.',
+          "Unibet accepte les paiements par carte bancaire (Visa, Mastercard), PayPal, virement bancaire et Skrill. La disponibilité de Skrill en retrait est rare parmi les opérateurs ANJ français — c'est un avantage concret pour les joueurs e-wallet.",
+          "Le retrait instantané est disponible depuis mars 2024 sur certaines méthodes. Aucun test indépendant publié n'a chiffré précisément le délai réel de traitement, contrairement à certains opérateurs dont les délais ont été testés. Le dépôt minimum est de 10 €. Un KYC complet est requis avant tout retrait.",
+        ],
+        highlights: [
+          'Visa, Mastercard, PayPal, virement, Skrill (retrait)',
+          'Skrill en retrait — rare parmi les opérateurs ANJ',
+          'Retrait instantané annoncé depuis mars 2024',
         ],
       },
       support: {
         prose: [
-          'TODO — Canaux de support et disponibilité à confirmer après vérification unibet.fr.',
+          "Unibet dispose d'un live chat disponible de 8h à minuit, d'un numéro de téléphone et d'un support par e-mail. Le live chat est le canal le plus réactif : un test réalisé par Eurosport a mesuré un temps de réponse inférieur à 1 minute.",
+          "L'absence de couverture nocturne (minuit-8h) est à noter pour les joueurs qui misent tard le soir. Le support est disponible en français, avec des agents formés sur les règles du pari sportif ANJ.",
+        ],
+        highlights: [
+          'Live chat 8h-minuit (réponse < 1 min, test Eurosport)',
+          'Téléphone disponible',
+          'E-mail disponible',
         ],
       },
       mobile: {
         prose: [
-          "TODO — Détails de l'app native (notes App Store, Play Store, fonctionnalités) à confirmer.",
+          "L'application Unibet est notée 4,6/5 sur l'App Store iOS sur la base de 90 000 avis (source Eurosport, juin 2026) et 4,3/5 sur Google Play. L'app couvre les 3 disciplines depuis une interface unifiée. Elle intègre MyBet (création de combinés multi-paris sur le même match), Cash Out, annulation de pari (dans les 2 minutes, pré-match uniquement) et Unibet TV pour le streaming d'événements sportifs en direct.",
+          'La navigation entre les 3 verticales (sport, poker, turf) est accessible depuis un compte unique. Les notifications push sont configurables par sport et par événement.',
+        ],
+        highlights: [
+          'App Store iOS : 4,6/5 (90 000 avis)',
+          'Google Play : 4,3/5',
+          'MyBet + Cash Out + annulation pari (2 min) + Unibet TV',
         ],
       },
       // vip: undefined — convention §15
       securite: {
         prose: [
-          "Unibet opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. Unibet fait partie du groupe Kindred, l'un des leaders européens du jeu en ligne.",
+          "Unibet opère sous licence ANJ depuis 2010 — l'année d'ouverture du marché français du jeu en ligne. Depuis octobre 2024, Unibet fait partie du groupe FDJ United, dont l'État français est co-actionnaire de référence via la Française des Jeux (cotée en bourse, Euronext Paris). La fusion avec Parions Sport en Ligne est effective depuis le 24 mars 2026 ; Zeturf (hippique) avait été intégré en juillet 2025.",
+          "Les obligations ANJ incluent : vérification d'identité obligatoire (KYC), plafonds de dépôt paramétrables, accès à l'auto-exclusion nationale (Fichier des Interdits de Jeu ANJ) et liens vers Joueurs Info Service (09 74 75 13 13). Partenariats sportifs actifs : NBA (plurisaisons), Olympique de Marseille.",
         ],
         highlights: [
-          'Licence ANJ — régulation française',
-          'Groupe Kindred — acteur européen établi',
+          'Licence ANJ depuis 2010 (ouverture marché FR)',
+          'Groupe FDJ United (État co-actionnaire) depuis octobre 2024',
+          'Fusion Parions Sport en Ligne le 24 mars 2026',
         ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'ANJ — Licence française' },
-      { label: 'Groupe', value: 'Kindred Group' },
-      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
-      { label: 'Méthodes de paiement', value: 'TODO à valider' },
-      { label: 'Délai de retrait', value: 'TODO à valider (réputation : retraits rapides)' },
-      { label: 'Catalogue', value: 'TODO à valider (sport + poker + hippique ?)' },
-      { label: 'Support', value: 'TODO à valider' },
-      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
-      { label: 'Fondé', value: '1997 (groupe) / TODO ligne ANJ à valider' },
+      { label: 'Licence', value: 'ANJ — Licence française (depuis 2010)' },
+      {
+        label: 'Bonus de bienvenue',
+        value: "Jusqu'à 450 € cumulables (sport + poker + turf), en freebets",
+      },
+      {
+        label: 'Méthodes de paiement',
+        value: 'VISA, Mastercard, PayPal, virement, Skrill (retrait)',
+      },
+      {
+        label: 'Délai de retrait',
+        value: 'Instantané annoncé depuis mars 2024 (non testé indépendamment)',
+      },
+      { label: 'Catalogue', value: 'Sport + Poker + Hippique (Zeturf intégré juillet 2025)' },
+      { label: 'Support', value: 'Live chat 8h-minuit (< 1 min), téléphone, e-mail' },
+      { label: 'Application mobile', value: 'iOS 4,6/5 (90 000 avis) · Google Play 4,3/5' },
+      { label: 'Fondé', value: '1997 (groupe) — ANJ France depuis 2010' },
+      { label: 'Groupe', value: 'FDJ United (État co-actionnaire, depuis octobre 2024)' },
     ],
     faq: [
       {
-        question: 'Unibet propose-t-il des jeux de casino classiques ?',
+        question: 'Unibet est-il le même opérateur que Parions Sport en Ligne ?',
         answer:
-          "Non. Unibet est un opérateur ANJ, et la réglementation française n'autorise pas les machines à sous, roulette, blackjack ou live casino en ligne. Unibet propose uniquement paris sportifs, poker et éventuellement hippique.",
+          "Oui, depuis le 24 mars 2026. Parions Sport en Ligne a fusionné dans Unibet à cette date. L'ensemble des fonctionnalités, de l'offre sportive et des comptes Parions Sport sont désormais accessibles directement sur Unibet.fr.",
+      },
+      {
+        question: 'Le bonus Unibet est-il en cash ou en freebets ?',
+        answer:
+          "En freebets (paris gratuits à rejouer). Les 450 € cumulables sur 3 verticales sont des crédits de jeu, pas de l'argent réel. Le bonus sport représente 110 € (10 € sans dépôt + 100 € premier pari remboursé), le poker 250 € (premier dépôt doublé) et le turf 100 €. Consultez unibet.fr pour les conditions en vigueur.",
+      },
+      {
+        question: 'Unibet propose-t-il des jeux de casino classiques (slots, roulette) ?',
+        answer:
+          "Non. La licence ANJ française n'autorise pas les jeux de casino classiques en ligne : machines à sous, roulette, blackjack et live casino avec croupier sont interdits. Unibet propose uniquement paris sportifs, poker et paris hippiques (via Zeturf intégré). Si vous cherchez des jeux de casino, les opérateurs offshore du comparatif proposent ces jeux, mais sans la protection de la réglementation française.",
+      },
+      {
+        question: "Quels sont les atouts distinctifs d'Unibet sur le marché ANJ ?",
+        answer:
+          "Quatre points distinguent Unibet des autres opérateurs ANJ français : l'adossement au groupe FDJ United depuis octobre 2024 (État français co-actionnaire), l'offre 3 verticales unifiées issue de la fusion Parions Sport en Ligne (mars 2026) et de l'intégration Zeturf (juillet 2025), jusqu'à 450 € cumulables en freebets sur ces 3 verticales, et Skrill disponible en retrait — peu d'opérateurs ANJ proposent cette méthode.",
       },
     ],
+    pourQui: {
+      idealSi: [
+        "Vous cherchez un opérateur adossé à l'État français : Unibet fait partie du groupe FDJ United depuis octobre 2024.",
+        "Vous pariez sur 3 disciplines : Unibet offre jusqu'à 450 € de bonus cumulables en sport, poker et turf.",
+        "Vous cherchiez Parions Sport en Ligne : Unibet a intégré l'offre le 24 mars 2026, regroupant sport, poker et turf.",
+      ],
+      bonChoixSi: [
+        "Vous contactez le support en urgence : Unibet propose un téléphone et un live chat répondant en moins d'une minute.",
+        "Vous utilisez Skrill pour vos retraits e-wallet : Unibet est l'un des rares opérateurs ANJ français à l'accepter.",
+      ],
+      aEviterSi: [
+        "Vous voulez un bonus directement en argent réel : les 450 € cumulables d'Unibet sont crédités en freebets à rejouer.",
+        "Vous misez la nuit : le live chat Unibet n'est disponible que de 8 h à minuit, sans couverture nocturne.",
+      ],
+    },
   },
 
   // ── 19. PMU (ANJ squelette — pending enrichissement éditorial) ───────────────
