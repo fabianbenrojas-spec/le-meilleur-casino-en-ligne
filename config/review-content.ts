@@ -2264,12 +2264,13 @@ const reviews: ReviewData[] = [
         prose: [
           'PMU propose 3 applications spécialisées distinctes : PMU Hippique, PMU Sport et PMU Poker — disponibles sur iOS et Android, toutes validées ANJ. Chaque application est optimisée pour sa verticale.',
           "Les fonctionnalités communes incluent les paris en live, le streaming Equidia (app Hippique), le Cash Out, la gestion de compte, les dépôts et la consultation de l'historique.",
-          "Les notes exactes sur l'App Store et le Google Play Store n'ont pas été sourcées lors de la vérification de juin 2026 — ce point est à compléter ultérieurement.",
+          "L'application PMU principale est notée 3,5/5 sur l'App Store iOS (vérification directe juin 2026) — en dessous de la moyenne des apps sport/hippique ANJ (Winamax 4,6/5, Betclic 4,7/5, Unibet 4,6/5). Les notes des applications PMU Sport et PMU Poker sur l'App Store et Google Play n'ont pas été sourcées lors de cette vérification.",
         ],
         highlights: [
           '3 applications spécialisées : PMU Hippique, PMU Sport, PMU Poker',
           'iOS + Android — validation ANJ sur les 3 apps',
           'Live betting, streaming Equidia et Cash Out disponibles',
+          'App principale : 3,5/5 App Store iOS — en dessous de la moyenne ANJ (Winamax 4,6/5, Betclic 4,7/5)',
         ],
       },
       // vip: undefined — convention §15
@@ -2300,7 +2301,8 @@ const reviews: ReviewData[] = [
       { label: 'Support', value: 'Téléphone, live chat, e-mail, Sourdline (malentendants)' },
       {
         label: 'Application mobile',
-        value: '3 apps spécialisées (Hippique, Sport, Poker) — iOS + Android',
+        value:
+          '3 apps spécialisées (Hippique, Sport, Poker) — iOS + Android — app principale 3,5/5 App Store',
       },
       { label: 'Statut', value: 'GIE adossé à la filière hippique française' },
     ],
@@ -2400,12 +2402,12 @@ const reviews: ReviewData[] = [
       mobile: {
         prose: [
           "PokerStars propose 2 applications distinctes : l'application PokerStars (poker) et l'application PokerStars Sports (paris sportifs), disponibles sur iOS et Android.",
-          "L'application poker est reconnue comme leader de marché pour la qualité de son interface, le multi-tabling et l'intégration complète des tournois (WCOOP, SCOOP, Power Path disponibles directement depuis l'app).",
+          "L'application poker est notée 4,5/5 sur l'App Store iOS (vérification directe juin 2026) — leader de marché pour la qualité de son interface, le multi-tabling et l'intégration complète des tournois (WCOOP, SCOOP, Power Path disponibles directement depuis l'app).",
           "L'application PokerStars Sports est notée 4,2/5 sur l'App Store iOS (~3 000 avis) et 3,7/5 sur Google Play (source : MediaPronos mai 2026) — qualité UX jugée en dessous de la moyenne du marché sport ANJ.",
         ],
         highlights: [
           '2 applications distinctes : PokerStars poker + PokerStars Sports',
-          'App poker : leader marché, multi-tabling, tournois intégrés',
+          'App poker : 4,5/5 App Store iOS — multi-tabling, tournois intégrés',
           'App sport : 4,2/5 iOS / 3,7/5 Android — qualité UX en dessous de la moyenne',
         ],
       },
@@ -2442,7 +2444,7 @@ const reviews: ReviewData[] = [
       { label: 'Support', value: 'Live chat 24h/24, 7j/7 — e-mail' },
       {
         label: 'Application mobile',
-        value: '2 apps séparées — poker (leader) + sport (4,2/5 iOS, 3,7/5 Android)',
+        value: '2 apps séparées — poker (4,5/5 App Store) + sport (4,2/5 iOS, 3,7/5 Android)',
       },
       { label: 'Fondé', value: '2001 (PokerStars mondial) — ANJ poker 2010, sport 2016' },
       { label: 'Liquidité', value: 'ESPT partagée France + Espagne + Portugal' },
