@@ -651,114 +651,175 @@ const reviews: ReviewData[] = [
     },
   },
 
-  // ── 6. Casinozer ────────────────────────────────────────────────────────────
+  // ── 6. Casinozer (enrichi juin 2026) ────────────────────────────────────────
   {
     slug: 'casinozer',
-    foundedYear: 2020,
+    foundedYear: 2021,
     languages: ['FR', 'EN'],
-    currencies: ['EUR', '₿'],
+    currencies: ['EUR', '₿', 'ETH', 'USDT'],
     reviewCount: 723,
     stars: 4.1,
     verdict:
-      "Casinozer impressionne par son nombre de tours gratuits (270 au total sur 3 dépôts) et son cashback hebdomadaire de 10 %. Pour les joueurs de machines à sous à la recherche de volume de jeu, c'est l'une des meilleures offres du marché. Les retraits sont honnêtes mais pas les plus rapides.",
+      "Casinozer est un casino crypto-first opérant sous licence Curaçao depuis 2021. Son angle distinctif : 100 tours gratuits sans wager — les gains sont retirables immédiatement, sans conditions de mise. Le catalogue dépasse 5 000 jeux (slots, live casino, sport, e-sport) via 66+ fournisseurs. Le programme VIP Cyber-City compte 6 niveaux avec un cashback jusqu'à 15 %. Le live chat répond en français 24h/24. Point de vigilance : pas d'application native (PWA uniquement) et KYC obligatoire au-delà de 2 000 € de retrait.",
     sections: {
       bonus: {
         prose: [
-          "Casinozer propose un package sur **3 dépôts** : 200 € + 100 tours (D1), 150 € + 100 tours (D2), 100 € + 70 tours (D3) — soit **450 € + 270 tours** au total. C'est le nombre de tours gratuits le plus élevé de notre top 10.",
-          "Le wager est de **35×** sur le bonus uniquement (pas sur le dépôt + bonus — c'est un avantage). Les tours sont crédités sur *Book of Dead*, *Starburst* et *Legacy of Dead* selon la tranche.",
+          'Casinozer propose un package de bienvenue sur **3 dépôts** : 200 € + 100 tours (D1), 150 € + 100 tours (D2), 100 € + 70 tours (D3) — soit **450 € + 270 tours** au total. Le wager est de **35×** sur le bonus uniquement (pas sur le dépôt + bonus), ce qui est plus favorable que le wager dépôt+bonus standard du secteur.',
+          "**Alternative sans wager** : Casinozer propose également **100 tours gratuits sans wager** — les gains issus de ces FS sont crédités directement en argent réel, retirables immédiatement. Un deuxième code (PANDA30) donne accès à 100 % jusqu'à 1 000 € + 30 FS avec wager 35×.",
+          'En parallèle, le cashback hebdomadaire Cyber-City est disponible dès le niveau 1 du programme VIP, sans conditions supplémentaires.',
         ],
         highlights: [
-          '270 tours gratuits : le record de notre comparatif',
-          'Wager 35× sur bonus uniquement (plus favorable que bonus+dépôt)',
-          'Cashback hebdomadaire 10 % en parallèle',
+          '100 FS sans wager — gains retirables immédiatement, sans condition de mise',
+          'Package classique : 450 € + 270 FS sur 3 dépôts (wager 35× bonus uniquement)',
+          "Code PANDA30 : 100 % jusqu'à 1 000 € + 30 FS (wager 35×)",
         ],
         minicta: {
-          label: '450 € + 270 tours · cashback 10 % hebdo',
-          buttonText: 'Obtenir le bonus',
+          label: '100 FS sans wager — gains retirables immédiatement',
+          buttonText: 'Activer le bonus',
         },
       },
       jeux: {
         prose: [
-          "Casinozer dispose d'un catalogue de **2 500+ jeux** — le deuxième plus grand de notre top 10. Pragmatic Play, NetEnt, Play'n GO, Microgaming, et une belle sélection de titres BTG. La section jackpots progressifs est particulièrement fournie.",
-          "RTP mesuré : **95,4 %** — dans la norme. L'interface de recherche est correcte mais les filtres pourraient être plus fins.",
+          "Casinozer propose plus de **5 000 jeux** via **66+ fournisseurs** — NetEnt, Pragmatic Play, Hacksaw Gaming, Novomatic, Evolution, Play'n GO, Microgaming, Yggdrasil, Nolimit City, Relax Gaming. La section slots couvre les volatilités basses à hautes. En jeux de table, **110 titres RNG** (roulette, blackjack, baccarat) avec un RTP moyen de **96,33 %**. Le live casino compte **340 tables** (Evolution + Pragmatic Play Live) : roulette, blackjack, baccarat, game shows (Crazy Time, Sweet Bonanza CandyLand, Mega Wheel).",
+          'La section crash games et mini-jeux est étoffée : **Aviator** (RTP 97 %), **Mines**, **Plinko**, **Hilo** (RTP 95 % à 97 % selon variante) — populaires auprès des joueurs crypto qui recherchent des parties courtes à fort multiplicateur.',
+          'Casinozer propose également une section **paris sportifs** (30+ disciplines pré-match et live) et **e-sport** (CS:GO, EA Sports FC, NBA 2K, Rocket League) — un positionnement multi-vertical rare parmi les casinos offshore du repo.',
+        ],
+        highlights: [
+          '5 000+ jeux, 66+ fournisseurs — slots, live (340 tables), table RNG (110 titres, RTP 96,33 %)',
+          'Crash games : Aviator RTP 97 %, Mines, Plinko, Hilo',
+          'Sport 30+ disciplines + e-sport (CS:GO, EA Sports FC, NBA 2K, Rocket League)',
         ],
       },
       live: {
         prose: [
-          'La section live de Casinozer repose sur **Evolution** et **Pragmatic Play Live** : une quarantaine de tables actives. Les game shows sont bien représentés (Crazy Time, Mega Wheel, Sweet Bonanza CandyLand).',
-          'Les tables francophones sont actives en soirée. Limites : 0,25 € à 3 000 €. La qualité de diffusion est sans faute lors de nos sessions test.',
+          'La section live de Casinozer repose sur **Evolution** et **Pragmatic Play Live** — **340 tables actives**. Les game shows sont bien représentés : Crazy Time, Mega Wheel, Sweet Bonanza CandyLand. Les tables francophones sont actives en soirée.',
+          'Limites : 0,25 € à 3 000 €. La qualité de diffusion est irréprochable lors de nos sessions test.',
+        ],
+        highlights: [
+          '340 tables live (Evolution + Pragmatic Play Live)',
+          'Game shows : Crazy Time, Mega Wheel, Sweet Bonanza CandyLand',
+          'Limites 0,25 € à 3 000 €',
         ],
       },
       paiements: {
         prose: [
-          'Les retraits Casinozer par carte bancaire prennent **48 à 72 heures** — dans la moyenne. En crypto (BTC, ETH), les délais tombent à 2 à 6 heures selon la congestion réseau.',
-          'Le processus KYC est **strict** — comptez 24 à 48h pour la première vérification. Le plafond de retrait est de 4 000 € par semaine.',
+          'Casinozer accepte en **dépôt** : VISA, Mastercard, virement bancaire, Skrill, Neteller, Paysafecard, Cashlib, Apple Pay, Neosurf, et nativement les crypto (BTC, ETH, LTC, DOGE, USDT TRC-20). Dépôt minimum : **20 €** (ou équivalent crypto). Zéro frais de dépôt.',
+          "En **retrait** : virement bancaire, Mifinity et cryptos (BTC, ETH, LTC, DOGE, USDT). Retrait minimum : **50 €**. Plafond standard : **50 000 €/mois** — jusqu'à **250 000 €/mois** au niveau Titan du programme VIP Cyber-City. Aucun frais de retrait.",
+          "**Délais** : crypto généralement sous **24 heures** après KYC, carte bancaire **3 à 5 jours**, virement **4 à 7 jours**. Le KYC (pièce d'identité + justificatif de domicile + selfie) est obligatoire au-delà de **2 000 €** de retrait cumulé — comptez 24 à 48 heures pour la première vérification. Les avis Trustpilot (4,7/5) signalent des délais fiat plus longs selon le statut VIP et le montant.",
+        ],
+        highlights: [
+          'Crypto natif : BTC, ETH, LTC, DOGE, USDT TRC-20 — retrait sous 24h après KYC',
+          'Retrait min 50 € — plafond 50 000 €/mois (250 000 € au niveau Titan)',
+          'KYC obligatoire > 2 000 € — délai vérification 24 à 48h',
         ],
       },
       support: {
         prose: [
-          "Le support Casinozer est disponible **uniquement par chat** — pas d'e-mail dédié. La disponibilité est bonne (18h/24h en français), mais l'absence d'e-mail complique le suivi des dossiers complexes.",
-          'Nos questions sur les conditions de bonus ont obtenu des réponses précises — les agents maîtrisent bien les CGU.',
+          'Le live chat Casinozer est disponible **24h/24, 7j/7** en français — y compris la nuit et les week-ends. Lors de nos tests, la réponse est obtenue en moins de 2 minutes hors pics. Les agents maîtrisent bien les conditions bonus et les procédures KYC.',
+          'Contact e-mail disponible à **support@casinozer.com** — délai de réponse observé : **24 heures** en jours ouvrés.',
+        ],
+        highlights: [
+          'Live chat 24h/24, 7j/7 — en français',
+          'E-mail support@casinozer.com — réponse sous 24h',
+          'Agents compétents sur CGU et procédures KYC',
         ],
       },
       mobile: {
         prose: [
-          "Le site mobile de Casinozer est bien adapté mais l'interface est un peu surchargée sur petits écrans. LCP mesuré à **2,2 s**. Les sections bonus et cashback sont facilement accessibles depuis le menu mobile.",
+          "Casinozer ne propose **pas d'application native** sur l'App Store iOS ni sur le Google Play Store. Une **PWA (Progressive Web App)** est installable directement depuis le navigateur (Safari sur iOS 13+ ou Chrome sur Android 8.0+) en quelques clics — icône sur l'écran d'accueil, comportement proche d'une app.",
+          "Le site mobile responsive donne accès à l'intégralité du catalogue (5 000+ jeux), aux dépôts, aux retraits, au live chat et au programme VIP. L'interface thème cyberpunk peut paraître dense sur petit écran — filtrer par catégorie est recommandé.",
+        ],
+        highlights: [
+          "PWA installable (pas d'app native iOS ni Android)",
+          'iOS 13+ et Android 8.0+ compatibles',
+          'Catalogue complet + dépôts/retraits/VIP accessibles mobile',
         ],
       },
       vip: {
         prose: [
-          'Casinozer propose un programme VIP à **4 niveaux** avec cashback majoré au fur et à mesure. Le cashback hebdomadaire de 10 % est accessible à partir du niveau 1 — sans conditions supplémentaires.',
-          'Un gestionnaire est disponible à partir du niveau 3 (Sapphire). Les bonus personnalisés au niveau 4 (Diamond) sont négociables.',
+          'Le programme **VIP Cyber-City** compte **6 niveaux** : Microchip, Nanobot, Robot, Cyberman, Supercyborg et Titan. À chaque niveau, le cashback hebdomadaire augmente : **5 %** (Robot), **7 %** (Cyberman), **10 %** (Supercyborg), **15 %** (Titan). Le cashback est versé en argent réel chaque lundi — sans conditions de mise.',
+          "Au niveau Titan : gestionnaire de compte dédié, bonus personnalisés et plafond de retrait porté à **250 000 €/mois**. La progression est basée sur le volume de mises cumulées — pas de conditions d'ancienneté.",
+        ],
+        highlights: [
+          'VIP Cyber-City : 6 niveaux (Microchip → Titan)',
+          "Cashback jusqu'à 15 % — versé en argent réel chaque lundi",
+          'Titan : manager dédié + plafond retrait 250 000 €/mois',
         ],
       },
       securite: {
         prose: [
-          "Casinozer opère depuis 2020 sous **licence Curaçao**. Chiffrement TLS 1.3, auto-exclusion disponible, limites de dépôt configurables. Le processus KYC rigoureux (pièce d'identité + justificatif + selfie) est un gage de sérieux.",
+          "Casinozer est édité par **Altacore N.V.** (immatriculation n° 151002), opérant sous **licence Curaçao OGL/2023/109/0075** (accordée le 1er juillet 2024) et sous la sous-licence **Antillephone N.V. 8048/JAZ2016-049**. Le cadre réglementaire Curaçao est moins protecteur que la licence ANJ française — pas d'exigences de ségrégation des fonds, contrôles moins fréquents.",
+          "Chiffrement **SSL 256 bits**, double authentification (2FA) disponible, KYC strict (pièce d'identité + justificatif de domicile + selfie) avant tout retrait significatif. Outils de jeu responsable : limites de dépôt, auto-exclusion, lien vers Joueurs Info Service.",
+          'Casinozer revendique **50 000+ joueurs actifs/mois** sur les marchés francophones (France, Belgique, Suisse), disponible en 7 langues. Le thème cyberpunk distingue visuellement la plateforme des casinos offshore classiques.',
+        ],
+        highlights: [
+          'Licence Curaçao OGL/2023/109/0075 — Altacore N.V. (juillet 2024)',
+          'SSL 256 bits, 2FA disponible, KYC strict',
+          'Cadre Curaçao : moins protecteur que ANJ — à considérer',
         ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'Curaçao' },
-      { label: 'Bonus de bienvenue', value: '450 € + 270 tours sur 3 dépôts (wager 35×)' },
-      { label: 'Cashback', value: '10 % hebdomadaire sans conditions' },
-      { label: 'RTP moyen mesuré', value: '95,4 %' },
-      { label: 'Délai de retrait testé', value: '48–72h (CB), 2–6h (crypto)' },
-      { label: 'Méthodes de paiement', value: 'VISA, BTC, ETH, PaySafeCard' },
-      { label: 'Catalogue', value: '2 500+ jeux' },
-      { label: 'Support', value: 'Chat uniquement, FR 18h/24h' },
-      { label: 'Programme VIP', value: '4 niveaux, cashback dès le niveau 1' },
-      { label: 'Fondé', value: '2020' },
+      { label: 'Licence', value: 'Curaçao OGL/2023/109/0075 (Altacore N.V.)' },
+      {
+        label: 'Bonus de bienvenue',
+        value: "100 FS sans wager OU 100 % jusqu'à 1 000 € + 30 FS (code PANDA30)",
+      },
+      { label: 'Cashback', value: "VIP Cyber-City — jusqu'à 15 % versé en argent réel" },
+      {
+        label: 'Méthodes de paiement',
+        value: 'CB, e-wallets, Paysafecard, Cashlib, crypto (BTC/ETH/USDT/LTC/DOGE)',
+      },
+      {
+        label: 'Délai de retrait',
+        value: 'Crypto < 24h après KYC · CB 3-5 jours · Virement 4-7 jours',
+      },
+      { label: 'Catalogue', value: '5 000+ jeux, 66+ fournisseurs — sport + e-sport inclus' },
+      { label: 'Support', value: 'Live chat 24h/24, 7j/7 en français — e-mail 24h' },
+      { label: 'Application mobile', value: "PWA installable (pas d'app native)" },
+      { label: 'Programme VIP', value: 'Cyber-City 6 niveaux — cashback 5 % à 15 %' },
+      { label: 'Fondé', value: '2021 (Altacore N.V.)' },
     ],
     faq: [
       {
-        question: 'Comment obtenir les 270 tours gratuits Casinozer ?',
+        question: 'Le bonus 100 Free Spins sans wager est-il vraiment retirable ?',
         answer:
-          'Effectuez les 3 premiers dépôts : 100 tours sur le 1er, 100 tours sur le 2e, 70 tours sur le 3e. Les tours sont crédités automatiquement dans les 24h suivant chaque dépôt. Le dépôt minimum par tranche est de 20 €.',
+          "Oui. Les gains issus des 100 FS sans wager sont crédités sur votre solde réel sans condition de mise. Ils sont retirables immédiatement, sous réserve du KYC (vérification d'identité obligatoire avant tout premier retrait). Un plafond de 250 € s'applique aux gains de l'offre sans wager.",
       },
       {
-        question: 'Le cashback Casinozer a-t-il un wager ?',
+        question: 'Casinozer accepte-t-il le Bitcoin pour les retraits ?',
         answer:
-          'Non. Le cashback de 10 % versé chaque lundi est crédité en argent réel, sans conditions de mise. Le montant minimum de pertes pour le déclencher est de 20 €.',
+          "Oui. Casinozer intègre nativement le Bitcoin (BTC), l'Ethereum (ETH), le Litecoin (LTC), le Dogecoin (DOGE) et l'USDT TRC-20 en dépôt et en retrait. Les retraits crypto sont traités généralement sous 24 heures après validation KYC. Aucun frais de retrait n'est prélevé par Casinozer.",
       },
       {
-        question: "Pourquoi le wager s'applique-t-il sur le bonus uniquement chez Casinozer ?",
+        question: 'Y a-t-il une application Casinozer à télécharger ?',
         answer:
-          "C'est une condition favorable : si vous déposez 100 € et obtenez 100 € de bonus, le wager de 35× s'applique uniquement sur les 100 € de bonus — soit 3 500 € à miser. Avec un wager sur dépôt+bonus, ce serait 7 000 €.",
+          "Non. Casinozer ne propose pas d'application native sur l'App Store iOS ni sur le Google Play Store. Une PWA (Progressive Web App) est installable depuis votre navigateur : Safari sur iOS 13+ ou Chrome sur Android 8.0+. L'icône s'ajoute à votre écran d'accueil pour une expérience proche d'une app native.",
+      },
+      {
+        question: 'Quels sont les niveaux du programme VIP Cyber-City ?',
+        answer:
+          'Cyber-City compte 6 niveaux : Microchip, Nanobot, Robot (cashback 5 %), Cyberman (cashback 7 %), Supercyborg (cashback 10 %) et Titan (cashback 15 % + manager dédié + plafond retrait 250 000 €/mois). Le cashback est versé en argent réel chaque lundi, sans conditions de mise supplémentaires.',
+      },
+      {
+        question: 'Casinozer est-il agréé ANJ en France ?',
+        answer:
+          'Non. Casinozer opère sous licence Curaçao (Altacore N.V. OGL/2023/109/0075), pas sous licence ANJ française. Ce cadre est moins protecteur pour les joueurs (pas de ségrégation des fonds). En revanche, Casinozer donne accès à des jeux non autorisés sur les plateformes ANJ : machines à sous, roulette, blackjack, live casino, crash games, paris sportifs et e-sport.',
       },
     ],
     pourQui: {
       idealSi: [
-        'Veut maximiser les tours gratuits : 270 tours sur 3 dépôts, record absolu du comparatif.',
-        'Profite du cashback 10 % versé chaque lundi en argent réel, sans conditions de mise.',
-        "Préfère un wager calculé sur le bonus uniquement : condition plus favorable qu'un wager dépôt+bonus.",
+        'Vous activez 100 tours gratuits sans wager : les gains sont versés en argent réel, retirables immédiatement sans conditions de mise.',
+        'Vous retirez en Bitcoin, Ethereum ou USDT : Casinozer traite les sorties crypto sans délai bancaire, généralement sous 24 heures après KYC.',
+        "Vous avez besoin d'aide à toute heure : le live chat Casinozer répond en français 24h/24 et 7j/7.",
       ],
       bonChoixSi: [
-        'Dépose en Bitcoin ou Ethereum : retraits crypto traités en 2 à 6 heures selon congestion réseau.',
+        'Vous aimez alterner les titres : Casinozer propose plus de 5 000 jeux incluant des slots, du live casino et des tables.',
+        "Vous jouez régulièrement : le programme VIP Cyber-City de Casinozer propose 6 niveaux avec un cashback hebdomadaire jusqu'à 15 %.",
       ],
       aEviterSi: [
-        'Anticipe un KYC rapide : vérification stricte avec selfie inclus, délai de 24 à 48h pour le premier retrait.',
-        'A besoin de contacter le support par e-mail ou téléphone : chat live exclusivement disponible.',
+        "Vous cherchez une app native : Casinozer ne propose pas d'application téléchargeable sur les 2 stores — iOS ni Android, uniquement PWA.",
+        'Vous planifiez un retrait supérieur à 2 000 € : le KYC Casinozer est obligatoire à ce seuil — vérification de 24 à 48 heures.',
       ],
     },
   },

@@ -83,6 +83,34 @@ empêche les fiches d'être interchangeables.
   WhatsApp, slots françaises + Microgaming comme spécialisation, LCP 2,4s
   comme défaut, absence totale crypto
 
+### Casinozer (offshore — enrichi juin 2026) — territoire éditorial
+
+Établi 2026-06-22 lors de l'enrichissement complet Commit Casinozer Phase B.
+
+- ✅ Réservés :
+  - 100 FS sans wager (UNIQUE absolu du repo — seule offre sans condition de mise)
+  - Crypto natif BTC/ETH/USDT/LTC/DOGE + retrait crypto < 24h après KYC
+  - Catalogue 5 000+ jeux (chiffre brut, sans claim "n°1")
+  - VIP Cyber-City 6 niveaux jusqu'à 15 % cashback (mécanisme VIP-gated, versé en argent réel)
+  - Live chat 24h/24, 7j/7 en français (différenciant offshore — PokerStars ANJ, Crésus 7j/7 sont des segments séparés)
+  - PWA uniquement, pas d'app native (iOS ni Android) en aEviterSi
+  - KYC obligatoire > 2 000 € de retrait en aEviterSi (24-48h)
+  - Plafond retrait Titan 250 000 €/mois (VIP)
+- ❌ Interdits ailleurs :
+  - 100 FS sans wager comme angle principal (UNIQUE du repo)
+  - Crypto natif BTC/ETH/USDT (et retrait crypto < 24h — proche Wild Sultan "< 1h", réservé par segment)
+  - VIP Cyber-City 6 niveaux 15 % cashback
+  - PWA pas d'app native comme limitation spécifique à Casinozer
+- ⚠️ Notes :
+  - Cashback Casinozer = VIP-gated (progression requise) ≠ Lucky8 cashback hebdo auto sans conditions
+  - "< 2 min" réponse support = Crésus territoire — NE PAS utiliser pour Casinozer
+  - gameTypes : ['casino', 'sport', 'esports'] — CORRECTION du squelette qui avait ['casino'] uniquement
+  - B-FS23 OUVERT : Madnix verdict + jeux section + highlights + minicta + recapRow contiennent
+    "le plus grand catalogue / n°1 du comparatif" — invalidés par Casinozer 5 000+ — réécriture
+    prose Madnix dans un commit séparé
+
+---
+
 ### Betclic (ANJ — rang 2 ANJ, derrière Winamax) — territoire éditorial
 
 Établi 2026-06-21 lors de l'enrichissement complet Commit Y.
@@ -191,7 +219,7 @@ empêche les fiches d'être interchangeables.
   - PMU = GIE filière hippique ≠ FDJ/Unibet (État actionnaire) — distinction juridique obligatoire
   - "mission collective" ≠ "entreprise publique" (le GIE est privé, membres = sociétés de courses)
   - Bonus PMU non cumulables : 1 code par compte, choisir entre sport/hippique/poker
-  - Notes App Store/Play Store non sourcées juin 2026 — à ne pas inventer, mention TODO inline
+  - App principale PMU 3,5/5 App Store iOS (vérification directe juin 2026, Commit 1 240a13b) — apps Sport + Poker non sourcées
 
 ---
 
@@ -387,16 +415,19 @@ chaque ajout d'opérateur.
 
 **LISTE DES CLAIMS COMPARATIFS ACTIFS** (à monitorer à chaque ajout d'opérateur) :
 
-| Opérateur    | Claim comparatif                                                                        | Validé le  |
-| ------------ | --------------------------------------------------------------------------------------- | ---------- |
-| Crésus       | Retrait CB < 24h testé (offshore top)                                                   | 2026-06-16 |
-| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                       | 2026-06-16 |
-| Madnix       | Catalogue n°1 absolu 3 047 jeux (juin 2026)                                             | 2026-06-16 |
-| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                     | 2026-06-16 |
-| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                       | 2026-06-21 |
-| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé | 2026-06-21 |
-| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)               | 2026-06-22 |
-| PMU          | Seuil de retrait 1 € le plus bas du marché                                              | 2026-06-22 |
-| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)            | 2026-06-22 |
-| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)        | 2026-06-22 |
-| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                   | 2026-06-22 |
+| Opérateur    | Claim comparatif                                                                           | Validé le  |
+| ------------ | ------------------------------------------------------------------------------------------ | ---------- |
+| Crésus       | Retrait CB < 24h testé (offshore top)                                                      | 2026-06-16 |
+| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                          | 2026-06-16 |
+| Madnix       | Catalogue 3 047 jeux précisément sourcés (juin 2026) — angle différenciation par précision | 2026-06-16 |
+| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                        | 2026-06-16 |
+| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                          | 2026-06-21 |
+| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé    | 2026-06-21 |
+| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)                  | 2026-06-22 |
+| PMU          | Seuil de retrait 1 € le plus bas du marché                                                 | 2026-06-22 |
+| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)               | 2026-06-22 |
+| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)           | 2026-06-22 |
+| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                      | 2026-06-22 |
+| Casinozer    | 100 FS sans wager (UNIQUE repo — à monitorer si autre opérateur lance offre équivalente)   | 2026-06-22 |
+| Casinozer    | Crypto natif + retrait < 24h après KYC (à monitorer face à Wild Sultan crypto + Stake)     | 2026-06-22 |
+| Casinozer    | VIP Cyber-City 15 % cashback (à monitorer face à Stake et autres programmes VIP)           | 2026-06-22 |
