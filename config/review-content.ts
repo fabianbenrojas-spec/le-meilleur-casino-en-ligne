@@ -2348,66 +2348,145 @@ const reviews: ReviewData[] = [
     ],
   },
 
-  // ── 20. PokerStars (ANJ squelette — pending enrichissement éditorial) ──────────
+  // ── 20. PokerStars (ANJ — enrichi juin 2026) ─────────────────────────────────
   {
     slug: 'pokerstars',
-    foundedYear: 2001, // ⚠️ placeholder — PokerStars fondé 2001 (global) ; France ANJ à valider
-    languages: ['FR', 'EN'], // TODO valider
-    currencies: ['EUR'], // TODO valider
-    reviewCount: 0, // ⚠️ placeholder — à valider sur Trustpilot
-    stars: 0, // ⚠️ placeholder — à valider
+    foundedYear: 2001, // PokerStars mondial ; ANJ poker 2010, ANJ sport 2016
+    languages: ['FR'],
+    currencies: ['EUR'],
+    reviewCount: 0, // Trustpilot global — chiffre avis FR non sourcé
+    stars: 0,
     verdict:
-      'PokerStars est un opérateur ANJ pure-poker, branche française de la plateforme poker mondiale. Tournois internationaux et cash games. Données éditoriales à compléter après vérification pokerstars.fr.',
+      "PokerStars est la référence mondiale du poker en ligne, présente en France sous licence ANJ depuis 2010. Sa plateforme poker propose la liquidité partagée ESPT (France, Espagne, Portugal), les tournois mondiaux WCOOP et SCOOP, le Power Path vers les tickets EPT (jusqu'à 9 300 €) et le programme Stars Rewards (jusqu'à 40 % de cashback sur le rake). En complément, PokerStars Sports (ex-BetStars, licence ANJ 2016) couvre le sport avec le Spin & Bet — multiplicateur jusqu'à x10 sur les paris simples, format propriétaire en France. À noter : 2 applications séparées (poker et sport) et app sport notée 4,2/5 iOS.",
     sections: {
-      // bonus: undefined — convention §15 (ANJ sans bonus casino)
+      // bonus: undefined — convention §15 (ANJ — hasBonus: false)
       jeux: {
         prose: [
-          'TODO — Section à enrichir après vérification pokerstars.fr (offre poker : MTT, cash games, tournois internationaux).',
+          "Le cœur de PokerStars est le poker, avec toutes les variantes majeures : Texas Hold'em, Omaha, 7 Card Stud, Razz, Badugi, 2-7 Triple Draw, HORSE, 8-Game Mix. Les formats incluent le cash game multi-tables (jusqu'à 24 tables simultanées sur PC, 16 sur Mac), les MTT, les Spin & Go (jackpots à 3 joueurs avec multiplicateur aléatoire jusqu'à x12 000 — note : 84 % des tables affichent le multiplicateur standard x2), le Zoom Poker, les PKO (Progressive Knock-Out), les Mystery Bounty et les Home Games. Les tournois propriétaires incluent le WCOOP (World Championship of Online Poker), le SCOOP (Spring Championship of Online Poker), le SECOOP, les Galactic Series et le Sunday Million (buy-in 109 €, garantie 250 000 €).",
+          "La liquidité poker est partagée avec l'Espagne et le Portugal dans le cadre de la Shared European Liquidity Pool (ESPT), mutualisant 3 marchés ANJ régulés — configuration unique parmi les opérateurs ANJ français. Le programme Stars Rewards redistribue jusqu'à 40 % de cashback sur le rake pour les joueurs les plus actifs, via des coffres mystères et des points statut. Le Power Path est un circuit en 4 étapes permettant d'accéder à des tickets pour le circuit live EPT (European Poker Tour, valeur jusqu'à 9 300 €). Des freerolls sont disponibles chaque semaine, dont le Sunday Stars (1 500 €) et le Wednesday Freeroll (500 €).",
+          "PokerStars Sports, anciennement BetStars (renommé en 2020), est la verticale sport de PokerStars en France, opérant sous licence ANJ n° 0006-PS-2016-06-07 depuis juin 2016. Elle couvre les sports principaux (football, tennis, basketball, rugby, etc.) en paris avant-match et en direct, avec Cash Out disponible. Son format distinctif, le Spin & Bet, applique un multiplicateur aléatoire jusqu'à x10 sur les gains potentiels d'un pari simple, pré-match ou live.",
+        ],
+        highlights: [
+          'Liquidité partagée ESPT : France, Espagne, Portugal — 3 marchés ANJ en 1 pool',
+          'Tournois mondiaux : WCOOP, SCOOP, SECOOP, Power Path → tickets EPT 9 300 €',
+          "Spin & Bet sport : multiplicateur aléatoire jusqu'à x10 sur paris simples",
+          "Stars Rewards : jusqu'à 40 % de cashback sur le rake pour joueurs actifs",
         ],
       },
-      // live: undefined — convention §15 (pure-poker, pas de live casino)
+      // live: undefined — convention §15
       paiements: {
         prose: [
-          'TODO — Méthodes de paiement et délais de retrait à confirmer après vérification pokerstars.fr.',
+          'PokerStars accepte les méthodes de dépôt suivantes : carte bancaire (VISA, Mastercard), PayPal, Apple Pay, Skrill, Neteller et virement bancaire. Le dépôt minimum est de 10 €.',
+          "Particularité importante : à l'inscription, PokerStars envoie un code d'activation par courrier postal à l'adresse fournie. Ce code est requis pour valider le compte et accéder aux retraits. Anticipez cette étape avant de demander un premier retrait — le délai postal peut prendre plusieurs jours.",
+          "Les délais de retrait varient selon la méthode choisie. Le KYC (vérification d'identité et justificatif de domicile) est strict et obligatoire avant tout retrait.",
+        ],
+        highlights: [
+          'Dépôt : VISA, MC, PayPal, Apple Pay, Skrill, Neteller, virement',
+          "Code d'activation par courrier postal à l'inscription (délai à anticiper)",
+          'KYC strict — vérification obligatoire avant premier retrait',
         ],
       },
       support: {
         prose: [
-          'TODO — Canaux de support et disponibilité à confirmer après vérification pokerstars.fr.',
+          'PokerStars propose un live chat disponible 24h/24, 7j/7 — canal de support permanent y compris la nuit et les jours fériés.',
+          "L'e-mail support@starsaccount.fr est également disponible, avec un délai de réponse de 1 à 2 jours ouvrés. Certains avis de joueurs mentionnent une réactivité mitigée hors live chat.",
+        ],
+        highlights: [
+          'Live chat disponible 24h/24, 7j/7',
+          'E-mail : support@starsaccount.fr (1-2 jours ouvrés)',
+          'Avis joueurs mitigés sur la réactivité hors live chat',
         ],
       },
       mobile: {
         prose: [
-          "TODO — Détails de l'app native PokerStars (notes App Store, Play Store, fonctionnalités) à confirmer.",
+          "PokerStars propose 2 applications distinctes : l'application PokerStars (poker) et l'application PokerStars Sports (paris sportifs), disponibles sur iOS et Android.",
+          "L'application poker est reconnue comme leader de marché pour la qualité de son interface, le multi-tabling et l'intégration complète des tournois (WCOOP, SCOOP, Power Path disponibles directement depuis l'app).",
+          "L'application PokerStars Sports est notée 4,2/5 sur l'App Store iOS (~3 000 avis) et 3,7/5 sur Google Play (source : MediaPronos mai 2026) — qualité UX jugée en dessous de la moyenne du marché sport ANJ.",
+        ],
+        highlights: [
+          '2 applications distinctes : PokerStars poker + PokerStars Sports',
+          'App poker : leader marché, multi-tabling, tournois intégrés',
+          'App sport : 4,2/5 iOS / 3,7/5 Android — qualité UX en dessous de la moyenne',
         ],
       },
       // vip: undefined — convention §15
       securite: {
         prose: [
-          'PokerStars.fr opère sous licence ANJ (Autorité Nationale des Jeux), le régulateur français. PokerStars est la plateforme de poker en ligne la plus utilisée au monde, filiale de Flutter Entertainment.',
+          'PokerStars opère sous 2 licences ANJ distinctes en France : la licence poker (depuis 2010, PokerStars.fr) et la licence sportive n° 0006-PS-2016-06-07 (depuis juin 2016, PokerStars Sports). Chaque verticale dispose de son propre agrément ANJ.',
+          "PokerStars est une filiale de Flutter Entertainment (groupe coté sur le London Stock Exchange, LSE : FLTR), l'un des plus grands opérateurs de jeux en ligne au monde. La sécurité des comptes est assurée par SSL/TLS 256 bits et la double authentification (2FA) disponible.",
+          "PokerStars a désactivé les HUD (Heads-Up Display) sur son pool ANJ depuis 2019, une mesure d'équité garantissant que les joueurs récréatifs ne sont pas désavantagés par les outils d'analyse des réguliers. Le KYC est strict : pièce d'identité, justificatif de domicile et code d'activation postal requis avant tout retrait.",
         ],
         highlights: [
-          'Licence ANJ — régulation française',
-          'Flutter Entertainment — groupe coté en bourse',
+          '2 licences ANJ distinctes : poker (2010) + sport n° 0006-PS-2016-06-07 (2016)',
+          'Flutter Entertainment — groupe mondial coté LSE',
+          'HUD désactivé ANJ depuis 2019 — SSL/TLS 256 bits + 2FA',
         ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'ANJ — Licence française' },
-      { label: 'Groupe', value: 'Flutter Entertainment' },
-      { label: 'Bonus de bienvenue', value: 'TODO à valider' },
-      { label: 'Méthodes de paiement', value: 'TODO à valider' },
-      { label: 'Délai de retrait', value: 'TODO à valider' },
-      { label: 'Catalogue', value: 'Poker uniquement (MTT, cash games, tournois)' },
-      { label: 'Support', value: 'TODO à valider' },
-      { label: 'Application mobile', value: 'TODO à valider (notes App Store / Play Store)' },
-      { label: 'Fondé', value: '2001 (global) / TODO ligne ANJ FR à valider' },
+      { label: 'Licence', value: 'ANJ — 2 licences (poker 2010 + sport 2016)' },
+      { label: 'Groupe', value: 'Flutter Entertainment (LSE : FLTR)' },
+      {
+        label: 'Bonus de bienvenue',
+        value: 'Poker : 100 € doublement 1er dépôt (code STARS100) — Sport : 100 € en freebets',
+      },
+      {
+        label: 'Méthodes de paiement',
+        value: 'VISA, MC, PayPal, Apple Pay, Skrill, Neteller, virement',
+      },
+      {
+        label: 'Retrait',
+        value: 'Variable selon méthode — code activation courrier postal requis',
+      },
+      { label: 'Catalogue', value: 'Poker (WCOOP/SCOOP/EPT/ESPT) + Sport (Spin & Bet x10)' },
+      { label: 'Support', value: 'Live chat 24h/24, 7j/7 — e-mail' },
+      {
+        label: 'Application mobile',
+        value: '2 apps séparées — poker (leader) + sport (4,2/5 iOS, 3,7/5 Android)',
+      },
+      { label: 'Fondé', value: '2001 (PokerStars mondial) — ANJ poker 2010, sport 2016' },
+      { label: 'Liquidité', value: 'ESPT partagée France + Espagne + Portugal' },
     ],
+    pourQui: {
+      idealSi: [
+        "Vous jouez en cash games : PokerStars partage sa liquidité avec l'Espagne et le Portugal, mutualisant 3 marchés ANJ régulés.",
+        "Vous participez à des tournois mondiaux : PokerStars organise le WCOOP, le SCOOP et propose des qualifications EPT jusqu'à 9 300 €.",
+        "Vous jouez régulièrement au poker : le programme Stars Rewards propose jusqu'à 40 % de cashback sur le rake généré.",
+      ],
+      bonChoixSi: [
+        'Vous jouez la nuit ou aux heures décalées : le live chat PokerStars est disponible 24h/24, 7j/7.',
+        "Vous pariez sur le sport : Spin & Bet PokerStars applique un multiplicateur aléatoire jusqu'à x10 sur les paris simples, pré-match et live.",
+      ],
+      aEviterSi: [
+        "Vous gérez poker et sport depuis une seule app : PokerStars propose 2 applications différentes, l'une pour le poker, l'autre pour le sport.",
+        "Vous misez sur le sport depuis votre mobile : l'app PokerStars Sport est notée 4,2/5 sur l'App Store et 3,7/5 sur Google Play.",
+      ],
+    },
     faq: [
       {
-        question: 'PokerStars propose-t-il des jeux de casino classiques ou des paris sportifs ?',
+        question: 'PokerStars est-il uniquement un site de poker ?',
         answer:
-          "Non. PokerStars.fr est un opérateur ANJ pure-poker. La réglementation française n'autorise pas les machines à sous, roulette, blackjack, live casino ni les paris sportifs dans le cadre de cette licence. PokerStars.fr propose uniquement des jeux de poker (MTT, cash games, sit & go).",
+          'Non. PokerStars opère deux verticales en France : PokerStars poker (licence ANJ depuis 2010) et PokerStars Sports, anciennement BetStars (licence ANJ n° 0006-PS-2016-06-07 depuis juin 2016). Les deux verticales ont des licences distinctes et leurs propres applications.',
+      },
+      {
+        question: "Qu'est-ce que la liquidité partagée ESPT ?",
+        answer:
+          'La Shared European Liquidity Pool (ESPT) mutualise les joueurs de PokerStars en France, Espagne et Portugal sur le même pool de tables. Cela offre plus de joueurs disponibles 24h/24, des prizepools plus élevés et une variété accrue de buy-ins. Ce mécanisme est propre à PokerStars parmi les opérateurs ANJ français.',
+      },
+      {
+        question: "Qu'est-ce que le Spin & Bet sport de PokerStars ?",
+        answer:
+          "Le Spin & Bet est une mécanique propriétaire de PokerStars Sports inspirée des Spin & Go poker. Avant de valider un pari simple (pré-match ou live), un multiplicateur aléatoire entre x1 et x10 est appliqué à vos gains potentiels. C'est un format propriétaire sans équivalent direct sur le marché français.",
+      },
+      {
+        question: "Pourquoi PokerStars envoie-t-il un code d'activation par courrier ?",
+        answer:
+          "C'est une mesure de sécurité KYC propre à PokerStars. À l'inscription, un courrier contenant un code d'activation est envoyé à votre adresse. Ce code est requis pour valider votre compte et accéder aux retraits. Anticipez cette étape avant de demander un premier retrait — le délai postal peut prendre plusieurs jours.",
+      },
+      {
+        question: 'PokerStars propose-t-il des jeux de casino classiques ?',
+        answer:
+          "Non. PokerStars opère sous licence ANJ française, qui n'autorise pas les jeux de casino classiques (machines à sous, roulette, blackjack, live casino). PokerStars.fr propose uniquement du poker, et PokerStars Sports les paris sportifs.",
       },
     ],
   },

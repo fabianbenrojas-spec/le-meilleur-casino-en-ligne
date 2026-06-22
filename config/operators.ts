@@ -876,50 +876,59 @@ export const operators: Operator[] = [
     launchYearFrance: 2010,
   },
 
-  // ── 20. PokerStars (ANJ squelette — pending enrichissement éditorial) ─────────
+  // ── 20. PokerStars (ANJ — enrichi juin 2026) ─────────────────────────────────
   {
     id: 'pokerstars',
     slug: 'pokerstars',
     name: 'PokerStars',
     shortName: 'PokerStars',
     // logoUrl: à compléter en phase logos
-    licence: 'ANJ — Licence française',
-    // licenceNumber: TODO valider sur registre ANJ
-    rating: 8.8, // ⚠️ placeholder — à valider après enrichissement éditorial
-    ratingLabel: 'Excellent',
+    licence: 'ANJ — 2 licences (poker + sport)',
+    licenceNumber: '0006-PS-2016-06-07', // licence sport sourcée — numéro licence poker ANJ à préciser
+    rating: 8.4,
+    ratingLabel: 'Très bien',
     // Convention §14 : valeurs placeholder pour hasBonus: false
     bonusAmount: '—',
     bonusSuffix: '',
     bonusConditions: '',
     bonusAmountNumber: 0,
     bonusSlug: 'no-bonus',
-    rtp: 0, // placeholder — non central pour poker
-    paymentMethods: ['VISA', 'MC', 'PPAL'], // ⚠️ à valider sur pokerstars.fr
-    features: ['Poker mondial', 'Tournois internationaux', 'Licence ANJ'],
+    rtp: 0, // non central pour poker/sport
+    paymentMethods: ['VISA', 'MC', 'PPAL', 'APAY', 'SKRL', 'NTLR'],
+    features: [
+      'Liquidité partagée ESPT (FR+ES+PT)',
+      'WCOOP/SCOOP tournois mondiaux',
+      'Stars Rewards 40%',
+      'Live chat 24h/24, 7j/7',
+    ],
     pros: [
-      'Référence mondiale du poker (WSOP, EPT)',
-      'Communauté internationale',
-      // TODO enrichir après vérification pokerstars.fr
+      'Liquidité partagée ESPT (France, Espagne, Portugal) — tables actives 24h/24, prizepools plus élevés',
+      "Tournois mondiaux propriétaires WCOOP, SCOOP, SECOOP + Power Path → tickets EPT jusqu'à 9 300 €",
+      "Stars Rewards : jusqu'à 40 % de cashback sur le rake pour les joueurs réguliers",
+      'Live chat disponible 24h/24, 7j/7',
+      "Spin & Bet sport : multiplicateur aléatoire jusqu'à x10 — format propriétaire en France",
     ],
     cons: [
-      'Pas de jeux de casino (interdit ANJ)',
-      'Pas de paris sportifs ni hippique',
+      "2 applications séparées (poker et sport) — pas d'app unifiée",
+      'App PokerStars Sports notée 4,2/5 iOS et 3,7/5 Android — qualité UX médiocre',
+      "Code d'activation par courrier postal requis à l'inscription (délai à anticiper)",
+      'Bonus sport versé en freebets (pas en argent réel)',
+      'Pas de jeux de casino ni de live casino (licence ANJ)',
       'Pas de crypto',
-      // TODO enrichir après vérification pokerstars.fr
     ],
     verdict:
-      'PokerStars est un opérateur ANJ pure-poker, branche française de la plateforme poker mondiale. Tournois internationaux et cash games. Données éditoriales à compléter après vérification pokerstars.fr.',
-    tagline: 'La référence mondiale du poker en ligne.',
+      "PokerStars est la référence mondiale du poker en ligne, présente en France sous licence ANJ depuis 2010. La liquidité partagée ESPT (France, Espagne, Portugal) garantit des tables actives 24h/24. Les tournois WCOOP et SCOOP sont propriétaires. Stars Rewards redistribue jusqu'à 40 % de cashback sur le rake. PokerStars Sports (ex-BetStars, ANJ depuis 2016) ajoute la verticale sport avec le Spin & Bet x10. À noter : 2 apps séparées et app sport notée 4,2/5 iOS.",
+    tagline: 'La référence mondiale du poker en ligne, branche sport en complément.',
     affiliateUrl: goUrl('pokerstars'),
     jurisdiction: 'anj',
     hasBonus: false,
     isAffiliated: true,
     legalDisclaimerVariant: 'anj',
-    gameTypes: ['poker'], // pure-poker uniquement
+    gameTypes: ['poker', 'sport'], // poker D'ABORD — sport en complément (ex-BetStars ANJ 2016)
     kycPolicy: 'strict',
-    withdrawalSpeed: 'standard', // ⚠️ placeholder — à valider
+    withdrawalSpeed: 'standard',
     supportsFrench: true,
-    // launchYearFrance: TODO valider année exacte licence ANJ
+    launchYearFrance: 2010,
   },
 ]
 

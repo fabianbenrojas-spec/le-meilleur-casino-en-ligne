@@ -133,6 +133,39 @@ empêche les fiches d'être interchangeables.
 
 ---
 
+### PokerStars (ANJ — 5e opérateur ANJ enrichi) — territoire éditorial
+
+Établi 2026-06-22 lors de l'enrichissement complet Commit BB.
+
+- ✅ Réservés :
+  - Liquidité partagée ESPT (France + Espagne + Portugal) — 3 marchés ANJ
+  - Tournois mondiaux propriétaires WCOOP, SCOOP, SECOOP, Galactic Series, Sunday Million
+  - Power Path → tickets EPT jusqu'à 9 300 €
+  - Spin & Go avec multiplicateur jusqu'à x12 000 (avec rareté assumée — 84% tables = x2)
+  - Stars Rewards cashback jusqu'à 40 % sur rake (à monitorer §16)
+  - Spin & Bet sport multiplicateur jusqu'à x10 (format propriétaire en France)
+  - Live chat 24h/24, 7j/7 (permanence 24h)
+  - Code d'activation par courrier postal (friction inscription)
+  - 2 apps séparées (poker + sport) en aEviterSi
+  - App sport notée 4,2/5 iOS + 3,7/5 Android en aEviterSi (honnêteté assumée)
+- ❌ Interdits ailleurs :
+  - Liquidité partagée ESPT
+  - WCOOP, SCOOP, SECOOP (tournois propriétaires PokerStars)
+  - Power Path → tickets EPT
+  - Spin & Go x12 000 multiplicateur
+  - Stars Rewards cashback 40% rake
+  - Spin & Bet sport x10
+  - Code d'activation courrier postal
+- ⚠️ Note :
+  - PokerStars ≠ "opérateur poker historique du marché français" (Winamax). PokerStars pivot sur "référence mondiale" + liquidité ESPT
+  - PokerStars Sports = ex-BetStars (renommé 2020), licence ANJ n° 0006-PS-2016-06-07 depuis juin 2016
+  - Flutter Entertainment = groupe PokerStars (peut être mentionné en securite, jamais en pourQui)
+  - Bonus sport en freebets (≠ cash PMU/Winamax/Betclic) — à noter en aEviterSi si besoin
+  - gameTypes : ['poker', 'sport'] — CORRECTION du squelette Commit 3 qui avait ['poker'] uniquement
+  - foundedYear 2001 (PokerStars mondial) + launchYearFrance 2010 (poker ANJ) + sport ANJ 2016
+
+---
+
 ### PMU (ANJ — 4e opérateur ANJ enrichi) — territoire éditorial
 
 Établi 2026-06-22 lors de l'enrichissement complet Commit AA.
@@ -365,3 +398,5 @@ chaque ajout d'opérateur.
 | Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)               | 2026-06-22 |
 | PMU          | Seuil de retrait 1 € le plus bas du marché                                              | 2026-06-22 |
 | PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)            | 2026-06-22 |
+| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)        | 2026-06-22 |
+| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                   | 2026-06-22 |
