@@ -63,7 +63,7 @@ empêche les fiches d'être interchangeables.
 
 ### Madnix (rang 4) — territoire éditorial
 
-- ✅ Réservés : catalogue n°1 absolu chiffré (3 047 jeux juin 2026),
+- ✅ Réservés : catalogue 3 047 jeux précisément sourcés (juin 2026) — angle EEAT par précision de chiffrage,
   missions quotidiennes (mécanique unique), 5 niveaux VIP progression,
   mobile gamifié (missions en 1 clic), live mises variables 0,10€-5 000€,
   wager 40× en aEviterSi (le plus élevé du top 5 traité), plafond hebdo

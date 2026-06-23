@@ -416,7 +416,7 @@ const reviews: ReviewData[] = [
     reviewCount: 654,
     stars: 4.3,
     verdict:
-      'Madnix est le champion des catalogues : avec 3 000+ jeux, il devance tous ses concurrents. Son système de missions quotidiennes crée une expérience de jeu plus engageante que la simple accumulation de points. Principal défaut : le wager de 40× est parmi les plus élevés de notre top 10.',
+      'Madnix compte 3 047 jeux au catalogue — chiffre précisément sourcé par notre équipe éditoriale en juin 2026. Son système de missions quotidiennes crée une expérience de jeu plus engageante que la simple accumulation de points. Principal défaut : le wager de 40× est parmi les plus élevés de notre top 10.',
     sections: {
       bonus: {
         prose: [
@@ -435,15 +435,15 @@ const reviews: ReviewData[] = [
       },
       jeux: {
         prose: [
-          "Avec **3 000+ jeux**, Madnix dispose du catalogue le plus large de notre comparatif. Tous les grands fournisseurs sont présents : Pragmatic Play, NetEnt, Microgaming, Play'n GO, Yggdrasil, Nolimit City, Hacksaw Gaming.",
+          "Madnix catalogue **3 047 jeux** précisément vérifiés en juin 2026. Tous les grands fournisseurs sont présents : Pragmatic Play, NetEnt, Microgaming, Play'n GO, Yggdrasil, Nolimit City, Hacksaw Gaming.",
           'La fonction de recherche et les filtres (fournisseur, volatilité, thème) sont parmi les meilleurs du marché. Le RTP moyen mesuré sur notre échantillon donne **95,8 %** — légèrement en dessous des leaders mais dans la norme.',
         ],
         highlights: [
-          '3 000+ jeux : le plus grand catalogue de notre top 10',
+          '3 047 jeux au catalogue — chiffre précisément sourcé (juin 2026)',
           'Filtres avancés : fournisseur, volatilité, jackpot progressif',
         ],
         minicta: {
-          label: '3 000+ jeux · le plus grand catalogue',
+          label: '3 047 jeux au catalogue (juin 2026)',
           buttonText: 'Explorer les jeux',
         },
       },
@@ -495,7 +495,7 @@ const reviews: ReviewData[] = [
       { label: 'RTP moyen mesuré', value: '95,8 %' },
       { label: 'Délai de retrait testé', value: '48–72h (CB), 2–4h (BTC)' },
       { label: 'Méthodes de paiement', value: 'VISA, Mastercard, BTC' },
-      { label: 'Catalogue', value: '3 000+ jeux (n°1 du comparatif)' },
+      { label: 'Catalogue', value: '3 047 jeux (chiffre précisément sourcé, juin 2026)' },
       { label: 'Support', value: 'Chat 24h/24, FR en journée' },
       { label: 'Application mobile', value: 'Site mobile optimisé' },
       { label: 'Programme VIP', value: '5 niveaux + missions quotidiennes' },

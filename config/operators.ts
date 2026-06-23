@@ -251,9 +251,9 @@ export const operators: Operator[] = [
     bonusSlug: '300_euros',
     rtp: 95.8,
     paymentMethods: ['VISA', 'MC', '₿'],
-    features: ['Design immersif', 'Missions quotidiennes', '3 000+ jeux'],
+    features: ['Design immersif', 'Missions quotidiennes', '3 047 jeux'],
     pros: [
-      'Plus de 3 000 jeux disponibles',
+      '3 047 jeux disponibles',
       'Programme de fidélité avec missions',
       'Design soigné et immersif',
     ],
@@ -263,8 +263,8 @@ export const operators: Operator[] = [
       'Pas de Paysafecard',
     ],
     verdict:
-      'Madnix offre la plus grande ludothèque de notre comparatif, idéale pour les joueurs qui veulent de la variété.',
-    tagline: 'La plus grande ludothèque et des missions de fidélité qui récompensent vraiment.',
+      'Madnix catalogue 3 047 jeux précisément sourcés (juin 2026), idéal pour les joueurs qui veulent de la variété et des missions quotidiennes de fidélité.',
+    tagline: 'Un catalogue de 3 047 jeux et des missions de fidélité qui récompensent vraiment.',
     logoUrl: LOGO_URLS['madnix'],
     affiliateUrl: goUrl('madnix'),
     jurisdiction: 'offshore',
