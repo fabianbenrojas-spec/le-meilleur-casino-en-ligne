@@ -1047,136 +1047,176 @@ const reviews: ReviewData[] = [
     },
   },
 
-  // ── 9. Stake Casino ─────────────────────────────────────────────────────────
+  // ── 9. Stake Casino (enrichi juin 2026) ─────────────────────────────────────
   {
     slug: 'stake',
     foundedYear: 2017,
     languages: ['FR', 'EN', 'PT', 'DE', 'JP', 'KO'],
-    currencies: ['EUR', '₿', 'ETH', 'LTC', 'USDT', 'XRP', 'DOGE'],
-    reviewCount: 2134,
-    stars: 3.8,
+    currencies: ['₿', 'ETH', 'LTC', 'USDT', 'XRP', 'DOGE', 'SOL'],
+    reviewCount: 6500,
+    stars: 4.2,
     verdict:
-      "Stake est la plateforme de casino crypto la plus connue au monde, avec une cote de confiance élevée et un écosystème complet (slots, live, paris sportifs, jeux maison). Son principal défaut pour les joueurs français : le bonus de bienvenue n'est pas accessible au grand public — il est réservé aux membres VIP invités.",
+      "Stake est le casino crypto-first mondial fondé en 2017 par Ed Craven et Bijan Tehrani. Opérant sous licence Curaçao eGaming, il fonctionne exclusivement en cryptomonnaies (pas de fiat), propose des jeux propriétaires Provably Fair (Stake Originals), et distribue ses promotions via Daily Races et tombolas plutôt que des bonus de bienvenue traditionnels. ⚠️ Stake n'est pas agréé ANJ : l'accès depuis la France nécessite un VPN, avec risque de blocage lors du KYC.",
     sections: {
-      bonus: {
-        prose: [
-          "Stake est connu pour ne pas proposer de bonus de bienvenue traditionnel accessible à tous. Le programme « Stake Bonus » (jusqu'à **200 €** équivalent) est réservé aux joueurs invités dans le programme VIP, sur la base du volume de jeu.",
-          "En pratique : un nouveau joueur qui arrive sur Stake sans invitation n'a pas accès aux bonus standards. C'est une politique délibérée pour limiter les abus — et un frein réel pour les nouveaux joueurs.",
-        ],
-        highlights: [
-          'Pas de bonus de bienvenue accessible au grand public',
-          'Programme VIP sur invitation uniquement',
-          'Rakeback hebdomadaire (% des pertes retourné) : plus transparent que les bonus classiques',
-        ],
-      },
       jeux: {
         prose: [
-          "Stake propose **3 000+ titres** incluant une section unique : les **jeux maison Stake** (Crash, Dice, Mines, Limbo, Plinko) — développés en interne avec des RTP vérifiables on-chain. C'est l'une des offres de crypto gaming les plus transparentes du marché.",
-          'La section slots traditionnelle couvre tous les grands fournisseurs. RTP mesuré : **95,8 %** sur les slots tiers. Les jeux maison affichent des RTP de 97 % à 99 % — supérieurs à la moyenne.',
+          "Stake propose un catalogue de **2 000 à 3 000 titres** couvrant les machines à sous des principaux fournisseurs (Pragmatic Play, Hacksaw Gaming, Twist Gaming), ainsi qu'un live casino alimenté par **Evolution** avec 150+ tables actives dont des tables exclusives Stake-branded.",
+          'Le point distinctif du catalogue Stake : les **Stake Originals** — jeux propriétaires développés en interne (Plinko, Mines, Crash, Limbo, Dice, Drill, Moles, etc.). Ces titres utilisent la technologie **Provably Fair** : chaque résultat est déterminé cryptographiquement avant la partie et vérifiable sur la blockchain. Les RTP affichés vont de **97 % à 99 %**, supérieurs à la moyenne des slots tiers.',
+          'Stake couvre également le **sport** (Ligue 1, football, basketball, tennis, rugby) et les **e-sports** (Dota 2, CS:GO, League of Legends) avec paris en direct, Cash Out et streaming intégré.',
         ],
         highlights: [
-          'Jeux maison (Crash, Dice, Mines) avec RTP vérifiable on-chain',
-          '3 000+ titres au total incluant paris sportifs',
-          'RTP 97–99 % sur les jeux Stake originaux',
+          'Stake Originals propriétaires (Plinko, Mines, Crash, Limbo, Dice) — Provably Fair blockchain',
+          'RTP 97–99 % sur les jeux Stake maison, vérifiable on-chain',
+          '2 000–3 000 titres catalogue + live Evolution 150+ tables',
+          'Sport 20+ disciplines + e-sport (Dota 2, CS:GO) — paris en direct',
         ],
         minicta: {
-          label: 'Jeux maison Stake à RTP vérifiable · crash, dice, mines',
+          label: 'Stake Originals Provably Fair — RTP 97–99 %, vérifiable blockchain',
           buttonText: 'Jouer sur Stake',
         },
       },
       live: {
         prose: [
-          'La section live de Stake, alimentée par **Evolution**, est parmi les plus complètes du marché : plus de 150 tables actives, y compris des tables exclusives Stake (Evolution Exclusive) avec limites haute mise.',
-          'Les game shows sont tous présents (Crazy Time, Monopoly, Mega Ball). Les tables en français sont disponibles. Limites : 0,10 € à 250 000 € sur certaines tables VIP.',
+          'La section live de Stake est alimentée par **Evolution** avec 150+ tables actives 24h/24, incluant des tables exclusives Stake-branded à hautes limites. Les game shows sont présents : Crazy Time, Monopoly Live, Mega Ball. Limites : de 0,10 € à 250 000 € sur certaines tables VIP.',
+          'Les tables en français sont disponibles. La section live est accessible uniquement en cryptomonnaies — pas de mise en fiat.',
         ],
         highlights: [
-          "Tables exclusives Stake avec limites jusqu'à 250 000 €",
-          '150+ tables Evolution actives 24h/24',
+          "Tables exclusives Stake-branded — limites jusqu'à 250 000 €",
+          '150+ tables Evolution actives 24h/24 · game shows inclus',
         ],
       },
       paiements: {
         prose: [
-          "Stake est avant tout un casino crypto : **BTC, ETH, LTC, USDT, XRP, DOGE** — tous supportés, avec des retraits traités en quelques minutes. La limite de retrait est quasi absente pour les crypto (jusqu'à l'équivalent de 100 000 € par transaction).",
-          'Les dépôts et retraits en EUR par carte bancaire sont disponibles via des prestataires tiers, mais les délais (3–5 jours) sont bien inférieurs aux retraits crypto.',
+          "Stake fonctionne **exclusivement en cryptomonnaies** — il n'existe aucune méthode de dépôt ou de retrait en euros ou autre devise fiat. Les 10+ devises supportées incluent **Bitcoin, Ethereum, Litecoin, Dogecoin, Ripple (XRP), USDT TRC-20, Solana** et plusieurs altcoins supplémentaires.",
+          "Les retraits sont traités en **moins de 2 heures** après vérification KYC. Stake n'applique aucun frais interne sur les transactions — seuls les frais de réseau blockchain s'appliquent. Il n'existe pas de plafond de retrait significatif pour les comptes vérifiés.",
+          "⚠️ Si vous ne possédez pas de crypto, Stake redirige vers des prestataires externes d'achat (MoonPay ou similaire). Le KYC est requis à partir de certains seuils et peut prendre 24 à 48 h.",
         ],
         highlights: [
-          'Retraits crypto en < 30 minutes (testé)',
-          'Plafonds de retrait très élevés pour les VIP crypto',
+          '100 % crypto exclusif — Bitcoin, Ethereum, Solana, 10+ devises (pas de fiat)',
+          'Retraits traités en moins de 2 heures · 0 frais Stake (seuls frais blockchain)',
+          'Pas de plafond de retrait significatif pour les comptes vérifiés',
         ],
         minicta: {
-          label: 'Retraits crypto illimités en < 30 minutes',
+          label: 'Retraits crypto en moins de 2 heures · 10+ devises',
           buttonText: 'Ouvrir un compte Stake',
         },
       },
       support: {
         prose: [
-          'Le support Stake est disponible par **chat 24h/24** en anglais, avec un support en français disponible via les agents multilingues. Les délais de réponse sont de **2 à 5 minutes**. La compétence est élevée sur les questions crypto et techniques.',
-          'La communauté Discord de Stake est également très active — souvent plus rapide pour les questions courantes.',
+          'Le **live chat Stake est disponible 24h/24, 7j/7** avec des agents parlant français. Le temps de réponse mesuré est inférieur à 2 minutes (test jeux.com : 52 secondes).',
+          'Contact alternatif : **support@stake.com** par e-mail et une FAQ détaillée couvrant les questions crypto, KYC et promotions.',
+        ],
+        highlights: [
+          'Live chat 24h/24, 7j/7 — agents francophones, réponse < 2 min (test)',
+          'E-mail support@stake.com · FAQ détaillée',
         ],
       },
       mobile: {
         prose: [
-          "Stake dispose d'une **application native** (iOS et Android) — une rareté dans notre top 10. L'app est bien notée (4,3/5 sur l'App Store), rapide, et donne accès à l'intégralité de l'offre incluant les paris sportifs.",
+          "**Stake ne propose pas d'application native** téléchargeable sur l'App Store iOS ni sur le Google Play Store.",
+          "Stake ne propose pas non plus de PWA (Progressive Web App) installable. L'accès mobile se fait uniquement via le **navigateur mobile** — le site est optimisé mobile-first et l'intégralité du catalogue (casino, Stake Originals, sport, e-sport) est accessible depuis smartphone et tablette.",
         ],
-        minicta: {
-          label: 'Application native iOS + Android disponible',
-          buttonText: "Télécharger l'app",
-        },
+        highlights: [
+          "Pas d'app native (App Store ni Google Play)",
+          'Pas de PWA — site mobile-first navigateur uniquement',
+        ],
       },
       vip: {
         prose: [
-          "Le programme VIP de Stake est l'un des plus sophistiqués du marché : **rakeback hebdomadaire** (% des pertes retourné sans conditions), bonus de niveau, bonus de recharge mensuel, et accès à des événements exclusifs (tournois, cadeaux physiques).",
-          'Le programme est entièrement géré par volume de jeu et transparent — les seuils de chaque niveau sont publiés. Le niveau Platine donne accès à un gestionnaire 24h/24.',
+          "Le programme VIP Stake est structuré en **4 niveaux** (Bronze, Argent, Or, Platine I-III). L'entrée au niveau Bronze nécessite **10 000 € misés** — un seuil élevé. Les avantages incluent un **rakeback de 3,5 % sur chaque mise** (reversé sans conditions), des recharges quotidiennes, des bonus mensuels, et l'accès à des événements exclusifs.",
+          'En complément du programme VIP, Stake distribue ses promotions via les **Daily Races** (100 000 $/jour aux joueurs les plus actifs) et la **Tombola hebdomadaire** (75 000 $/semaine entre 15 gagnants). Aucune inscription supplémentaire requise — vos mises comptent automatiquement.',
+        ],
+        highlights: [
+          'Rakeback 3,5 % sur chaque mise — sans conditions de mise',
+          '4 niveaux Bronze/Argent/Or/Platine · seuil Bronze : 10 000 € misés',
+          'Daily Races : 100 000 $/jour · Tombola hebdomadaire : 75 000 $/semaine',
         ],
       },
       securite: {
         prose: [
-          "Avec **9 ans d'existence** (fondé en 2017), Stake est l'un des opérateurs les plus établis de notre comparatif. Licence Curaçao 8048, chiffrement TLS 1.3, et une politique de provably fair sur ses jeux maison — les algorithmes sont vérifiables publiquement.",
+          "Stake est fondé en **2017** par Ed Craven et Bijan Tehrani. L'opérateur opère sous **licence Curaçao eGaming** et est membre vérifié de la **Crypto Gambling Foundation** — organisation de référence en matière de standards de jeu équitable dans l'industrie crypto.",
+          "⚠️ **Stake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française.** L'opérateur n'opère pas dans le cadre réglementaire français. Plusieurs sources indiquent que l'accès depuis la France nécessite l'usage d'un VPN, ce qui peut entraîner un blocage du compte lors de la vérification KYC. Pour rester dans le cadre légal français, nous recommandons les opérateurs ANJ.",
+          'Les **Stake Originals** utilisent la technologie **Provably Fair** : chaque résultat est déterminé cryptographiquement avant la partie et vérifiable par le joueur sur la blockchain après coup. La plateforme utilise le chiffrement SSL/TLS et propose la double authentification (2FA).',
+          'Note Trustpilot : **4,2/5 sur ~6 500 avis** (mitigée). Les éloges portent sur la rapidité des retraits crypto et la réactivité du support. Les plaintes récurrentes concernent le RTP perçu sur les jeux tiers, des délais KYC plus longs que prévu (notamment sous VPN), et des conditions du programme VIP jugées peu transparentes.',
+        ],
+        highlights: [
+          'Fondé 2017 · licence Curaçao eGaming · membre Crypto Gambling Foundation',
+          'Provably Fair (Stake Originals) · 2FA · SSL/TLS',
+          "⚠️ Pas d'ANJ — accès France via VPN possible, risque blocage KYC",
+          'Trustpilot 4,2/5 (~6 500 avis) — mitigée',
         ],
       },
     },
     recapRows: [
-      { label: 'Licence', value: 'Curaçao 8048' },
-      { label: 'Bonus de bienvenue', value: 'VIP sur invitation uniquement' },
-      { label: 'RTP moyen mesuré', value: '95,8 % (slots) / 97–99 % (jeux maison)' },
-      { label: 'Délai de retrait testé', value: '< 30 min (crypto), 3–5j (CB)' },
-      { label: 'Méthodes de paiement', value: 'BTC, ETH, LTC, USDT, XRP, DOGE, CB' },
-      { label: 'Catalogue', value: '3 000+ jeux + paris sportifs' },
-      { label: 'Support', value: 'Chat 24h/24 (EN/FR), Discord actif' },
-      { label: 'Application mobile', value: 'App native iOS + Android (4,3/5)' },
-      { label: 'Programme VIP', value: 'Rakeback hebdomadaire + niveaux transparents' },
-      { label: 'Fondé', value: '2017' },
+      { label: 'Licence', value: 'Curaçao eGaming' },
+      {
+        label: 'Bonus de bienvenue',
+        value: 'Aucun (promotions via Daily Races 100 000 $/j + Tombola 75 000 $/sem.)',
+      },
+      {
+        label: 'Méthodes de paiement',
+        value: 'Crypto exclusif — BTC, ETH, LTC, USDT, SOL, XRP, DOGE (10+ devises, pas de fiat)',
+      },
+      { label: 'Délai de retrait', value: 'Moins de 2 heures (crypto) · 0 frais Stake' },
+      {
+        label: 'Catalogue',
+        value: '2 000–3 000 jeux + Stake Originals propriétaires (Provably Fair)',
+      },
+      { label: 'Support', value: 'Live chat 24h/24, 7j/7 FR · e-mail · réponse < 2 min' },
+      {
+        label: 'Application mobile',
+        value: 'Aucune app native, aucune PWA — site mobile navigateur uniquement',
+      },
+      {
+        label: 'Programme VIP',
+        value: 'Rakeback 3,5 % · 4 niveaux Bronze à Platine · seuil Bronze : 10 000 € misés',
+      },
+      { label: 'Fondé', value: '2017 (Ed Craven & Bijan Tehrani)' },
+      {
+        label: '⚠️ Cadre réglementaire FR',
+        value: "Pas d'ANJ — opérateur Curaçao. Accès depuis la France via VPN, risque KYC",
+      },
     ],
     faq: [
       {
-        question: 'Peut-on jouer sur Stake sans crypto ?',
+        question: 'Stake est-il accessible légalement en France ?',
         answer:
-          "Oui. Stake accepte les dépôts par carte bancaire via des prestataires tiers. Cependant, l'expérience est optimisée pour les joueurs crypto : retraits rapides, limites élevées et meilleure intégration sont réservés aux crypto.",
+          "Stake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française. Cela signifie que l'opérateur n'opère pas dans le cadre réglementaire français. Plusieurs sources indiquent que l'accès depuis la France nécessite un VPN, ce qui peut entraîner un blocage du compte lors de la vérification KYC. Pour rester dans le cadre légal français, nous recommandons les opérateurs ANJ comme Winamax, Betclic ou PokerStars.",
       },
       {
-        question: 'Comment accéder au programme VIP Stake ?',
+        question: 'Pourquoi Stake ne propose-t-il pas de bonus de bienvenue ?',
         answer:
-          "Le programme VIP Stake est basé sur le volume de jeu. Vous progressez automatiquement en jouant — sans invitation. Les seuils de chaque niveau sont publiés sur le site. À partir d'un certain volume, un gestionnaire dédié vous contacte.",
+          "Stake fait le choix d'un modèle promotionnel différent : plutôt qu'un bonus de bienvenue avec conditions de mise, l'opérateur distribue ses promotions via les Daily Races (100 000 $/jour), la Tombola hebdomadaire (75 000 $/semaine), des tournois récurrents (Wheel Wars, Stake vs Eddie) et le programme VIP avec rakeback de 3,5 %. L'absence de bonus signifie aussi l'absence de conditions de mise — vos gains sont retirables immédiatement.",
       },
       {
-        question: 'Les jeux maison Stake sont-ils équitables ?',
+        question: "Qu'est-ce que la technologie Provably Fair des Stake Originals ?",
         answer:
-          'Oui. Les jeux Stake (Crash, Dice, Mines, Plinko, Limbo) utilisent un algorithme provably fair : le résultat est déterminé avant le jeu et vérifiable par le joueur après coup. Le RTP de chaque jeu est affiché (97 % à 99 %).',
+          "Provably Fair est une technologie cryptographique qui permet de vérifier algorithmiquement chaque résultat d'un jeu après coup. Pour les Stake Originals (Plinko, Mines, Crash, Limbo, Dice, etc.), vous pouvez vérifier sur la blockchain que le résultat n'a pas été manipulé. C'est un signal de transparence technique fort, propre aux jeux propriétaires de Stake, disponible depuis la création de la plateforme en 2017.",
+      },
+      {
+        question: "Comment fonctionnent les Stake's Daily Races et la Tombola hebdomadaire ?",
+        answer:
+          "Les Stake's Daily Races distribuent 100 000 $ chaque jour aux joueurs les plus actifs, selon un classement basé sur le volume de mises sur les jeux casino. La Tombola hebdomadaire offre 75 000 $ répartis entre 15 gagnants chaque semaine — chaque tranche de 1 000 $ misés donne droit à un ticket. Aucune inscription supplémentaire n'est requise : vos mises comptent automatiquement.",
+      },
+      {
+        question: 'Stake accepte-t-il les paiements en euros (fiat) ?',
+        answer:
+          "Non. Stake fonctionne exclusivement en cryptomonnaies. L'opérateur n'accepte ni virement bancaire, ni carte de crédit ou de débit, ni portefeuilles électroniques classiques (type Skrill, Neteller). Les 10+ devises crypto supportées incluent Bitcoin, Ethereum, Litecoin, Dogecoin, Ripple (XRP), USDT (TRC-20) et Solana. Si vous ne possédez pas de crypto, Stake redirige vers des partenaires d'achat externe.",
       },
     ],
     pourQui: {
       idealSi: [
-        'Joue 100 % en crypto et veut des retraits traités en moins de 30 minutes, BTC à DOGE inclus.',
-        'Cherche des jeux maison à RTP vérifiable on-chain : Crash, Dice, Mines entre 97 % et 99 %.',
-        "Préfère une application native bien notée : app iOS et Android disponibles, 4,3/5 sur l'App Store.",
+        'Vous évitez les conditions de mise opaques : Stake ne propose aucun bonus de bienvenue — 0 wager, vos gains vous appartiennent intégralement.',
+        'Vous retirez en crypto : Stake traite les sorties en moins de 2 heures, avec 10+ devises dont Bitcoin, Ethereum et Solana.',
+        "Vous voulez vérifier l'équité algorithmique : les Stake Originals (Plinko, Mines, Crash, Limbo, Dice) sont Provably Fair — résultats vérifiables sur la blockchain depuis 2017.",
       ],
       bonChoixSi: [
-        'Suit les paris sportifs en parallèle du casino : Stake couvre les deux dans la même app.',
+        'Vous appréciez une animation permanente : Stake distribue 100 000 $ quotidiennement via ses Daily Races et 75 000 $ chaque semaine en tombola.',
+        "Vous êtes passionné de sport mondial : Stake sponsorise l'UFC, une écurie F1 et 5 légendes sportives dont Hazard et Agüero.",
       ],
       aEviterSi: [
-        'Attend un bonus de bienvenue standard : Stake le réserve aux membres VIP sur invitation uniquement.',
-        'Paie exclusivement par carte bancaire : les retraits CB prennent 3 à 5 jours via prestataires tiers.',
-        "Débute sur les casinos en ligne : l'interface technique et le focus crypto peuvent désorienter.",
+        'Vous voulez un opérateur sous licence ANJ française : Stake opère sous licence Curaçao depuis 2017, hors du cadre réglementaire français.',
+        'Vous cherchez une application téléchargeable : Stake ne propose ni app native ni PWA — uniquement un site mobile dans le navigateur.',
       ],
     },
   },

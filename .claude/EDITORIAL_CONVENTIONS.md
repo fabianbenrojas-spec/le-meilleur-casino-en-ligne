@@ -111,6 +111,37 @@ empêche les fiches d'être interchangeables.
 
 ---
 
+### Stake Casino (offshore — enrichi juin 2026) — territoire éditorial
+
+Établi 2026-06-24 lors de l'enrichissement complet Phase B Stake.
+
+- ✅ Réservés :
+  - Pas de bonus de bienvenue + 0 wager (UNIQUE absolu du repo — modèle transparence total)
+  - 100 % crypto exclusif — 10+ devises (différencié de Casinozer : crypto natif + fiat)
+  - Stake Originals propriétaires Provably Fair (Plinko, Mines, Crash, Limbo, Dice, etc.) — UNIQUE blockchain
+  - Daily Races 100 000 $/jour + Tombola hebdomadaire 75 000 $/semaine (chiffrés, UNIQUE)
+  - Partenariats sport mondial premium : UFC sponsor officiel, Stake F1 Team, Drake, 5 légendes (Hazard/Agüero/Casillas/Evra/Dettori)
+  - Rakeback VIP 3,5 % sur chaque mise (flat, sans conditions)
+  - Retrait crypto < 2h (distinct Wild Sultan < 1h, Casinozer < 24h — chiffre distinct)
+  - ⚠️ Pas d'ANJ / VPN requis en France en aEviterSi (signal EEAT — UNIQUE du repo)
+  - Pas d'application native NI PWA en aEviterSi (distinct Casinozer qui a PWA)
+- ❌ Interdits ailleurs :
+  - Pas de bonus + 0 wager (UNIQUE Stake — modèle sans offre de bienvenue)
+  - 100 % crypto exclusif sans fiat (distinct Casinozer crypto natif + fiat)
+  - Stake Originals Provably Fair (jeux propriétaires — ne pas attribuer à d'autres)
+  - Daily Races 100 000 $/j + Tombola 75 000 $/sem. chiffrées
+  - Partenariats UFC officiel + Stake F1 Team (ces entités spécifiques)
+- ⚠️ Notes :
+  - Convention §17 applicable : premier opérateur du repo nécessitant VPN en France
+  - Rakeback Stake = flat 3,5 % par mise ≠ cashback Casinozer VIP-gated ≠ cashback Lucky8 hebdo
+  - Live chat 24/7 = PARTAGÉ avec Casinozer et PokerStars — NE PAS en faire angle idealSi Stake
+  - gameTypes : ['casino', 'sport', 'esports']
+  - kycPolicy : 'strict' (CORRECTION du squelette v1 qui avait 'none')
+  - hasBonus : false (convention §14 — premier offshore sans bonus du repo)
+  - TODO : licenceNumber Curaçao exact à valider (TODO inline maintenu)
+
+---
+
 ### Betclic (ANJ — rang 2 ANJ, derrière Winamax) — territoire éditorial
 
 Établi 2026-06-21 lors de l'enrichissement complet Commit Y.
@@ -415,19 +446,58 @@ chaque ajout d'opérateur.
 
 **LISTE DES CLAIMS COMPARATIFS ACTIFS** (à monitorer à chaque ajout d'opérateur) :
 
-| Opérateur    | Claim comparatif                                                                           | Validé le  |
-| ------------ | ------------------------------------------------------------------------------------------ | ---------- |
-| Crésus       | Retrait CB < 24h testé (offshore top)                                                      | 2026-06-16 |
-| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                          | 2026-06-16 |
-| Madnix       | Catalogue 3 047 jeux précisément sourcés (juin 2026) — angle différenciation par précision | 2026-06-16 |
-| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                        | 2026-06-16 |
-| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                          | 2026-06-21 |
-| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé    | 2026-06-21 |
-| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)                  | 2026-06-22 |
-| PMU          | Seuil de retrait 1 € le plus bas du marché                                                 | 2026-06-22 |
-| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)               | 2026-06-22 |
-| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)           | 2026-06-22 |
-| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                      | 2026-06-22 |
-| Casinozer    | 100 FS sans wager (UNIQUE repo — à monitorer si autre opérateur lance offre équivalente)   | 2026-06-22 |
-| Casinozer    | Crypto natif + retrait < 24h après KYC (à monitorer face à Wild Sultan crypto + Stake)     | 2026-06-22 |
-| Casinozer    | VIP Cyber-City 15 % cashback (à monitorer face à Stake et autres programmes VIP)           | 2026-06-22 |
+| Opérateur    | Claim comparatif                                                                                                 | Validé le  |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- | ---------- |
+| Crésus       | Retrait CB < 24h testé (offshore top)                                                                            | 2026-06-16 |
+| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                                                | 2026-06-16 |
+| Madnix       | Catalogue 3 047 jeux précisément sourcés (juin 2026) — angle différenciation par précision                       | 2026-06-16 |
+| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                                              | 2026-06-16 |
+| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                                                | 2026-06-21 |
+| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé                          | 2026-06-21 |
+| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)                                        | 2026-06-22 |
+| PMU          | Seuil de retrait 1 € le plus bas du marché                                                                       | 2026-06-22 |
+| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)                                     | 2026-06-22 |
+| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)                                 | 2026-06-22 |
+| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                                            | 2026-06-22 |
+| Casinozer    | 100 FS sans wager (UNIQUE repo — à monitorer si autre opérateur lance offre équivalente)                         | 2026-06-22 |
+| Casinozer    | Crypto natif + retrait < 24h après KYC (à monitorer face à Wild Sultan crypto + Stake)                           | 2026-06-22 |
+| Casinozer    | VIP Cyber-City 15 % cashback (à monitorer face à Stake et autres programmes VIP)                                 | 2026-06-22 |
+| Stake        | Pas de bonus de bienvenue + 0 wager (UNIQUE absolu repo — à monitorer si autre offshore adopte modèle similaire) | 2026-06-24 |
+| Stake        | Stake Originals Provably Fair propriétaires (UNIQUE — à monitorer si autre op lance jeux blockchain similaires)  | 2026-06-24 |
+| Stake        | Daily Races 100 000 $/j + Tombola hebdo 75 000 $/sem. (UNIQUE chiffré — à monitorer)                             | 2026-06-24 |
+| Stake        | 100 % crypto exclusif sans fiat (différencié Casinozer crypto natif + fiat)                                      | 2026-06-24 |
+
+## §17 — Opérateurs hors-ANJ nécessitant VPN en France
+
+Établi 2026-06-24 lors de l'enrichissement Stake (premier opérateur du repo concerné).
+
+Quand un opérateur offshore n'est pas accessible directement depuis la France sans VPN,
+le contenu éditorial doit :
+
+1. Mentionner explicitement dans **aEviterSi** le statut hors-ANJ (sans incitation au VPN)
+2. Dédier au minimum **1 FAQ** à la question de la légalité d'accès depuis la France
+3. Inclure dans la section **securite** la mention honnête du cadre réglementaire et du
+   risque de blocage KYC sous VPN
+4. Recommander explicitement les **alternatives ANJ** pour les visiteurs FR souhaitant
+   rester dans le cadre légal
+
+**Formulation aEviterSi recommandée (wording β — neutre, sans incitation VPN) :**
+
+> "Vous voulez un opérateur sous licence ANJ française : [Opérateur] opère sous licence
+> Curaçao depuis [année], hors du cadre réglementaire français."
+
+**Formulation FAQ Q1 recommandée :**
+
+> "[Opérateur] n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française.
+> L'opérateur n'opère pas dans le cadre réglementaire français. Plusieurs sources indiquent
+> que l'accès depuis la France nécessite un VPN, ce qui peut entraîner un blocage du compte
+> lors de la vérification KYC. Pour rester dans le cadre légal français, nous recommandons
+> les opérateurs ANJ comme Winamax, Betclic ou PokerStars."
+
+**Ne jamais :**
+
+- Inciter explicitement à l'utilisation d'un VPN (risque juridique)
+- Minimiser le risque de blocage KYC sous VPN
+- Présenter l'accès VPN comme "la méthode normale" pour jouer sur l'opérateur
+
+**Cas d'application :** Stake (premier opérateur du repo, commit B-FS24).
