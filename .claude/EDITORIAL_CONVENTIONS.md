@@ -142,6 +142,33 @@ empêche les fiches d'être interchangeables.
 
 ---
 
+### MyStake (offshore — enrichi juin 2026) — territoire éditorial
+
+Établi 2026-06-25 lors de l'enrichissement complet Phase B MyStake.
+
+- ✅ Réservés :
+  - 4 verticales unifiées (casino, sport, e-sport, hippique) dans un compte unique — UNIQUE repo (seul opérateur avec horse-racing dans gameTypes)
+  - 60+ mini-jeux propriétaires exclusifs (Chicken, Dino, Plinko, Crash, HiLo, Mines, Balloons) — UNIQUE repo pour mini-jeux développés en interne
+  - Cashback crypto 10 % sans wager sur chaque dépôt — UNIQUE repo pour cashback crypto sans conditions de mise
+  - Choix 3 bonus distincts à l'inscription (1 500 € casino / 600 € sport / 500 € mini-jeux)
+  - 18 méthodes de dépôt dont 11 cryptos (plus large gamme multi-méthode du repo hors Stake 100% crypto)
+  - ⚠️ Délais retrait SEPA 5+ jours (tests 2026) vs 24-48h affichés — angle aEviterSi α-medium, sourcé CritiqueJeu + LaPlanqueDuJoueur
+  - ⚠️ Pas de retrait CB — asymétrie dépôt CB accepté / retrait CB impossible (angle aEviterSi unique du repo)
+- ❌ Interdits ailleurs :
+  - Cashback crypto 10 % sans wager (UNIQUE MyStake du repo)
+  - 60+ mini-jeux propriétaires développés en interne (Chicken, Dino, Plinko — ne pas attribuer à d'autres)
+  - Hippique (horse-racing) comme verticale unifiée (UNIQUE du repo)
+  - Choix 3 bonus distincts à l'inscription (format et chiffres spécifiques MyStake)
+- ⚠️ Notes :
+  - §17 NON applicable : MyStake directement accessible depuis la France sans VPN (≠ Stake qui nécessite VPN)
+  - Hippique = UNIQUE dans le repo — gameTypes: ['casino', 'sport', 'esports', 'horse-racing']
+  - withdrawalSpeed: 'standard' (délais SEPA contestés — wording α-medium confirmé, sourcé)
+  - kycPolicy: 'strict'
+  - Wager x60 mini-jeux = plus contraignant du repo — mentionner explicitement si angle bonus utilisé
+  - Live chat 24/7 = PARTAGÉ avec Casinozer, Stake, PokerStars — NE PAS en faire angle idealSi MyStake
+
+---
+
 ### Betclic (ANJ — rang 2 ANJ, derrière Winamax) — territoire éditorial
 
 Établi 2026-06-21 lors de l'enrichissement complet Commit Y.
@@ -446,26 +473,29 @@ chaque ajout d'opérateur.
 
 **LISTE DES CLAIMS COMPARATIFS ACTIFS** (à monitorer à chaque ajout d'opérateur) :
 
-| Opérateur    | Claim comparatif                                                                                                 | Validé le  |
-| ------------ | ---------------------------------------------------------------------------------------------------------------- | ---------- |
-| Crésus       | Retrait CB < 24h testé (offshore top)                                                                            | 2026-06-16 |
-| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                                                | 2026-06-16 |
-| Madnix       | Catalogue 3 047 jeux précisément sourcés (juin 2026) — angle différenciation par précision                       | 2026-06-16 |
-| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                                              | 2026-06-16 |
-| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                                                | 2026-06-21 |
-| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé                          | 2026-06-21 |
-| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)                                        | 2026-06-22 |
-| PMU          | Seuil de retrait 1 € le plus bas du marché                                                                       | 2026-06-22 |
-| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)                                     | 2026-06-22 |
-| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)                                 | 2026-06-22 |
-| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                                            | 2026-06-22 |
-| Casinozer    | 100 FS sans wager (UNIQUE repo — à monitorer si autre opérateur lance offre équivalente)                         | 2026-06-22 |
-| Casinozer    | Crypto natif + retrait < 24h après KYC (à monitorer face à Wild Sultan crypto + Stake)                           | 2026-06-22 |
-| Casinozer    | VIP Cyber-City 15 % cashback (à monitorer face à Stake et autres programmes VIP)                                 | 2026-06-22 |
-| Stake        | Pas de bonus de bienvenue + 0 wager (UNIQUE absolu repo — à monitorer si autre offshore adopte modèle similaire) | 2026-06-24 |
-| Stake        | Stake Originals Provably Fair propriétaires (UNIQUE — à monitorer si autre op lance jeux blockchain similaires)  | 2026-06-24 |
-| Stake        | Daily Races 100 000 $/j + Tombola hebdo 75 000 $/sem. (UNIQUE chiffré — à monitorer)                             | 2026-06-24 |
-| Stake        | 100 % crypto exclusif sans fiat (différencié Casinozer crypto natif + fiat)                                      | 2026-06-24 |
+| Opérateur    | Claim comparatif                                                                                                  | Validé le  |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- | ---------- |
+| Crésus       | Retrait CB < 24h testé (offshore top)                                                                             | 2026-06-16 |
+| Wild Sultan  | Wager 30× ex aequo Tortuga — le plus bas offshore                                                                 | 2026-06-16 |
+| Madnix       | Catalogue 3 047 jeux précisément sourcés (juin 2026) — angle différenciation par précision                        | 2026-06-16 |
+| Magical Spin | Package 1 000€ cumulé sur 4 dépôts le plus généreux                                                               | 2026-06-16 |
+| Winamax      | Cotes les plus compétitives du marché ANJ (sport)                                                                 | 2026-06-21 |
+| Betclic      | App 4,7/5 iOS + 4,5/5 GP (chiffres bruts, pas "meilleur") ; SEPA Instant < 15 min testé                           | 2026-06-21 |
+| Unibet       | Adossement FDJ United depuis octobre 2024 (unique ANJ actif dans le repo)                                         | 2026-06-22 |
+| PMU          | Seuil de retrait 1 € le plus bas du marché                                                                        | 2026-06-22 |
+| PMU          | Sourdline rare en ANJ FR (à revalider si autre ANJ lance service équivalent)                                      | 2026-06-22 |
+| PokerStars   | Stars Rewards cashback jusqu'à 40% sur rake (taux effectif maximal, pas garanti)                                  | 2026-06-22 |
+| PokerStars   | Liquidité partagée ESPT unique en ANJ FR (à revalider si pool élargi)                                             | 2026-06-22 |
+| Casinozer    | 100 FS sans wager (UNIQUE repo — à monitorer si autre opérateur lance offre équivalente)                          | 2026-06-22 |
+| Casinozer    | Crypto natif + retrait < 24h après KYC (à monitorer face à Wild Sultan crypto + Stake)                            | 2026-06-22 |
+| Casinozer    | VIP Cyber-City 15 % cashback (à monitorer face à Stake et autres programmes VIP)                                  | 2026-06-22 |
+| Stake        | Pas de bonus de bienvenue + 0 wager (UNIQUE absolu repo — à monitorer si autre offshore adopte modèle similaire)  | 2026-06-24 |
+| Stake        | Stake Originals Provably Fair propriétaires (UNIQUE — à monitorer si autre op lance jeux blockchain similaires)   | 2026-06-24 |
+| Stake        | Daily Races 100 000 $/j + Tombola hebdo 75 000 $/sem. (UNIQUE chiffré — à monitorer)                              | 2026-06-24 |
+| Stake        | 100 % crypto exclusif sans fiat (différencié Casinozer crypto natif + fiat)                                       | 2026-06-24 |
+| MyStake      | Cashback crypto 10 % sans wager (UNIQUE du repo — à monitorer si autre op lance offre équivalente sans condition) | 2026-06-25 |
+| MyStake      | 18 méthodes de dépôt dont 11 cryptos (gamme multi-méthode la plus large du repo)                                  | 2026-06-25 |
+| MyStake      | 60+ mini-jeux propriétaires exclusifs (UNIQUE — à monitorer si autre op lance catalogue maison similaire)         | 2026-06-25 |
 
 ## §17 — Opérateurs hors-ANJ nécessitant VPN en France
 

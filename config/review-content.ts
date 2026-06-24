@@ -2593,6 +2593,198 @@ const reviews: ReviewData[] = [
       },
     ],
   },
+  // ── 16. MyStake (enrichi juin 2026) ─────────────────────────────────────────
+  {
+    slug: 'mystake',
+    foundedYear: 2019,
+    languages: ['FR', 'EN', 'PT', 'DE', 'TR', 'AR'],
+    currencies: ['EUR', '₿', 'ETH', 'LTC', 'USDT', 'XRP', 'DASH', 'XMR', 'XLM'],
+    reviewCount: 5200,
+    stars: 3.8,
+    verdict:
+      "MyStake est un opérateur offshore fondé en 2019, agréé Curaçao Gaming Control Board (OGL/2024/1798/1048). Il regroupe les 4 verticales casino, sport, e-sport et hippique dans un compte unique, complétées par 60+ mini-jeux propriétaires (Chicken, Dino, Plinko). Le cashback crypto de 10 % sans wager et le choix entre 3 bonus à l'inscription sont ses arguments distinctifs. ⚠️ MyStake n'est pas agréé ANJ : l'opérateur n'entre pas dans le cadre réglementaire français. Délais de retrait contestés : des tests indépendants 2026 rapportent 5+ jours vs 24-48 h affichés.",
+    sections: {
+      bonus: {
+        prose: [
+          "MyStake propose **3 offres distinctes à l'inscription**, laissant au joueur le choix de la verticale à activer :",
+          "**Casino** : bonus de 100 % jusqu'à **1 500 €** sur le premier dépôt, wager x30 effectif sur dépôt + bonus.",
+          "**Sport** : bonus de 100 % jusqu'à **600 €** sur le premier dépôt, wager x10 en paris cumulés.",
+          "**Mini-jeux** : bonus de 100 % jusqu'à **500 €** sur le premier dépôt, wager x60 — condition élevée à anticiper.",
+          "Ces offres ne se cumulent pas : une seule peut être activée à l'inscription. Pour les déposants en cryptomonnaie, MyStake reverse un **cashback de 10 % sans wager** sur chaque dépôt — offre permanente, sans conditions de mise.",
+        ],
+        highlights: [
+          "3 bonus au choix à l'inscription : 1 500 € casino / 600 € sport / 500 € mini-jeux",
+          'Cashback crypto 10 % sans wager — permanent, applicable sur chaque dépôt crypto',
+          '⚠️ Wager x60 sur le bonus mini-jeux — condition très contraignante à anticiper',
+        ],
+      },
+      jeux: {
+        prose: [
+          'MyStake regroupe **4 verticales dans un compte unique** : casino classique, paris sportifs, e-sport et hippique (courses de chevaux). Ce regroupement multi-vertical est rare parmi les opérateurs offshore disponibles en français.',
+          'Le catalogue casino propose **7 000+ titres** incluant des machines à sous, du blackjack, de la roulette et un live casino. Point distinctif : **60+ mini-jeux propriétaires développés en interne** — Chicken, Dino, Plinko, Crash, HiLo, Mines, Balloons — des formats courts jouables en quelques secondes.',
+          "La section sport couvre **30+ disciplines** avec des paris en direct. L'hippique est disponible via un module dédié couvrant les principaux hippodromes mondiaux.",
+        ],
+        highlights: [
+          '4 verticales unifiées : casino, sport, e-sport, hippique — 1 compte unique',
+          '60+ mini-jeux propriétaires exclusifs (Chicken, Dino, Plinko, Crash, HiLo, Mines)',
+          '7 000+ titres casino + 30+ disciplines sportives + hippique',
+        ],
+        minicta: {
+          label: '4 verticales en 1 compte · 60+ mini-jeux exclusifs · 7 000+ titres',
+          buttonText: 'Jouer sur MyStake',
+        },
+      },
+      live: {
+        prose: [
+          "Le live casino de MyStake est alimenté par **Evolution** et **Pragmatic Play Live**, avec plusieurs centaines de tables actives 24h/24. L'offre couvre les classiques (blackjack, roulette, baccarat) et les game shows (Crazy Time, Mega Ball, Sweet Bonanza Candyland).",
+          'Les tables en français sont disponibles. La section live est accessible via dépôt en euros ou en cryptomonnaies.',
+        ],
+        highlights: [
+          'Tables live Evolution + Pragmatic Play Live · plusieurs centaines actives 24h/24',
+          'Tables francophones disponibles · game shows inclus (Crazy Time, Mega Ball)',
+        ],
+      },
+      paiements: {
+        prose: [
+          'MyStake accepte **18 méthodes de dépôt** : cartes bancaires Visa et Mastercard, Apple Pay, virement SEPA, portefeuilles électroniques (Skrill, MiFinity, Jeton), ainsi que **11 cryptomonnaies** (Bitcoin, Ethereum, Litecoin, USDT, XRP, Dash, Monero, Stellar, et autres).',
+          "Pour les **retraits, 13 méthodes sont disponibles** — virement SEPA, e-wallets et cryptos. **⚠️ Aucun retrait par carte bancaire (Visa/Mastercard) n'est possible chez MyStake** : les cartes sont acceptées en dépôt mais pas en retrait.",
+          '⚠️ Les délais affichés par MyStake sont de 24-48 h. Des tests indépendants 2026 rapportent des délais effectifs de **5 jours ou plus** pour les virements SEPA (CritiqueJeu, LaPlanqueDuJoueur). Les retraits en crypto seraient traités en moins de 3 jours (mightytips.com).',
+        ],
+        highlights: [
+          '18 méthodes de dépôt dont 11 cryptos (BTC, ETH, LTC, USDT, XRP, Dash, XMR, XLM)',
+          '13 méthodes de retrait · ⚠️ aucun retrait CB (Visa/Mastercard non supporté)',
+          '⚠️ Délais réels 5+ jours (tests 2026, SEPA) vs 24-48h affichés',
+        ],
+        minicta: {
+          label: '18 méthodes de dépôt · cashback crypto 10 % sans wager',
+          buttonText: 'Ouvrir un compte MyStake',
+        },
+      },
+      support: {
+        prose: [
+          'MyStake propose un **live chat disponible 24h/24, 7j/7** accessible directement depuis le site, avec des agents francophones. Un support par **e-mail** est également disponible.',
+          'Le site est disponible en français.',
+        ],
+        highlights: [
+          'Live chat 24h/24, 7j/7 · agents francophones disponibles',
+          'Support e-mail · site et interface en français',
+        ],
+      },
+      mobile: {
+        prose: [
+          "MyStake ne propose **pas d'application native** téléchargeable sur l'App Store iOS ni sur Google Play, et **pas de PWA** installable.",
+          "L'accès mobile se fait via le **navigateur mobile** — le site est responsive et testé fluide sur iOS et Android. Les 4 verticales (casino, sport, e-sport, hippique) et les 60+ mini-jeux propriétaires sont accessibles depuis smartphone.",
+        ],
+        highlights: [
+          "Pas d'app native (App Store ni Google Play) · pas de PWA",
+          'Site mobile responsive — testé fluide iOS et Android · 4 verticales accessibles',
+        ],
+      },
+      vip: {
+        prose: [
+          'Le programme VIP MyStake est structuré en niveaux progressifs avec accès à des récompenses croissantes. Le bénéfice distinctif de MyStake est le **cashback crypto de 10 % sans wager** sur chaque dépôt en cryptomonnaie — disponible dès le premier dépôt, sans condition de niveau VIP.',
+          'Des bonus de recharge hebdomadaires et des offres saisonnières sont proposés aux joueurs actifs.',
+        ],
+        highlights: [
+          'Cashback crypto 10 % sans wager · sur chaque dépôt crypto, dès le premier',
+          'Programme VIP niveaux progressifs · bonus de recharge hebdomadaires',
+        ],
+      },
+      securite: {
+        prose: [
+          "MyStake opère depuis **2019** sous licence **Curaçao Gaming Control Board** (numéro OGL/2024/1798/1048). Le site utilise un chiffrement SSL/TLS et propose l'authentification à deux facteurs (2FA).",
+          "⚠️ **MyStake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française.** L'opérateur n'entre pas dans le cadre réglementaire français. Pour les joueurs souhaitant rester dans le cadre légal, nous recommandons les opérateurs agréés ANJ.",
+          "La vérification d'identité (KYC) est requise à partir de certains seuils de retrait. Les outils de jeu responsable (limites de dépôt, auto-exclusion) sont disponibles dans les paramètres du compte.",
+        ],
+        highlights: [
+          'Fondé 2019 · licence Curaçao Gaming Control Board (OGL/2024/1798/1048)',
+          'SSL/TLS · 2FA disponible · outils jeu responsable',
+          "⚠️ Pas d'ANJ — hors cadre réglementaire français",
+        ],
+      },
+    },
+    recapRows: [
+      { label: 'Licence', value: 'Curaçao Gaming Control Board (OGL/2024/1798/1048)' },
+      {
+        label: 'Bonus de bienvenue',
+        value: 'Au choix : 1 500 € casino (x30) / 600 € sport (x10) / 500 € mini-jeux (x60)',
+      },
+      { label: 'Cashback crypto', value: '10 % sans wager sur chaque dépôt en cryptomonnaie' },
+      {
+        label: 'Méthodes de paiement',
+        value:
+          '18 méthodes dépôt (dont 11 cryptos, CB, Apple Pay, Skrill) · 13 méthodes retrait (⚠️ pas de retrait CB)',
+      },
+      {
+        label: 'Délai de retrait',
+        value: '24-48h affichés · ⚠️ 5+ jours constatés (tests 2026, SEPA)',
+      },
+      {
+        label: 'Catalogue',
+        value:
+          '7 000+ titres + 60+ mini-jeux propriétaires · 4 verticales (casino, sport, e-sport, hippique)',
+      },
+      {
+        label: 'Support',
+        value: 'Live chat 24h/24, 7j/7 · e-mail · interface et agents en français',
+      },
+      {
+        label: 'Application mobile',
+        value: "Pas d'app native, pas de PWA — site mobile responsive iOS et Android",
+      },
+      {
+        label: 'Programme VIP',
+        value: 'Cashback crypto 10 % sans wager + niveaux VIP progressifs',
+      },
+      { label: 'Fondé', value: '2019' },
+      {
+        label: '⚠️ Cadre réglementaire FR',
+        value: "Pas d'ANJ — opérateur Curaçao hors cadre réglementaire français",
+      },
+    ],
+    faq: [
+      {
+        question: 'MyStake est-il accessible légalement en France ?',
+        answer:
+          "MyStake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française. L'opérateur n'entre pas dans le cadre réglementaire français. Pour rester dans le cadre légal, nous recommandons les opérateurs agréés ANJ comme Winamax, Betclic ou PokerStars.",
+      },
+      {
+        question: "Quel bonus choisir à l'inscription sur MyStake ?",
+        answer:
+          "MyStake propose 3 offres distinctes à l'inscription : 1 500 € pour le casino (wager x30 effectif sur dépôt + bonus), 600 € pour le sport (wager x10 en paris cumulés) ou 500 € pour les mini-jeux (wager x60 — le plus contraignant). Si vous déposez en crypto, le cashback de 10 % sans wager est une alternative plus souple sans conditions de mise.",
+      },
+      {
+        question: 'Quels sont les délais de retrait réels sur MyStake ?',
+        answer:
+          "MyStake annonce des délais de 24-48 heures. Des tests indépendants conduits en 2026 rapportent des délais effectifs de 5 jours ou plus pour les virements SEPA (CritiqueJeu, LaPlanqueDuJoueur). Les retraits en cryptomonnaies seraient généralement traités en moins de 3 jours. Notez qu'aucun retrait par carte bancaire n'est possible — les cartes Visa et Mastercard ne sont disponibles qu'en dépôt.",
+      },
+      {
+        question: "Qu'est-ce que les mini-jeux exclusifs de MyStake ?",
+        answer:
+          'MyStake propose 60+ mini-jeux propriétaires développés en interne — des formats courts jouables en quelques secondes : Chicken (évitez les bombes pour multiplier votre mise), Dino (courez, évitez les obstacles), Plinko (billes tombantes avec multiplicateurs), Crash (encaissez avant le crash), HiLo, Mines et Balloons. Ces jeux sont exclusifs à MyStake.',
+      },
+      {
+        question: 'Peut-on retirer par carte bancaire sur MyStake ?',
+        answer:
+          "Non. MyStake accepte les cartes Visa et Mastercard en dépôt, mais aucun retrait par carte bancaire n'est possible. Pour retirer vos gains, vous devrez utiliser l'une des 13 méthodes disponibles : virement bancaire (SEPA), portefeuilles électroniques (Skrill, MiFinity, Jeton) ou cryptomonnaies.",
+      },
+    ],
+    pourQui: {
+      idealSi: [
+        'Vous alternez casino, sport, e-sport et hippique : MyStake regroupe les 4 verticales dans un compte unique.',
+        'Vous cherchez des formats courts originaux : MyStake propose 60+ mini-jeux maison exclusifs (Chicken, Dino, Plinko) développés en interne.',
+        'Vous déposez en crypto : MyStake reverse un cashback de 10 % sans wager sur chaque dépôt en cryptomonnaie.',
+      ],
+      bonChoixSi: [
+        "Vous choisissez votre bonus à l'inscription : MyStake propose 3 offres distinctes — 1 500 € casino, 600 € sport ou 500 € mini-jeux.",
+        'Vous variez les méthodes de paiement : MyStake accepte 18 méthodes de dépôt dont 11 cryptomonnaies, avec 13 méthodes de retrait disponibles.',
+      ],
+      aEviterSi: [
+        "Vous voulez la garantie d'un retrait rapide : des tests indépendants 2026 rapportent des délais de 5+ jours, vs 24-48h affichés.",
+        "Vous comptez retirer par carte bancaire : MyStake n'accepte aucun retrait CB — uniquement 13 méthodes alternatives (virement, e-wallets, cryptos).",
+      ],
+    },
+  },
 ]
 
 // ── Map + fallback ────────────────────────────────────────────────────────────
