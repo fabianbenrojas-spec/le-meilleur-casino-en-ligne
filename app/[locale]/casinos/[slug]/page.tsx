@@ -917,7 +917,7 @@ export default async function ReviewPage({
                           })}
                           {/* Link 4 — page alternatives */}
                           <a
-                            href="/casinos/alternatives/"
+                            href="/alternatives/"
                             className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
                             data-event="internal_link"
                             data-placement="review_band_comparatifs_alternatives"
