@@ -6,6 +6,7 @@ import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { CasinoLogo } from '@/components/ui/casino-logo'
+import { FAQAccordion } from '@/components/ui/faq-accordion'
 import { ScorePill } from '@/components/ui/score-pill'
 import type { Locale } from '@/i18n/routing'
 import { operatorBySlug } from '@/config/operators'
@@ -368,8 +369,12 @@ export default async function VersusPage({
                 className="mt-auto"
               >
                 {isFr
-                  ? `Obtenir le bonus ${winner.shortName ?? winner.name}`
-                  : `Get ${winner.shortName ?? winner.name} bonus`}
+                  ? winner.hasBonus
+                    ? `Obtenir le bonus ${winner.shortName ?? winner.name}`
+                    : `Rejoindre ${winner.shortName ?? winner.name}`
+                  : winner.hasBonus
+                    ? `Get ${winner.shortName ?? winner.name} bonus`
+                    : `Join ${winner.shortName ?? winner.name}`}
               </CTAButton>
             </div>
 
@@ -425,13 +430,89 @@ export default async function VersusPage({
                 className="mt-auto"
               >
                 {isFr
-                  ? `Obtenir le bonus ${challenger.shortName ?? challenger.name}`
-                  : `Get ${challenger.shortName ?? challenger.name} bonus`}
+                  ? challenger.hasBonus
+                    ? `Obtenir le bonus ${challenger.shortName ?? challenger.name}`
+                    : `Rejoindre ${challenger.shortName ?? challenger.name}`
+                  : challenger.hasBonus
+                    ? `Get ${challenger.shortName ?? challenger.name} bonus`
+                    : `Join ${challenger.shortName ?? challenger.name}`}
               </CTAButton>
             </div>
           </div>
         </div>
       </section>
+      {/* ── Section 04 — Internal links to full reviews ─────────────────── */}
+      <section className="border-t border-line py-10">
+        <div className="mx-auto max-w-site px-[18px] md:px-8">
+          <h2 className="mb-5 font-serif text-[clamp(18px,2.2vw,22px)] font-medium tracking-[-0.01em] text-ink">
+            {isFr ? 'Nos avis complets' : 'Our full reviews'}
+          </h2>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href={`/casinos/${opA.slug}/`}
+              className="flex flex-1 items-center justify-between gap-3 rounded-lg border border-line bg-surface px-5 py-4 text-[14.5px] font-semibold text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+              data-event="internal_link"
+              data-operator={opA.slug}
+              data-placement="versus_review_link"
+              data-page-type="versus"
+              data-locale={locale}
+            >
+              <span>
+                {isFr
+                  ? `Avis complet ${opA.shortName ?? opA.name}`
+                  : `Full review ${opA.shortName ?? opA.name}`}
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4 shrink-0 text-ink-3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                aria-hidden
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+            <a
+              href={`/casinos/${opB.slug}/`}
+              className="flex flex-1 items-center justify-between gap-3 rounded-lg border border-line bg-surface px-5 py-4 text-[14.5px] font-semibold text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+              data-event="internal_link"
+              data-operator={opB.slug}
+              data-placement="versus_review_link"
+              data-page-type="versus"
+              data-locale={locale}
+            >
+              <span>
+                {isFr
+                  ? `Avis complet ${opB.shortName ?? opB.name}`
+                  : `Full review ${opB.shortName ?? opB.name}`}
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4 shrink-0 text-ink-3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                aria-hidden
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 05 — FAQ (conditional) ───────────────────────────────── */}
+      {matchup.faq && matchup.faq.length > 0 && (
+        <section className="border-t border-line bg-bg-sunken py-12">
+          <div className="mx-auto max-w-[780px] px-[18px] md:px-8">
+            <h2 className="mb-6 font-serif text-[clamp(20px,2.4vw,26px)] font-medium tracking-[-0.015em] text-ink">
+              {isFr ? 'Questions fréquentes' : 'Frequently asked questions'}
+            </h2>
+            <FAQAccordion items={matchup.faq} />
+          </div>
+        </section>
+      )}
     </>
   )
 }

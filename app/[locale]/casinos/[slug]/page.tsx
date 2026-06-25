@@ -24,6 +24,7 @@ import {
   type GameType,
 } from '@/config/operators'
 import { getReviewData, type ReviewSection } from '@/config/review-content'
+import { versusMatchups } from '@/config/versus-content'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
 
@@ -452,6 +453,9 @@ export default async function ReviewPage({
   const sameJurisdictionOps = Array.from(operatorBySlug.values())
     .filter((o) => o.slug !== slug && o.jurisdiction === op.jurisdiction)
     .slice(0, 2)
+
+  // Manual /versus/ pages involving this operator
+  const manualVersusPages = versusMatchups.filter((m) => m.slugA === op.slug || m.slugB === op.slug)
 
   const rank = operators.findIndex((o) => o.slug === slug) + 1
   const tocFiltered = TOC_BASE.filter((item) => {
@@ -900,6 +904,54 @@ export default async function ReviewPage({
                                   </div>
                                   <div className="mt-[1px] text-[12.5px] text-ink-3">
                                     Notre analyse comparative
+                                  </div>
+                                </div>
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  className="h-4 w-4 shrink-0 text-ink-3"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.5"
+                                  aria-hidden
+                                >
+                                  <path d="M9 18l6-6-6-6" />
+                                </svg>
+                              </a>
+                            )
+                          })}
+                          {/* Links — manual /versus/ pages (editorial enriched) */}
+                          {manualVersusPages.map((m) => {
+                            const opponentSlug = m.slugA === op.slug ? m.slugB : m.slugA
+                            const opponentOp = operatorBySlug.get(opponentSlug)
+                            if (!opponentOp) return null
+                            return (
+                              <a
+                                key={m.slug}
+                                href={`/versus/${m.slug}/`}
+                                className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                                data-event="internal_link"
+                                data-placement="review_band_comparatifs_versus_deep"
+                                data-page-type="review"
+                                data-locale={locale}
+                              >
+                                <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                                  <svg
+                                    viewBox="0 0 24 24"
+                                    className="h-[19px] w-[19px]"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    aria-hidden
+                                  >
+                                    <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+                                  </svg>
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="text-[14.5px] font-bold">
+                                    {op.name} vs {opponentOp.name}
+                                  </div>
+                                  <div className="mt-[1px] text-[12.5px] text-ink-3">
+                                    Comparatif approfondi
                                   </div>
                                 </div>
                                 <svg

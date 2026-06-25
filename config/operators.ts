@@ -708,8 +708,8 @@ export const operators: Operator[] = [
     // logoUrl: à compléter en phase logos
     licence: 'ANJ — Licence française',
     // licenceNumber: TODO vérifier numéro exact sur registre ANJ
-    rating: 9.0, // ⚠️ placeholder éditorial — à valider en Commit 4
-    ratingLabel: 'Excellent',
+    rating: 8.5, // validé Phase 2.1.1 (ajusté depuis placeholder 9.0 Commit 4)
+    ratingLabel: 'Très bien',
     // Convention §14 : valeurs placeholder pour hasBonus: false
     bonusAmount: '—',
     bonusSuffix: '',

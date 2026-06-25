@@ -191,6 +191,20 @@ export default async function CasinosFrancaisPage({
               un problème dans votre langue et obtenir une réponse claire réduit considérablement
               les délais de résolution. Sur un litige de retrait, chaque heure compte.
             </p>
+            <p>
+              Vous hésitez entre les deux références ANJ du marché français ? Consultez notre{' '}
+              <a
+                href="/versus/winamax-vs-betclic/"
+                className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
+                data-event="internal_link"
+                data-placement="hub_editorial_versus_link"
+                data-page-type="casino_francais"
+                data-locale={locale}
+              >
+                comparatif détaillé Winamax vs Betclic
+              </a>{' '}
+              — bonus, cotes, retraits et support analysés critère par critère.
+            </p>
           </div>
         ) : (
           <div className="space-y-4 text-[15.5px] leading-[1.7] text-ink-2">
