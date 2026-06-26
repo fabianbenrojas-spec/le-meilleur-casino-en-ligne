@@ -456,6 +456,7 @@ export default async function ReviewPage({
 
   // Manual /versus/ pages involving this operator
   const manualVersusPages = versusMatchups.filter((m) => m.slugA === op.slug || m.slugB === op.slug)
+  const isCryptoFirst = ['stake', 'mystake', 'casinozer'].includes(op.slug)
 
   const rank = operators.findIndex((o) => o.slug === slug) + 1
   const tocFiltered = TOC_BASE.filter((item) => {
@@ -967,6 +968,48 @@ export default async function ReviewPage({
                               </a>
                             )
                           })}
+                          {/* Link — crypto hub (Stake/MyStake/Casinozer) */}
+                          {isCryptoFirst && (
+                            <a
+                              href="/comparatifs/crypto/"
+                              className="flex items-center gap-[13px] rounded border border-line bg-surface px-[17px] py-[15px] text-ink no-underline shadow-1 transition-[transform,box-shadow,border-color] duration-[150ms] hover:-translate-y-[2px] hover:border-[color-mix(in_srgb,var(--green)_35%,var(--line))] hover:shadow-3"
+                              data-event="internal_link"
+                              data-placement="review_band_comparatifs_crypto_hub"
+                              data-page-type="review"
+                              data-locale={locale}
+                            >
+                              <div className="grid h-[38px] w-[38px] shrink-0 place-items-center rounded-[9px] bg-bg-sunken text-green">
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  className="h-[19px] w-[19px]"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  aria-hidden
+                                >
+                                  <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="text-[14.5px] font-bold">
+                                  Comparatif des casinos crypto
+                                </div>
+                                <div className="mt-[1px] text-[12.5px] text-ink-3">
+                                  Guide complet 2026
+                                </div>
+                              </div>
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="h-4 w-4 shrink-0 text-ink-3"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                aria-hidden
+                              >
+                                <path d="M9 18l6-6-6-6" />
+                              </svg>
+                            </a>
+                          )}
                           {/* Link 4 — page alternatives */}
                           <a
                             href="/alternatives/"
