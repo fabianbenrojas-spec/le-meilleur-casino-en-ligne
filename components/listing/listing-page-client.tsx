@@ -235,7 +235,7 @@ function getPageConfigs(isFr: boolean): Record<PageConfigKey, PageConfig> {
     alternatives: { defaultSort: 'rating', filterGroups: [B, R, P, L] },
     sans_kyc: { defaultSort: 'rating', filterGroups: [C, R, L] },
     retrait_instantane: { defaultSort: 'rating', filterGroups: [P, C, L] },
-    francais: { defaultSort: 'rating', filterGroups: [B, R, W] },
+    francais: { defaultSort: 'rating', filterGroups: [P, B, L] },
     rtp_eleve: { defaultSort: 'rtp', filterGroups: [R, P, L] },
   }
 }
