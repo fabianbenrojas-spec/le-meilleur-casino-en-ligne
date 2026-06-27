@@ -269,6 +269,162 @@ export const versusMatchups: VersusMatchup[] = [
       },
     ],
   },
+  // ── 3. Winamax vs PokerStars (ANJ poker — Phase 2.1.4 juin 2026) ────────────
+  {
+    slug: 'winamax-vs-pokerstars',
+    slugA: 'winamax',
+    slugB: 'pokerstars',
+    winner: 'b',
+    intro:
+      "Winamax et PokerStars sont les deux références du poker en ligne en France, opérant tous deux sous licence ANJ depuis 2010. Winamax est l'opérateur historique du marché français — application unifiée poker+sport+hippique, cotes sportives parmi les plus compétitives ANJ. PokerStars, filiale de Flutter Entertainment, apporte la liquidité partagée ESPT (France, Espagne, Portugal), les tournois mondiaux WCOOP et SCOOP, et le programme Stars Rewards (jusqu'à 40 % de cashback sur le rake). Deux positionnements distincts pour deux profils de joueurs. Nous les avons comparés sur 6 critères décisifs pour un joueur de poker — liquidité, tournois, rakeback, application, support et inscription.",
+    criteria: [
+      { label: 'Note éditoriale', a: '8,5 / 10', b: '8,4 / 10', winner: 'a' },
+      {
+        label: 'Licence',
+        a: 'ANJ — 2 licences (poker + sport)',
+        b: 'ANJ — 2 licences (poker 2010 + sport 2016)',
+        winner: 'tie',
+      },
+      {
+        label: 'Liquidité poker',
+        a: 'Pool FR exclusif',
+        b: 'ESPT FR+ES+PT (3 marchés ANJ)',
+        winner: 'b',
+      },
+      {
+        label: 'Tournois phares',
+        a: 'Séries MTT + Expresso · FR',
+        b: 'WCOOP/SCOOP/EPT · Power Path 9 300 €',
+        winner: 'b',
+      },
+      {
+        label: 'Programme fidélité',
+        a: 'Pas de rakeback structuré',
+        b: "Stars Rewards jusqu'à 40 %",
+        winner: 'b',
+      },
+      {
+        label: 'App mobile',
+        a: '4,6/5 iOS · unifiée poker+sport+hippique',
+        b: '4,5/5 iOS poker · 2 apps séparées',
+        winner: 'a',
+      },
+      {
+        label: 'Support client',
+        a: 'Formulaire + e-mail (pas de live chat)',
+        b: 'Chat 24/7 + e-mail',
+        winner: 'b',
+      },
+      {
+        label: 'Méthodes paiement',
+        a: 'VISA, MC, PayPal (3 méthodes)',
+        b: 'VISA, MC, PayPal, Apple Pay, Skrill, Neteller (6)',
+        winner: 'b',
+      },
+      { label: 'Hippique', a: "Intégré dans l'app", b: 'Absent', winner: 'a' },
+      {
+        label: 'Inscription',
+        a: 'Directe',
+        b: 'Code activation courrier postal (délai)',
+        winner: 'a',
+      },
+    ],
+    sections: [
+      {
+        criterion: 'Liquidité et volume de joueurs',
+        winner: 'b',
+        winnerLabel: 'Avantage PokerStars',
+        aText:
+          'Winamax opère avec un pool de joueurs exclusivement français — tous les adversaires rencontrés en cash game ou en tournoi jouent depuis la France sous réglementation ANJ. Cette homogénéité crée une communauté clairement identifiée mais peut limiter le nombre de tables actives en dehors des heures de pointe françaises.',
+        bText:
+          "PokerStars mutualise sa liquidité en ESPT — les marchés français, espagnol et portugais jouent ensemble sur les mêmes tables. Plus de tables actives 24h/24, des prizepools de tournois plus élevés et une plus grande variété de stakes disponibles à toute heure. Pour un joueur de poker actif, c'est le critère différenciant le plus concret entre les deux opérateurs.",
+      },
+      {
+        criterion: 'Application mobile',
+        winner: 'a',
+        winnerLabel: 'Avantage Winamax',
+        aText:
+          "Winamax propose une application unifiée couvrant poker, sport et hippique depuis un seul compte. Note 4,6/5 App Store iOS et 4,3/5 Google Play (vérification directe juin 2026). Navigation fluide entre les verticales sans re-connexion. L'un des rares opérateurs ANJ à intégrer les trois verticales dans une seule application.",
+        bText:
+          'PokerStars distribue deux applications distinctes : PokerStars Poker (4,5/5 iOS) et PokerStars Sports (4,2/5 iOS, 3,7/5 Android — MediaPronos mai 2026). Chaque verticale dispose de sa propre application. Aucune intégration cross-vertical : un joueur poker+sport jongle entre deux apps.',
+      },
+      {
+        criterion: 'Tournois et formats poker',
+        winner: 'b',
+        winnerLabel: 'Avantage PokerStars',
+        aText:
+          "Winamax propose le Sunday MainEvent hebdomadaire, des Séries MTT régulières et l'Expresso — sit & go à prize pool multiplicateur. Calendrier ancré dans le marché français avec une communauté reconnue. Formats Texas Hold'em et Omaha couverts.",
+        bText:
+          "PokerStars dispose de tournois mondiaux propriétaires : WCOOP (World Championship of Online Poker), SCOOP (Spring Championship) et EPT (European Poker Tour). Le Power Path permet de gagner des packages EPT jusqu'à 9 300 €. Ces tournois n'ont pas d'équivalent sur le marché ANJ français en juin 2026.",
+      },
+      {
+        criterion: 'Programme fidélité et rakeback',
+        winner: 'b',
+        winnerLabel: 'Avantage PokerStars',
+        aText:
+          "Winamax ne propose pas de programme de rakeback structuré. Des promotions ponctuelles encadrées par l'ANJ existent — freebets sport, bonus poker temporaires — mais aucun mécanisme de cashback automatique sur les mains jouées. Les joueurs réguliers ne récupèrent pas de pourcentage du rake généré.",
+        bText:
+          "Stars Rewards : cashback jusqu'à 40 % sur le rake pour les joueurs les plus actifs (niveau Diamond ou supérieur). Crédit automatique sur le solde, sans condition de mise. C'est le seul programme de rakeback structuré disponible sur le marché ANJ français en juin 2026.",
+      },
+      {
+        criterion: 'Support client',
+        winner: 'b',
+        winnerLabel: 'Avantage PokerStars',
+        aText:
+          'Winamax est accessible par formulaire de contact et e-mail uniquement — pas de live chat, pas de numéro de téléphone. Délai de réponse de quelques heures à 24h selon la complexité. Équipe française dédiée, compétente, mais sans canal temps réel.',
+        bText:
+          'PokerStars propose un live chat disponible 24h/24, 7j/7, avec des réponses en quelques minutes pour les questions simples. E-mail en complément pour les demandes complexes. Équipe multilingue dont une équipe francophone. La réactivité support la plus élevée parmi les opérateurs ANJ en juin 2026.',
+      },
+      {
+        criterion: 'Fiabilité, ancienneté et inscription',
+        winner: 'tie',
+        winnerLabel: 'Match nul',
+        aText:
+          "Winamax opère sous double licence ANJ depuis 2010 (poker + sport) — plus de 15 ans sans incident de sécurité majeur. Marque historique du marché français. Inscription directe : compte actif immédiatement, sans délai d'activation postal. KYC obligatoire avant le premier retrait.",
+        bText:
+          "PokerStars opère sous deux licences ANJ depuis 2010 (poker) et 2016 (sport, n° 0006-PS-2016-06-07). Filiale de Flutter Entertainment (LSE : FLTR). HUD désactivé sur le pool ANJ depuis 2019. ⚠️ Friction d'inscription : un code d'activation est envoyé par courrier postal après la création du compte — délai à anticiper avant le premier retrait de gains importants.",
+      },
+    ],
+    verdictIntro:
+      "Pour un joueur de poker actif focalisé sur la liquidité, les tournois et le rakeback, PokerStars prend l'avantage sur 3 critères décisifs. Pour un joueur polyvalent cherchant poker, sport et hippique dans une seule application sans délai d'inscription, Winamax reste la référence intégrée du marché français.",
+    verdictA: [
+      'Vous voulez une seule application pour poker, sport et hippique : Winamax unifie les 3 verticales sur un compte unique depuis 2010 (4,6/5 iOS).',
+      'Vous pariez aussi sur le sport : Winamax propose les cotes les plus compétitives du marché ANJ français en juin 2026.',
+      "Vous voulez vous inscrire et jouer immédiatement : Winamax n'impose pas de code d'activation par courrier postal.",
+    ],
+    verdictB: [
+      'Vous cherchez la liquidité maximale : PokerStars mutualise les marchés ANJ français, espagnol et portugais (ESPT).',
+      "Vous valorisez le rakeback automatique : Stars Rewards rembourse jusqu'à 40 % du rake généré, sans condition de mise.",
+      "Vous voulez accéder aux tournois mondiaux : WCOOP, SCOOP et Power Path → tickets EPT jusqu'à 9 300 €.",
+    ],
+    faq: [
+      {
+        question: 'Winamax ou PokerStars : lequel a la meilleure liquidité poker en France ?',
+        answer:
+          "PokerStars a une liquidité plus large grâce à la mutualisation ESPT — les joueurs français partagent les tables avec ceux d'Espagne et du Portugal. Cela offre plus de tables actives 24h/24, des prizepools de tournois plus élevés et une plus grande variété de stakes disponibles. Winamax conserve un pool exclusivement français, plus homogène en termes d'horaires de jeu et d'ambiance francophone.",
+      },
+      {
+        question: "Quels tournois PokerStars propose-t-il que Winamax n'a pas ?",
+        answer:
+          "PokerStars dispose de tournois mondiaux propriétaires absents chez Winamax : WCOOP (World Championship of Online Poker), SCOOP (Spring Championship) et le Power Path qui permet de gagner des tickets EPT (European Poker Tour) jusqu'à 9 300 €. Winamax mise sur ses propres séries MTT et ses tournois Expresso, ancrés dans le marché français mais sans équivalent mondial.",
+      },
+      {
+        question: 'Comment fonctionne le programme Stars Rewards ?',
+        answer:
+          "Stars Rewards est le programme de fidélité PokerStars. À chaque main jouée en cash game ou en tournoi, vous accumulez des points qui se transforment en cashback sur le rake généré, jusqu'à 40 % pour les joueurs les plus actifs (niveau Diamond ou supérieur). Le cashback est crédité automatiquement sur votre solde, sans condition de mise. C'est l'un des rares programmes de rakeback structurés disponibles sur le marché ANJ français.",
+      },
+      {
+        question: 'Peut-on gérer poker et sport dans une seule application ?',
+        answer:
+          "Oui chez Winamax : l'application unifie poker, sport et hippique sur un compte unique depuis 2010, notée 4,6/5 sur l'App Store. Chez PokerStars, ce n'est pas possible — l'opérateur distribue 2 applications séparées : PokerStars Poker (4,5/5 iOS) et PokerStars Sports (4,2/5 iOS). Pour un joueur polyvalent, Winamax offre une intégration que PokerStars n'a pas.",
+      },
+      {
+        question: 'Les deux opérateurs sont-ils bien agréés ANJ depuis 2010 ?',
+        answer:
+          "Oui. Winamax et PokerStars ont obtenu leurs agréments ANJ en 2010, lors de l'ouverture du marché français des jeux en ligne. Tous deux opèrent légalement sous le cadre réglementaire français avec deux licences distinctes (poker + sport). PokerStars dispose en plus de l'agrément sport n° 0006-PS-2016-06-07 depuis 2016 (ex-BetStars).",
+      },
+    ],
+  },
 ]
 
 export const versusMatchupBySlug = new Map(versusMatchups.map((m) => [m.slug, m]))

@@ -259,7 +259,19 @@ export default async function CasinosFrancaisPage({
               >
                 Notre comparatif Winamax vs Betclic
               </a>{' '}
-              analyse bonus, cotes, retraits et support critère par critère.
+              analyse bonus, cotes, retraits et support critère par critère. Vous hésitez entre
+              Winamax et PokerStars pour le poker ?{' '}
+              <a
+                href="/versus/winamax-vs-pokerstars/"
+                className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
+                data-event="internal_link"
+                data-placement="hub_editorial_versus_link"
+                data-page-type="casino_francais"
+                data-locale={locale}
+              >
+                Notre comparatif Winamax vs PokerStars
+              </a>{' '}
+              analyse liquidité, tournois et rakeback critère par critère.
             </p>
             <p>
               Retrouvez nos avis complets sur les cinq opérateurs agréés ANJ :{' '}
@@ -416,7 +428,19 @@ export default async function CasinosFrancaisPage({
               >
                 Our Winamax vs Betclic comparison
               </a>{' '}
-              analyses bonuses, odds, withdrawals and support criterion by criterion.
+              analyses bonuses, odds, withdrawals and support criterion by criterion. Torn between
+              Winamax and PokerStars for poker?{' '}
+              <a
+                href="/versus/winamax-vs-pokerstars/"
+                className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
+                data-event="internal_link"
+                data-placement="hub_editorial_versus_link"
+                data-page-type="casino_francais"
+                data-locale={locale}
+              >
+                Our Winamax vs PokerStars comparison
+              </a>{' '}
+              analyses liquidity, tournaments and rakeback criterion by criterion.
             </p>
             <p>
               Read our full reviews of all five ANJ-licensed operators:{' '}
