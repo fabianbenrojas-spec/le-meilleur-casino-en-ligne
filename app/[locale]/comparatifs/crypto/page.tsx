@@ -242,7 +242,19 @@ export default async function CryptoComparatifPage({
               >
                 avis complet Stake
               </a>
-              {'. '}Vous préférez un opérateur agréé ANJ ?{' '}
+              {'. '}Hésitez-vous entre Stake et Casinozer ?{' '}
+              <a
+                href="/versus/stake-vs-casinozer/"
+                className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
+                data-event="internal_link"
+                data-placement="hub_editorial_versus_link"
+                data-page-type="crypto_casino"
+                data-locale={locale}
+              >
+                Notre comparatif Stake vs Casinozer
+              </a>{' '}
+              analyse crypto, bonus, accès depuis la France et Provably Fair critère par critère.{' '}
+              Vous préférez un opérateur agréé ANJ ?{' '}
               <a
                 href="/casinos/francais/"
                 className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
@@ -318,7 +330,19 @@ export default async function CryptoComparatifPage({
               >
                 full Stake review
               </a>
-              {'. '}Prefer an ANJ-licensed operator?{' '}
+              {'. '}Torn between Stake and Casinozer?{' '}
+              <a
+                href="/versus/stake-vs-casinozer/"
+                className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"
+                data-event="internal_link"
+                data-placement="hub_editorial_versus_link"
+                data-page-type="crypto_casino"
+                data-locale={locale}
+              >
+                Our Stake vs Casinozer comparison
+              </a>{' '}
+              analyses crypto, bonuses, access from France and Provably Fair criterion by criterion.{' '}
+              Prefer an ANJ-licensed operator?{' '}
               <a
                 href="/casinos/francais/"
                 className="font-semibold text-green underline decoration-[color-mix(in_srgb,var(--green)_40%,transparent)] underline-offset-2 hover:decoration-green"

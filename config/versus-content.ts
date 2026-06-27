@@ -425,6 +425,152 @@ export const versusMatchups: VersusMatchup[] = [
       },
     ],
   },
+  // ── 4. Stake vs Casinozer (offshore crypto — Phase 2.1.5 juin 2026) ──────────
+  {
+    slug: 'stake-vs-casinozer',
+    slugA: 'stake',
+    slugB: 'casinozer',
+    winner: 'b',
+    intro:
+      "Stake et Casinozer sont les deux références du casino crypto offshore en 2026 — mais leurs positionnements n'ont rien en commun. Stake est la plateforme crypto mondiale fondée en 2017 : 100 % blockchain, 7 cryptomonnaies, Stake Originals Provably Fair, partenariats UFC et Stake F1 Team. L'accès depuis la France peut nécessiter un VPN — Stake n'est pas agréé ANJ. Casinozer est le casino crypto-first accessible depuis la France sans VPN : 100 FS sans wager, gains retirables immédiatement, VIP Cyber-City 6 niveaux jusqu'à 15 % de cashback. Nous les avons comparés sur 6 critères — bonus, crypto, jeux Provably Fair, fidélité, accès France et UX mobile.",
+    criteria: [
+      { label: 'Note éditoriale', a: '7,5 / 10', b: '8,3 / 10', winner: 'b' },
+      { label: 'Licence', a: 'Curaçao eGaming', b: 'Curaçao', winner: 'tie' },
+      {
+        label: 'Bonus / conditions de mise',
+        a: 'Pas de bonus — Daily Races 100k$/j, Tombola 75k$/sem.',
+        b: '100 FS sans wager · gains retirables immédiatement',
+        winner: 'b',
+      },
+      {
+        label: 'Cryptomonnaies acceptées',
+        a: '7 devises : BTC ETH USDT LTC DOGE XRP SOL',
+        b: 'BTC (₿), ETH, USDT (3 crypto)',
+        winner: 'a',
+      },
+      {
+        label: 'Méthodes paiement fiat',
+        a: '❌ Crypto-only (aucune méthode fiat)',
+        b: '✅ VISA, MC, Skrill, Neteller',
+        winner: 'b',
+      },
+      { label: 'Délai retrait', a: '< 2h (crypto)', b: '< 24h après KYC', winner: 'a' },
+      {
+        label: 'Jeux Provably Fair exclusifs',
+        a: 'Stake Originals UNIQUE (Plinko, Mines, Crash)',
+        b: '—',
+        winner: 'a',
+      },
+      {
+        label: 'Programme fidélité',
+        a: 'Daily Races 100k$/j + rakeback 3,5%',
+        b: 'VIP Cyber-City 6 niveaux · 15% cashback',
+        winner: 'b',
+      },
+      {
+        label: 'Accès depuis la France',
+        a: '⚠️ VPN requis · risque blocage KYC',
+        b: '✅ Direct, sans VPN',
+        winner: 'b',
+      },
+      { label: 'Application mobile', a: '❌ Aucune app ni PWA', b: 'PWA disponible', winner: 'b' },
+    ],
+    sections: [
+      {
+        criterion: 'Bonus et conditions de mise',
+        winner: 'b',
+        winnerLabel: 'Avantage Casinozer',
+        aText:
+          'Stake ne propose aucun bonus de bienvenue structuré. La promotion principale repose sur les Daily Races (100 000 $/jour distribués selon classement de mise) et la Tombola hebdomadaire (75 000 $/semaine). Pas de wager — vos gains de jeu vous appartiennent immédiatement, sans condition de déblocage.',
+        bText:
+          "Casinozer propose 100 Free Spins sans wager à l'inscription, avec gains retirables immédiatement (plafond 250 €). C'est le seul opérateur du repo à offrir un bonus structuré sans condition de mise. Le bonus de bienvenue casino complémentaire (jusqu'à 1 000 €) suit un wager x35 standard.",
+      },
+      {
+        criterion: 'Cryptomonnaies et méthodes de paiement',
+        winner: 'a',
+        winnerLabel: 'Avantage Stake (sur le crypto pur)',
+        aText:
+          'Stake est 100 % crypto exclusif depuis 2017, acceptant 7 cryptomonnaies : Bitcoin (BTC), Ethereum (ETH), USDT, Litecoin (LTC), Dogecoin (DOGE), Ripple (XRP), Solana (SOL). Aucune méthode fiat disponible — pas de carte bancaire, pas de virement, pas de portefeuille électronique classique.',
+        bText:
+          'Casinozer accepte 3 cryptomonnaies principales (BTC, ETH, USDT) en plus de méthodes fiat traditionnelles : VISA, Mastercard, Skrill, Neteller, Apple Pay. Cette polyvalence permet à un joueur non crypto de jouer sans étape de conversion blockchain préalable.',
+      },
+      {
+        criterion: 'Jeux Provably Fair et catalogue',
+        winner: 'a',
+        winnerLabel: 'Avantage Stake (Provably Fair UNIQUE)',
+        aText:
+          'Stake propose les Stake Originals — jeux propriétaires développés en interne : Plinko, Mines, Crash, Limbo, Dice, Drill, Moles. Ces jeux utilisent la technologie Provably Fair : chaque résultat est vérifiable sur la blockchain via hash cryptographique. RTP affiché 97–99 % selon le titre. Format unique au repo.',
+        bText:
+          "Casinozer propose un catalogue de 5 000+ jeux via 66+ fournisseurs (Pragmatic Play, NetEnt, Hacksaw Gaming, Play'n GO). Slots, jeux de table, live casino (340 tables). Pas de jeux propriétaires ni de mécanique Provably Fair — la confiance repose sur la certification des fournisseurs tiers.",
+      },
+      {
+        criterion: 'Programme fidélité et promotions',
+        winner: 'b',
+        winnerLabel: 'Avantage Casinozer',
+        aText:
+          'Stake Daily Races distribuent 100 000 $/jour aux joueurs les plus actifs, et la Tombola hebdomadaire offre 75 000 $/semaine. Le programme VIP commence au niveau Bronze à partir de 10 000 € misés — seuil élitiste réservé aux gros joueurs. Le rakeback de base est de 3,5 % via le programme VIP.',
+        bText:
+          "Casinozer propose VIP Cyber-City — 6 niveaux progressifs (Microchip, Nanobot, Robot, Cyberman, Supercyborg, Titan) avec cashback jusqu'à 15 % en argent réel, gestionnaire dédié et plafond retrait élargi à 250 000 €/mois. Programme structuré et accessible aux joueurs réguliers dès les premiers niveaux.",
+      },
+      {
+        criterion: 'Accès depuis la France',
+        winner: 'b',
+        winnerLabel: 'Avantage Casinozer',
+        aText:
+          "Stake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française. L'accès depuis la France peut nécessiter un VPN, ce qui peut entraîner un blocage du compte lors de la vérification KYC. Pour rester dans le cadre légal français, privilégiez les opérateurs ANJ (Winamax, Betclic, PokerStars).",
+        bText:
+          "Casinozer est accessible directement depuis la France sans VPN, sous licence Curaçao. L'opérateur n'est pas agréé ANJ — vous restez hors du cadre réglementaire français — mais l'accès et le KYC fonctionnent normalement pour les visiteurs résidant en France.",
+      },
+      {
+        criterion: 'Application mobile et UX',
+        winner: 'b',
+        winnerLabel: 'Avantage Casinozer',
+        aText:
+          "Stake ne propose ni application native sur les stores (iOS ou Android), ni Progressive Web App (PWA). Le site est responsive et mobile-first, mais l'absence d'app limite la facilité de re-connexion et l'expérience offline. Pas de mise à jour automatique via l'écosystème stores.",
+        bText:
+          "Casinozer propose une PWA installable depuis le navigateur (compatible iOS 13+ et Android 8.0+) — pas d'app native sur les stores, mais l'expérience PWA offre une icône sur l'écran d'accueil, un mode plein écran et un meilleur confort de re-connexion qu'un simple site responsive.",
+      },
+    ],
+    verdictIntro:
+      "Pour un joueur crypto-pur depuis l'international acceptant un VPN, Stake est la référence avec 7 cryptomonnaies, des Stake Originals Provably Fair uniques et des retraits en moins de 2 heures. Pour un joueur en France cherchant un casino crypto accessible directement, avec 100 FS sans wager et un programme VIP structuré, Casinozer prend l'avantage sur 6 critères.",
+    verdictA: [
+      'Vous jouez en crypto-only : Stake accepte 7 devises (BTC, ETH, USDT, LTC, DOGE, XRP, SOL) avec des retraits traités en moins de 2 heures.',
+      'Vous cherchez des jeux Provably Fair exclusifs : Stake Originals (Plinko, Mines, Crash) vérifiables sur la blockchain, RTP 97–99 %.',
+      'Les partenariats sport font partie de votre expérience : Stake F1 Team, sponsor officiel UFC, Drake ambassadeur, Everton.',
+    ],
+    verdictB: [
+      'Vous résidez en France et voulez jouer sans VPN : Casinozer est directement accessible, sans risque de blocage KYC.',
+      'Vous cherchez un bonus sans condition de mise : 100 FS sans wager, gains retirables immédiatement.',
+      "Vous voulez un programme de fidélité structuré et progressif : VIP Cyber-City 6 niveaux, cashback jusqu'à 15 % en argent réel.",
+    ],
+    faq: [
+      {
+        question: 'Stake ou Casinozer : lequel choisir pour le crypto ?',
+        answer:
+          "Le choix dépend de votre profil. Si vous êtes un joueur crypto-puriste international acceptant un VPN, et que vous valorisez les jeux Provably Fair propriétaires et les partenariats premium (UFC, F1), Stake est la référence. Si vous résidez en France et voulez un casino crypto accessible sans VPN, avec un bonus structuré sans wager et un programme VIP progressif, Casinozer prend l'avantage sur 6 critères mesurables.",
+      },
+      {
+        question: 'Faut-il vraiment un VPN pour jouer sur Stake depuis la France ?',
+        answer:
+          "Stake n'est pas agréé par l'Autorité Nationale des Jeux (ANJ) française. Plusieurs sources indiquent que l'accès depuis la France nécessite un VPN, ce qui peut entraîner un blocage du compte lors de la vérification KYC. Pour rester dans le cadre légal français, privilégiez les opérateurs ANJ (Winamax, Betclic, PokerStars) ou un opérateur offshore accessible directement comme Casinozer.",
+      },
+      {
+        question: "Qu'est-ce que les Stake Originals Provably Fair ?",
+        answer:
+          "Les Stake Originals sont une collection de jeux propriétaires développés par Stake : Plinko, Mines, Crash, Limbo, Dice, Drill, Moles. Ils utilisent la technologie Provably Fair — chaque résultat est vérifiable sur la blockchain via hash cryptographique, ce qui garantit qu'aucune manipulation n'est possible côté opérateur. Le RTP affiché varie de 97 % à 99 % selon le titre. Format unique au repo, absent chez les autres casinos.",
+      },
+      {
+        question: 'Comment fonctionne le bonus 100 FS sans wager de Casinozer ?',
+        answer:
+          "À l'inscription, vous activez 100 Free Spins sur des slots sélectionnées par Casinozer. Les gains issus de ces tours gratuits sont crédités sur votre solde réel sans condition de mise — pas de wager x30 ou x40 à débloquer. Vous pouvez retirer immédiatement après vérification KYC, avec un plafond de 250 €. C'est l'un des rares bonus 100 % sans wager disponibles sur le marché casino crypto offshore en 2026.",
+      },
+      {
+        question: 'Les deux opérateurs sont-ils légaux pour un visiteur français ?',
+        answer:
+          "Ni Stake ni Casinozer n'est agréé par l'ANJ française. Tous deux opèrent sous licence Curaçao — cadre réglementaire offshore, distinct du cadre légal français. Casinozer est accessible directement depuis la France sans VPN, alors que Stake peut nécessiter un VPN avec risque de blocage KYC. Pour rester dans le cadre légal français avec protections joueurs ANJ, consultez notre sélection de casinos agréés ANJ sur /casinos/francais/.",
+      },
+    ],
+  },
 ]
 
 export const versusMatchupBySlug = new Map(versusMatchups.map((m) => [m.slug, m]))
