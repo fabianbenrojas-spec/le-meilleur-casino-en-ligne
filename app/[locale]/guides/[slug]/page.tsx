@@ -399,7 +399,7 @@ export async function generateMetadata({
   const guide = guideMap.get(slug)
   if (!guide) return {}
 
-  const isEn = locale === 'en'
+  const isEn = (locale as string) === 'en'
   return {
     title: isEn ? guide.titleEn : guide.title,
     description: guide.description,

@@ -1,6 +1,5 @@
 import { Search } from 'lucide-react'
 
-import { LocaleSwitcher } from '@/components/ui/locale-switcher'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import type { Locale } from '@/i18n/routing'
 import { localizeHref } from '@/lib/i18n/routes'
@@ -8,11 +7,9 @@ import { MobileNav } from './mobile-nav'
 
 interface SiteHeaderProps {
   locale: Locale
-  /** Alternate locale URL for the current page (for LocaleSwitcher) */
-  alternateUrl?: string
 }
 
-export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
+export function SiteHeader({ locale }: SiteHeaderProps) {
   const isFr = locale === 'fr'
 
   const navItems = [
@@ -22,11 +19,6 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
     { label: isFr ? 'Bonus' : 'Bonuses', href: localizeHref('/bonus/', locale) },
     { label: isFr ? 'Guides' : 'Guides', href: localizeHref('/guides/', locale) },
   ]
-
-  const localeUrls: Record<Locale, string> = {
-    fr: alternateUrl ?? '/',
-    en: alternateUrl ? `/en${alternateUrl}` : '/en/',
-  }
 
   return (
     <header
@@ -73,10 +65,6 @@ export function SiteHeader({ locale, alternateUrl }: SiteHeaderProps) {
           </button>
 
           <ThemeToggle />
-
-          <div className="hidden md:block">
-            <LocaleSwitcher currentLocale={locale} localeUrls={localeUrls} />
-          </div>
 
           <MobileNav
             items={navItems}

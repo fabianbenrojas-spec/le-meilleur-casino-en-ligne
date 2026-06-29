@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params
-  const isEn = locale === 'en'
+  const isEn = (locale as string) === 'en'
   return {
     title: isEn
       ? 'Top 10 Best Online Casinos France (2026)'

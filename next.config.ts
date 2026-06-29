@@ -46,10 +46,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const base = [
-      // /fr/* → /* : strip legacy /fr/ prefix (belt-and-suspenders alongside middleware)
-      // Middleware handles this first, but next.config 301s guarantee permanent SEO signal
+      // /fr/* → /* : strip legacy /fr/ prefix
       { source: '/fr', destination: '/', permanent: true },
       { source: '/fr/:path*', destination: '/:path*', permanent: true },
+      // /en/* → /* : EN locale disabled — redirect to FR equivalents
+      { source: '/en', destination: '/', permanent: true },
+      { source: '/en/:path*', destination: '/:path*', permanent: true },
     ]
     // Apex → www canonical redirect (permanent 301)
     // Vercel also handles this at the routing layer when www is set as primary domain,

@@ -53,7 +53,7 @@ export async function generateMetadata({
     alternates: {
       languages: buildHreflang(
         `/casinos/${slug}/`,
-        locale === 'en' ? `/casinos/${slug}/` : undefined
+        (locale as string) === 'en' ? `/casinos/${slug}/` : undefined
       ),
     },
     other: {

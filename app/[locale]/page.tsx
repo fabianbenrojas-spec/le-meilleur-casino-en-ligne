@@ -29,7 +29,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  const isEn = locale === 'en'
+  const isEn = (locale as string) === 'en'
 
   const itemListSchema = {
     '@context': 'https://schema.org',
@@ -539,7 +539,7 @@ const seoCriteria = [
 // ── ItemList JSON-LD ─────────────────────────────────────────────────────────
 
 function ItemListSchema({ locale }: { locale: Locale }) {
-  const isEn = locale === 'en'
+  const isEn = (locale as string) === 'en'
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',

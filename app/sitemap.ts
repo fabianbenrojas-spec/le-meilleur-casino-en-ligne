@@ -7,7 +7,7 @@ const BASE = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://www.le-meilleur-cas
 
 const NOW = new Date()
 
-/** Build a bilingual sitemap entry with hreflang alternates */
+/** Build a sitemap entry for a FR-only page */
 function entry(
   frPath: string,
   opts: {
@@ -17,20 +17,12 @@ function entry(
     lastModified?: Date
   } = {}
 ): MetadataRoute.Sitemap[number] {
-  const { enPath, priority = 0.6, changeFrequency = 'monthly', lastModified = NOW } = opts
-  const enFull = `${BASE}/en${enPath ?? frPath}`
+  const { priority = 0.6, changeFrequency = 'monthly', lastModified = NOW } = opts
   return {
     url: `${BASE}${frPath}`,
     lastModified,
     changeFrequency,
     priority,
-    alternates: {
-      languages: {
-        fr: `${BASE}${frPath}`,
-        en: enFull,
-        'x-default': `${BASE}${frPath}`,
-      },
-    },
   }
 }
 
