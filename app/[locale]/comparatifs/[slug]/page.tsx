@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
+// V1 template désactivé Phase 2.2.3 — seules les pages /versus/[slug]/ éditoriales sont actives
+export const dynamicParams = false
 import { notFound } from 'next/navigation'
 
 import { AffiliateDisclosure } from '@/components/ui/affiliate-disclosure'
@@ -11,7 +13,7 @@ import { VersusCompareBar } from '@/components/versus/versus-compare-bar'
 import { WagerSimulator } from '@/components/versus/wager-simulator'
 import { VersusCrits, type CritData } from '@/components/versus/versus-crits'
 import type { Locale } from '@/i18n/routing'
-import { operatorBySlug, operators, TOP_10 } from '@/config/operators'
+import { operatorBySlug, TOP_10 } from '@/config/operators'
 import { VERSUS_EXTRA_CRITS } from '@/config/versus-extra-crits'
 import { buildHreflang } from '@/lib/i18n/routes'
 
@@ -27,14 +29,7 @@ function parseWager(conditions: string): number {
 }
 
 export async function generateStaticParams() {
-  const top5 = operators.sort((a, b) => b.rating - a.rating).slice(0, 5)
-  const pairs: { slug: string }[] = []
-  for (let i = 0; i < top5.length; i++) {
-    for (let j = i + 1; j < top5.length; j++) {
-      pairs.push({ slug: `${top5[i]!.slug}-vs-${top5[j]!.slug}` })
-    }
-  }
-  return pairs
+  return []
 }
 
 export async function generateMetadata({

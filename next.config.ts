@@ -52,6 +52,17 @@ const nextConfig: NextConfig = {
       // /en/* → /* : EN locale disabled — redirect to FR equivalents
       { source: '/en', destination: '/', permanent: true },
       { source: '/en/:path*', destination: '/:path*', permanent: true },
+      // /comparatifs/cresus-vs-lucky8/ → /versus/ (V1 doublon → Phase 2.1 editorial page)
+      {
+        source: '/comparatifs/cresus-vs-lucky8',
+        destination: '/versus/cresus-vs-lucky8/',
+        permanent: true,
+      },
+      {
+        source: '/comparatifs/cresus-vs-lucky8/',
+        destination: '/versus/cresus-vs-lucky8/',
+        permanent: true,
+      },
     ]
     // Apex → www canonical redirect (permanent 301)
     // Vercel also handles this at the routing layer when www is set as primary domain,

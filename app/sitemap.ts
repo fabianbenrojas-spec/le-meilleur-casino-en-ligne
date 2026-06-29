@@ -26,19 +26,6 @@ function entry(
   }
 }
 
-/** Top-5 versus pairs */
-function versusEntries(): MetadataRoute.Sitemap {
-  const top5 = [...operators].sort((a, b) => b.rating - a.rating).slice(0, 5)
-  const out: MetadataRoute.Sitemap = []
-  for (let i = 0; i < top5.length; i++) {
-    for (let j = i + 1; j < top5.length; j++) {
-      const slug = `${top5[i]!.slug}-vs-${top5[j]!.slug}`
-      out.push(entry(`/comparatifs/${slug}/`, { priority: 0.5 }))
-    }
-  }
-  return out
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // ── Static high-priority pages ──────────────────────────────────────
@@ -57,7 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
       changeFrequency: 'weekly',
     }),
-    ...versusEntries(),
+    entry('/versus/cresus-vs-lucky8/', { priority: 0.7 }),
+    entry('/versus/winamax-vs-betclic/', { priority: 0.7 }),
+    entry('/versus/winamax-vs-pokerstars/', { priority: 0.7 }),
+    entry('/versus/stake-vs-casinozer/', { priority: 0.7 }),
 
     // ── Alternatives ─────────────────────────────────────────────────────
     ...operators.map((op) => entry(`/alternatives/${op.slug}/`, { priority: 0.5 })),

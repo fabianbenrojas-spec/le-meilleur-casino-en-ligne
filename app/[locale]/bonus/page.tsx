@@ -247,7 +247,7 @@ export default async function BonusHubPage({ params }: { params: Promise<{ local
             <p className="text-[16px] leading-[1.72] text-ink-2">
               {isFr ? 'Utilisez nos pages comparatifs (ex : ' : 'Use our comparison pages (e.g. '}
               <a
-                href="/comparatifs/cresus-vs-lucky8/"
+                href="/versus/cresus-vs-lucky8/"
                 className="font-semibold text-green no-underline"
                 style={{
                   borderBottom: '1px solid color-mix(in srgb,var(--green) 35%,transparent)',

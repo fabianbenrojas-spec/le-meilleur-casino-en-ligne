@@ -4,7 +4,8 @@ export const revalidate = 3600
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { CTAButton } from '@/components/ui/cta-button'
 import { ScorePill } from '@/components/ui/score-pill'
-import { TOP_10, operators } from '@/config/operators'
+import { TOP_10, operatorBySlug } from '@/config/operators'
+import { versusMatchups } from '@/config/versus-content'
 import type { Locale } from '@/i18n/routing'
 import { buildHreflang } from '@/lib/i18n/routes'
 
@@ -27,11 +28,6 @@ export async function generateMetadata({
   }
 }
 
-// Top 5 versus pairs for the hub
-function versusSlug(a: string, b: string) {
-  return `${a}-vs-${b}`
-}
-
 export default async function ComparatifsHubPage({
   params,
 }: {
@@ -39,11 +35,6 @@ export default async function ComparatifsHubPage({
 }) {
   const { locale } = await params
   const isFr = locale === 'fr'
-
-  const top5 = [...operators].sort((a, b) => b.rating - a.rating).slice(0, 5)
-  const versusPairs = top5
-    .flatMap((a, i) => top5.slice(i + 1).map((b) => [a, b] as const))
-    .slice(0, 6)
 
   return (
     <>
@@ -144,25 +135,30 @@ export default async function ComparatifsHubPage({
             {isFr ? 'Casino vs Casino' : 'Casino vs Casino'}
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {versusPairs.map(([a, b]) => (
-              <a
-                key={`${a.slug}-vs-${b.slug}`}
-                href={`/comparatifs/${versusSlug(a.slug, b.slug)}/`}
-                className="flex items-center gap-3 rounded-lg border border-line bg-surface p-4 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
-                data-event="versus_click"
-                data-slug={versusSlug(a.slug, b.slug)}
-              >
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <ScorePill score={a.rating} className="px-[8px] py-[3px] text-[12px]" />
-                  <span className="truncate text-[14px] font-semibold">{a.name}</span>
-                </div>
-                <span className="shrink-0 font-mono text-[11px] text-ink-3">vs</span>
-                <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
-                  <span className="truncate text-[14px] font-semibold">{b.name}</span>
-                  <ScorePill score={b.rating} className="px-[8px] py-[3px] text-[12px]" />
-                </div>
-              </a>
-            ))}
+            {versusMatchups.map((m) => {
+              const opA = operatorBySlug.get(m.slugA)
+              const opB = operatorBySlug.get(m.slugB)
+              if (!opA || !opB) return null
+              return (
+                <a
+                  key={m.slug}
+                  href={`/versus/${m.slug}/`}
+                  className="flex items-center gap-3 rounded-lg border border-line bg-surface p-4 text-ink no-underline shadow-1 transition-[transform,box-shadow] hover:-translate-y-[3px] hover:shadow-2"
+                  data-event="versus_click"
+                  data-slug={m.slug}
+                >
+                  <div className="flex min-w-0 flex-1 items-center gap-2">
+                    <ScorePill score={opA.rating} className="px-[8px] py-[3px] text-[12px]" />
+                    <span className="truncate text-[14px] font-semibold">{opA.name}</span>
+                  </div>
+                  <span className="shrink-0 font-mono text-[11px] text-ink-3">vs</span>
+                  <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+                    <span className="truncate text-[14px] font-semibold">{opB.name}</span>
+                    <ScorePill score={opB.rating} className="px-[8px] py-[3px] text-[12px]" />
+                  </div>
+                </a>
+              )
+            })}
           </div>
         </div>
       </section>
