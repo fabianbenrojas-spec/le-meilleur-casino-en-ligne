@@ -44,13 +44,20 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
-  // Apex → www canonical redirect (permanent 301)
-  // Vercel also handles this at the routing layer when www is set as primary domain,
-  // but having it in code ensures local dev + preview deployments behave correctly.
   async redirects() {
+    const base = [
+      // /fr/* → /* : strip legacy /fr/ prefix (belt-and-suspenders alongside middleware)
+      // Middleware handles this first, but next.config 301s guarantee permanent SEO signal
+      { source: '/fr', destination: '/', permanent: true },
+      { source: '/fr/:path*', destination: '/:path*', permanent: true },
+    ]
+    // Apex → www canonical redirect (permanent 301)
+    // Vercel also handles this at the routing layer when www is set as primary domain,
+    // but having it in code ensures local dev + preview deployments behave correctly.
     const isProd = process.env['NEXT_PUBLIC_SITE_URL']?.includes('www.')
-    if (!isProd) return []
+    if (!isProd) return base
     return [
+      ...base,
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'le-meilleur-casino-en-ligne.fr' }],
