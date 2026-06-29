@@ -202,6 +202,7 @@ export type PageConfigKey =
   | 'retrait_instantane'
   | 'francais'
   | 'rtp_eleve'
+  | 'sans_wager'
 
 interface PageConfig {
   defaultSort: SortKey
@@ -237,6 +238,7 @@ function getPageConfigs(isFr: boolean): Record<PageConfigKey, PageConfig> {
     retrait_instantane: { defaultSort: 'rating', filterGroups: [P, C, L] },
     francais: { defaultSort: 'rating', filterGroups: [P, B, L] },
     rtp_eleve: { defaultSort: 'rtp', filterGroups: [R, P, L] },
+    sans_wager: { defaultSort: 'rating', filterGroups: [B, W, P] },
   }
 }
 

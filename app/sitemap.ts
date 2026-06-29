@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
       changeFrequency: 'weekly',
     }),
+    entry('/comparatifs/sans-wager/', { priority: 0.75, changeFrequency: 'weekly' }),
     entry('/versus/cresus-vs-lucky8/', { priority: 0.7 }),
     entry('/versus/winamax-vs-betclic/', { priority: 0.7 }),
     entry('/versus/winamax-vs-pokerstars/', { priority: 0.7 }),

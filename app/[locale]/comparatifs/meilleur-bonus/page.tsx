@@ -179,10 +179,12 @@ export default async function MeilleurBonusPage({
                 placement: 'bonus_hub_after_versus_anj',
               },
               {
-                href: '/versus/cresus-vs-lucky8/',
-                label: isFr ? 'Crésus vs Lucky8' : 'Crésus vs Lucky8',
-                sub: isFr ? 'Comparatif bonus offshore' : 'Offshore bonus comparison',
-                placement: 'bonus_hub_after_versus_offshore',
+                href: '/comparatifs/sans-wager/',
+                label: isFr ? 'Bonus 100% sans wager' : '100% no-wager bonuses',
+                sub: isFr
+                  ? 'Casinozer 100 FS · Cashback Lucky8 + MyStake'
+                  : 'Casinozer 100 FS · Lucky8 + MyStake cashback',
+                placement: 'bonus_hub_after_sans_wager',
               },
             ] as const
           ).map((item) => (

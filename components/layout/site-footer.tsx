@@ -54,6 +54,10 @@ function buildColumns(locale: Locale, isFr: boolean): FooterColumn[] {
         { label: isFr ? 'Alternatives' : 'Alternatives', href: l('/alternatives/') },
         { label: isFr ? 'Cashback Casino' : 'Cashback Casino', href: l('/comparatifs/cashback/') },
         { label: isFr ? 'Casinos Crypto' : 'Crypto Casinos', href: l('/comparatifs/crypto/') },
+        {
+          label: isFr ? 'Casinos Sans Wager' : 'No Wager Casinos',
+          href: l('/comparatifs/sans-wager/'),
+        },
         { label: 'Crésus vs Lucky8', href: l('/versus/cresus-vs-lucky8/') },
         { label: 'Winamax vs Betclic', href: l('/versus/winamax-vs-betclic/') },
         { label: 'Winamax vs PokerStars', href: l('/versus/winamax-vs-pokerstars/') },
